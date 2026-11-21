@@ -48,12 +48,14 @@ class Flight extends Entity {
     for (const e of this.game.entities) {
       if (e === this || this.hit.has(e) || !e.alive) continue;
       if (!(e.isEnemy || e.isSwitch || e.isTerminal || e.isTarget)) continue;
+      if (e.isTarget && this.state === 'back') continue; // au retour, il ne valide pas une cible par accident (ordre)
       const dx = e.x - this.x, dz = e.z - this.z, d = Math.hypot(dx, dz) || 0.01;
       if (d > e.r + this.r) continue;
       this.hit.add(e);
       e.takeHit(B.dmg, dx / d, dz / d, B.knock, this);
       this.game.particles.burst(this.x, this.y, this.z, 8, 0xffc040, 3);
       if (e.isEnemy) { this.game.hitstop = 0.04; if (this.state === 'out') this.state = 'back'; }
+      if (e.isTarget && this.state === 'out') this.state = 'back'; // une cible à la fois
     }
   }
 }

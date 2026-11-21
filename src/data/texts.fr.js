@@ -218,6 +218,12 @@ export const TEXTS = {
     ],
     antiEcharpe: 'ANTI-ÉCHARPE !',
     ciblesFail: ['PAIEMENT REFUSÉ', "mauvais ordre, ou trop lent"],
+    // indices après chaque échec (le 1er au 1er échec, etc.) ; au dernier, la prochaine cible clignote
+    ciblesHints: [
+      { who: 'CELLE DU STADE', txt: "Regarde les néons au-dessus des arches : rouge, puis or, puis cyan. C'est l'ordre à suivre." },
+      { who: 'CELLE DU STADE', txt: "Les terminaux sont rangés dans le désordre : cyan à gauche, rouge au milieu, or à droite." },
+      { who: 'CELLE DU STADE', txt: "Le chrono part à la première cible. Mets-toi entre le rouge et l'or avant de lancer. Je te fais clignoter la prochaine." }
+    ],
     pdg: [
       { who: 'LE PDG DE BLINGCO', txt: "L'histoire appartient à ceux qui la possèdent." },
       { who: "L'ULTRA", txt: "Alors on va la reprendre." }

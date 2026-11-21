@@ -195,7 +195,7 @@ Idée de Maxime : des compagnons invocables, **Stork** (cigogne) et **Dylagne** 
 6. **Test du boss** (`tests/boss-<nom>.test.mjs`, même modèle que l'ASR-67) + test de parcours du niveau.
 7. Faits historiques affichés : exacts, sourcés, relus par Maxime (`CLAUDE.md` §3).
 
-Ordre prévu (à confirmer) :
+Ordre **tranché le 21/11/2026 : 11 niveaux, voir `docs/decisions.md`** (fait foi). Tableau d'origine, pour les idées :
 
 | Sprint | Niveau | Époque | Énigme / mécanique | Boss | Idées de Maxime à respecter |
 |---|---|---|---|---|---|
@@ -215,23 +215,20 @@ en 2067, boss Directeur) ? Morceau du final, bonus, ou abandonné ?
 
 ---
 
-## 6. Décisions encore ouvertes (à recopier dans `docs/decisions.md`, statut « ouvert »)
+## 6. Décisions
 
-Ne tranche aucune de ces questions toi-même. Pose-les à Maxime au moment où elles bloquent.
+**Tranchées le 21/11/2026** (détail et valeurs de départ dans `docs/decisions.md`, qui fait foi) : visée de l'arc,
+tir, munitions, mouvement, 4 flèches (tag retirée), mapping `switch` / `arrow` / `aim`, mégaphone = capacité du
+final, compagnons (obtention, recharge, un seul à la fois, un bouton chacun), 11 niveaux et leur ordre,
+`meinau-ouest` recyclé dans le final. Les 🎨 STOP gameplay / rôles des étapes E et F sont donc levés ;
+le STOP mapping reste : vérifier les touches libres dans `core/Input.js` avant de coder.
+
+Encore ouvertes (ne les tranche pas toi-même, liste tenue dans `docs/decisions.md`) :
 
 - Retour vers le futur : A (BlingCo arrache l'Ultra via le Serveur), B (paradoxe + rappel par SCN), ou A+B.
-- Nombre de niveaux : 9 → 11 avec Marché 2000 et Le Kalt ; place exacte dans l'ordre.
-- Mégaphone : `CLAUDE.md` le donne au niveau 2, mais l'objet du niveau 2 devient l'Arc-Drapeau et Maxime a noté
-  « Mégaphone oui » au niveau 8. Arme du sélecteur ou capacité spéciale ? (mettre à jour le tableau de
-  `CLAUDE.md` §2 une fois tranché)
-- Flèches : 5 types (bannière, fumigène, enflammée, tag, court-circuit) ou on en retire une ?
-- Compagnons : où on les obtient, comment on les invoque.
-- Phrase de Maxime à faire reformuler (boss niveau 4) : « il repère guy ouvre la porte et le club de demain
+- Phrase de Maxime à faire reformuler (slogan de Marco CeKlair) : « il repère guy ouvre la porte et le club de demain
   avec les consommateurs d'aujourd'hui ».
-- Les 13 questions boss du fichier `Stras2067_reponses_niveaux.xlsx` (onglet « Questions boss ») : hydre ou
-  humain, ton, arène, Promoteur dans la grue ou en exosquelette, satire des « appartements préfabriqués »,
-  PDG de 2026 = PDG final ?, durée du faux final, revanche ASR-67 répétitive ?, boss-bâtiment ou personnage,
-  réutiliser le Coq, 5 boss en même temps, identité du PDG final, les deux kops qui chantent.
+- Les questions boss restantes du fichier `Stras2067_reponses_niveaux.xlsx` (onglet « Questions boss »).
 
 ---
 

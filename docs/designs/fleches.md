@@ -21,8 +21,8 @@ Banane de supporter noire, fermeture bleue, sangle ; les flèches dépassent ave
 Portée **devant, à la taille** (pivot `pelvis` de l'Ultra). Au besoin, afficher seulement les flèches possédées.
 
 ## Rappel
-La liste finale des flèches jouables reste une décision ouverte (voir `docs/decisions.md`) : le design est validé
-pour les 5, le gameplay non.
+Tranché le 21/11/2026 (`docs/decisions.md`) : **4 flèches jouables** (bannière, fumigène, enflammée, court-circuit).
+La flèche tag est retirée du gameplay ; son modèle reste pour un éventuel bonus.
 
 ## Citations de Maxime
 « Pour la torche enflammée fais-la en mode torche de stade, et fumigène couleur bleu » · « top » · « juste le tag couleur bleu et blanc, et c'est parfait »

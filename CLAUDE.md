@@ -19,9 +19,12 @@ de nouveaux chemins), ton satirique et loufoque, 100 % Strasbourg.
 | # | Niveau | Filiale du consortium | Peuple libéré → objet | Boss |
 |---|--------|----------------------|------------------------|------|
 | 1 | Petite France (futur) | BlingCo Restauration (restos à touristes hors de prix) | winstubs, petits commerçants → bretzel-boomerang | Androïde de Service Restauration ASR-67 |
-| 2 | Meinau (quartier + stade) | BlingCo Football (multipropriété) | habitants, anciens du kop → mégaphone | Le Multipropriétaire (hydre à têtes de clubs) |
+| 2 | Meinau (quartier + stade) | BlingCo Football (multipropriété) | habitants, anciens du kop → Arc-Drapeau | Le Multipropriétaire (hydre à têtes de clubs) |
 | 3 | Port du Rhin | BlingCo Immobilier (boboïsation) | dockers, mariniers → gaffe-grappin | Le Promoteur et sa grue |
 | 4 | Place Kléber | Siège du marché de Noël permanent | tout le monde | PDG déguisé en Père Noël en costard (la corruption) |
+
+Ce tableau est l'idée de départ. **Liste et ordre officiels des 11 niveaux, armes, flèches, compagnons et mégaphone
+(capacité spéciale du final) : `docs/decisions.md`.**
 
 Chronologie :
 - **2023** : BlingCo Multi-Holdings rachète le club de la Meinau.
@@ -98,7 +101,7 @@ src/
     enemies/<Nom>.js      un fichier par ennemi (ServeurArnaqueur.js, StewardRobot.js, ...)
     bosses/<Nom>.js       un fichier par boss, machine à états explicite
     props/<Nom>.js        coffres, pots, portes, leviers, PNJ
-  items/<Nom>.js          un fichier par objet : Echarpe.js, BretzelBoomerang.js, Megaphone.js, Gaffe.js
+  items/<Nom>.js          un fichier par objet : Echarpe.js, BretzelBoomerang.js, ArcDrapeau.js, Gaffe.js
   levels/index.js         registre des niveaux : layout, script, textes, modèles .glb et types d'entités
   levels/<id>/            un dossier par niveau
     layout.js             DONNÉES uniquement : salles, murs, entités, déclencheurs

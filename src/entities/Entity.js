@@ -7,7 +7,7 @@ export const angDiff = (a, b) => { let d = b - a; while (d > Math.PI) d -= 2 * M
 
 export class Entity {
   constructor(game, { x = 0, z = 0, face = 0, r = 0.6, hp = 1, model = null, scale = 1 } = {}) {
-    this.game = game; this.x = x; this.z = z; this.face = face; this.r = r;
+    this.game = game; this.x = x; this.z = z; this.y = 0; this.face = face; this.r = r; // y : hauteur (barque...)
     this.hp = hp; this.maxHp = hp; this.alive = true; this.removed = false;
     this.vx = 0; this.vz = 0; this.inv = 0; this.flash = 0; this.t = 0; this.time = 0;
     this.states = {}; this.stateName = null; this.telegraph = false;
@@ -49,7 +49,7 @@ export class Entity {
   }
   sync() {
     if (!this.obj) return;
-    this.obj.position.set(this.x, 0, this.z); this.obj.rotation.y = this.face;
+    this.obj.position.set(this.x, this.y, this.z); this.obj.rotation.y = this.face;
     const flashOn = this.flash > 0, tele = this.telegraph;
     if (flashOn || tele || this._tinted) {
       tint(this.obj, flashOn ? 0xffffff : 0xff2040, flashOn ? 0.9 : (tele ? 0.45 + 0.35 * Math.sin(this.time * 30) : 0));

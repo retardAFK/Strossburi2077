@@ -30,3 +30,18 @@ export class TimedSwitchGroup {
     this.game.events.emit('puzzle:failed:' + this.group);
   }
 }
+
+// MultiState : un état partagé à plusieurs niveaux (ex. le niveau d'eau d'une écluse).
+// set(v) émet 'state:<id>' (v, ancien) ; les entités et le script s'y abonnent.
+export class MultiState {
+  constructor(game, { id, count, start = 0 }) {
+    this.game = game; this.id = id; this.count = count; this.value = start; this.removed = false;
+  }
+  set(v) {
+    v = Math.max(0, Math.min(this.count - 1, v));
+    if (v === this.value) return;
+    const old = this.value; this.value = v;
+    this.game.events.emit('state:' + this.id, v, old);
+  }
+  update() {}
+}

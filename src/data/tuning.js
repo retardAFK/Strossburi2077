@@ -40,5 +40,10 @@ export const TUNING = {
   // interrupteurs d'énigme (bornes...) : portée de E, couleurs du voyant, clignotement (Hz x 2π)
   switches: { useRange: 2.2, onColor: 0x38f2ff, offColor: 0xffc040, blinkSpeed: 6 },
   puzzle: { pfBornesTime: 6 }, // Petite France salle 1 : 3 bornes en moins de 6 s
-  plaque: { useRange: 2.2, glitchTime: 1.2 } // plaques historiques : portée de E, durée du glitch (s)
+  plaque: { useRange: 2.2, glitchTime: 1.2 }, // plaques historiques : portée de E, durée du glitch (s)
+  water: { speed: 0.6 }, // montée / descente de l'eau (m/s)
+  // barque-plateforme : vitesse (m/s), demi-longueur / demi-largeur du pont, hauteur du pont au-dessus de l'eau
+  boat: { speed: 3.2, halfLen: 1.5, halfWid: 0.65, deck: 0.3, useRange: 2.4, helmBias: 2 }, // helmBias : priorité basse de « larguer »
+  lever: { useRange: 2.2, armAngle: 0.55 }, // leviers / vannes : portée de E, débattement du levier (rad)
+  pnj: { useRange: 2.6 }
 };

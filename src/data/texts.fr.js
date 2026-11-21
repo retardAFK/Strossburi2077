@@ -12,7 +12,10 @@ export const TEXTS = {
   controls: 'Clic : capturer la souris · Souris : caméra · Échap : libérer (pause)<br>ZQSD / flèches : bouger · J / clic : écharpe (3 coups) · Espace : roulade<br>Maj / L / clic droit : verrouiller · E : interagir / pirater · Entrée : dialogues · M : son',
   pauseHint: 'CLIC : REPRENDRE · P : REPRENDRE SANS SOURIS',
   skip: 'ENTRÉE : PASSER',
-  prompts: { hack: 'E : pirater', activate: 'E : activer', restore: 'E : restaurer la plaque' },
+  prompts: {
+    hack: 'E : pirater', activate: 'E : activer', restore: 'E : restaurer la plaque', talk: 'E : parler',
+    lever: 'E : actionner le levier', valve: 'E : tourner la vanne', board: 'E : monter dans la barque', sail: 'E : larguer les amarres'
+  },
   hero: "L'ULTRA",
   rooms: { entree: 'PORTE OUEST', coursive: 'COURSIVE DE LA TRIBUNE OUEST', vip: 'SALON « EXPÉRIENCE CLIENT » BLINGCO', sortie: 'VERS LA TRIBUNE' },
 
@@ -72,17 +75,23 @@ export const TEXTS = {
     // plaques historiques : mensonge de BlingCo -> vraie histoire (TEXTES À RELIRE PAR MAXIME)
     plaqueTitle: ['PLAQUE HISTORIQUE · BLINGCO®', 'LA VRAIE HISTOIRE'],
     plaques: {
-      p1: { lie: 'Food Court Premium depuis toujours.', truth: "Cœur du quartier des tanneurs, au bord de l'Ill." }
+      p1: { lie: 'Food Court Premium depuis toujours.', truth: "Cœur du quartier des tanneurs, au bord de l'Ill." },
+      p2: { lie: 'Patrimoine sous licence BlingCo.', truth: "Quartier populaire de tanneurs, meuniers et pêcheurs. Patrimoine mondial de l'UNESCO depuis 1988." }
     },
     plaqueRestored: { who: "L'ULTRA", txt: "Voilà. Notre histoire, pas la leur." },
-    rooms: { ruelle: 'PETITE FRANCE · RUELLE SOUS LICENCE', foodcourt: 'QUARTIER DES TANNEURS · « FOOD COURT PREMIUM »', terrasse: 'TERRASSE (ACCÈS PAYANT)' },
+    rooms: {
+      ruelle: 'PETITE FRANCE · RUELLE SOUS LICENCE', foodcourt: 'QUARTIER DES TANNEURS · « FOOD COURT PREMIUM »', terrasse: 'TERRASSE (ACCÈS PAYANT)',
+      ecluse: "L'ÉCLUSE · « PASSAGE PREMIUM »", canal: 'CANAL · BARQUE AUTONOME (2 BC / MIN)', quaiHaut: 'QUAI HAUT'
+    },
     ads: [
       ['FOOD COURT PREMIUM', 'EXPÉRIENCE AUTHENTIQUE®'],
       ['TARTE FLAMBÉE', '89 BC · FEU EN OPTION'],
       ['COLOMBAGES®', 'PROPRIÉTÉ BLINGCO'],
       ["VUE SUR L'ILL", '2 BC / MINUTE'],
       ['COMMANDEZ ICI', 'SOURIEZ, VOUS PAYEZ'],
-      ['BRETZEL', "À L'UNITÉ OU PAR ABONNEMENT"]
+      ['BRETZEL', "À L'UNITÉ OU PAR ABONNEMENT"],
+      ['ÉCLUSE PREMIUM', 'PASSAGE : 12 BC'],
+      ['BARQUE AUTONOME', '2 BC / MINUTE']
     ],
     intro: [
       { who: "L'ULTRA", txt: "La Petite France, de nuit. Avant, ça sentait le bois mouillé et la tarte flambée. Maintenant ça sent le terminal de paiement." },
@@ -104,7 +113,26 @@ export const TEXTS = {
       { who: 'CELLE DU STADE', txt: "Ils ont bloqué l'écluse pour faire payer le passage. File là-bas, on t'y attend. Et méfie-toi des sommeliers : ils visent bien." },
       { who: "L'ULTRA", txt: "Reçu. Direction l'écluse." }
     ],
-    end: ['FIN DE LA DÉMO', "Suite : l'Écluse (en construction)"]
+    // salle 2 : l'Écluse. La winstubière, enfermée, souffle les indices.
+    winstubIntro: [
+      { who: 'LA WINSTUBIÈRE', txt: "Psst ! Toi, avec l'écharpe ! Ils m'ont mise dans une cage « Tradition Certifiée® ». Pour les photos, qu'ils disent." },
+      { who: 'LA WINSTUBIÈRE', txt: "Trente ans que je sers des baeckeoffe au bord de l'Ill. Ma winstub, ils en ont fait un « Bretzel-Bar Expérience »." },
+      { who: "L'ULTRA", txt: "Je vais vous sortir de là. Promis." },
+      { who: 'LA WINSTUBIÈRE', txt: "Occupe-toi d'abord de passer. Je connais cette écluse par cœur : viens me parler, je te guide." }
+    ],
+    // indice selon le niveau d'eau (0 = bas, 1 = moyen, 2 = haut)
+    winstubHints: [
+      "Voilà, l'eau est basse. Monte dans la barque et file sous le pont. De l'autre côté, la vanne fait remonter l'eau jusqu'au quai haut.",
+      "Tu vois le pont bas ? La barque ne passe dessous que si l'eau est au plus bas. Le levier, près du ponton, fait baisser l'eau.",
+      "L'eau est haute : parfait pour le quai d'en face. Mais pour repasser sous le pont, il faudra la rebaisser."
+    ],
+    boat: {
+      bridge: { who: "L'ULTRA", txt: "Trop d'eau : on ne passe pas sous le pont. Demi-tour." },
+      quaiHigh: { who: "L'ULTRA", txt: "Le quai est trop haut d'ici. Il faut plus d'eau. Demi-tour." },
+      endOk: { who: "L'ULTRA", txt: "Le canal s'arrête là. Je descends côté quai." }
+    },
+    quaiWelcome: { who: 'ANDROÏDE SERVEUR', txt: "Débarquement non réservé ! Supplément quai : 15 BlingCoins." },
+    end: ['FIN DE LA DÉMO', 'Suite : les Ponts Couverts (en construction)']
   },
   shield: 'TING !'
 };

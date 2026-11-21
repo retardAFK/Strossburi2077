@@ -53,6 +53,7 @@ export class Game {
     for (const p of level.layout.terminals || []) this.add(new this.types.terminal(this, p));
     for (const p of level.layout.switches || []) this.add(new this.types[p.type || 'borne'](this, p));
     for (const p of level.layout.plaques || []) this.add(new this.types.plaque(this, p));
+    for (const o of level.layout.objects || []) this.add(new this.types[o.type](this, o)); // barque, leviers, PNJ...
     this.events.on('enemy:killed', e => this.onEnemyKilled(e));
     level.script(this);
     this.startOpening(level.layout.opening);

@@ -2,7 +2,10 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Strasbourg n'est pas à vendre</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
 <style>
@@ -54,6 +57,36 @@
   #skip { position:absolute; right:2.5%; bottom:3%; display:none; font-size:.6em; color:#b8b0e0; }
   #pause .hint { margin:0; font-size:clamp(7px,1vw,11px); color:#b8b0e0; }
   .err { color:#f66; position:fixed; top:0; left:0; z-index:9; white-space:pre-wrap; }
+
+  /* ---------- tactile (core/Touch.js) ---------- */
+  body.touch { touch-action:none; -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; overscroll-behavior:none; }
+  body.touch #prompt { display:none !important; } /* l'indication devient le bouton AGIR */
+  body.touch #hud { font-size:clamp(8px,2vw,14px); }
+  #touch { position:fixed; inset:0; z-index:5; pointer-events:none; font-family:"Press Start 2P", ui-monospace, monospace; }
+  #touch .t-zone { position:absolute; top:0; bottom:0; pointer-events:auto; touch-action:none; }
+  #touch .t-left { left:0; width:45%; }
+  #touch .t-right { left:45%; right:0; }
+  #touch .t-stick { position:absolute; display:none; width:112px; height:112px; transform:translate(-50%,-50%);
+                    border-radius:50%; border:3px solid rgba(56,242,255,.55); background:rgba(10,12,36,.35); pointer-events:none; }
+  #touch .t-knob { position:absolute; left:50%; top:50%; width:50px; height:50px; border-radius:50%;
+                   background:rgba(56,242,255,.6); box-shadow:0 0 12px rgba(56,242,255,.6); transform:translate(-50%,-50%); }
+  #touch .t-btn { position:absolute; pointer-events:auto; touch-action:none; border-radius:50%; border:3px solid #000;
+                  color:#fff; font:inherit; font-size:9px; display:flex; align-items:center; justify-content:center; padding:0;
+                  box-shadow:0 0 0 3px rgba(255,255,255,.25), 0 4px 0 rgba(0,0,0,.5); opacity:.8; -webkit-tap-highlight-color:transparent; }
+  #touch .t-btn span { pointer-events:none; text-shadow:1px 1px 0 #000; }
+  #touch .t-btn.on { opacity:1; transform:scale(.92); }
+  /* grappe en bas à droite (marge des encoches d'écran comprise) */
+  #touch .t-attack { width:84px; height:84px; right:calc(24px + env(safe-area-inset-right)); bottom:calc(30px + env(safe-area-inset-bottom)); background:#1f5fd0; font-size:10px; }
+  #touch .t-roll { width:62px; height:62px; right:calc(120px + env(safe-area-inset-right)); bottom:calc(18px + env(safe-area-inset-bottom)); background:#2a2d40; }
+  #touch .t-lock { width:62px; height:62px; right:calc(40px + env(safe-area-inset-right)); bottom:calc(126px + env(safe-area-inset-bottom)); background:#7a35e0; }
+  #touch .t-throw { width:62px; height:62px; right:calc(124px + env(safe-area-inset-right)); bottom:calc(96px + env(safe-area-inset-bottom)); background:#b8661f; }
+  #touch .t-use { width:auto; min-width:62px; height:44px; border-radius:22px; padding:0 14px; right:calc(150px + env(safe-area-inset-right));
+                  bottom:calc(160px + env(safe-area-inset-bottom)); background:#ff2e88; font-size:8px; animation:pulse 1.2s ease-in-out infinite; }
+  #touch .t-pause { width:40px; height:40px; left:calc(12px + env(safe-area-inset-left)); top:calc(30% + env(safe-area-inset-top)); background:rgba(10,12,36,.7); font-size:10px; }
+  #touch .t-rotate { display:none; position:fixed; inset:0; pointer-events:auto; background:#07081a; color:#ffd23f;
+                     align-items:center; justify-content:center; text-align:center; padding:0 10%; line-height:2; font-size:12px; }
+  #touch.idle .t-btn:not(.t-pause) { visibility:hidden; }
+  @media (orientation: portrait) { #touch .t-rotate { display:flex; } }
 </style>
 </head>
 <body>

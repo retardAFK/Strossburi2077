@@ -15,6 +15,7 @@ export class Input {
     this.el = element;
     this.held = {}; this.pressed = {}; this.padPrev = {};
     this.look = { dx: 0, dy: 0 }; this.stick = { x: 0, y: 0 };
+    this.move = { x: 0, y: 0 }; // déplacement analogique (-1..1, y vers le bas) : joystick tactile (core/Touch.js)
     this.releasedAt = -1e9;
     const press = (a) => { if (!this.held[a]) this.pressed[a] = true; this.held[a] = true; onFirstInput?.(); };
     addEventListener('keydown', e => {
@@ -53,8 +54,9 @@ export class Input {
     this.padPrev = st;
     this.stick.x = p.axes[2] || 0; this.stick.y = p.axes[3] || 0; // stick droit (zone morte gérée par la caméra)
   }
-  // direction de déplacement brute (-1..1)
+  // direction de déplacement (-1..1) : analogique (joystick tactile) sinon clavier
   axis() {
+    if (this.move.x || this.move.y) return { x: this.move.x, y: -this.move.y };
     return { x: (this.held.right ? 1 : 0) - (this.held.left ? 1 : 0), y: (this.held.up ? 1 : 0) - (this.held.down ? 1 : 0) };
   }
   endTick() {

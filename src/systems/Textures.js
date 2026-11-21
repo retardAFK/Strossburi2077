@@ -49,6 +49,11 @@ export const TEX = {
     g.fillStyle = '#e05a9c'; g.fillRect(4, 4, 4, 4);
     g.fillStyle = '#8a8298'; for (let i = 0; i < 16; i += 4) { g.fillRect(0, i, 16, 1); g.fillRect(i, 0, 1, 16); }
   }, rx, ry),
+  // eau de l'Ill la nuit : bleu sombre, reflets de néons
+  eau: (rx, ry) => canvasTex(32, 32, g => {
+    g.fillStyle = '#0c1c3a'; g.fillRect(0, 0, 32, 32);
+    for (let i = 0; i < 18; i++) { g.fillStyle = ['#16305a', '#1f5fd0', '#38f2ff', '#ff2e88'][i % 7 === 0 ? 2 + (i % 2) : i % 2]; g.fillRect(Math.random() * 30 | 0, Math.random() * 32 | 0, 3 + (Math.random() * 4 | 0), 1); }
+  }, rx, ry),
   moquette: (rx, ry) => canvasTex(16, 16, g => {
     g.fillStyle = '#5a1840'; g.fillRect(0, 0, 16, 16);
     g.fillStyle = '#d8a830'; for (let i = 0; i < 16; i += 4) { g.fillRect(i, i, 2, 2); g.fillRect(15 - i, i, 2, 2); }

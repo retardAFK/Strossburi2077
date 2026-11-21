@@ -124,9 +124,12 @@ tools/blender/            un script Python par modèle + lib commune (s3k_lib.py
 - Niveau jouable : `levels/meinau-ouest` (coursives de la tribune ouest en 2077 : consultants, juristes,
   portique laser + terminal, boss « Directeur de la Valorisation »). Modèles : `tools/blender/ultra.py`,
   `tools/blender/meinau_cast.py`. C'est le niveau par défaut tant que la Petite France n'est pas complète.
-- En cours : `levels/petite-france` (`?level=petite-france`), salle 1 jouable : ruelle en bord d'Ill puis
-  Quartier des Tanneurs devenu « Food Court Premium » (serveurs, sommelier, énigme des 3 bornes, herse,
-  message holo de Celle du stade). Modèles : `tools/blender/{sbires,decor_pf,salles_pf}.py`.
+- En cours : `levels/petite-france` (`?level=petite-france`), démo du niveau 1 (une PR par étape, voir
+  `prompts/03-demo-niveau1-petite-france.md`). Jouables : ouverture, salle 1 (Quartier des Tanneurs : vagues,
+  3 bornes, herse, plaque 1, Celle du stade), salle 2 (l'Écluse : levier, vanne, 3 niveaux d'eau, barque,
+  winstubière, plaque 2). Un fichier de script par salle (`salle1.js`, `salle2.js`...).
+  Le layout déclare ses objets génériques dans `objects: [{ type, ... }]` (barque, leviers, PNJ...).
+  Modèles : `tools/blender/{sbires,decor_pf,salles_pf}.py`.
 - Debug : `window.S3K` dans la console donne accès au Game (entités, monde, joueur).
 - Debug : ajouter `?debug=1` à l'URL (`dist/index.html?debug=1`) active les raccourcis de `src/debug.js` :
   **F2** salle suivante (points `warps` du layout ; le script répond à 'debug:warp' pour remettre la salle

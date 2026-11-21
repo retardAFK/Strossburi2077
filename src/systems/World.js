@@ -1,13 +1,14 @@
 // Construit le décor d'un niveau à partir de ses DONNÉES (levels/<id>/layout.js).
 import * as THREE from 'three';
 import { TEX, canvasTex, adTexture, graffitiTexture } from './Textures.js';
+import { TUNING } from '../data/tuning.js';
 
 const WALL_H = 6;
 
 export class World {
   constructor(game, layout) {
     this.game = game; this.layout = layout; this.scene = game.renderer.scene;
-    this.doors = {}; this.lasers = {}; this.gates = {}; this.anim = []; this.props = {};
+    this.doors = {}; this.lasers = {}; this.gates = {}; this.waters = {}; this.anim = []; this.props = {};
     this.texts = game.levelTexts || game.texts; // panneaux, enseignes : textes du niveau
   }
   build() {
@@ -69,6 +70,7 @@ export class World {
     }
     for (const t of L.tables || []) this.buildTable(t);
     for (const g of L.gates || []) this.buildGate(g);
+    for (const w of L.waters || []) this.buildWater(w);
     for (const d of L.drones || []) {
       const o = this.game.assets.instance('drone'); S.add(o);
       this.anim.push(t => { const a = t * d.speed + d.phase; o.position.set(d.x + Math.cos(a) * d.r, d.y + Math.sin(t * 3) * 0.15, d.z + Math.sin(a) * d.r); o.rotation.y = -a; });
@@ -134,6 +136,26 @@ export class World {
     const [x0, x1, z0, z1] = g.rect;
     this.gates[g.id] = { box: this.game.collision.addBox(x0, x1, z0, z1, 'gate'), beams, open: false };
   }
+  // canal à niveau d'eau variable : plan d'eau + parois intérieures. levels = hauteurs (y), start = indice.
+  // Le bassin est bloqué (collision) ; la barque le désactive quand l'Ultra est à bord.
+  buildWater(w) {
+    const [x0, x1, z0, z1] = w.rect, cx = (x0 + x1) / 2, cz = (z0 + z1) / 2, W = x1 - x0, D = z0 - z1, deep = 2.6;
+    const tex = TEX.eau(W / 3, D / 3);
+    const plane = new THREE.Mesh(new THREE.PlaneGeometry(W, D), new THREE.MeshBasicMaterial({ map: tex, transparent: true, opacity: 0.92 }));
+    plane.rotation.x = -Math.PI / 2; this.scene.add(plane);
+    const stone = new THREE.MeshLambertMaterial({ map: TEX.gres(Math.max(W, D) / 4, 1) });
+    for (const [px, pz, sw, ry] of [[x0, cz, D, Math.PI / 2], [x1, cz, D, -Math.PI / 2], [cx, z0, W, Math.PI], [cx, z1, W, 0]]) {
+      const m = new THREE.Mesh(new THREE.PlaneGeometry(sw, deep), stone); m.position.set(px, -deep / 2, pz); m.rotation.y = ry; this.scene.add(m);
+    }
+    const water = { plane, levels: w.levels, level: w.start ?? 0, y: w.levels[w.start ?? 0], box: this.game.collision.addBox(x0, x1, z0, z1, 'water') };
+    plane.position.set(cx, water.y, cz);
+    this.anim.push(t => { tex.offset.set(Math.sin(t * 0.3) * 0.05, t * 0.02); });
+    this.waters[w.id] = water;
+  }
+  setWaterLevel(id, level) {
+    const w = this.waters[id]; if (!w || w.level === level) return;
+    w.level = level; this.game.audio.play('door');
+  }
   setGate(id, open) {
     const g = this.gates[id]; if (!g || g.open === open) return;
     g.open = open; g.box.on = !open; for (const b of g.beams) b.visible = !open;
@@ -155,6 +177,11 @@ export class World {
       d.t = Math.max(0, Math.min(1, d.t + (d.open ? dt : -dt) * 1.2));
       // rideau qui s'enroule vers le haut (ne dépasse jamais du mur, même en extérieur)
       const h = Math.max(0.02, 1 - d.t * 0.94); d.m.scale.y = h; d.m.position.y = WALL_H - WALL_H * h / 2;
+    }
+    for (const id in this.waters) { // l'eau monte / descend doucement vers le niveau demandé
+      const w = this.waters[id], target = w.levels[w.level];
+      w.y += Math.sign(target - w.y) * Math.min(Math.abs(target - w.y), dt * TUNING.water.speed);
+      w.plane.position.y = w.y;
     }
     for (const id in this.lasers) { const l = this.lasers[id]; if (l.on) l.beams.forEach((b, i) => (b.material.opacity = 1, b.scale.y = 1 + 0.5 * Math.sin(t * 30 + i))); }
   }

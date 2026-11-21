@@ -53,7 +53,8 @@ export class Camera {
     if (recenter) this.pitch += (this.defaultPitch(this.boss) - this.pitch) * Math.min(1, dt * C.followRate);
 
     const f = this.forward(), R = this.radius(this.boss);
-    const dist = R * Math.cos(this.pitch), h = LOOK_Y + R * Math.sin(this.pitch);
+    const py = player.y || 0; // le joueur peut être plus bas que le sol (barque)
+    const dist = R * Math.cos(this.pitch), h = py + LOOK_Y + R * Math.sin(this.pitch);
     const want = new THREE.Vector3(player.x - f.x * dist, h, player.z - f.z * dist);
     if (this.bounds) {
       const [x0, x1, z0, z1] = this.bounds;
@@ -61,7 +62,7 @@ export class Camera {
       want.y += Math.min(Math.hypot(want.x - wx, want.z - wz) * 0.6, 3);
       want.x = wx; want.z = wz;
     }
-    want.y = Math.max(C.minHeight, want.y);
+    want.y = Math.max(py + C.minHeight, want.y);
     // souris en main : suivi plus nerveux ; sinon lissage d'origine
     const mouseDriven = !recenter && this.idle !== Infinity;
     this.pos.lerp(want, Math.min(1, dt * (mouseDriven ? M.posRate : C.posRate)));
@@ -70,7 +71,7 @@ export class Camera {
       this.shake = Math.max(0, this.shake - dt);
       this.cam.position.x += (Math.random() - 0.5) * this.shake; this.cam.position.y += (Math.random() - 0.5) * this.shake;
     }
-    const lookAt = new THREE.Vector3(player.x, LOOK_Y, player.z);
+    const lookAt = new THREE.Vector3(player.x, py + LOOK_Y, player.z);
     if (focus) lookAt.lerp(new THREE.Vector3(focus.x, focus.lookY || LOOK_Y, focus.z), 0.4);
     this.look.lerp(lookAt, Math.min(1, dt * 10));
     this.cam.lookAt(this.look);

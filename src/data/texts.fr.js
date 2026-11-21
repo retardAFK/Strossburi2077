@@ -9,6 +9,8 @@ export const TEXTS = {
   title: 'STRASBOURG N\'EST PAS À VENDRE',
   subtitle: 'NIVEAU 1 : LA TRIBUNE OUEST',
   pressStart: 'APPUIE SUR {ok}',
+  continueStart: '{ok} : CONTINUER · {back} : NOUVELLE PARTIE', // titre, partie sauvegardée
+  nextLevel: '{ok} : NIVEAU SUIVANT', // écran de fin de niveau (campagne)
   controls: '{move} bouger · {camera} caméra · {attack} écharpe (3 coups) · {roll} roulade · {lock} cible<br>{throw} objet · {use} interagir · {ok} valider · {pause} pause<br>{use} sur cet écran : toutes les commandes · au clavier, clic : capturer la souris',
   items: { boomerang: ['BRETZEL-BOOMERANG', '{throw}'], arc: ['ARC-DRAPEAU', '{throw} tirer · {aim} viser'] },
   itemSwitch: '{switch} changer',
@@ -19,8 +21,11 @@ export const TEXTS = {
   padUnknown: 'Manette non reconnue : utilise Steam Input ou une manette Xbox / PlayStation. Le clavier reste actif.',
   skip: '{ok} : PASSER',
   draftBadge: 'BROUILLON', // réplique non validée par Maxime (visible seulement avec ?debug=1)
+  alertBubble: '!', // un sbire repère l'Ultra
+  placeholder: 'PLACEHOLDER', // étiquette des éléments sans design validé
+  crate: 'CAISSE', // caisse de flèches spéciales
   prompts: {
-    hack: '{use} : pirater', activate: '{use} : activer', restore: '{use} : restaurer la plaque', talk: '{use} : parler', open: '{use} : ouvrir',
+    hack: '{use} : pirater', activate: '{use} : activer', restore: '{use} : restaurer la plaque', talk: '{use} : parler', crate: '{use} : prendre des flèches', open: '{use} : ouvrir',
     lever: '{use} : actionner le levier', valve: '{use} : tourner la vanne', board: '{use} : monter dans la barque', sail: '{use} : larguer les amarres'
   },
   // ------------------------------------------------ indications de commandes (systems/Prompts.js)
@@ -58,6 +63,7 @@ export const TEXTS = {
     overrides: [
       ['controls', 'Pouce gauche : bouger · Glisser à droite : caméra<br>ÉCHARPE : 3 coups · ROULADE · CIBLE : verrouiller · BRETZEL : objet · AGIR : interagir<br>Toucher l\'écran : dialogues'],
       ['pressStart', "TOUCHE L'ÉCRAN"],
+      ['continueStart', "TOUCHE L'ÉCRAN : CONTINUER"],
       ['pauseHint', 'TOUCHE L\'ÉCRAN POUR REPRENDRE'],
       ['skip', "TOUCHER L'ÉCRAN : PASSER"],
       ['items.boomerang.1', 'BOUTON BRETZEL'],

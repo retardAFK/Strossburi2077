@@ -4,6 +4,7 @@
 import * as THREE from 'three';
 import { Entity } from '../Entity.js';
 import { TUNING } from '../../data/tuning.js';
+import { arrowEffect } from './arrowEffects.js';
 
 const A = TUNING.arc;
 const PASS = new Set(['water', 'vitre', 'gate', 'switch', 'terminal', 'plaque', 'target']);
@@ -47,16 +48,20 @@ export class Arrow extends Entity {
     }
     this.obj.position.set(this.x, this.y, this.z);
   }
-  plant() { this.state = 'stuck'; this.time = 0; this.obj.position.set(this.x, this.y, this.z); this.game.audio.play('ting'); }
+  plant() {
+    this.state = 'stuck'; this.time = 0; this.obj.position.set(this.x, this.y, this.z); this.game.audio.play('ting');
+    arrowEffect(this.game, this, null); // fumée, court-circuit, feu… aussi contre un mur
+  }
   touch() {
     for (const e of this.game.entities) {
       if (e === this || !e.alive || e.isArrow) continue;
-      if (!(e.isEnemy || e.isSwitch || e.isTerminal || e.isTarget)) continue;
+      if (!(e.isEnemy || e.isSwitch || e.isTerminal || e.isTarget || e.hookable || e.arrowTarget)) continue;
       const dx = e.x - this.x, dz = e.z - this.z, d = Math.hypot(dx, dz) || 0.01;
       if (d > e.r + this.r || this.y > (e.hitH || 2.6)) continue;
       e.takeHit(A.dmg, this.dir.x, this.dir.z, A.knock, this);
       this.game.particles.burst(this.x, this.y, this.z, 8, 0xf4f6ff, 3);
       this.game.events.emit('arrow:hit', e, this);
+      arrowEffect(this.game, this, e);
       return true;
     }
     return false;

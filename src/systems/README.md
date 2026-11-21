@@ -15,6 +15,8 @@ Réutilisées par tous les niveaux. Dépendent de `core/` et de `data/`, jamais 
 | `Prompts.js` | Dernier appareil utilisé ; `format(texte, 'html' | 'text')` remplace `{action}` par une icône ou un libellé |
 | `Menus.js` | Titre, pause, « passer », écran « Commandes » (deux colonnes clavier / manette) |
 | `Cutscene.js` | Plans de caméra + sous-titres minutés ; lancé par `game.playCutscene(plans, sous-titres, suite)` |
+| `Progress.js` | Campagne de la partie 1 : sauvegarde locale (niveau, objets, flèches, compagnons), « Continuer / Nouvelle partie », `complete(texte)` → niveau suivant |
+| `Placeholder.js` | `placeholder(game, nom, hauteur, 'perso' \| 'boite')` : silhouette grise étiquetée pour tout élément sans design validé |
 | `Animator.js` | `pose(holder, {pivot: degrés})`, `walkPose`, `walkBob`, `tint` (télégraphie) |
 | `Fx.js` / `Particles.js` | Réticule, ondes de choc, étoiles, bulles de texte ; `particles.burst(x, y, z, n, couleur, vitesse)` |
 

@@ -7,6 +7,7 @@ Certains noms viennent des **données** et n'apparaissent pas comme émis ici : 
 
 | Événement | Émis par | Écouté par | Arguments (extrait de l'appel) |
 |---|---|---|---|
+| `arrow:effect` | `entities/props/arrowEffects.js` | — | `id, x, z, target \|\| null` |
 | `arrow:hit` | `entities/props/Arrow.js` | — | `e, this` |
 | `boat:arrived` | `entities/props/Barque.js` | — | `this.here.id` |
 | `boat:blocked` | `entities/props/Barque.js` | `levels/petite-france/salle2.js` | `i + 1 < n ? 'pass' : 'end', this.here.id` |
@@ -16,6 +17,7 @@ Certains noms viennent des **données** et n'apparaissent pas comme émis ici : 
 | `boss:phase` | `entities/bosses/PhasedBoss.js` | `levels/petite-france/salle5.js` | `ph, this` |
 | `chest:opened` | `entities/props/Coffre.js` | `levels/petite-france/salle3.js` | `this.id` |
 | `chest:unlock:<id>` | `levels/petite-france/salle3.js` | `entities/props/Coffre.js` | — |
+| `crate:opened` | `entities/props/CaisseFleches.js` | — | `this.arrow, this` |
 | `debug:warp` | `debug.js` | `levels/bac-a-sable/script.js`<br>`levels/petite-france/salle1.js`<br>`levels/petite-france/salle2.js`<br>`levels/petite-france/salle3.js`<br>`levels/petite-france/salle5.js` | `w.id` |
 | `enemy:killed` | `entities/bosses/PhasedBoss.js`<br>`entities/enemies/Enemy.js` | `Game.js` | `this` |
 | `enemy:removed` | `entities/enemies/Enemy.js` | — | `this` |
@@ -39,9 +41,11 @@ Certains noms viennent des **données** et n'apparaissent pas comme émis ici : 
 | `pnj:hide:<id>` | `levels/petite-france/salle2.js`<br>`levels/petite-france/salle3.js` | `entities/props/Pnj.js` | — |
 | `pnj:show:<id>` | `levels/petite-france/salle3.js` | `entities/props/Pnj.js` | — |
 | `pnj:talk` | `entities/props/Pnj.js` | `levels/petite-france/salle2.js`<br>`levels/petite-france/salle3.js` | `this.id` |
+| `progress:companions` | `systems/Progress.js` | — | `s.companions` |
 | `puzzle:failed:<id>` | `systems/Puzzle.js` | `levels/petite-france/salle1.js`<br>`levels/petite-france/salle4.js` | — |
 | `puzzle:progress:<id>` | `systems/Puzzle.js` | `levels/petite-france/salle1.js`<br>`levels/petite-france/salle4.js` | `this.i, this.order.length, this.left`<br>`this.lit.size, this.total, this.left` |
 | `puzzle:solved:<id>` | `systems/Puzzle.js` | `levels/petite-france/salle1.js`<br>`levels/petite-france/salle4.js` | — |
+| `sbire:alert` | `entities/enemies/Sbire.js` | — | `this` |
 | `state:<id>` | `systems/Puzzle.js` | `levels/petite-france/salle2.js` | `v, old` |
 | `switch:enable:<id>` | `levels/petite-france/salle1.js` | `entities/props/Borne.js` | — |
 | `switch:lock:<id>` | `levels/petite-france/salle1.js`<br>`systems/Puzzle.js` | `entities/props/Borne.js` | — |

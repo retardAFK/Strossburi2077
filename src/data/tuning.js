@@ -81,5 +81,20 @@ export const TUNING = {
   },
   // Videur-Maître d'hôtel : pare tout sauf le bretzel, qui l'assomme stun (s) ; recul subi réduit,
   // repousse l'Ultra quand il pare ; rappel de la winstubière au bout de hintAfter parades
-  videur: { hp: 10, radius: 0.85, scale: 1.4, stun: 2.6, knockTaken: 0.3, pushBack: 7, hintAfter: 3 }
+  videur: { hp: 10, radius: 0.85, scale: 1.4, stun: 2.6, knockTaken: 0.3, pushBack: 7, hintAfter: 3 },
+  // ---------------------------------------------------------------- partie 1 (socle) : sbires, flèches spéciales, caisses
+  // sbires (kit générique entities/enemies/Sbire.js) : vision (portée, cône en cos, ouïe), vitesses, attaque
+  sbires: {
+    test: { hp: 3, radius: 0.55, height: 1.9, speed: 2.2, runSpeed: 4.4, wander: 4, view: 11, fov: 0.5, hear: 2.5,
+      alertTime: 0.6, lose: 2.5, reach: 1.9, windup: 0.5, attack: 'lunge', lunge: 10, attackTime: 0.22, recover: 0.7, dmg: 1, robot: true },
+    testTireur: { hp: 3, radius: 0.55, height: 1.9, speed: 2, runSpeed: 3.6, wander: 3, view: 13, fov: 0.45, hear: 2.5,
+      alertTime: 0.6, lose: 2.5, attack: 'shoot', shootRange: 9, windup: 0.6, attackTime: 0.3, recover: 1.2, projSpeed: 11, dmg: 1 }
+  },
+  // effets des flèches spéciales (entities/props/arrowEffects.js)
+  arrowFx: {
+    smoke: { radius: 3.2, life: 6, blind: 0.5 },   // fumigène : rayon (m), durée (s), aveuglement entretenu (s)
+    short: { radius: 2.5, stun: 3 },               // court-circuit : rayon, étourdissement des robots (s)
+    fire: { radius: 1.8, dmg: 1 }                  // enflammée : rayon, dégâts aux sbires
+  },
+  crates: { amount: 3, respawn: 8, useRange: 2.2 } // caisses de flèches : quantité, réapparition (s), portée de E
 };

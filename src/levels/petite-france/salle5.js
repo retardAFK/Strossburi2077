@@ -74,7 +74,7 @@ export function salle5(game, { T, W, E }) {
   const finale = () => {
     E.emit('hud:fade', 1);
     game.playCutscene([{ from: [120, 2.6, -169], look: [120, 6.5, -182], dur: 13 }],
-      T.finale.map((txt, i) => ({ at: 0.6 + i * 4, txt })), () => game.win(T.end));
+      T.finale.map((txt, i) => ({ at: 0.6 + i * 4, txt })), () => game.completeLevel(T.end)); // → niveau suivant
   };
 
   // debug F2 'salle5' : directement dans la cuisine

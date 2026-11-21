@@ -1,6 +1,6 @@
 # src/levels — les niveaux (des données + des scripts)
 
-`index.js` est le registre : pour chaque niveau, `layout`, `script`, `texts`, `subtitle`, `models` (les `.glb` à charger)
+`index.js` est le registre (+ `CAMPAIGN` : l'ordre de la partie 1, niveaux déjà inscrits) : pour chaque niveau, `layout`, `script`, `texts`, `subtitle`, `models` (les `.glb` à charger)
 et `types` (les classes que layout et script peuvent créer). Le niveau est choisi par `?level=<id>` (défaut : `DEFAULT_LEVEL`).
 
 | Dossier | Niveau |

@@ -25,6 +25,8 @@ import pfScript from './petite-france/script.js';
 import bacLayout from './bac-a-sable/layout.js';
 import bacScript from './bac-a-sable/script.js';
 import { Mannequin } from '../entities/props/Mannequin.js';
+import { Sbire } from '../entities/enemies/Sbire.js';
+import { CaisseFleches } from '../entities/props/CaisseFleches.js';
 
 // modèles exportés par tools/blender/*.py (embarqués dans le build par esbuild, chargés à la demande)
 import ultra from '../../assets/models/ultra.glb';
@@ -63,6 +65,9 @@ import pnj_celui_du_stade from '../../assets/models/pnj_celui_du_stade.glb';
 import arc_drapeau from '../../assets/models/arc_drapeau.glb';
 
 export const DEFAULT_LEVEL = 'petite-france'; // la Meinau reste accessible avec ?level=meinau-ouest
+// Partie 1, dans l'ordre (docs/decisions.md). Seuls les niveaux déjà inscrits dans LEVELS sont joués ;
+// la fin d'un niveau lance le suivant (systems/Progress.js). La partie 2 (2067) viendra plus tard.
+export const CAMPAIGN_ORDER = ['petite-france', 'meinau', 'port-rhin', 'marche2000', 'kalt', 'kleber'];
 
 export const LEVELS = {
   'meinau-ouest': {
@@ -82,6 +87,7 @@ export const LEVELS = {
   'bac-a-sable': {
     debugOnly: true, layout: bacLayout, script: bacScript, texts: TEXTS.bac, subtitle: TEXTS.bac.subtitle,
     models: { ultra, arc_drapeau, bretzel_boomerang, pf_cible_tpe, pf_herse_laser },
-    types: { cible: Cible, mannequin: Mannequin }
+    types: { cible: Cible, mannequin: Mannequin, sbire: Sbire, caisse: CaisseFleches } // sbire / caisse : tests du socle
   }
 };
+export const CAMPAIGN = CAMPAIGN_ORDER.filter(id => LEVELS[id]);

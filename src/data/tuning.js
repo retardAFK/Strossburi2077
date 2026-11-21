@@ -39,7 +39,7 @@ export const TUNING = {
   },
   // interrupteurs d'énigme (bornes...) : portée de E, couleurs du voyant, clignotement (Hz x 2π)
   switches: { useRange: 2.2, onColor: 0x38f2ff, offColor: 0xffc040, blinkSpeed: 6 },
-  puzzle: { pfBornesTime: 6 }, // Petite France salle 1 : 3 bornes en moins de 6 s
+  puzzle: { pfBornesTime: 6, pfCiblesTime: 9 }, // Petite France : 3 bornes en 6 s (salle 1), 3 cibles en 9 s (salle 4)
   plaque: { useRange: 2.2, glitchTime: 1.2 }, // plaques historiques : portée de E, durée du glitch (s)
   water: { speed: 0.6 }, // montée / descente de l'eau (m/s)
   // barque-plateforme : vitesse (m/s), demi-longueur / demi-largeur du pont, hauteur du pont au-dessus de l'eau
@@ -48,6 +48,8 @@ export const TUNING = {
   pnj: { useRange: 2.6 },
   chest: { useRange: 2.2, lidAngle: 1.8 },
   // bretzel-boomerang : portée (m), vitesse (m/s), courbe latérale (m), rayon de touche, retour (m), durée max (s)
+  // cibles-TPE : couleurs des clés (ordre des néons)
+  targets: { colors: { rouge: 0xff1a3c, or: 0xffc040, cyan: 0x38f2ff } },
   boomerang: { range: 11, speed: 15, curve: 1.6, radius: 0.55, catch: 0.9, maxTime: 4, height: 1.2, spin: 18, scale: 0.6, dmg: 1, knock: 6 },
   // Videur-Maître d'hôtel : garde de face (cos de l'angle), recul subi réduit, repousse l'Ultra quand il bloque
   videur: { hp: 10, radius: 0.85, scale: 1.4, guard: 0.35, knockTaken: 0.3, pushBack: 7 }

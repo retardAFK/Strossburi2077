@@ -1,6 +1,6 @@
 // Construit le décor d'un niveau à partir de ses DONNÉES (levels/<id>/layout.js).
 import * as THREE from 'three';
-import { TEX, canvasTex, adTexture, graffitiTexture } from './Textures.js';
+import { TEX, canvasTex, adTexture, graffitiTexture, silhouetteTexture } from './Textures.js';
 import { TUNING } from '../data/tuning.js';
 
 const WALL_H = 6;
@@ -65,11 +65,14 @@ export class World {
       if (p.scale) o.scale.setScalar(p.scale);
       S.add(o); if (p.id) this.props[p.id] = o;
       if (p.solid) { const c = col.addCircle(p.x, p.z, p.solid, 'prop'); if (p.id) this.propCircles[p.id] = c; }
+      if (p.box) col.addBox(...p.box, p.boxTag || 'prop'); // obstacle rectangulaire (vitre anti-écharpe : boxTag 'vitre')
       if (p.holo) this.makeHolo(o);
       if (p.hidden) o.visible = false;
     }
     for (const t of L.tables || []) this.buildTable(t);
     for (const b of L.blocks || []) this.buildBlock(b);
+    for (const [x0, x1, z0, z1, tag] of L.glass || []) col.addBox(x0, x1, z0, z1, tag || 'vitre'); // vitres sans modèle
+    for (const s of L.screens || []) this.buildScreen(s);
     for (const g of L.gates || []) this.buildGate(g);
     for (const w of L.waters || []) this.buildWater(w);
     for (const d of L.drones || []) {
@@ -114,6 +117,13 @@ export class World {
     const mats = [];
     o.traverse(m => { if (m.isMesh) { m.material = new THREE.MeshBasicMaterial({ color: m.material.color.clone().lerp(new THREE.Color(0x38f2ff), 0.55), transparent: true, opacity: 0.7, fog: false }); mats.push(m.material); } });
     this.anim.push(t => { const a = 0.55 + 0.15 * Math.sin(t * 20) + (Math.random() < 0.04 ? -0.3 : 0); for (const m of mats) m.opacity = a; });
+  }
+  // écran géant (silhouette du PDG...) : { id, x, y, z, w, rotY, hidden }
+  buildScreen(s) {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(s.w, s.w * 2 / 3), new THREE.MeshBasicMaterial({ map: silhouetteTexture(), fog: false }));
+    m.position.set(s.x, s.y, s.z); m.rotation.y = s.rotY || 0; m.visible = !s.hidden; this.scene.add(m);
+    this.props[s.id] = m;
+    this.anim.push(t => { m.material.color.setScalar(0.85 + 0.15 * Math.sin(t * 13) + (Math.random() < 0.03 ? -0.4 : 0)); });
   }
   setPropVisible(id, on) { if (this.props[id]) this.props[id].visible = on; }
   // retire un décor (cage qui saute...) : invisible et plus d'obstacle

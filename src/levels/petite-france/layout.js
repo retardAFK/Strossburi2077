@@ -1,7 +1,8 @@
 // Niveau 1 : Petite France (futur). DONNÉES UNIQUEMENT.
 // Salle 1 : ruelle en bord d'Ill puis Quartier des Tanneurs devenu « Food Court Premium » (z 6 → -52).
 // Salle 2 : l'Écluse, canal à 3 niveaux d'eau, barque, pont bas, quai haut (z -52 → -104).
-// Salle 3 : les Ponts Couverts « Péage Patrimoine », arène entre les tours, coffre, borne sur pile (z -104 → -147). Repère : x à droite, z négatif = vers le fond.
+// Salle 3 : les Ponts Couverts « Péage Patrimoine », arène entre les tours, coffre, borne sur pile (z -104 → -150).
+// Salle 4 : le Barrage Vauban « Rooftop Premium », cibles-TPE derrière vitres, écran du PDG (z -150 → -175). Repère : x à droite, z négatif = vers le fond.
 // Rectangles : [x0, x1, zHaut, zBas]. Les modèles pf_* regardent vers +x (rotY 0).
 const PI = Math.PI;
 const CYAN = 0x38f2ff, PINK = 0xff2e88, GOLD = 0xffc040;
@@ -26,12 +27,13 @@ export default {
   // debug F2 (?debug=1) : points de passage, dans l'ordre du niveau (le script remet chaque salle en état)
   warps: [
     { id: 'salle1-enigme', x: 0, z: -30, face: PI / 2 }, { id: 'salle2', x: 0, z: -55, face: PI / 2 },
-    { id: 'salle3', x: 12, z: -105, face: PI / 2 }, { id: 'salle3-coffre', x: 12, z: -124, face: PI / 2 }
+    { id: 'salle3', x: 12, z: -105, face: PI / 2 }, { id: 'salle3-coffre', x: 12, z: -124, face: PI / 2 },
+    { id: 'salle4', x: 12, z: -146, face: PI / 2 }
   ],
 
   // plaque historique holo (textes : TEXTS.pf.plaques)
   plaques: [{ id: 'p1', x: -2.6, z: -15.6, rotY: 0 }, { id: 'p2', x: 14, z: -89, rotY: -PI / 2 },
-    { id: 'p3', x: 7.5, z: -133, rotY: 0 }],
+    { id: 'p3', x: 7.5, z: -133, rotY: 0 }, { id: 'p4', x: 2.2, z: -153, rotY: 0 }],
 
   zones: [
     { id: 'ruelle', rect: [-3.5, 7, 6, -18.5] },
@@ -42,7 +44,8 @@ export default {
     { id: 'quaiHaut', rect: [8, 16, -85, -104], cam: [2, 16, -80, -104] },
     { id: 'peage', rect: [9, 15, -104, -112], cam: [2, 22, -100, -136] },
     { id: 'ponts', rect: [2, 22, -112, -136.5] },
-    { id: 'sortie3', rect: [9, 15, -136.5, -147], cam: [2, 22, -112, -147] }
+    { id: 'sortie3', rect: [9, 15, -136.5, -150], cam: [2, 22, -112, -150] },
+    { id: 'barrage', rect: [0, 24, -150, -171], cam: [0, 24, -146, -171] }
   ],
   floors: [
     { rect: [-3.5, 3, 6, -18], tex: 'paves', sky: true },          // ruelle (le quai a son propre pavage)
@@ -56,7 +59,8 @@ export default {
     { rect: [8, 16, -85, -100], tex: 'paves', sky: true },         // quai haut B
     { rect: [10, 14, -100, -112], tex: 'paves', sky: true },       // vers les Ponts Couverts
     { rect: [2, 22, -112, -136], tex: 'paves', sky: true },        // arène du péage
-    { rect: [10, 14, -136, -146], tex: 'paves', sky: true }        // sortie vers le barrage
+    { rect: [10, 14, -136, -150], tex: 'paves', sky: true },       // sortie vers le barrage
+    { rect: [0, 24, -150, -171], tex: 'paves', sky: true }         // toit-terrasse du barrage
   ],
   // [x0, x1, z0, z1, texture]
   walls: [
@@ -71,17 +75,22 @@ export default {
     [8, 10, -100, -101, 'gres'], [14, 17, -100, -101, 'gres'],
     [9, 10, -100, -108, 'gres'], [14, 15, -100, -108, 'gres'],
     // ponts couverts : sortie
-    [9, 10, -137.5, -146, 'gres'], [14, 15, -137.5, -146, 'gres'], [9, 15, -146, -147, 'gres']
+    [9, 10, -137.5, -150, 'gres'], [14, 15, -137.5, -150, 'gres']
   ],
   // collisions seules : façades des maisons (gauche), rambarde du quai (droite)
   blockers: [[-10, -3.5, 7, -15.5], [6.75, 10, 7, -18], [-9, 2, -68, -100], [8, 20, -52, -85],
     // tours de péage (entrée et sortie de l'arène) et bords de l'arène
     [3.4, 9.6, -107.9, -114.1], [14.4, 20.6, -107.9, -114.1], [3.4, 9.75, -133.9, -140.1], [14.25, 20.6, -133.9, -140.1],
-    [1, 3.4, -111, -114], [20.6, 23, -111, -114], [1, 3.4, -136, -139], [20.6, 23, -136, -139]],
+    [1, 3.4, -111, -114], [20.6, 23, -111, -114], [1, 3.4, -136, -139], [20.6, 23, -136, -139],
+    // barrage : bords nord, garde-corps est / ouest, arches au sud
+    [-1, 10, -149, -150], [14, 25, -149, -150], [-1, 0, -150, -172], [24, 25, -150, -172], [-1, 25, -168.3, -176]],
+  // mur vitré « anti-écharpe » devant les cibles (le bretzel passe au-dessus), ouverture fermée par la herse 4
+  glass: [[0, 18.25, -163.5, -163.7], [22.75, 24, -163.5, -163.7]],
   // canal de l'écluse : 3 niveaux d'eau (y), départ au niveau moyen
   waters: [
     { id: 'eau', rect: [2, 8, -52, -100], levels: [-1.7, -1.0, -0.3], start: 1 },
-    { id: 'ill-ouest', rect: [-8, 2, -104, -142], levels: [-1.2] }, { id: 'ill-est', rect: [22, 32, -104, -142], levels: [-1.2] }
+    { id: 'ill-ouest', rect: [-8, 2, -104, -142], levels: [-1.2] }, { id: 'ill-est', rect: [22, 32, -104, -142], levels: [-1.2] },
+    { id: 'ill-barrage-o', rect: [-10, -1, -146, -176], levels: [-3] }, { id: 'ill-barrage-e', rect: [25, 34, -146, -176], levels: [-3] }
   ],
   // pile de pont (décor) qui porte la borne hors de portée de l'écharpe
   blocks: [{ x: 27, z: -130, w: 1.8, d: 1.8, h: 1.25, y: -1.25 }],
@@ -98,12 +107,19 @@ export default {
     { type: 'pnj', id: 'winstubiere', model: 'pnj_winstubiere', x: -5, z: -62, rotY: 0 },
     // ponts couverts : la winstubière revient avec les commerçants, le coffre du péage
     { type: 'pnj', id: 'winstubiere3', model: 'pnj_winstubiere', x: 14.6, z: -128.6, rotY: -PI / 2, hidden: true },
-    { type: 'coffre', id: 'peage', x: 12, z: -129, rotY: -PI / 2 }
+    { type: 'coffre', id: 'peage', x: 12, z: -129, rotY: -PI / 2 },
+    // barrage : 3 cibles-TPE derrière les vitres (ordre des néons : rouge, or, cyan ; placées dans un autre ordre)
+    { type: 'cible', group: 'cibles', key: 'cyan', x: 4, z: -166, rotY: -PI / 2 },
+    { type: 'cible', group: 'cibles', key: 'rouge', x: 9.5, z: -166, rotY: -PI / 2 },
+    { type: 'cible', group: 'cibles', key: 'or', x: 15, z: -166, rotY: -PI / 2 }
   ],
+  // écran géant du PDG au-dessus des arches (caché jusqu'à son apparition)
+  screens: [{ id: 'pdg', x: 12, y: 10.2, z: -170, w: 9, hidden: true }],
   doors: [{ id: 'entree', rect: [-2.5, 2.5, -18, -19], open: true }, { id: 'peage', rect: [9.6, 14.4, -111, -112], open: true }],
   gates: [
     { id: 'herse', model: 'pf_herse_laser', x: 0, z: -42.5, rotY: PI / 2, rect: [-2.5, 2.5, -42, -43] },
-    { id: 'herse3', model: 'pf_herse_laser', x: 12, z: -137, rotY: PI / 2, rect: [9.75, 14.25, -136.6, -137.4] }
+    { id: 'herse3', model: 'pf_herse_laser', x: 12, z: -137, rotY: PI / 2, rect: [9.75, 14.25, -136.6, -137.4] },
+    { id: 'herse4', model: 'pf_herse_laser', x: 20.5, z: -163.6, rotY: PI / 2, rect: [18.25, 22.75, -163.4, -163.8] }
   ],
   // 3 bornes « sans contact » (verrouillées jusqu'à la fin des vagues), face à l'entrée (+z)
   switches: [
@@ -135,7 +151,15 @@ export default {
     // ponts couverts : tours de péage (entrée, sortie, et deux dans l'Ill)
     { model: 'pf_tour_peage', x: 6.5, z: -111 }, { model: 'pf_tour_peage', x: 17.5, z: -111 },
     { model: 'pf_tour_peage', x: 6.5, z: -137 }, { model: 'pf_tour_peage', x: 17.5, z: -137 },
-    { model: 'pf_tour_peage', x: -3, z: -124 }, { model: 'pf_tour_peage', x: 28, z: -118 }
+    { model: 'pf_tour_peage', x: -3, z: -124 }, { model: 'pf_tour_peage', x: 28, z: -118 },
+    // barrage : arches (façade vers la terrasse), vitres anti-écharpe
+    { model: 'pf_arche_barrage', x: 3.7, z: -171.5, rotY: -PI / 2 }, { model: 'pf_arche_barrage', x: 9.3, z: -171.5, rotY: -PI / 2 },
+    { model: 'pf_arche_barrage', x: 14.9, z: -171.5, rotY: -PI / 2 }, { model: 'pf_arche_barrage', x: 20.5, z: -171.5, rotY: -PI / 2 },
+    { model: 'pf_vitre', x: 1.1, z: -163.6, rotY: -PI / 2 }, { model: 'pf_vitre', x: 3.2, z: -163.6, rotY: -PI / 2 },
+    { model: 'pf_vitre', x: 5.3, z: -163.6, rotY: -PI / 2 }, { model: 'pf_vitre', x: 7.4, z: -163.6, rotY: -PI / 2 },
+    { model: 'pf_vitre', x: 9.5, z: -163.6, rotY: -PI / 2 }, { model: 'pf_vitre', x: 11.6, z: -163.6, rotY: -PI / 2 },
+    { model: 'pf_vitre', x: 13.7, z: -163.6, rotY: -PI / 2 }, { model: 'pf_vitre', x: 15.8, z: -163.6, rotY: -PI / 2 },
+    { model: 'pf_vitre', x: 17.2, z: -163.6, rotY: -PI / 2 }, { model: 'pf_vitre', x: 23.4, z: -163.6, rotY: -PI / 2 }
   ],
   drones: [
     { x: 5, z: -62, y: 5, r: 3, speed: 0.6, phase: 0 }, { x: 5, z: -86, y: 5.5, r: 4, speed: 0.45, phase: 2 }
@@ -151,7 +175,8 @@ export default {
     { x: -4.5, z: -41.9, w: 3, y: 4.3, idx: 4 }, { x: 5.5, z: -41.9, w: 3, y: 4.3, idx: 0 },
     { x: -7.9, z: -60, rotY: PI / 2, idx: 6 }, { x: 11.9, z: -71, rotY: -PI / 2, w: 2.4, y: 2.6, idx: 7 },
     { x: 15.9, z: -93, rotY: -PI / 2, idx: 2 },
-    { x: 12, z: -107.8, w: 4, y: 5.2, idx: 8 }, { x: 12, z: -133.8, w: 4, y: 5.2, idx: 9 }
+    { x: 12, z: -107.8, w: 4, y: 5.2, idx: 8 }, { x: 12, z: -133.8, w: 4, y: 5.2, idx: 9 },
+    { x: 4, z: -149.9, rotY: PI, w: 3, y: 3.4, idx: 10 }, { x: 9.5, z: -163.5, w: 2.4, y: 3.4, idx: 11 }
   ],
   neons: [
     { x: -3.45, y: 0.12, z: -5, len: 22, axis: 'z', color: PINK },
@@ -161,7 +186,11 @@ export default {
     { x: -6.6, y: 0.9, z: -27, len: 8, axis: 'z', color: GOLD }, { x: 6.6, y: 0.9, z: -27, len: 8, axis: 'z', color: GOLD },
     { x: 0, y: 4.6, z: -41.9, len: 5, axis: 'x', color: PINK },
     { x: 2.05, y: 0.06, z: -76, len: 48, axis: 'z', color: CYAN }, { x: 7.95, y: 0.06, z: -76, len: 48, axis: 'z', color: PINK },
-    { x: 2.05, y: 0.9, z: -124, len: 22, axis: 'z', color: CYAN }, { x: 21.95, y: 0.9, z: -124, len: 22, axis: 'z', color: PINK }
+    { x: 2.05, y: 0.9, z: -124, len: 22, axis: 'z', color: CYAN }, { x: 21.95, y: 0.9, z: -124, len: 22, axis: 'z', color: PINK },
+    // barrage : garde-corps, et les 3 néons d'ordre au-dessus des arches (de gauche à droite : rouge, or, cyan)
+    { x: 0.05, y: 1, z: -160, len: 20, axis: 'z', color: CYAN }, { x: 23.95, y: 1, z: -160, len: 20, axis: 'z', color: PINK },
+    { x: 8, y: 7.6, z: -168.2, len: 2.2, axis: 'x', color: 0xff1a3c }, { x: 12, y: 7.6, z: -168.2, len: 2.2, axis: 'x', color: GOLD },
+    { x: 16, y: 7.6, z: -168.2, len: 2.2, axis: 'x', color: CYAN }
   ],
   lights: [
     { x: 5.4, z: 1, y: 3, color: CYAN, i: 10 }, { x: 5.4, z: -9, y: 3, color: CYAN, i: 10 },
@@ -171,6 +200,7 @@ export default {
     { x: -3, z: -58, color: GOLD, i: 10 }, { x: 5, z: -64, y: 3, color: CYAN, i: 12 }, { x: 5, z: -82, y: 3, color: PINK, i: 12 },
     { x: 12, z: -92, color: GOLD, i: 12 }, { x: 12, z: -102, color: CYAN, i: 8 },
     { x: 7, z: -120, color: PINK, i: 16, d: 18 }, { x: 17, z: -130, color: CYAN, i: 16, d: 18 }, { x: 26, z: -130, y: 3, color: GOLD, i: 10 },
-    { x: 12, z: -142, color: GOLD, i: 8 }
+    { x: 12, z: -142, color: GOLD, i: 8 },
+    { x: 6, z: -156, color: PINK, i: 14, d: 18 }, { x: 18, z: -156, color: CYAN, i: 14, d: 18 }, { x: 12, z: -166, y: 6, color: GOLD, i: 14, d: 16 }
   ]
 };

@@ -53,13 +53,14 @@ export function salle3(game, { T, W, E }) {
     game.setCheckpoint(12, -139, PI / 2);
   });
 
-  // fin provisoire de la démo : la sortie mène au barrage Vauban
-  game.trigger([10, 14, -143, -146], () => game.win(T.end));
-
   // debug F2 : 'salle3-coffre' = arène déjà vidée
   E.on('debug:warp', id => {
-    if (id !== 'salle3-coffre') return;
+    if (id !== 'salle3-coffre' && id !== 'salle4') return;
     enter.done = true; W.setDoor('peage', false);
     freed();
+    if (id === 'salle4') { // ponts couverts terminés : bretzel en main, herse ouverte
+      if (!game.inventory.has('boomerang')) game.inventory.give(new BretzelBoomerang(game));
+      W.setGate('herse3', true);
+    }
   });
 }

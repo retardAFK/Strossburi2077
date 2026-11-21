@@ -69,6 +69,19 @@ export function adTexture(l1, l2, hue) {
     g.fillStyle = '#ffffff'; g.font = 'bold 10px monospace'; g.fillText(l2, w / 2, 47, w - 10);
   });
 }
+// écran géant : silhouette sans visage (tête, épaules, costard) sur fond rouge sombre à lignes de balayage
+export function silhouetteTexture() {
+  return canvasTex(96, 64, (g, w, h) => {
+    g.fillStyle = '#2a0610'; g.fillRect(0, 0, w, h);
+    for (let y = 0; y < h; y += 2) { g.fillStyle = 'rgba(255,46,136,0.10)'; g.fillRect(0, y, w, 1); }
+    g.fillStyle = '#050208';
+    g.beginPath(); g.arc(w / 2, 24, 10, 0, Math.PI * 2); g.fill();                    // tête
+    g.beginPath(); g.moveTo(w / 2 - 26, h); g.quadraticCurveTo(w / 2 - 24, 36, w / 2, 36);
+    g.quadraticCurveTo(w / 2 + 24, 36, w / 2 + 26, h); g.fill();                          // épaules
+    g.fillStyle = '#ffc040'; g.fillRect(w / 2 - 1, 40, 2, h - 40);                       // cravate dorée
+    g.strokeStyle = '#ff2e88'; g.lineWidth = 2; g.strokeRect(1, 1, w - 2, h - 2);
+  });
+}
 export function graffitiTexture(text, color) {
   return canvasTex(128, 32, (g, w, h) => {
     g.clearRect(0, 0, w, h); g.textAlign = 'center'; g.font = 'bold italic 22px sans-serif';

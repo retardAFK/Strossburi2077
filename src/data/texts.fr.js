@@ -79,13 +79,15 @@ export const TEXTS = {
     plaques: {
       p1: { lie: 'Food Court Premium depuis toujours.', truth: "Cœur du quartier des tanneurs, au bord de l'Ill." },
       p3: { lie: 'Construits par BlingCo en 2061.', truth: 'Commencés en 1230, ouverts en 1250. Leurs toitures en bois ont disparu en 1784, le nom est resté.' },
+      p4: { lie: 'Rooftop Premium, accès VIP.', truth: "Bâti par Vauban à partir de 1686 pour barrer l'accès par l'eau. Terrasse panoramique ouverte à tous depuis 1966." },
       p2: { lie: 'Patrimoine sous licence BlingCo.', truth: "Quartier populaire de tanneurs, meuniers et pêcheurs. Patrimoine mondial de l'UNESCO depuis 1988." }
     },
     plaqueRestored: { who: "L'ULTRA", txt: "Voilà. Notre histoire, pas la leur." },
     rooms: {
       ruelle: 'PETITE FRANCE · RUELLE SOUS LICENCE', foodcourt: 'QUARTIER DES TANNEURS · « FOOD COURT PREMIUM »', terrasse: 'TERRASSE (ACCÈS PAYANT)',
       ecluse: "L'ÉCLUSE · « PASSAGE PREMIUM »", canal: 'CANAL · BARQUE AUTONOME (2 BC / MIN)', quaiHaut: 'QUAI HAUT',
-      peage: 'PONTS COUVERTS · « PÉAGE PATRIMOINE »', ponts: 'PONTS COUVERTS · ARÈNE DU PÉAGE', sortie3: 'VERS LE BARRAGE VAUBAN'
+      peage: 'PONTS COUVERTS · « PÉAGE PATRIMOINE »', ponts: 'PONTS COUVERTS · ARÈNE DU PÉAGE', sortie3: 'VERS LE BARRAGE VAUBAN',
+      barrage: 'BARRAGE VAUBAN · « ROOFTOP PREMIUM »'
     },
     ads: [
       ['FOOD COURT PREMIUM', 'EXPÉRIENCE AUTHENTIQUE®'],
@@ -97,7 +99,9 @@ export const TEXTS = {
       ['ÉCLUSE PREMIUM', 'PASSAGE : 12 BC'],
       ['BARQUE AUTONOME', '2 BC / MINUTE'],
       ['PÉAGE PATRIMOINE', 'TRAVERSÉE : 25 BC'],
-      ['PONTS COUVERTS®', 'MARQUE DÉPOSÉE']
+      ['PONTS COUVERTS®', 'MARQUE DÉPOSÉE'],
+      ['ROOFTOP PREMIUM', 'ACCÈS VIP : 120 BC'],
+      ['PAIEMENT SANS CONTACT', 'SUIVEZ LES NÉONS']
     ],
     intro: [
       { who: "L'ULTRA", txt: "La Petite France, de nuit. Avant, ça sentait le bois mouillé et la tarte flambée. Maintenant ça sent le terminal de paiement." },
@@ -165,7 +169,22 @@ export const TEXTS = {
       { who: 'LA WINSTUBIÈRE', txt: "La herse de sortie s'ouvre avec la borne, là-bas, sur la pile du pont. Personne ne peut l'atteindre... sauf toi, maintenant." }
     ],
     winstubHint3: "La borne sur la pile du pont ! Vise-la avec le bretzel.",
-    end: ['FIN DE LA DÉMO', 'Suite : le Barrage Vauban (en construction)']
+    // salle 4 : le Barrage Vauban, « Rooftop Premium »
+    rooftop: [
+      { who: 'ANDROÏDE SERVEUR', txt: "Bienvenue au Rooftop Premium. Coupe de champagne obligatoire : 60 BC. La vue est en option." },
+      { who: "L'ULTRA", txt: "La terrasse du barrage... Elle était à tout le monde." }
+    ],
+    cibles: [
+      { who: "L'ULTRA", txt: "Trois terminaux derrière des vitres anti-écharpe. Et les néons au-dessus des arches : rouge, or, cyan." },
+      { who: 'TUTO', txt: "Touche les 3 cibles avec le bretzel dans l'ordre des néons, en moins de {t} secondes." }
+    ],
+    antiEcharpe: 'ANTI-ÉCHARPE !',
+    ciblesFail: ['PAIEMENT REFUSÉ', "mauvais ordre, ou trop lent"],
+    pdg: [
+      { who: 'LE PDG DE BLINGCO', txt: "L'histoire appartient à ceux qui la possèdent." },
+      { who: "L'ULTRA", txt: "Alors on va la reprendre." }
+    ],
+    end: ['FIN DE LA DÉMO', "Suite : l'ASR-67 (en construction)"]
   },
   shield: 'TING !'
 };

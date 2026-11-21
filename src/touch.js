@@ -14,10 +14,12 @@ export function touchWanted(params) {
 function blockZoom() {
   const stop = e => e.preventDefault();
   for (const ev of ['gesturestart', 'gesturechange', 'gestureend', 'dblclick']) document.addEventListener(ev, stop, { passive: false });
-  document.addEventListener('touchmove', stop, { passive: false }); // la page ne défile ni ne zoome jamais
+  // la page ne défile ni ne zoome jamais (sauf l'écran d'installation, qui peut défiler sur petit écran)
+  const inInstall = e => !!e.target.closest?.('#install');
+  document.addEventListener('touchmove', e => { if (e.touches.length > 1 || !inInstall(e)) e.preventDefault(); }, { passive: false });
   document.addEventListener('touchstart', e => { if (e.touches.length > 1) e.preventDefault(); }, { passive: false });
-  let lastEnd = 0; // double-tap rapide : pas de zoom
-  document.addEventListener('touchend', e => { const now = Date.now(); if (now - lastEnd < 350) e.preventDefault(); lastEnd = now; }, { passive: false });
+  let lastEnd = 0; // double-tap rapide : pas de zoom (les boutons de l'écran d'installation restent cliquables)
+  document.addEventListener('touchend', e => { const now = Date.now(); if (now - lastEnd < 350 && !inInstall(e)) e.preventDefault(); lastEnd = now; }, { passive: false });
 }
 
 export function setupTouch(game, dom) {

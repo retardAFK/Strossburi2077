@@ -106,6 +106,23 @@
                      align-items:center; justify-content:center; text-align:center; padding:0 10%; line-height:2; font-size:12px; }
   #touch.idle .t-btn:not(.t-pause) { visibility:hidden; }
   @media (orientation: portrait) { #touch .t-rotate { display:flex; } }
+  /* écran « installe le jeu » (src/install.js), au-dessus de tout, lisible en portrait comme en paysage */
+  #install { position:fixed; inset:0; z-index:20; display:flex; align-items:center; justify-content:center; overflow:auto;
+             background:radial-gradient(ellipse at center, #14204a, #07081a 70%); touch-action:auto;
+             padding:max(12px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); }
+  #install .i-box { max-width:560px; width:100%; text-align:center; line-height:1.8; font-size:10px; }
+  #install .i-icon { width:56px; height:56px; image-rendering:pixelated; border-radius:12px; }
+  #install h2 { margin:.4em 0; color:var(--gold); font-size:15px; text-shadow:3px 3px 0 var(--blue); }
+  #install p { margin:.3em 0 .8em; color:#d8d0f0; }
+  #install .i-steps { text-align:left; margin:.6em auto 1em; padding-left:2em; color:#fff; max-width:440px; }
+  #install .i-steps li { margin:.4em 0; }
+  #install .i-share { width:1.6em; height:1.6em; vertical-align:-.45em; color:var(--cyan); }
+  #install button { font:inherit; display:block; margin:.5em auto; padding:.9em 1.4em; border:3px solid #000; color:#fff;
+                    box-shadow:0 4px 0 rgba(0,0,0,.5); cursor:pointer; }
+  #install .i-go { background:var(--pink); font-size:12px; }
+  #install .i-go[hidden] { display:none; }
+  #install .i-go:not([hidden]) ~ .i-steps { display:none; } /* vrai bouton dispo : pas besoin du tuto */
+  #install .i-browser { background:transparent; border-color:#5a5f80; color:#b8b0e0; box-shadow:none; font-size:9px; }
 </style>
 </head>
 <body>

@@ -36,6 +36,15 @@ export const TEXTS = {
   touch: {
     buttons: { attack: 'ÉCHARPE', roll: 'ROULADE', lock: 'CIBLE', throw: 'BRETZEL', use: 'AGIR', pause: '❚❚' },
     rotate: 'Tourne ton téléphone en paysage 📱↻',
+    // écran d'accueil sur mobile (src/install.js) : installer le jeu comme une appli (plein écran, sans barres)
+    install: {
+      title: 'INSTALLE LE JEU',
+      why: 'Sur téléphone, le jeu est bien meilleur installé : plein écran, sans les barres du navigateur.',
+      install: 'INSTALLER',
+      browser: 'JOUER DANS LE NAVIGATEUR',
+      ios: ['Touche {share} Partager, en bas (ou en haut) de Safari', 'Choisis « Sur l\'écran d\'accueil »', 'Lance le jeu depuis sa nouvelle icône'],
+      android: ['Ouvre le menu ⋮ du navigateur', 'Choisis « Installer l\'application » (ou « Ajouter à l\'écran d\'accueil »)', 'Lance le jeu depuis sa nouvelle icône']
+    },
     // textes remplacés quand on joue au doigt : [chemin dans TEXTS, nouveau texte]
     overrides: [
       ['controls', 'Pouce gauche : bouger · Glisser à droite : caméra<br>ÉCHARPE : 3 coups · ROULADE · CIBLE : verrouiller · BRETZEL : objet · AGIR : interagir<br>Toucher l\'écran : dialogues'],

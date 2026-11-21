@@ -44,6 +44,9 @@
   #prompt { position:absolute; left:0; right:0; bottom:24%; text-align:center; display:none; color:var(--cyan);
             text-shadow:2px 2px 0 #000; animation:pulse 1.2s ease-in-out infinite; }
   @keyframes pulse { 50% { opacity:.55; } }
+  #caption { position:absolute; left:10%; right:10%; bottom:9%; display:none; text-align:center; line-height:1.9;
+             color:var(--fg); text-shadow:2px 2px 0 #000, 0 0 8px #000; }
+  #skip { position:absolute; right:2.5%; bottom:3%; display:none; font-size:.6em; color:#b8b0e0; }
   #pause .hint { margin:0; font-size:clamp(7px,1vw,11px); color:#b8b0e0; }
   .err { color:#f66; position:fixed; top:0; left:0; z-index:9; white-space:pre-wrap; }
 </style>
@@ -58,6 +61,8 @@
     <div id="boss"><span id="bossname"></span><div id="bossbar"><div id="bossfill"></div></div></div>
     <div id="banner"></div>
     <div id="prompt"></div>
+    <div id="caption"></div>
+    <div id="skip"></div>
     <div id="dialog"><div class="who"></div><div class="txt"></div><div class="next">▼</div></div>
     <div id="flash"></div>
     <div id="pause" class="overlay"><h2 style="color:#fff">PAUSE</h2><p class="hint"></p></div>

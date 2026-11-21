@@ -9,6 +9,24 @@ export default {
   bg: 0x0a0a20, fog: [14, 44],
   playerStart: { x: 0, z: -1, face: PI / 2 },
 
+  // ouverture (~45 s) : survol de nuit, de l'Ill jusqu'au food court. Un sous-titre par plan (TEXTS.pf.opening).
+  opening: {
+    shots: [
+      { from: [26, 16, 18], to: [18, 12, 4], look: [4, 1, -6], lookTo: [2, 1, -12], dur: 9 },
+      { from: [12, 3, 6], to: [9, 2.6, -14], look: [-3, 3, -2], lookTo: [-3, 3, -18], dur: 9 },
+      { from: [0, 2.2, 5], to: [0, 3, -14], look: [0, 2.5, -10], lookTo: [0, 3.5, -30], dur: 9 },
+      { from: [0, 8, -14], to: [0, 20, -30], look: [0, 3, -22], lookTo: [0, 0, -36], dur: 9 },
+      { from: [-16, 14, -46], to: [16, 18, -6], look: [0, 1, -22], lookTo: [0, 1, -18], dur: 9 }
+    ],
+    captionAt: [0.5, 9, 18, 27, 36]
+  },
+
+  // debug F2 (?debug=1) : points de passage, dans l'ordre du niveau (le script remet chaque salle en état)
+  warps: [{ id: 'salle1-enigme', x: 0, z: -30, face: PI / 2 }],
+
+  // plaque historique holo (textes : TEXTS.pf.plaques)
+  plaques: [{ id: 'p1', x: -2.6, z: -15.6, rotY: 0 }],
+
   zones: [
     { id: 'ruelle', rect: [-3.5, 7, 6, -18.5] },
     { id: 'foodcourt', rect: [-9, 9, -18.5, -42.5] },

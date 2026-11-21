@@ -1,11 +1,18 @@
 // Tous les textes du jeu. Satire de types : aucune personne ni entreprise réelle.
+// Les textes historiques (plaques...) sont exacts, sourcés et relus par Maxime avant publication.
+
+// Année du futur : encore à trancher (2077 ou 2067). Ne JAMAIS l'écrire en dur ailleurs.
+const YEAR = '2077';
+
 export const TEXTS = {
+  year: YEAR,
   title: 'STRASBOURG N\'EST PAS À VENDRE',
   subtitle: 'NIVEAU 1 : LA TRIBUNE OUEST',
   pressStart: 'APPUIE SUR ENTRÉE',
   controls: 'Clic : capturer la souris · Souris : caméra · Échap : libérer (pause)<br>ZQSD / flèches : bouger · J / clic : écharpe (3 coups) · Espace : roulade<br>Maj / L / clic droit : verrouiller · E : interagir / pirater · Entrée : dialogues · M : son',
   pauseHint: 'CLIC : REPRENDRE · P : REPRENDRE SANS SOURIS',
-  prompts: { hack: 'E : pirater', activate: 'E : activer' },
+  skip: 'ENTRÉE : PASSER',
+  prompts: { hack: 'E : pirater', activate: 'E : activer', restore: 'E : restaurer la plaque' },
   hero: "L'ULTRA",
   rooms: { entree: 'PORTE OUEST', coursive: 'COURSIVE DE LA TRIBUNE OUEST', vip: 'SALON « EXPÉRIENCE CLIENT » BLINGCO', sortie: 'VERS LA TRIBUNE' },
 
@@ -18,7 +25,7 @@ export const TEXTS = {
     ['CHANTEZ MOINS FORT', 'VOUS USEZ LA PELOUSE'],
     ['TRIBUNE OUEST', 'ESPACE EXPÉRIENCE CLIENT'],
     ['MERCATO PERMANENT', 'VOTRE JOUEUR PRÉFÉRÉ : 3 MOIS'],
-    ['2077', 'BLINGCO MULTI-HOLDINGS']
+    [YEAR, 'BLINGCO MULTI-HOLDINGS']
   ],
   buvette: ['BUVETTE 2.0', 'BIÈRE SANS ALCOOL SANS BIÈRE : 18 BC'],
 
@@ -30,7 +37,7 @@ export const TEXTS = {
   },
 
   intro: [
-    { who: "L'ULTRA", txt: "Meinau, 2077. Ils ont rebaptisé le stade « BlingCo Arena » et transformé la tribune ouest en « espace expérience client »." },
+    { who: "L'ULTRA", txt: `Meinau, ${YEAR}. Ils ont rebaptisé le stade « BlingCo Arena » et transformé la tribune ouest en « espace expérience client ».` },
     { who: "L'ULTRA", txt: "Le club est devenu une filiale. Demain ce sera la ville. Pas tant qu'il y aura une écharpe dans cette tribune." },
     { who: 'TUTO', txt: "J (ou clic) pour fouetter avec l'écharpe, trois fois pour le combo. Espace pour rouler. Maj pour verrouiller un costard." }
   ],
@@ -51,9 +58,23 @@ export const TEXTS = {
   victory: ['TRIBUNE OUEST LIBÉRÉE !', 'Les anciens du kop rejoignent la résistance. Fin du niveau 1 (prototype).'],
   gameOver: "Tu t'es fait licencier... Retour au dernier point de contrôle.",
 
-  // ------------------------------------------------ Niveau 1 : Petite France 2077 (salle 1 : Quartier des Tanneurs)
+  // ------------------------------------------------ Niveau 1 : Petite France (futur)
   pf: {
-    subtitle: 'NIVEAU 1 : PETITE FRANCE 2077',
+    subtitle: `NIVEAU 1 : PETITE FRANCE ${YEAR}`,
+    // ouverture : voix off (survol de la Petite France), un sous-titre par plan
+    opening: [
+      `Strasbourg, ${YEAR}.`,
+      "Ça a commencé au stade. Un consortium a racheté notre club : BlingCo Multi-Holdings. « Club satellite », qu'ils disaient.",
+      "Puis ils ont racheté le reste. Les rues, les ponts, les winstubs. Le marché de Noël ouvert 365 jours par an.",
+      "Ici, ils ont même réécrit l'histoire. La Petite France est devenue une « Expérience Authentique® ».",
+      "Les gens d'ici paient pour rentrer chez eux. Moi, j'ai encore mon écharpe."
+    ],
+    // plaques historiques : mensonge de BlingCo -> vraie histoire (TEXTES À RELIRE PAR MAXIME)
+    plaqueTitle: ['PLAQUE HISTORIQUE · BLINGCO®', 'LA VRAIE HISTOIRE'],
+    plaques: {
+      p1: { lie: 'Food Court Premium depuis toujours.', truth: "Cœur du quartier des tanneurs, au bord de l'Ill." }
+    },
+    plaqueRestored: { who: "L'ULTRA", txt: "Voilà. Notre histoire, pas la leur." },
     rooms: { ruelle: 'PETITE FRANCE · RUELLE SOUS LICENCE', foodcourt: 'QUARTIER DES TANNEURS · « FOOD COURT PREMIUM »', terrasse: 'TERRASSE (ACCÈS PAYANT)' },
     ads: [
       ['FOOD COURT PREMIUM', 'EXPÉRIENCE AUTHENTIQUE®'],
@@ -78,6 +99,7 @@ export const TEXTS = {
     herseOpen: ['HERSE OUVERTE', 'paiement refusé : vous êtes libre'],
     celle: [
       { who: 'CELLE DU STADE', txt: "Eh, l'écharpe bleue et blanche ! T'inquiète, c'est Celle du stade. J'ai emprunté leur écran deux minutes." },
+      { who: 'CELLE DU STADE', txt: "On t'attendait, tu sais. Toi précisément. Je t'expliquerai... pas sur leur réseau." },
       { who: 'CELLE DU STADE', txt: "Nous, c'est SCN : Stras c'est nous. Des gens d'ici. Winstubs, mariniers, anciens du kop, mamies du quartier. On ne lâche rien." },
       { who: 'CELLE DU STADE', txt: "Ils ont bloqué l'écluse pour faire payer le passage. File là-bas, on t'y attend. Et méfie-toi des sommeliers : ils visent bien." },
       { who: "L'ULTRA", txt: "Reçu. Direction l'écluse." }

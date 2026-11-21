@@ -13,6 +13,7 @@ import { Hud } from './systems/Hud.js';
 import { Particles } from './systems/Particles.js';
 import { World } from './systems/World.js';
 import { Fx } from './systems/Fx.js';
+import { Cutscene } from './systems/Cutscene.js';
 import { Ultra } from './entities/player/Ultra.js';
 import { Pickup } from './entities/props/Pickup.js';
 import { TEXTS } from './data/texts.fr.js';
@@ -51,8 +52,10 @@ export class Game {
     this.camera.snapBehind(s.face);
     for (const p of level.layout.terminals || []) this.add(new this.types.terminal(this, p));
     for (const p of level.layout.switches || []) this.add(new this.types[p.type || 'borne'](this, p));
+    for (const p of level.layout.plaques || []) this.add(new this.types.plaque(this, p));
     this.events.on('enemy:killed', e => this.onEnemyKilled(e));
     level.script(this);
+    this.startOpening(level.layout.opening);
     let last = performance.now(), acc = 0;
     const frame = now => {
       acc += Math.min(0.1, (now - last) / 1000); last = now;
@@ -73,7 +76,7 @@ export class Game {
     return e;
   }
   onGroupCleared(group, fn) { this.events.on('group:cleared:' + group, fn); }
-  trigger(rect, fn, once = true) { this.triggers.push({ rect, fn, once, done: false }); }
+  trigger(rect, fn, once = true) { const t = { rect, fn, once, done: false }; this.triggers.push(t); return t; }
   say(lines, cb) { this.dialog.say(lines, cb); }
   bubble(ent, text, dur) { this.fx.bubble(ent, text, dur); }
   shockwave(x, z, r) { this.fx.shockwave(x, z, r); }
@@ -86,11 +89,29 @@ export class Game {
     if (!e.isBoss && Math.random() < TUNING.pickup.dropChance) this.add(new Pickup(this, { x: e.x, z: e.z }));
   }
 
+  // ouverture du niveau (cinématique avant l'écran titre), passable avec Entrée
+  startOpening(o) {
+    const lines = this.levelTexts.opening;
+    if (!o || !lines) return;
+    this.mode = 'opening'; this.dom.title.style.display = 'none';
+    this.dom.skip.textContent = this.texts.skip; this.dom.skip.style.display = 'block';
+    this.cutscene = new Cutscene(this, { shots: o.shots, captions: lines.map((txt, i) => ({ at: o.captionAt[i] ?? 0, txt })) });
+  }
+  endOpening() {
+    this.cutscene.end(); this.cutscene = null; this.mode = 'title';
+    this.dom.skip.style.display = 'none'; this.dom.title.style.display = 'flex';
+  }
+
   // ---------------------------------------------------------------- boucle
   tick(dt) {
     this.time += dt; this.dt = dt;
     const I = this.input;
     if (I.pressed.mute) this.audio.toggleMute();
+    if (this.mode === 'opening') {
+      this.world.update(dt, this.time); this.cutscene.update(dt);
+      if (this.cutscene.done || I.pressed.ok) this.endOpening();
+      return;
+    }
     if (this.mode === 'title') {
       this.renderer.camera.position.set(Math.sin(this.time * 0.25) * 3, 3, -4 + Math.cos(this.time * 0.25) * 2);
       this.renderer.camera.lookAt(0, 2, -14);

@@ -39,5 +39,6 @@ export const TUNING = {
   },
   // interrupteurs d'énigme (bornes...) : portée de E, couleurs du voyant, clignotement (Hz x 2π)
   switches: { useRange: 2.2, onColor: 0x38f2ff, offColor: 0xffc040, blinkSpeed: 6 },
-  puzzle: { pfBornesTime: 6 } // Petite France salle 1 : 3 bornes en moins de 6 s
+  puzzle: { pfBornesTime: 6 }, // Petite France salle 1 : 3 bornes en moins de 6 s
+  plaque: { useRange: 2.2, glitchTime: 1.2 } // plaques historiques : portée de E, durée du glitch (s)
 };

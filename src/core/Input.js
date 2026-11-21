@@ -6,7 +6,7 @@
 const KEYS = {
   KeyW: 'up', ArrowUp: 'up', KeyS: 'down', ArrowDown: 'down', KeyA: 'left', ArrowLeft: 'left', KeyD: 'right', ArrowRight: 'right',
   KeyJ: 'attack', Space: 'roll', KeyK: 'roll', ShiftLeft: 'lock', ShiftRight: 'lock', KeyL: 'lock',
-  KeyE: 'use', Enter: 'ok', KeyM: 'mute', KeyP: 'pause', Escape: 'pause'
+  KeyE: 'use', KeyF: 'throw', Enter: 'ok', KeyM: 'mute', KeyP: 'pause', Escape: 'pause'
 };
 const ESC_AFTER_RELEASE_MS = 300; // Échap qui vient de libérer la souris : ne pas le compter deux fois
 
@@ -28,9 +28,9 @@ export class Input {
       onFirstInput?.();
       if (!this.locked) { this.pressed.capture = true; this.capture(); return; } // 1er clic : capture seulement
       if (e.button === 0) this.pressed.attack = true;
-      if (e.button === 2) press('lock');
+      if (e.button === 2) press('alt'); // objet si rien n'est verrouillé, sinon verrouillage (voir Inventory)
     });
-    addEventListener('mouseup', e => { if (e.button === 2) this.held.lock = false; });
+    addEventListener('mouseup', e => { if (e.button === 2) this.held.alt = false; });
     addEventListener('mousemove', e => { if (this.locked) { this.look.dx += e.movementX; this.look.dy += e.movementY; } });
     document.addEventListener('pointerlockchange', () => {
       if (!this.locked) { this.releasedAt = performance.now(); this.pressed.release = true; this.held.lock = false; }
@@ -48,7 +48,7 @@ export class Input {
     if (!p) return;
     const b = i => !!(p.buttons[i] && p.buttons[i].pressed);
     const st = { left: p.axes[0] < -0.4, right: p.axes[0] > 0.4, up: p.axes[1] < -0.4, down: p.axes[1] > 0.4,
-      attack: b(2), roll: b(0), lock: b(6) || b(4), use: b(3), ok: b(9) || b(1), pause: b(8) };
+      attack: b(2), roll: b(0), lock: b(6) || b(4), use: b(3), throw: b(5) || b(7), ok: b(9) || b(1), pause: b(8) };
     for (const k in st) { if (st[k] && !this.padPrev[k]) this.pressed[k] = true; if (st[k] || this.padPrev[k]) this.held[k] = st[k]; }
     this.padPrev = st;
     this.stick.x = p.axes[2] || 0; this.stick.y = p.axes[3] || 0; // stick droit (zone morte gérée par la caméra)

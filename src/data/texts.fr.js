@@ -1,19 +1,20 @@
 // Tous les textes du jeu. Satire de types : aucune personne ni entreprise réelle.
 // Les textes historiques (plaques...) sont exacts, sourcés et relus par Maxime avant publication.
 
-// Année du futur : encore à trancher (2077 ou 2067). Ne JAMAIS l'écrire en dur ailleurs.
-const YEAR = '2077';
+// Année du futur. Ne JAMAIS l'écrire en dur ailleurs.
+const YEAR = '2067';
 
 export const TEXTS = {
   year: YEAR,
   title: 'STRASBOURG N\'EST PAS À VENDRE',
   subtitle: 'NIVEAU 1 : LA TRIBUNE OUEST',
   pressStart: 'APPUIE SUR ENTRÉE',
-  controls: 'Clic : capturer la souris · Souris : caméra · Échap : libérer (pause)<br>ZQSD / flèches : bouger · J / clic : écharpe (3 coups) · Espace : roulade<br>Maj / L / clic droit : verrouiller · E : interagir / pirater · Entrée : dialogues · M : son',
+  controls: 'Clic : capturer la souris · Souris : caméra · Échap : libérer (pause)<br>ZQSD / flèches : bouger · J / clic : écharpe (3 coups) · Espace : roulade<br>Maj / L / clic droit : verrouiller · Clic droit / F : objet · E : interagir · Entrée : dialogues · M : son',
+  items: { boomerang: ['BRETZEL-BOOMERANG', 'CLIC DROIT / F'] },
   pauseHint: 'CLIC : REPRENDRE · P : REPRENDRE SANS SOURIS',
   skip: 'ENTRÉE : PASSER',
   prompts: {
-    hack: 'E : pirater', activate: 'E : activer', restore: 'E : restaurer la plaque', talk: 'E : parler',
+    hack: 'E : pirater', activate: 'E : activer', restore: 'E : restaurer la plaque', talk: 'E : parler', open: 'E : ouvrir',
     lever: 'E : actionner le levier', valve: 'E : tourner la vanne', board: 'E : monter dans la barque', sail: 'E : larguer les amarres'
   },
   hero: "L'ULTRA",
@@ -23,7 +24,7 @@ export const TEXTS = {
   ads: [
     ['BLINGCO ARENA', 'ex-stade de la Meinau'],
     ['ABONNEMENT', 'PREMIUM+ : 2 REINS'],
-    ['BRETZEL NFT', '49 BLINGCOINS'],
+    ['BRETZEL NFT', '49 BC'],
     ['LE FOOTBALL', 'MAIS RENTABLE'],
     ['CHANTEZ MOINS FORT', 'VOUS USEZ LA PELOUSE'],
     ['TRIBUNE OUEST', 'ESPACE EXPÉRIENCE CLIENT'],
@@ -36,6 +37,7 @@ export const TEXTS = {
     consultant: ['On va optimiser ta ferveur !', 'Ton chant n\'est pas monétisable.', 'Synergie !', 'Je te passe en freemium !', 'C\'est pas personnel, c\'est stratégique.'],
     juriste: ['Article 12 : interdiction de chanter !', 'Signe ici, ici, et là.', 'Clause de non-supportérisme !', 'Vous avez lu les CGU ? Non ? Parfait.'],
     serveur: ['Votre table est prête. Votre carte bancaire aussi ?', "Une carafe d'eau ? Option Premium.", 'Le menu « Authentique® » vous tend les bras !', 'Pourboire inclus. Et re-inclus.'],
+    videur: ["Vous n'êtes pas sur la liste.", 'Tenue correcte exigée. Écharpe interdite.', 'Réservation obligatoire, même pour respirer.', "Je ne bouge pas. Je suis payé à l'heure."],
     sommelier: ['Notes de fruits rouges et de frais de service.', "Le vin d'ici, avec notre marge d'ailleurs.", 'Bouchonné ? Non : facturé.', 'Je vous sers un fond ? Au prix de la bouteille.']
   },
 
@@ -67,7 +69,7 @@ export const TEXTS = {
     // ouverture : voix off (survol de la Petite France), un sous-titre par plan
     opening: [
       `Strasbourg, ${YEAR}.`,
-      "Ça a commencé au stade. Un consortium a racheté notre club : BlingCo Multi-Holdings. « Club satellite », qu'ils disaient.",
+      "Ça a commencé en 2026, au stade. Un consortium a racheté notre club : BlingCo Multi-Holdings. « Club satellite », qu'ils disaient.",
       "Puis ils ont racheté le reste. Les rues, les ponts, les winstubs. Le marché de Noël ouvert 365 jours par an.",
       "Ici, ils ont même réécrit l'histoire. La Petite France est devenue une « Expérience Authentique® ».",
       "Les gens d'ici paient pour rentrer chez eux. Moi, j'ai encore mon écharpe."
@@ -76,12 +78,14 @@ export const TEXTS = {
     plaqueTitle: ['PLAQUE HISTORIQUE · BLINGCO®', 'LA VRAIE HISTOIRE'],
     plaques: {
       p1: { lie: 'Food Court Premium depuis toujours.', truth: "Cœur du quartier des tanneurs, au bord de l'Ill." },
+      p3: { lie: 'Construits par BlingCo en 2061.', truth: 'Commencés en 1230, ouverts en 1250. Leurs toitures en bois ont disparu en 1784, le nom est resté.' },
       p2: { lie: 'Patrimoine sous licence BlingCo.', truth: "Quartier populaire de tanneurs, meuniers et pêcheurs. Patrimoine mondial de l'UNESCO depuis 1988." }
     },
     plaqueRestored: { who: "L'ULTRA", txt: "Voilà. Notre histoire, pas la leur." },
     rooms: {
       ruelle: 'PETITE FRANCE · RUELLE SOUS LICENCE', foodcourt: 'QUARTIER DES TANNEURS · « FOOD COURT PREMIUM »', terrasse: 'TERRASSE (ACCÈS PAYANT)',
-      ecluse: "L'ÉCLUSE · « PASSAGE PREMIUM »", canal: 'CANAL · BARQUE AUTONOME (2 BC / MIN)', quaiHaut: 'QUAI HAUT'
+      ecluse: "L'ÉCLUSE · « PASSAGE PREMIUM »", canal: 'CANAL · BARQUE AUTONOME (2 BC / MIN)', quaiHaut: 'QUAI HAUT',
+      peage: 'PONTS COUVERTS · « PÉAGE PATRIMOINE »', ponts: 'PONTS COUVERTS · ARÈNE DU PÉAGE', sortie3: 'VERS LE BARRAGE VAUBAN'
     },
     ads: [
       ['FOOD COURT PREMIUM', 'EXPÉRIENCE AUTHENTIQUE®'],
@@ -91,14 +95,16 @@ export const TEXTS = {
       ['COMMANDEZ ICI', 'SOURIEZ, VOUS PAYEZ'],
       ['BRETZEL', "À L'UNITÉ OU PAR ABONNEMENT"],
       ['ÉCLUSE PREMIUM', 'PASSAGE : 12 BC'],
-      ['BARQUE AUTONOME', '2 BC / MINUTE']
+      ['BARQUE AUTONOME', '2 BC / MINUTE'],
+      ['PÉAGE PATRIMOINE', 'TRAVERSÉE : 25 BC'],
+      ['PONTS COUVERTS®', 'MARQUE DÉPOSÉE']
     ],
     intro: [
       { who: "L'ULTRA", txt: "La Petite France, de nuit. Avant, ça sentait le bois mouillé et la tarte flambée. Maintenant ça sent le terminal de paiement." },
       { who: "L'ULTRA", txt: "Tout est « sous licence BlingCo » : les colombages, les géraniums, même le reflet dans l'Ill. Et les gens d'ici se font sortir de chez eux." },
       { who: 'TUTO', txt: "Souris pour regarder, ZQSD pour avancer. Au Quartier des Tanneurs, BlingCo a ouvert un « Food Court Premium » : c'est au bout de la ruelle." }
     ],
-    foodcourt: { who: 'ANDROÏDE SERVEUR', txt: "Bienvenue au Food Court Premium ! La table, c'est 40 BlingCoins. Ressortir, c'est plus cher." },
+    foodcourt: { who: 'ANDROÏDE SERVEUR', txt: "Bienvenue au Food Court Premium ! La table, c'est 40 BC. Ressortir, c'est plus cher." },
     wave2: { who: 'ANDROÏDE SOMMELIER', txt: "Monsieur n'a pas consommé. Monsieur va être servi." },
     herse: [
       { who: "L'ULTRA", txt: "La sortie vers la terrasse est bloquée par une herse laser. Trois bornes « sans contact »... il faut les allumer presque en même temps." },
@@ -131,8 +137,35 @@ export const TEXTS = {
       quaiHigh: { who: "L'ULTRA", txt: "Le quai est trop haut d'ici. Il faut plus d'eau. Demi-tour." },
       endOk: { who: "L'ULTRA", txt: "Le canal s'arrête là. Je descends côté quai." }
     },
-    quaiWelcome: { who: 'ANDROÏDE SERVEUR', txt: "Débarquement non réservé ! Supplément quai : 15 BlingCoins." },
-    end: ['FIN DE LA DÉMO', 'Suite : les Ponts Couverts (en construction)']
+    quaiWelcome: { who: 'ANDROÏDE SERVEUR', txt: "Débarquement non réservé ! Supplément quai : 15 BC." },
+    winstubFreed: [
+      { who: 'LA WINSTUBIÈRE', txt: "L'eau est montée et ma cage a sauté ! Merci, l'écharpe." },
+      { who: 'LA WINSTUBIÈRE', txt: "Je file par les quais prévenir les commerçants. On se retrouve aux Ponts Couverts." }
+    ],
+    // salle 3 : les Ponts Couverts, « Péage Patrimoine »
+    peage: [
+      { who: 'BORNE DE PÉAGE', txt: "Bienvenue aux Ponts Couverts®. Traversée : 25 BC. Sortie : 50 BC. Rester : sur devis." },
+      { who: "L'ULTRA", txt: "Ils font payer les ponts, maintenant. Des ponts qui ne sont même pas à eux." }
+    ],
+    videur: {
+      name: "LE VIDEUR-MAÎTRE D'HÔTEL", shield: 'NON RÉSERVÉ !',
+      intro: [
+        { who: "LE VIDEUR-MAÎTRE D'HÔTEL", txt: "Vous n'êtes pas sur la liste. Personne n'est sur la liste. C'est ça, l'exclusivité." },
+        { who: 'LA WINSTUBIÈRE', txt: "De face, il bloque tout ! Fais-le charger dans le vide, ou prends-le de dos." }
+      ]
+    },
+    freed: [
+      { who: 'LA WINSTUBIÈRE', txt: "Bien joué ! Les commerçants du pont étaient enfermés dans les tours de péage. Ils sont libres." },
+      { who: 'UN COMMERÇANT', txt: "On t'a gardé quelque chose dans le coffre du péage. Un bretzel... pas tout à fait comme les autres." },
+      { who: 'LA WINSTUBIÈRE', txt: "Ouvre-le. Et lance-le fort : il revient toujours vers celui qui l'a lancé." }
+    ],
+    boomerangGot: ['BRETZEL-BOOMERANG', 'clic droit (rien de verrouillé) ou F : lancer'],
+    boomerangTuto: [
+      { who: 'TUTO', txt: "Clic droit (ou F) pour lancer le bretzel-boomerang. Il touche à distance : ennemis, bornes, cibles. Il revient tout seul." },
+      { who: 'LA WINSTUBIÈRE', txt: "La herse de sortie s'ouvre avec la borne, là-bas, sur la pile du pont. Personne ne peut l'atteindre... sauf toi, maintenant." }
+    ],
+    winstubHint3: "La borne sur la pile du pont ! Vise-la avec le bretzel.",
+    end: ['FIN DE LA DÉMO', 'Suite : le Barrage Vauban (en construction)']
   },
   shield: 'TING !'
 };

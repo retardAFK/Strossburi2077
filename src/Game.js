@@ -14,6 +14,7 @@ import { Particles } from './systems/Particles.js';
 import { World } from './systems/World.js';
 import { Fx } from './systems/Fx.js';
 import { Cutscene } from './systems/Cutscene.js';
+import { Inventory } from './systems/Inventory.js';
 import { Ultra } from './entities/player/Ultra.js';
 import { Pickup } from './entities/props/Pickup.js';
 import { TEXTS } from './data/texts.fr.js';
@@ -33,9 +34,10 @@ export class Game {
     this.camera = new Camera(this.renderer.camera);
     this.combat = new Combat(this);
     this.dialog = new Dialog(this, dom.dialog);
-    this.hud = new Hud(dom.hud, this.events);
+    this.hud = new Hud(dom.hud, this.events, TEXTS);
     this.particles = new Particles(this.renderer.scene);
     this.fx = new Fx(this, dom.bubbles);
+    this.inventory = new Inventory(this);
     this.entities = []; this.triggers = []; this.groups = {};
     this.mode = 'title'; this.time = 0; this.dt = STEP; this.hitstop = 0; this.zone = null;
   }
@@ -131,6 +133,7 @@ export class Game {
     this.particles.update(dt);
     if (this.hitstop > 0) { this.hitstop -= dt; this.updateCamera(dt); return; }
     if (!talking && this.mode === 'play') {
+      this.inventory.update();
       for (const e of this.entities) if (!e.removed) e.update(dt);
       this.entities = this.entities.filter(e => !e.removed);
       this.checkTriggers();

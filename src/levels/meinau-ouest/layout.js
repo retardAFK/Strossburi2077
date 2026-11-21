@@ -1,4 +1,4 @@
-// Niveau 1 : coursives de la tribune ouest, Meinau, 2077. DONNÉES UNIQUEMENT.
+// Prototype : coursives de la tribune ouest, Meinau, 2067. DONNÉES UNIQUEMENT.
 // Repère : x à droite, z négatif = vers le fond. Rectangles de zone : [x0, x1, zHaut, zBas].
 const PI = Math.PI;
 const CYAN = 0x38f2ff, PINK = 0xff2e88, GOLD = 0xffc040;

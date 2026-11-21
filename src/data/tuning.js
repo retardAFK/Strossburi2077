@@ -45,5 +45,10 @@ export const TUNING = {
   // barque-plateforme : vitesse (m/s), demi-longueur / demi-largeur du pont, hauteur du pont au-dessus de l'eau
   boat: { speed: 3.2, halfLen: 1.5, halfWid: 0.65, deck: 0.3, useRange: 2.4, helmBias: 2 }, // helmBias : priorité basse de « larguer »
   lever: { useRange: 2.2, armAngle: 0.55 }, // leviers / vannes : portée de E, débattement du levier (rad)
-  pnj: { useRange: 2.6 }
+  pnj: { useRange: 2.6 },
+  chest: { useRange: 2.2, lidAngle: 1.8 },
+  // bretzel-boomerang : portée (m), vitesse (m/s), courbe latérale (m), rayon de touche, retour (m), durée max (s)
+  boomerang: { range: 11, speed: 15, curve: 1.6, radius: 0.55, catch: 0.9, maxTime: 4, height: 1.2, spin: 18, scale: 0.6, dmg: 1, knock: 6 },
+  // Videur-Maître d'hôtel : garde de face (cos de l'angle), recul subi réduit, repousse l'Ultra quand il bloque
+  videur: { hp: 10, radius: 0.85, scale: 1.4, guard: 0.35, knockTaken: 0.3, pushBack: 7 }
 };

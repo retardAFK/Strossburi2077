@@ -8,7 +8,7 @@ const WALL_H = 6;
 export class World {
   constructor(game, layout) {
     this.game = game; this.layout = layout; this.scene = game.renderer.scene;
-    this.doors = {}; this.lasers = {}; this.gates = {}; this.waters = {}; this.anim = []; this.props = {};
+    this.doors = {}; this.lasers = {}; this.gates = {}; this.waters = {}; this.anim = []; this.props = {}; this.propCircles = {};
     this.texts = game.levelTexts || game.texts; // panneaux, enseignes : textes du niveau
   }
   build() {
@@ -64,11 +64,12 @@ export class World {
       const o = this.game.assets.instance(p.model); o.position.set(p.x, p.y || 0, p.z); o.rotation.y = p.rotY || 0;
       if (p.scale) o.scale.setScalar(p.scale);
       S.add(o); if (p.id) this.props[p.id] = o;
-      if (p.solid) col.addCircle(p.x, p.z, p.solid, 'prop');
+      if (p.solid) { const c = col.addCircle(p.x, p.z, p.solid, 'prop'); if (p.id) this.propCircles[p.id] = c; }
       if (p.holo) this.makeHolo(o);
       if (p.hidden) o.visible = false;
     }
     for (const t of L.tables || []) this.buildTable(t);
+    for (const b of L.blocks || []) this.buildBlock(b);
     for (const g of L.gates || []) this.buildGate(g);
     for (const w of L.waters || []) this.buildWater(w);
     for (const d of L.drones || []) {
@@ -115,6 +116,14 @@ export class World {
     this.anim.push(t => { const a = 0.55 + 0.15 * Math.sin(t * 20) + (Math.random() < 0.04 ? -0.3 : 0); for (const m of mats) m.opacity = a; });
   }
   setPropVisible(id, on) { if (this.props[id]) this.props[id].visible = on; }
+  // retire un décor (cage qui saute...) : invisible et plus d'obstacle
+  removeProp(id) { this.setPropVisible(id, false); if (this.propCircles[id]) this.propCircles[id].on = false; }
+  // bloc de décor simple (pile de pont, socle...) : { x, z, w, d, h, y?, tex?, solid? }
+  buildBlock(b) {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(b.w, b.h, b.d), new THREE.MeshLambertMaterial({ map: TEX[b.tex || 'gres'](Math.max(b.w, b.d) / 3, b.h / 3) }));
+    m.position.set(b.x, (b.y || 0) + b.h / 2, b.z); this.scene.add(m);
+    if (b.solid) this.game.collision.addBox(b.x - b.w / 2, b.x + b.w / 2, b.z - b.d / 2, b.z + b.d / 2, 'block');
+  }
   // table de food court + 2 tabourets (obstacle rond)
   buildTable(t) {
     const S = this.scene, dark = new THREE.MeshLambertMaterial({ color: 0x2a2d40 });

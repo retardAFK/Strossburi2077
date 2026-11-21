@@ -1,6 +1,7 @@
 // Registre des niveaux : pour chacun, ses données (layout), son script, ses textes,
 // les modèles .glb à charger et les types d'entités que layout/script peuvent faire apparaître.
 // Ajouter un niveau = un dossier levels/<id>/ + une entrée ici. Choix : ?level=<id> dans l'URL.
+// debugOnly : accessible seulement avec ?debug=1 (bac à sable de test).
 import { TEXTS } from '../data/texts.fr.js';
 import { Consultant } from '../entities/enemies/Consultant.js';
 import { Juriste } from '../entities/enemies/Juriste.js';
@@ -21,6 +22,9 @@ import meinauLayout from './meinau-ouest/layout.js';
 import meinauScript from './meinau-ouest/script.js';
 import pfLayout from './petite-france/layout.js';
 import pfScript from './petite-france/script.js';
+import bacLayout from './bac-a-sable/layout.js';
+import bacScript from './bac-a-sable/script.js';
+import { Mannequin } from '../entities/props/Mannequin.js';
 
 // modèles exportés par tools/blender/*.py (embarqués dans le build par esbuild, chargés à la demande)
 import ultra from '../../assets/models/ultra.glb';
@@ -56,6 +60,7 @@ import pf_vitre from '../../assets/models/pf_vitre.glb';
 import pf_arche_barrage from '../../assets/models/pf_arche_barrage.glb';
 import asr from '../../assets/models/asr.glb';
 import pnj_celui_du_stade from '../../assets/models/pnj_celui_du_stade.glb';
+import arc_drapeau from '../../assets/models/arc_drapeau.glb';
 
 export const DEFAULT_LEVEL = 'petite-france'; // la Meinau reste accessible avec ?level=meinau-ouest
 
@@ -73,5 +78,10 @@ export const LEVELS = {
       pf_cible_tpe, pf_vitre, pf_arche_barrage, asr, pnj_celui_du_stade },
     types: { serveur: Serveur, sommelier: Sommelier, terminal: Terminal, borne: Borne, plaque: Plaque,
       barque: Barque, lever: Lever, pnj: Pnj, coffre: Coffre, videur: VideurMaitreHotel, cible: Cible, asr: Asr67 }
+  },
+  'bac-a-sable': {
+    debugOnly: true, layout: bacLayout, script: bacScript, texts: TEXTS.bac, subtitle: TEXTS.bac.subtitle,
+    models: { ultra, arc_drapeau, bretzel_boomerang, pf_cible_tpe, pf_herse_laser },
+    types: { cible: Cible, mannequin: Mannequin }
   }
 };

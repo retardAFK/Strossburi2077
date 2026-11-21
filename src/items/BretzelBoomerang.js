@@ -2,6 +2,7 @@
 // une courbe, touche à distance ennemis, bornes, terminaux et cibles, puis revient. Un seul en vol.
 // Il passe au-dessus de l'eau et des vitres « anti-écharpe », mais pas à travers les murs.
 import { Entity } from '../entities/Entity.js';
+import { Weapon } from './Weapon.js';
 import { TUNING } from '../data/tuning.js';
 
 const B = TUNING.boomerang;
@@ -60,7 +61,7 @@ class Flight extends Entity {
   }
 }
 
-export class BretzelBoomerang {
-  constructor(game) { this.game = game; this.id = 'boomerang'; this.ready = true; }
+export class BretzelBoomerang extends Weapon {
+  constructor(game) { super(game, 'boomerang'); }
   use() { this.ready = false; this.game.add(new Flight(this.game, this)); }
 }

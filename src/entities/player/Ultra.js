@@ -1,4 +1,5 @@
 // Le héros : l'Ultra de la Meinau. Écharpe en satin (combo 3 coups), roulade, verrouillage.
+// aiming : posé par l'objet équipé (Arc-Drapeau) ; en visée, l'Ultra marche lentement face à la caméra et ne fouette pas.
 import * as THREE from 'three';
 import { Entity, faceOf, angDiff } from '../Entity.js';
 import { pose, walkPose, walkBob } from '../../systems/Animator.js';
@@ -6,11 +7,12 @@ import { TUNING } from '../../data/tuning.js';
 
 const T = TUNING.player;
 const GUARD = { shN: 25, elN: 70, shF: 30, elF: 60, torso: 4 };
+const AIM = { shN: 90, elN: 0, shF: 85, elF: 95, torso: 0 }; // bras tendu qui tient l'arc, l'autre bande la corde
 
 export class Ultra extends Entity {
   constructor(game, opts) {
     super(game, { ...opts, r: T.radius, hp: T.hp, model: 'ultra' });
-    this.target = null; this.combo = 0; this.comboTimer = 0; this.walkT = 0; this.checkpoint = { x: opts.x, z: opts.z, face: opts.face };
+    this.target = null; this.aiming = false; this.combo = 0; this.comboTimer = 0; this.walkT = 0; this.checkpoint = { x: opts.x, z: opts.z, face: opts.face };
     this.whip = this.makeWhip();
     this.states = {
       idle: { update: this.moveUpdate },
@@ -33,20 +35,26 @@ export class Ultra extends Entity {
     return g;
   }
   get enemies() { return this.game.entities.filter(e => e.isEnemy && e.alive); }
+  // ce qu'on peut verrouiller : les ennemis, plus les cibles / crochets (`lockable`) si l'objet équipé le permet (arc)
+  get lockables() {
+    const props = this.game.inventory.equipped?.locksProps;
+    return this.game.entities.filter(e => e.alive && (e.isEnemy || (props && e.lockable)));
+  }
 
   moveUpdate(dt) {
     const I = this.game.input;
-    if (I.pressed.attack) return this.setState('attack');
+    if (I.pressed.attack && !this.aiming) return this.setState('attack');
     const dir = this.inputDir();
     if (I.pressed.roll) { this.rollDir = dir || { x: this.fx, z: this.fz }; return this.setState('roll'); }
     if (dir) {
-      const sp = this.target ? T.lockSpeed : T.speed;
+      const sp = this.aiming ? T.speed * TUNING.arc.aimSpeed : this.target ? T.lockSpeed : T.speed;
       this.x += dir.x * sp * dt; this.z += dir.z * sp * dt;
-      if (!this.target) this.face += angDiff(this.face, faceOf(dir.x, dir.z)) * Math.min(1, dt * 14);
+      if (!this.target && !this.aiming) this.face += angDiff(this.face, faceOf(dir.x, dir.z)) * Math.min(1, dt * 14);
       this.walkT += dt * (this.target ? 9 : 11);
       if (this.stateName !== 'run') this.stateName = 'run';
     } else this.stateName = 'idle';
     if (this.target) this.faceTo(this.target.x, this.target.z);
+    if (this.aiming) { const f = this.game.camera.forward(); this.face = faceOf(f.x, f.z); }
   }
   attackEnter() {
     if (this.comboTimer <= 0) this.combo = 0;
@@ -84,7 +92,7 @@ export class Ultra extends Entity {
   toggleLock() {
     if (this.target) { this.target = null; return; }
     let best = null, bd = T.lockRange;
-    for (const e of this.enemies) { const d = this.dist(e); if (d < bd) { bd = d; best = e; } }
+    for (const e of this.lockables) { const d = this.dist(e); if (d < bd) { bd = d; best = e; } }
     this.target = best;
     if (!best) this.game.camera.snapBehind(this.face);
   }
@@ -97,6 +105,7 @@ export class Ultra extends Entity {
   onDeath() { this.setState('dead'); }
   respawn() {
     Object.assign(this, { x: this.checkpoint.x, z: this.checkpoint.z, face: this.checkpoint.face, hp: this.maxHp, alive: true, inv: 1.5, target: null, vx: 0, vz: 0 });
+    if (this.aiming) { this.aiming = false; this.game.camera.endAim(this.face); }
     this.game.camera.snapBehind(this.face);
     this.game.events.emit('player:respawn');
     this.setState('idle');
@@ -114,7 +123,11 @@ export class Ultra extends Entity {
     const o = this.obj, s = this.stateName;
     o.userData.model.rotation.z = 0;
     this.whip.visible = false;
-    if (s === 'run') pose(o, walkPose(this.walkT, { ...GUARD, torso: 10 }), walkBob(this.walkT));
+    const arm = this.aiming || this.game.inventory.equipped?.inHand; // arc en main (visée ou tir)
+    if (arm && (s === 'run' || s === 'idle')) {
+      const w = s === 'run' ? walkPose(this.walkT, {}, 20) : {};
+      pose(o, { ...w, ...AIM }, s === 'run' ? walkBob(this.walkT) : 0);
+    } else if (s === 'run') pose(o, walkPose(this.walkT, { ...GUARD, torso: 10 }), walkBob(this.walkT));
     else if (s === 'attack') {
       const k = Math.min(1, this.t / this.move.active[1]), big = this.moveIdx === 2;
       const side = this.moveIdx === 1 ? 'F' : 'N';

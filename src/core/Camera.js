@@ -1,6 +1,8 @@
 // Caméra 3e personne : orbite autour de l'Ultra (yaw horizontal, pitch vertical) pilotée par la souris
 // ou le stick droit ; se recentre seule derrière le joueur après un délai sans souris ;
 // cadre la cible verrouillée ou le boss (prioritaire sur la souris pour le yaw).
+// Visée (Arc-Drapeau) : startAim() / endAim() ; vue par-dessus l'épaule, la souris / le stick / le doigt orientent
+// le tir (aimYaw = yaw, aimPitch vers le haut), aimPoint(portée) donne le point visé au centre de l'écran.
 import * as THREE from 'three';
 import { TUNING } from '../data/tuning.js';
 
@@ -15,7 +17,12 @@ export class Camera {
     this.pos = new THREE.Vector3(0, 5, 5); this.look = new THREE.Vector3();
     this.bounds = null; // [x0,x1,zTop,zBottom] de la zone courante
     this.boss = false;
+    this.aiming = false; this.aimPitch = 0;
   }
+  startAim() { this.aiming = true; this.aimPitch = TUNING.camera.aim.pitch0; }
+  endAim(face) { this.aiming = false; this.snapBehind(face); this.idle = 0; }
+  aimDir() { const f = this.forward(), c = Math.cos(this.aimPitch); return new THREE.Vector3(f.x * c, Math.sin(this.aimPitch), f.z * c); }
+  aimPoint(range) { return this.pos.clone().add(this.aimDir().multiplyScalar(range)); }
   // vecteurs horizontaux avant / droite (utilisés pour les déplacements relatifs à la caméra)
   forward() { return { x: -Math.sin(this.yaw), z: -Math.cos(this.yaw) }; }
   right() { return { x: Math.cos(this.yaw), z: -Math.sin(this.yaw) }; }
@@ -37,7 +44,22 @@ export class Camera {
     this.pitch = Math.max(M.pitchMin, Math.min(M.pitchMax, this.pitch + pitchIn));
   }
 
+  // vue de visée : derrière l'épaule droite, rotation libre (souris / stick / doigt), pas de recentrage
+  aimUpdate(dt, player, look, stick) {
+    const C = TUNING.camera, M = C.mouse, A = C.aim;
+    const yawIn = ((look?.dx || 0) * M.sens + (stick?.x || 0) * C.pad.speed * dt) * A.sens;
+    const pitchIn = ((look?.dy || 0) * M.sens + (stick?.y || 0) * C.pad.speed * dt) * A.sens * (M.invertY ? -1 : 1);
+    this.yaw -= yawIn; this.aimPitch = Math.max(A.pitchMin, Math.min(A.pitchMax, this.aimPitch - pitchIn));
+    const f = this.forward(), r = this.right(), py = player.y || 0;
+    const want = new THREE.Vector3(player.x - f.x * A.dist + r.x * A.side, py + A.height, player.z - f.z * A.dist + r.z * A.side);
+    this.pos.lerp(want, Math.min(1, dt * A.posRate));
+    this.cam.position.copy(this.pos);
+    this.look.copy(this.pos).add(this.aimDir().multiplyScalar(20));
+    this.cam.lookAt(this.look);
+  }
+
   update(dt, player, focus, moving, look, stick) {
+    if (this.aiming) return this.aimUpdate(dt, player, look, stick);
     const C = TUNING.camera, M = C.mouse;
     this.steer(dt, look, stick, !!focus);
     const recenter = M.recenterDelay > 0 && this.idle >= M.recenterDelay;

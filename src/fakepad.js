@@ -3,12 +3,13 @@
 //   8 / 4 / 5 / 6 : stick gauche     7 / 9 : stick droit (caméra)
 //   1 : X / □ (écharpe)   0 : A / ✕ (roulade, valider)   3 : Y / △ (interagir)   . : B / ○ (retour)
 //   + : RB / R1 (objet)   - : LT / L2 (verrouiller)      Entrée : Start / Options   * : Vue / Share (vibrations)
+//   2 : LB / L1 (viser avec l'arc)
 //   / : débrancher / rebrancher (teste la pause automatique)
 const IDS = {
   xbox: 'Xbox Wireless Controller (STANDARD GAMEPAD Vendor: 045e Product: 0b13)',
   ps: 'DualSense Wireless Controller (STANDARD GAMEPAD Vendor: 054c Product: 0ce6)'
 };
-const BUTTONS = { Numpad0: 0, NumpadDecimal: 1, Numpad1: 2, Numpad3: 3, NumpadAdd: 5, NumpadSubtract: 6, NumpadMultiply: 8, NumpadEnter: 9 };
+const BUTTONS = { Numpad2: 4, Numpad0: 0, NumpadDecimal: 1, Numpad1: 2, Numpad3: 3, NumpadAdd: 5, NumpadSubtract: 6, NumpadMultiply: 8, NumpadEnter: 9 };
 const AXES = { Numpad4: [0, -1], Numpad6: [0, 1], Numpad8: [1, -1], Numpad5: [1, 1], Numpad7: [2, -1], Numpad9: [2, 1] };
 
 export function installFakePad() {

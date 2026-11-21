@@ -32,7 +32,10 @@ export const TUNING = {
     dist: 7.5, height: 4.4, bossDist: 9.5, bossHeight: 5.2, followRate: 1.6, lockRate: 6, posRate: 6, minHeight: 0.6,
     // souris : sens en rad/pixel ; pitch = angle au-dessus de l'horizontale (rad) ; recenterDelay en s (0 = jamais)
     mouse: { sens: 0.0025, invertY: false, pitchMin: -0.1, pitchMax: 1.1, recenterDelay: 2.5, posRate: 18 },
-    pad: { speed: 2.6 } // stick droit : rad/s à fond (sensibilité séparée de la souris)
+    pad: { speed: 2.6 }, // stick droit : rad/s à fond (sensibilité séparée de la souris)
+    // visée de l'arc (vue par-dessus l'épaule) : recul (m), hauteur au-dessus des pieds, décalage à droite,
+    // sensibilité (x souris / stick), angle vertical min / max / de départ (rad, + = vers le haut), lissage
+    aim: { dist: 3.4, height: 2.4, side: 1.1, sens: 0.7, pitchMin: -0.45, pitchMax: 0.6, pitch0: -0.08, posRate: 14 }
   },
   // tactile (core/Touch.js) : rayon du joystick (px CSS), zone morte (0..1), sensibilité caméra (multiplie
   // les pixels glissés avant camera.mouse.sens), toucher = glisser de moins de tapMove px en moins de tapTime ms
@@ -57,6 +60,17 @@ export const TUNING = {
   // cibles-TPE : couleurs des clés (ordre des néons)
   targets: { colors: { rouge: 0xff1a3c, or: 0xffc040, cyan: 0x38f2ff } },
   boomerang: { range: 11, speed: 15, curve: 0.7, radius: 0.55, catch: 0.9, maxTime: 4, height: 1.2, spin: 18, scale: 0.6, dmg: 1, knock: 6 },
+  // Arc-Drapeau (docs/decisions.md, 21/11/2026 : valeurs de départ à régler dans le bac à sable)
+  // cadence (s), portée (m), vitesse des flèches (m/s), rayon de touche, dégâts, recul, vitesse en visée (x vitesse
+  // normale), flèche plantée visible (s), munitions max par flèche spéciale, hauteur de départ des flèches.
+  // back : arc sur le dos (repère Blender, pieds à l'origine, rotation en degrés ordre ZXY, cf. docs/designs/arc-drapeau.md),
+  // hand : arc en main pendant la visée (repère du modèle de l'Ultra, Y en haut, +X devant).
+  arc: {
+    cooldown: 0.6, range: 25, speed: 40, radius: 0.12, dmg: 1, knock: 3, aimSpeed: 0.5, stuck: 1.5, ammoMax: 10, height: 1.5,
+    shotPose: 0.35, // s : l'arc reste en main après un tir sans visée
+    back: { pos: [-0.42, 0.12, 1.6], rot: [32, 0, 90], torsoZ: 1.02 },
+    hand: { pos: [0.55, 1.4, 0.22] }
+  },
   // ASR-67 (boss du niveau 1) : PV, seuils de phase, cadence, tickets, plats brûlants, charge, flammes du four
   asr: {
     hp: 24, phases: [0.66, 0.33], radius: 0.9, speed: 2.6, turn: 2.2, attackEvery: 2.6, dmg: 1, stunned: 2.2, recover: 0.7,

@@ -125,7 +125,7 @@ cette étape.
 
 ---
 
-## Étape D — Bac à sable de test (branche `feat/bac-a-sable`)
+## Étape D — Bac à sable de test (branche `feat/bac-a-sable`) · ✅ fait avec l'étape E (21/11/2026)
 
 Un niveau `levels/bac-a-sable/` (accessible seulement avec `?level=bac-a-sable&debug=1`) : une salle grise
 avec cibles, mannequins, un fossé, une grille, un mur haut. Il sert à tester armes et compagnons sans
@@ -133,7 +133,7 @@ toucher aux vrais niveaux. Inscrit dans `levels/index.js` sans changer `DEFAULT_
 
 ---
 
-## Étape E — Sélecteur d'armes + Arc-Drapeau (branche `feat/arc-drapeau`)
+## Étape E — Sélecteur d'armes + Arc-Drapeau (branche `feat/arc-drapeau`) · ✅ fait (21/11/2026, flèche simple)
 
 Contexte (idées de Maxime) : l'Arc-Drapeau est gagné à la Meinau 2026 (hampe de drapeau du kop + corde
 d'écharpe), « bien valider le gameplay ensemble », « touche pour changer d'arme », « voir pour munitions

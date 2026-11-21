@@ -1,6 +1,7 @@
 // Cible-TPE (générique) : ne réagit qu'au bretzel-boomerang (« anti-écharpe »). Son anneau prend la couleur
 // de sa clé ; touchée, son écran s'allume et elle émet 'target:hit' (elle-même). Une énigme (OrderedSequence)
 // décide si c'était la bonne ; 'target:reset:<g>' l'éteint, 'target:lock:<g>' la laisse allumée.
+// Réagit aussi aux flèches de l'Arc-Drapeau (isPlayerShot).
 import { Entity } from '../Entity.js';
 import { TUNING } from '../../data/tuning.js';
 
@@ -10,6 +11,7 @@ export class Cible extends Entity {
   constructor(game, { group, key, x, z, rotY = 0, model = 'pf_cible_tpe' }) {
     super(game, { x, z, r: 0.5, hp: 1, model });
     this.group = group; this.key = key; this.face = rotY; this.isTarget = true; this.lit = false; this.done = false;
+    this.lockable = true; // verrouillable quand l'objet équipé le permet (Arc-Drapeau), jamais avec le bretzel
     this.color = C.colors[key];
     const J = this.obj.userData.J; this.head = J.target; this.spin = 0;
     // anneau rouge du modèle → couleur de la cible ; écran → témoin

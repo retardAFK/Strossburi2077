@@ -10,7 +10,10 @@ export const TEXTS = {
   subtitle: 'NIVEAU 1 : LA TRIBUNE OUEST',
   pressStart: 'APPUIE SUR {ok}',
   controls: '{move} bouger · {camera} caméra · {attack} écharpe (3 coups) · {roll} roulade · {lock} cible<br>{throw} objet · {use} interagir · {ok} valider · {pause} pause<br>{use} sur cet écran : toutes les commandes · au clavier, clic : capturer la souris',
-  items: { boomerang: ['BRETZEL-BOOMERANG', '{throw}'] },
+  items: { boomerang: ['BRETZEL-BOOMERANG', '{throw}'], arc: ['ARC-DRAPEAU', '{throw} tirer · {aim} viser'] },
+  itemSwitch: '{switch} changer',
+  // types de flèches (data/arrows.js), affichés sous l'objet équipé
+  arrows: { simple: 'FLÈCHES', banniere: 'BANNIÈRE', fumigene: 'FUMIGÈNE', enflammee: 'ENFLAMMÉE', court_circuit: 'COURT-CIRCUIT' },
   pauseHint: '{pause} : REPRENDRE · {use} : COMMANDES · {rumble} : VIBRATIONS ({state})',
   rumbleState: ['NON', 'OUI'],
   padUnknown: 'Manette non reconnue : utilise Steam Input ou une manette Xbox / PlayStation. Le clavier reste actif.',
@@ -23,18 +26,23 @@ export const TEXTS = {
   // Les textes écrivent des ACTIONS entre accolades ({use}, {attack}...), jamais des touches : l'icône affichée
   // suit le dernier appareil utilisé. Libellés génériques (pas de logos de marques).
   glyphs: {
-    kb: { move: 'ZQSD', camera: 'SOURIS', attack: 'J', roll: 'ESPACE', lock: 'MAJ', use: 'E', throw: 'F', ok: 'ENTRÉE', back: 'RETOUR', pause: 'P', rumble: 'V' },
-    xbox: { move: 'L', camera: 'R', attack: 'X', roll: 'A', lock: 'LT', use: 'Y', throw: 'RB', ok: 'A', back: 'B', pause: 'MENU', rumble: 'VUE' },
-    ps: { move: 'L', camera: 'R', attack: '□', roll: '✕', lock: 'L2', use: '△', throw: 'R1', ok: '✕', back: '○', pause: 'OPTIONS', rumble: 'SHARE' }
+    kb: { move: 'ZQSD', camera: 'SOURIS', attack: 'J', roll: 'ESPACE', lock: 'MAJ', use: 'E', throw: 'F', ok: 'ENTRÉE', back: 'RETOUR', pause: 'P', rumble: 'V',
+      switch: 'TAB', aim: 'CLIC DROIT', arrow: 'MOLETTE' },
+    xbox: { move: 'L', camera: 'R', attack: 'X', roll: 'A', lock: 'LT', use: 'Y', throw: 'RB', ok: 'A', back: 'B', pause: 'MENU', rumble: 'VUE',
+      switch: 'CROIX ↕', aim: 'LB', arrow: 'CROIX ↔' },
+    ps: { move: 'L', camera: 'R', attack: '□', roll: '✕', lock: 'L2', use: '△', throw: 'R1', ok: '✕', back: '○', pause: 'OPTIONS', rumble: 'SHARE',
+      switch: 'CROIX ↕', aim: 'L1', arrow: 'CROIX ↔' }
   },
   commands: {
     title: 'COMMANDES', kb: 'CLAVIER / SOURIS', pad: 'MANETTE', close: '{back} : FERMER',
     rows: [['move', 'Bouger'], ['camera', 'Caméra'], ['attack', 'Écharpe (3 coups)'], ['roll', 'Roulade'], ['lock', 'Verrouiller une cible'],
-      ['throw', 'Objet (bretzel)'], ['use', 'Interagir'], ['ok', 'Valider / dialogues'], ['back', 'Retour'], ['pause', 'Pause'], ['rumble', 'Vibrations oui / non']]
+      ['throw', 'Objet (bretzel, tir de l\'arc)'], ['switch', 'Changer d\'objet'], ['aim', 'Viser (arc)'], ['arrow', 'Type de flèche'],
+      ['use', 'Interagir'], ['ok', 'Valider / dialogues'], ['back', 'Retour'], ['pause', 'Pause'], ['rumble', 'Vibrations oui / non']]
   },
   // ------------------------------------------------ tactile (téléphone / tablette)
   touch: {
-    buttons: { attack: 'ÉCHARPE', roll: 'ROULADE', lock: 'CIBLE', throw: 'BRETZEL', use: 'AGIR', pause: '❚❚' },
+    buttons: { attack: 'ÉCHARPE', roll: 'ROULADE', lock: 'CIBLE', throw: 'BRETZEL', use: 'AGIR', pause: '❚❚', switch: '⇄', aim: 'VISER' },
+    itemButtons: { boomerang: 'BRETZEL', arc: 'ARC' }, // libellé du bouton d'objet selon l'objet équipé
     rotate: 'Tourne ton téléphone en paysage 📱↻',
     // écran d'accueil sur mobile (src/install.js) : installer le jeu comme une appli (plein écran, sans barres)
     install: {
@@ -52,6 +60,8 @@ export const TEXTS = {
       ['pauseHint', 'TOUCHE L\'ÉCRAN POUR REPRENDRE'],
       ['skip', "TOUCHER L'ÉCRAN : PASSER"],
       ['items.boomerang.1', 'BOUTON BRETZEL'],
+      ['items.arc.1', 'ARC : tirer · VISER : viser'],
+      ['itemSwitch', '⇄ : changer'],
       ['intro.2.txt', "ÉCHARPE pour fouetter, trois fois pour le combo. ROULADE pour esquiver. CIBLE pour verrouiller un costard."],
       ['laser.txt', "Un portique laser « Accès Premium ». Le terminal qui clignote, là, doit le couper : je m'approche et AGIR pour le pirater. Ou un bon coup d'écharpe."],
       ['pf.boomerangGot.1', 'BOUTON BRETZEL : lancer'],
@@ -279,6 +289,14 @@ export const TEXTS = {
       "STRASBOURG N'EST PAS À VENDRE"
     ],
     end: ["STRASBOURG N'EST PAS À VENDRE", "Fin de la démo du niveau 1. Merci d'avoir joué !"]
+  },
+  // bac à sable de test (?level=bac-a-sable&debug=1) : pas un vrai niveau, textes de service
+  bac: {
+    subtitle: 'BAC À SABLE · TESTS (DEBUG)',
+    rooms: { bac: 'BAC À SABLE · SALLE DE TEST' },
+    antiEcharpe: 'ANTI-ÉCHARPE !',
+    hello: [{ who: 'BAC À SABLE', txt: "Salle de test : cibles, mannequins, fossé, grille, mur haut. Tu as le bretzel et l'Arc-Drapeau ({switch} pour changer)." }],
+    mannequin: 'PLACEHOLDER mannequin'
   },
   shield: 'TING !'
 };

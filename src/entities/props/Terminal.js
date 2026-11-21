@@ -4,6 +4,7 @@
 import * as THREE from 'three';
 import { Entity } from '../Entity.js';
 import { TUNING } from '../../data/tuning.js';
+import { interact, clearPrompt } from '../../systems/Interact.js';
 
 const T = TUNING.terminal;
 
@@ -15,6 +16,7 @@ export class Terminal extends Entity {
     this.screen = this.obj.userData.J.screen;
     this.inRange = false;
     this.marker = this.makeMarker();
+    this.sync(); // place le modèle (le terminal ne bouge plus ensuite)
   }
   makeMarker() {
     const M = T.marker;
@@ -28,17 +30,12 @@ export class Terminal extends Entity {
   activate() {
     if (!this.alive) return;
     this.alive = false;
-    this.setPrompt(false);
+    clearPrompt(this);
     this.game.renderer.scene.remove(this.marker);
     this.game.audio.play('hit'); this.game.camera.shake = 0.2;
     this.game.particles.burst(this.x, 1.5, this.z, 14, 0x38f2ff, 5);
     if (this.screen) this.screen.material.color.setHex(0x223355);
     this.game.events.emit(this.event, this);
-  }
-  setPrompt(on) {
-    if (on === this.inRange) return;
-    this.inRange = on;
-    this.game.events.emit('hud:prompt', this, on ? this.game.texts.prompts.hack : null);
   }
   update(dt) {
     this.time += dt;
@@ -47,8 +44,6 @@ export class Terminal extends Entity {
     const M = T.marker;
     this.marker.position.y = M.y + Math.sin(this.time * M.bobSpeed) * M.bob;
     this.marker.rotation.y += dt * M.spin;
-    const p = this.game.player;
-    this.setPrompt(p.alive && this.dist(p) < T.useRange);
-    if (this.inRange && this.game.input.pressed.use) this.activate();
+    if (interact(this, this.game.texts.prompts.hack, T.useRange)) this.activate();
   }
 }

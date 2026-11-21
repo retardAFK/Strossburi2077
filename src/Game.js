@@ -42,6 +42,7 @@ export class Game {
   async start(models, level) {
     await this.assets.load(models);
     this.level = level;
+    this.levelTexts = level.texts || TEXTS; // salles, panneaux : textes propres au niveau
     this.world = new World(this, level.layout);
     this.world.build();
     const s = level.layout.playerStart;
@@ -49,6 +50,7 @@ export class Game {
     this.entities.push(this.player);
     this.camera.snapBehind(s.face);
     for (const p of level.layout.terminals || []) this.add(new this.types.terminal(this, p));
+    for (const p of level.layout.switches || []) this.add(new this.types[p.type || 'borne'](this, p));
     this.events.on('enemy:killed', e => this.onEnemyKilled(e));
     level.script(this);
     let last = performance.now(), acc = 0;
@@ -77,7 +79,7 @@ export class Game {
   shockwave(x, z, r) { this.fx.shockwave(x, z, r); }
   stars(target) { this.fx.stars(target); }
   setCheckpoint(x, z, face) { this.player.checkpoint = { x, z, face }; }
-  hittables() { return this.entities.filter(e => e !== this.player && e.alive && (e.isEnemy || e.isProjectile || e.isTerminal)); }
+  hittables() { return this.entities.filter(e => e !== this.player && e.alive && (e.isEnemy || e.isProjectile || e.isTerminal || e.isSwitch)); }
 
   onEnemyKilled(e) {
     if (e.group && this.groups[e.group] && --this.groups[e.group] === 0) this.events.emit('group:cleared:' + e.group);
@@ -132,14 +134,15 @@ export class Game {
     const p = this.player;
     const z = this.level.layout.zones.find(z => Collision.inRect(p.x, p.z, z.rect));
     if (z && z !== this.zone) {
-      this.zone = z; this.hud.setRoom(this.texts.rooms[z.id] || '');
+      this.zone = z; this.hud.setRoom((this.levelTexts.rooms || this.texts.rooms)[z.id] || '');
       this.camera.bounds = z.cam || z.rect; this.camera.boss = !!z.boss;
       this.events.emit('zone:' + z.id);
     }
   }
-  win(lines) {
+  // fin de niveau (ou de démo) : [titre, sous-titre]
+  win(text = this.texts.victory) {
     this.mode = 'end'; this.input.releasePointer(); this.audio.music(null); this.audio.play('win');
-    const [t, sub] = this.texts.victory;
+    const [t, sub] = text;
     this.dom.end.querySelector('h1').textContent = t; this.dom.end.querySelector('p').textContent = sub;
     this.dom.end.style.display = 'flex';
   }

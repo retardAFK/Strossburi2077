@@ -40,6 +40,11 @@ et signe de ralliement).
 ## 3. Règles de contenu (non négociables)
 - Satire de **types** (le restaurateur arnaqueur, le promoteur, le consortium), jamais de personnes, élus,
   joueurs ou entreprises réels nommés. Noms parodiques uniquement.
+  - Exception assumée par Maxime (21/11/2026) : des **noms parodiques déformés** qui évoquent des figures du
+    football (« Egboehly », « Marco CeKlair ») sont autorisés. Le reste est toujours inventé : visage, physique,
+    traits de caractère, actions. Aucune citation, aucun fait, aucune accusation attribués à une vraie personne ;
+    la satire vise le système (multipropriété, club « partenaire »), pas la vie de quelqu'un.
+    Aucun nouveau nom de ce type sans l'accord explicite de Maxime.
 - Inspirations de gameplay (Zelda N64/GC) et de ton (Marseille 3000) : on reprend des **mécaniques
   génériques**, jamais de noms, personnages, musiques, sons ou designs existants.
 - La culture alsacienne est toujours montrée avec respect. La satire vise uniquement ce que le consortium

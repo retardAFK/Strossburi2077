@@ -26,7 +26,9 @@ export function checker(name) {
 
 // ouvre dist/index.html avec les paramètres donnés ; pad = 'xbox' | 'ps' installe une manette simulée (window.__pad)
 export async function launch(T, { query = 'debug=1', pad = null } = {}) {
-  const browser = await chromium.launch({ channel: process.env.CHROME_CHANNEL || 'chrome', headless: true });
+  // Chrome installé par défaut ; CHROME_PATH=<binaire> pour un autre Chromium (conteneur, CI sans Chrome)
+  const exe = process.env.CHROME_PATH;
+  const browser = await chromium.launch({ ...(exe ? { executablePath: exe } : { channel: process.env.CHROME_CHANNEL || 'chrome' }), headless: true });
   const page = await browser.newPage();
   page.on('pageerror', e => T.fail('erreur de page : ' + e.message));
   // toute erreur dans la console du jeu fait échouer le test (sauf polices Google bloquées hors ligne)

@@ -1,11 +1,12 @@
 // Commandes tactiles (téléphone / tablette) -> mêmes actions abstraites que le clavier et la manette.
 //  - moitié gauche de l'écran : joystick virtuel qui apparaît sous le pouce (déplacement analogique -> input.touchMove)
 //  - moitié droite : glisser le doigt = caméra (input.look), toucher = valider dans les dialogues / menus
-//  - boutons : écharpe, roulade, cible, objet (s'il y en a un), agir (s'il y a quelque chose à portée), pause
+//  - boutons : écharpe, roulade, cible, objet (s'il y en a un), agir (s'il y a quelque chose à portée), pause,
+//    changer d'objet (⇄, si plusieurs objets) et viser (si l'objet équipé vise : Arc-Drapeau)
 // Ne connaît rien du jeu : les libellés, la visibilité des boutons et le « toucher = valider » sont fournis par main.js.
 import { TUNING } from '../data/tuning.js';
 
-const BUTTONS = ['attack', 'roll', 'lock', 'throw', 'use', 'pause'];
+const BUTTONS = ['attack', 'roll', 'lock', 'throw', 'use', 'pause', 'switch', 'aim'];
 
 export class Touch {
   // opts : { labels: {action: texte}, tapAction: () => 'ok' | 'pause' | null, rotateText, onFirstInput }
@@ -36,7 +37,7 @@ export class Touch {
     addEventListener('s3k:viewport', place); place();
     this.base = root.querySelector('.t-stick'); this.knob = root.querySelector('.t-knob');
     this.btn = {}; for (const a of BUTTONS) this.btn[a] = root.querySelector('.t-' + a);
-    this.setVisible('throw', false); this.setVisible('use', false);
+    for (const a of ['throw', 'use', 'switch', 'aim']) this.setVisible(a, false);
 
     const left = root.querySelector('.t-left'), right = root.querySelector('.t-right');
     left.addEventListener('pointerdown', e => this.stickStart(e));

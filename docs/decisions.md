@@ -73,6 +73,15 @@ et son test fumée reste en place.
 
 ---
 
+## Intégrations
+
+| Date | Élément | Fiche / décision utilisée | Notes |
+|---|---|---|---|
+| 21/11/2026 | Bac à sable `?level=bac-a-sable&debug=1` | prompt 05, étape D | cibles-TPE, 3 mannequins gris (placeholders), fossé, grille, mur haut |
+| 21/11/2026 | Sélecteur d'objets + Arc-Drapeau (flèche simple) | `docs/designs/arc-drapeau.md`, décisions ci-dessus | modèle `arc_drapeau.glb` sur le dos / en main, drapeau roulé / déployé ; flèche simple en **placeholder gris** (pas de design validé) ; corde non animée (les tronçons de corde du modèle ne sont pas attachés au pivot `nock`) ; flèches spéciales en données, désactivées |
+
+---
+
 ## Encore ouvert
 - Retour vers le futur : A (BlingCo arrache l'Ultra via le Serveur), B (paradoxe + rappel par SCN), ou A+B.
 - Slogan de Marco CeKlair : reformuler ensemble la phrase source (voir `docs/designs/marco-ceklair.md`).

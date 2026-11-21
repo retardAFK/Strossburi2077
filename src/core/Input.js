@@ -5,6 +5,9 @@
 //   pressed.release = la souris vient d'être libérée (Échap du navigateur), pressed.padLost = manette débranchée.
 // Manette : disposition « standard » uniquement (Xbox, PlayStation et la plupart des manettes y sont ramenées).
 // device = dernier appareil utilisé ('kb' | 'pad' | 'touch'), padType = 'xbox' | 'ps', padUnknown = manette non standard.
+// Objets (Arc-Drapeau...) : switch / switchPrev = objet suivant / précédent, arrowNext / arrowPrev = type de flèche,
+//   arrowPick = numéro de flèche choisi au clavier (1 à 4, remis à zéro à chaque tick), aim = viser (LB / bouton tactile ;
+//   à la souris, viser = clic droit maintenu, action alt).
 // Déplacement analogique : move = stick gauche, touchMove = joystick tactile (core/Touch.js), séparés pour
 // qu'une manette branchée n'écrase pas le joystick tactile (et inversement).
 import { TUNING } from '../data/tuning.js';
@@ -12,23 +15,27 @@ import { TUNING } from '../data/tuning.js';
 const KEYS = {
   KeyW: 'up', ArrowUp: 'up', KeyS: 'down', ArrowDown: 'down', KeyA: 'left', ArrowLeft: 'left', KeyD: 'right', ArrowRight: 'right',
   KeyJ: 'attack', Space: 'roll', KeyK: 'roll', ShiftLeft: 'lock', ShiftRight: 'lock', KeyL: 'lock',
-  KeyE: 'use', KeyF: 'throw', Enter: 'ok', Backspace: 'back', KeyV: 'rumble', KeyM: 'mute', KeyP: 'pause', Escape: 'pause'
+  KeyE: 'use', KeyF: 'throw', Enter: 'ok', Backspace: 'back', KeyV: 'rumble', KeyM: 'mute', KeyP: 'pause', Escape: 'pause',
+  Tab: 'switch'
 };
+const ARROW_KEYS = { Digit1: 1, Digit2: 2, Digit3: 3, Digit4: 4 }; // choix direct du type de flèche
 // boutons de la disposition standard (indices W3C) → actions
-const PAD = { attack: [2], roll: [0], use: [3], throw: [5], lock: [6], ok: [0], back: [1], pause: [9], rumble: [8] };
+const PAD = { attack: [2], roll: [0], use: [3], throw: [5], lock: [6], ok: [0], back: [1], pause: [9], rumble: [8],
+  aim: [4], switch: [12], switchPrev: [13], arrowPrev: [14], arrowNext: [15] }; // LB, croix haut / bas / gauche / droite
 const ESC_AFTER_RELEASE_MS = 300; // Échap qui vient de libérer la souris : ne pas le compter deux fois
 const PS_IDS = /054c|dualshock|dualsense|playstation/i;
 
 export class Input {
   constructor(element, onFirstInput) {
     this.el = element; this.onFirstInput = onFirstInput;
-    this.held = {}; this.pressed = {}; this.padPrev = {};
+    this.held = {}; this.pressed = {}; this.padPrev = {}; this.arrowPick = 0;
     this.look = { dx: 0, dy: 0 }; this.stick = { x: 0, y: 0 }; this.move = { x: 0, y: 0 }; this.touchMove = { x: 0, y: 0 };
     this.releasedAt = -1e9; this.device = 'kb'; this.padType = 'xbox'; this.padUnknown = false; this.padIndex = null;
     this.rumbleOn = TUNING.pad.rumble;
     try { const v = localStorage.getItem('s3k.rumble'); if (v !== null) this.rumbleOn = v === '1'; } catch (e) { /* pas de stockage */ }
     const press = (a) => { if (!this.held[a]) this.pressed[a] = true; this.held[a] = true; onFirstInput?.(); };
     addEventListener('keydown', e => {
+      if (ARROW_KEYS[e.code]) { this.arrowPick = ARROW_KEYS[e.code]; this.device = 'kb'; return; }
       const a = KEYS[e.code]; if (!a) return; e.preventDefault(); this.device = 'kb';
       if (e.code === 'Escape' && (this.locked || performance.now() - this.releasedAt < ESC_AFTER_RELEASE_MS)) return;
       press(a);
@@ -42,6 +49,8 @@ export class Input {
       if (e.button === 2) press('alt'); // objet si rien n'est verrouillé, sinon verrouillage (voir Inventory)
     });
     addEventListener('mouseup', e => { if (e.button === 2) this.held.alt = false; });
+    // molette : type de flèche suivant / précédent (souris capturée seulement)
+    addEventListener('wheel', e => { if (this.locked && e.deltaY) this.pressed[e.deltaY > 0 ? 'arrowNext' : 'arrowPrev'] = true; }, { passive: true });
     addEventListener('mousemove', e => { if (this.locked) { this.device = 'kb'; this.look.dx += e.movementX; this.look.dy += e.movementY; } });
     document.addEventListener('pointerlockchange', () => {
       if (!this.locked) { this.releasedAt = performance.now(); this.pressed.release = true; this.held.lock = false; }
@@ -109,6 +118,7 @@ export class Input {
   }
   endTick() {
     for (const k in this.pressed) this.pressed[k] = false;
+    this.arrowPick = 0;
     this.look.dx = 0; this.look.dy = 0;
   }
 }

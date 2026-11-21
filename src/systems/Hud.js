@@ -17,11 +17,12 @@ export class Hud {
     events.on('hud:fade', a => { this.fadeEl.style.opacity = a; });
     events.on('hud:cinema', on => root.classList.toggle('cinema', on)); // cinématique : HUD de jeu masqué
     events.on('hud:glitch', on => this.glitch(on));
+    events.on('hud:aim', on => root.classList.toggle('aim', on)); // réticule de visée (Arc-Drapeau)
     this.lastHearts = '';
     // indication contextuelle (« E : pirater »...) : (source, texte) pour l'afficher, (source, null) pour la retirer
     this.promptOwner = null;
     events.on('hud:prompt', (owner, text) => this.prompt(owner, text));
-    events.on('inventory:changed', it => { this.item = it; this.renderItem(); });
+    events.on('inventory:changed', (it, count = 1) => { this.item = it; this.itemCount = count; this.renderItem(); });
     // on change d'appareil : les icônes suivent (clavier <-> manette Xbox / PlayStation)
     events.on('input:device', () => { this.renderItem(); if (this.promptText) this.promptEl.innerHTML = this.fmt(this.promptText); });
     this.noticeEl = root.querySelector('#notice');
@@ -38,7 +39,9 @@ export class Hud {
   renderItem() {
     if (!this.item) return;
     const [name, keys] = this.texts.items[this.item.id];
-    this.itemEl.innerHTML = `${name}<small>${this.fmt(keys)}</small>`; this.itemEl.style.display = 'block';
+    const line = this.item.hudLine?.() || '', more = this.itemCount > 1 ? ` · ${this.texts.itemSwitch}` : '';
+    this.itemEl.innerHTML = `${name}${line ? `<b>${this.fmt(line)}</b>` : ''}<small>${this.fmt(keys + more)}</small>`;
+    this.itemEl.style.display = 'block';
   }
   // pluie de caractères (branchement de force sur le Serveur central)
   glitch(on) {

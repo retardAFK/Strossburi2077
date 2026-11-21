@@ -73,7 +73,7 @@ src/
   index.html              page + HUD (copiée dans dist/)
   core/                   moteur, ne connaît RIEN du contenu du jeu
     Renderer.js           Three.js, rendu basse résolution (480x270) + upscale pixelisé
-    Input.js              clavier / souris / manette -> actions abstraites (move, attack, roll, lock, use, ok)
+    Input.js              clavier / souris / manette -> actions abstraites (move, attack, roll, lock, use, ok, switch, aim...)
     Touch.js              tactile -> mêmes actions : joystick virtuel (input.move), glisser = caméra, boutons
     Audio.js              WebAudio : sfx et musiques décrits par des données
     Assets.js             chargement des .glb, clonage, index des pivots nommés
@@ -150,6 +150,13 @@ tools/blender/            un script Python par modèle + lib commune (s3k_lib.py
   Objet : `items/BretzelBoomerang.js` via `systems/Inventory.js` (clic droit si rien n'est verrouillé, sinon F).
   Le layout déclare ses objets génériques dans `objects: [{ type, ... }]` (barque, leviers, PNJ...).
   Modèles : `tools/blender/{sbires,decor_pf,salles_pf}.py`.
+- **Objets et Arc-Drapeau** (règles : `docs/decisions.md`) : `items/Weapon.js` (interface commune), `systems/Inventory.js`
+  (objets dans l'ordre d'obtention, Tab / croix haut-bas / bouton ⇄ pour changer), `items/ArcDrapeau.js` (verrouillage ou visée
+  par-dessus l'épaule : clic droit / LB maintenus, VISER à bascule au tactile ; tir F / RB / bouton ARC, clic gauche en visée),
+  `entities/props/Arrow.js`, types de flèches dans `data/arrows.js` (seule la flèche simple est activée), réglages `TUNING.arc`
+  et `TUNING.camera.aim`. Le verrouillage accroche aussi les entités `lockable` (cibles-TPE) quand l'arc est équipé.
+- **Bac à sable** : `levels/bac-a-sable` (seulement avec `?level=bac-a-sable&debug=1`) : salle grise avec cibles, mannequins
+  (`entities/props/Mannequin.js`, compteur de coups), fossé, grille, mur haut ; le bretzel et l'arc sont donnés au départ.
 - Ancien prototype, toujours jouable : `levels/meinau-ouest` (coursives de la tribune ouest en 2067 : consultants,
   juristes, portique laser + terminal, boss « Directeur de la Valorisation »), avec `?level=meinau-ouest`.
   Modèles : `tools/blender/ultra.py`, `tools/blender/meinau_cast.py`.
@@ -161,7 +168,9 @@ tools/blender/            un script Python par modèle + lib commune (s3k_lib.py
 - Tests (filet anti-régression) : `npm test` = build + `tests/run-all.mjs` (Chrome installé piloté par
   `playwright-core`, sans fenêtre). `niveau1` (parcours complet via F2), `boss-asr67` (graine `?seed=1`,
   instantané des réglages `tests/snapshots/asr67.json`, mise à jour volontaire : `npm run test:update-snapshots`),
-  `meinau-ouest` (fumée), `manette` (Xbox / PlayStation simulées). Outils communs : `tests/helpers.mjs`.
+  `meinau-ouest` (fumée), `manette` (Xbox / PlayStation simulées), `arc-drapeau` (bac à sable : changement d'objet, tir,
+  visée, munitions, tactile). Outils communs : `tests/helpers.mjs`. Sans Chrome installé (conteneur) :
+  `CHROME_PATH=<binaire Chromium> npm test`.
   Toute PR garde `npm test` vert ; une PR qui touche `entities/bosses/` met à jour le test du boss.
 - Aléatoire : la logique de jeu (IA, attaques, objets lâchés) tire dans `core/Random.js` (`rng()`), graine `?seed=<n>` ;
   les effets visuels gardent `Math.random()`.

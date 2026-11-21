@@ -1,5 +1,6 @@
 // Branchement des commandes tactiles sur le jeu : quand les afficher, et ce que font les boutons
-// contextuels (AGIR suit les indications 'hud:prompt', BRETZEL apparaît quand on a un objet).
+// contextuels (AGIR suit les indications 'hud:prompt', le bouton d'objet apparaît quand on a un objet et porte son nom,
+// ⇄ apparaît avec deux objets ou plus, VISER avec l'Arc-Drapeau ; au tactile, VISER bascule la visée).
 import { Touch } from './core/Touch.js';
 import { TEXTS } from './data/texts.fr.js';
 
@@ -45,7 +46,11 @@ export function setupTouch(game, dom) {
     else holders.delete(src);
     touch.setVisible('use', holders.size > 0);
   });
-  game.events.on('inventory:changed', item => touch.setVisible('throw', !!item));
+  game.events.on('inventory:changed', (item, count = 1) => {
+    touch.setVisible('throw', !!item); touch.setVisible('switch', count > 1); touch.setVisible('aim', !!item?.aimOnAlt);
+    if (item) touch.setLabel('throw', T.itemButtons[item.id] || T.buttons.throw);
+  });
+  game.events.on('hud:aim', on => touch.btn.aim.classList.toggle('lit', on)); // VISER allumé pendant la visée
   // hors du jeu (titre, cinématique, pause, fin) : on ne garde que le bouton pause et le toucher
   // (et pendant un dialogue, pour ne pas cacher la boîte de texte : on touche l'écran pour avancer)
   setInterval(() => touch.root.classList.toggle('idle', game.mode !== 'play' || game.dialog.active), 100);

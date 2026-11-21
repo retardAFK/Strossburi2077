@@ -32,7 +32,7 @@ export class Game {
     this.camera = new Camera(this.renderer.camera);
     this.combat = new Combat(this);
     this.dialog = new Dialog(this, dom.dialog);
-    this.hud = new Hud(dom.hud);
+    this.hud = new Hud(dom.hud, this.events);
     this.particles = new Particles(this.renderer.scene);
     this.fx = new Fx(this, dom.bubbles);
     this.entities = []; this.triggers = []; this.groups = {};
@@ -93,11 +93,14 @@ export class Game {
       this.renderer.camera.position.set(Math.sin(this.time * 0.25) * 3, 3, -4 + Math.cos(this.time * 0.25) * 2);
       this.renderer.camera.lookAt(0, 2, -14);
       this.world.update(dt, this.time);
-      if (I.pressed.ok || I.pressed.attack) { this.mode = 'play'; this.dom.title.style.display = 'none'; this.events.emit('game:start'); }
+      if (I.pressed.ok || I.pressed.attack || I.pressed.capture) { this.mode = 'play'; this.dom.title.style.display = 'none'; this.events.emit('game:start'); }
       return;
     }
-    if (this.mode === 'paused') { if (I.pressed.pause) { this.mode = 'play'; this.dom.pause.style.display = 'none'; } return; }
-    if (I.pressed.pause && this.mode === 'play' && !this.dialog.active) { this.mode = 'paused'; this.dom.pause.style.display = 'flex'; return; }
+    // pause : P / Échap, ou souris libérée par le navigateur ; reprise : P / Échap ou clic (qui recapture la souris)
+    if (this.mode === 'paused') { if (I.pressed.pause || I.pressed.capture) { this.mode = 'play'; this.dom.pause.style.display = 'none'; } return; }
+    if ((I.pressed.pause || I.pressed.release) && this.mode === 'play' && !this.dialog.active) {
+      this.mode = 'paused'; this.dom.pause.style.display = 'flex'; I.releasePointer(); return;
+    }
 
     const talking = this.dialog.update(dt, I);
     this.world.update(dt, this.time);
@@ -116,7 +119,7 @@ export class Game {
   updateCamera(dt) {
     const boss = this.entities.find(e => e.isBoss && e.alive);
     const focus = this.player.target || (boss && this.zone?.boss ? boss : null);
-    this.camera.update(dt, this.player, focus, this.player.stateName === 'run');
+    this.camera.update(dt, this.player, focus, this.player.stateName === 'run', this.input.look, this.input.stick);
   }
   checkTriggers() {
     const p = this.player;
@@ -135,7 +138,7 @@ export class Game {
     }
   }
   win(lines) {
-    this.mode = 'end'; this.audio.music(null); this.audio.play('win');
+    this.mode = 'end'; this.input.releasePointer(); this.audio.music(null); this.audio.play('win');
     const [t, sub] = this.texts.victory;
     this.dom.end.querySelector('h1').textContent = t; this.dom.end.querySelector('p').textContent = sub;
     this.dom.end.style.display = 'flex';

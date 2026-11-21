@@ -19,5 +19,16 @@ export const TUNING = {
     volleyEvery: 4, volleyCount: 3, summonAt: 0.5
   },
   pickup: { heal: 2, dropChance: 0.35 },
-  camera: { dist: 7.5, height: 4.4, bossDist: 9.5, bossHeight: 5.2, followRate: 1.6, lockRate: 6 }
+  camera: {
+    dist: 7.5, height: 4.4, bossDist: 9.5, bossHeight: 5.2, followRate: 1.6, lockRate: 6, posRate: 6, minHeight: 0.6,
+    // souris : sens en rad/pixel ; pitch = angle au-dessus de l'horizontale (rad) ; recenterDelay en s (0 = jamais)
+    mouse: { sens: 0.0025, invertY: false, pitchMin: -0.1, pitchMax: 1.1, recenterDelay: 2.5, posRate: 18 },
+    pad: { speed: 2.6, deadzone: 0.2 } // stick droit : rad/s à fond
+  },
+  // terminaux piratables (tous niveaux) : portée de la touche E, marqueur néon au-dessus
+  terminal: {
+    useRange: 2.2,
+    marker: { y: 3.1, size: 0.32, bob: 0.18, bobSpeed: 3, spin: 2.2, color: 0x38f2ff },
+    debugDist: 1.6 // F2 (?debug=1) : distance devant le terminal
+  }
 };

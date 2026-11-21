@@ -3,7 +3,9 @@ export const TEXTS = {
   title: 'STRASBOURG N\'EST PAS À VENDRE',
   subtitle: 'NIVEAU 1 : LA TRIBUNE OUEST',
   pressStart: 'APPUIE SUR ENTRÉE',
-  controls: 'ZQSD / flèches : bouger · J / clic : écharpe (3 coups) · Espace : roulade<br>Maj / L / clic droit : verrouiller · E : interagir · Entrée : dialogues · M : son',
+  controls: 'Clic : capturer la souris · Souris : caméra · Échap : libérer (pause)<br>ZQSD / flèches : bouger · J / clic : écharpe (3 coups) · Espace : roulade<br>Maj / L / clic droit : verrouiller · E : interagir / pirater · Entrée : dialogues · M : son',
+  pauseHint: 'CLIC : REPRENDRE · P : REPRENDRE SANS SOURIS',
+  prompts: { hack: 'E : pirater' },
   hero: "L'ULTRA",
   rooms: { entree: 'PORTE OUEST', coursive: 'COURSIVE DE LA TRIBUNE OUEST', vip: 'SALON « EXPÉRIENCE CLIENT » BLINGCO', sortie: 'VERS LA TRIBUNE' },
 
@@ -31,7 +33,7 @@ export const TEXTS = {
     { who: 'TUTO', txt: "J (ou clic) pour fouetter avec l'écharpe, trois fois pour le combo. Espace pour rouler. Maj pour verrouiller un costard." }
   ],
   entreeCleared: { who: "L'ULTRA", txt: "Trois costards de moins. La coursive est par là, je connais le chemin par cœur." },
-  laser: { who: "L'ULTRA", txt: "Un portique laser « Accès Premium ». Il doit y avoir un terminal pour le couper... un bon coup d'écharpe devrait suffire." },
+  laser: { who: "L'ULTRA", txt: "Un portique laser « Accès Premium ». Le terminal qui clignote, là, doit le couper : je m'approche et E pour le pirater. Ou un bon coup d'écharpe." },
   laserOff: { who: 'TERMINAL', txt: "ERREUR 404 : MODÈLE ÉCONOMIQUE NON TROUVÉ. Portique désactivé." },
   bossIntro: [
     { who: 'LE DIRECTEUR DE LA VALORISATION', txt: "Mon cher, le football est un produit. Et toi, tu es un coût." },

@@ -37,7 +37,10 @@ T.check('le préfabriqué tombe et blesse l\'Ultra resté dessous', hit.landed &
 await h.god();
 
 // vrai lancer de gaffe-grappin sur un préfabriqué au sol → renvoyé au Promoteur
-await h.run(() => { const g = window.S3K, p = g.player, f = g.entities.find(e => e.isPrefab && e.state === 'ground');
+// (le Promoteur ne relargue pas pendant ce lancer ; le préfabriqué visé repart pour une durée de vie complète)
+await h.run(() => { const g = window.S3K, p = g.player, b = g.entities.find(e => e.isBoss), f = g.entities.find(e => e.isPrefab && e.state === 'ground');
+  for (const e of g.entities) if (e.isPrefab && e !== f) e.remove();
+  b.setState('walk'); b.cd = 99; f.st = 0;
   Object.assign(p, { x: f.x + 3, z: f.z + 3 }); p.sync(); g.inventory.equip('gaffe'); p.target = f; });
 await h.until(() => window.S3K.inventory.items.gaffe.ready, 3000); await h.key('KeyF');
 T.check('préfabriqué renvoyé → Promoteur sonné', await h.until(() => window.S3K.entities.find(e => e.isBoss).stateName === 'stunned', 4000));

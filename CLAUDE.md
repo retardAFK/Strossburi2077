@@ -54,7 +54,8 @@ et signe de ralliement).
   en fait (androïdes, « Expériences Authentiques® », péages, cages « Tradition Certifiée »). Les gens
   (winstubière, commerçants, supporters) et les traditions sont ce qu'on défend, jamais une cible.
 - Les faits historiques affichés en jeu sont exacts et sourcés ; chaque texte historique est relu par Maxime.
-- Tous les textes du jeu sont en français, dans `src/data/texts.fr.js` (jamais en dur dans le code).
+- Tous les textes du jeu sont en français, dans `src/data/texts.fr.js` (jamais en dur dans le code). Les **nouveaux**
+  dialogues sont des brouillons dans `src/data/dialogues/<niveau>.fr.js`, relus par Maxime (voir `src/data/README.md`).
 
 ## 4. Stack (100 % open source)
 - **Blender** (piloté par MCP) : modèles low poly, exportés en glTF binaire (`.glb`).

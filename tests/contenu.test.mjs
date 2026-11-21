@@ -1,6 +1,6 @@
 // Vérifications de contenu et de conventions, sans navigateur :
 // jetons {action} des textes, année du futur jamais en dur, aléatoire à graine dans la logique de jeu,
-// générateur reproductible, en-tête de rôle et taille des fichiers (signalée, sans échec).
+// générateur reproductible. (En-têtes, README, EVENTS.md : voir conventions.test.mjs.)
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { checker } from './helpers.mjs';
@@ -43,11 +43,5 @@ seed(2); const c = Array.from({ length: 8 }, rng);
 T.check('Random : reproductible', JSON.stringify(a) === JSON.stringify(b));
 T.check('Random : dépend de la graine', JSON.stringify(a) !== JSON.stringify(c));
 T.check('Random : dans [0, 1[', a.concat(c).every(x => x >= 0 && x < 1));
-
-// 5. conventions : en-tête de rôle (commentaire en 1re ligne) ; taille signalée au-delà de 250 lignes
-const noHeader = src.filter(f => !readFileSync(f, 'utf8').trimStart().startsWith('//'));
-T.check('chaque fichier de src/ commence par un commentaire de rôle', noHeader.length === 0, noHeader.join(', '));
-const long = src.map(f => [f, readFileSync(f, 'utf8').split('\n').length]).filter(([, n]) => n > 250);
-console.log(long.length ? `(info) fichiers > 250 lignes : ${long.map(([f, n]) => `${f} (${n})`).join(', ')}` : '(info) aucun fichier > 250 lignes');
 
 await T.finish();

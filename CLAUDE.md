@@ -64,6 +64,8 @@ et signe de ralliement).
 - Pas d'autre dépendance sans bonne raison.
 
 ## 5. Architecture : un fichier = une responsabilité
+Détails par dossier : un `README.md` dans chaque dossier de `src/`. Événements du bus : `docs/EVENTS.md`
+(généré par `node tools/list-events.mjs`, vérifié par les tests). Décisions : `docs/decisions.md`. Autres IA : `AGENTS.md`.
 ```
 src/
   main.js                 point d'entrée : choisit le niveau (?level=<id>), branche le DOM, charge ses modèles

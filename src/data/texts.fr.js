@@ -8,14 +8,29 @@ export const TEXTS = {
   year: YEAR,
   title: 'STRASBOURG N\'EST PAS À VENDRE',
   subtitle: 'NIVEAU 1 : LA TRIBUNE OUEST',
-  pressStart: 'APPUIE SUR ENTRÉE',
-  controls: 'Clic : capturer la souris · Souris : caméra · Échap : libérer (pause)<br>ZQSD / flèches : bouger · J / clic : écharpe (3 coups) · Espace : roulade<br>Maj / L / clic droit : verrouiller · Clic droit / F : objet · E : interagir · Entrée : dialogues · M : son',
-  items: { boomerang: ['BRETZEL-BOOMERANG', 'CLIC DROIT / F'] },
-  pauseHint: 'CLIC : REPRENDRE · P : REPRENDRE SANS SOURIS',
-  skip: 'ENTRÉE : PASSER',
+  pressStart: 'APPUIE SUR {ok}',
+  controls: '{move} bouger · {camera} caméra · {attack} écharpe (3 coups) · {roll} roulade · {lock} cible<br>{throw} objet · {use} interagir · {ok} valider · {pause} pause<br>{use} sur cet écran : toutes les commandes · au clavier, clic : capturer la souris',
+  items: { boomerang: ['BRETZEL-BOOMERANG', '{throw}'] },
+  pauseHint: '{pause} : REPRENDRE · {use} : COMMANDES · {rumble} : VIBRATIONS ({state})',
+  rumbleState: ['NON', 'OUI'],
+  padUnknown: 'Manette non reconnue : utilise Steam Input ou une manette Xbox / PlayStation. Le clavier reste actif.',
+  skip: '{ok} : PASSER',
   prompts: {
-    hack: 'E : pirater', activate: 'E : activer', restore: 'E : restaurer la plaque', talk: 'E : parler', open: 'E : ouvrir',
-    lever: 'E : actionner le levier', valve: 'E : tourner la vanne', board: 'E : monter dans la barque', sail: 'E : larguer les amarres'
+    hack: '{use} : pirater', activate: '{use} : activer', restore: '{use} : restaurer la plaque', talk: '{use} : parler', open: '{use} : ouvrir',
+    lever: '{use} : actionner le levier', valve: '{use} : tourner la vanne', board: '{use} : monter dans la barque', sail: '{use} : larguer les amarres'
+  },
+  // ------------------------------------------------ indications de commandes (systems/Prompts.js)
+  // Les textes écrivent des ACTIONS entre accolades ({use}, {attack}...), jamais des touches : l'icône affichée
+  // suit le dernier appareil utilisé. Libellés génériques (pas de logos de marques).
+  glyphs: {
+    kb: { move: 'ZQSD', camera: 'SOURIS', attack: 'J', roll: 'ESPACE', lock: 'MAJ', use: 'E', throw: 'F', ok: 'ENTRÉE', back: 'RETOUR', pause: 'P', rumble: 'V' },
+    xbox: { move: 'L', camera: 'R', attack: 'X', roll: 'A', lock: 'LT', use: 'Y', throw: 'RB', ok: 'A', back: 'B', pause: 'MENU', rumble: 'VUE' },
+    ps: { move: 'L', camera: 'R', attack: '□', roll: '✕', lock: 'L2', use: '△', throw: 'R1', ok: '✕', back: '○', pause: 'OPTIONS', rumble: 'SHARE' }
+  },
+  commands: {
+    title: 'COMMANDES', kb: 'CLAVIER / SOURIS', pad: 'MANETTE', close: '{back} : FERMER',
+    rows: [['move', 'Bouger'], ['camera', 'Caméra'], ['attack', 'Écharpe (3 coups)'], ['roll', 'Roulade'], ['lock', 'Verrouiller une cible'],
+      ['throw', 'Objet (bretzel)'], ['use', 'Interagir'], ['ok', 'Valider / dialogues'], ['back', 'Retour'], ['pause', 'Pause'], ['rumble', 'Vibrations oui / non']]
   },
   // ------------------------------------------------ tactile (téléphone / tablette)
   touch: {
@@ -64,10 +79,10 @@ export const TEXTS = {
   intro: [
     { who: "L'ULTRA", txt: `Meinau, ${YEAR}. Ils ont rebaptisé le stade « BlingCo Arena » et transformé la tribune ouest en « espace expérience client ».` },
     { who: "L'ULTRA", txt: "Le club est devenu une filiale. Demain ce sera la ville. Pas tant qu'il y aura une écharpe dans cette tribune." },
-    { who: 'TUTO', txt: "J (ou clic) pour fouetter avec l'écharpe, trois fois pour le combo. Espace pour rouler. Maj pour verrouiller un costard." }
+    { who: 'TUTO', txt: "{attack} pour fouetter avec l'écharpe, trois fois pour le combo. {roll} pour rouler. {lock} pour verrouiller un costard." }
   ],
   entreeCleared: { who: "L'ULTRA", txt: "Trois costards de moins. La coursive est par là, je connais le chemin par cœur." },
-  laser: { who: "L'ULTRA", txt: "Un portique laser « Accès Premium ». Le terminal qui clignote, là, doit le couper : je m'approche et E pour le pirater. Ou un bon coup d'écharpe." },
+  laser: { who: "L'ULTRA", txt: "Un portique laser « Accès Premium ». Le terminal qui clignote, là, doit le couper : je m'approche et {use} pour le pirater. Ou un bon coup d'écharpe." },
   laserOff: { who: 'TERMINAL', txt: "ERREUR 404 : MODÈLE ÉCONOMIQUE NON TROUVÉ. Portique désactivé." },
   bossIntro: [
     { who: 'LE DIRECTEUR DE LA VALORISATION', txt: "Mon cher, le football est un produit. Et toi, tu es un coût." },
@@ -186,9 +201,9 @@ export const TEXTS = {
       { who: 'UN COMMERÇANT', txt: "On t'a gardé quelque chose dans le coffre du péage. Un bretzel... pas tout à fait comme les autres." },
       { who: 'LA WINSTUBIÈRE', txt: "Ouvre-le. Et lance-le fort : il revient toujours vers celui qui l'a lancé." }
     ],
-    boomerangGot: ['BRETZEL-BOOMERANG', 'clic droit (rien de verrouillé) ou F : lancer'],
+    boomerangGot: ['BRETZEL-BOOMERANG', "{throw} : lancer (ou clic droit si rien n'est verrouillé)"],
     boomerangTuto: [
-      { who: 'TUTO', txt: "Clic droit (ou F) pour lancer le bretzel-boomerang. Il touche à distance : ennemis, bornes, cibles. Il revient tout seul." },
+      { who: 'TUTO', txt: "{throw} pour lancer le bretzel-boomerang. Il touche à distance : ennemis, bornes, cibles. Il revient tout seul." },
       { who: 'LA WINSTUBIÈRE', txt: "La herse de sortie s'ouvre avec la borne, là-bas, sur la pile du pont. Personne ne peut l'atteindre... sauf toi, maintenant." }
     ],
     winstubHint3: "La borne sur la pile du pont ! Vise-la avec le bretzel.",

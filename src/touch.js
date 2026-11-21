@@ -37,7 +37,7 @@ export function setupTouch(game, dom) {
   // AGIR : visible seulement quand quelque chose est à portée, avec l'action en clair (« pirater »...)
   const holders = new Set();
   game.events.on('hud:prompt', (src, text) => {
-    if (text) { holders.add(src); touch.setLabel('use', String(text).replace(/^E\s*:\s*/i, '').toUpperCase()); }
+    if (text) { holders.add(src); touch.setLabel('use', String(text).replace(/^(\{use\}|E)\s*:\s*/i, '').toUpperCase()); }
     else holders.delete(src);
     touch.setVisible('use', holders.size > 0);
   });

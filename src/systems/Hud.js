@@ -1,7 +1,8 @@
 // Interface HTML : bretzels de vie, nom de zone, barre de boss, bandeaux, indication d'action, sous-titres.
 export class Hud {
-  constructor(root, events, texts) {
-    this.texts = texts;
+  // fmt : texte avec jetons d'actions ({use}...) -> HTML avec les icônes de l'appareil utilisé (systems/Prompts.js)
+  constructor(root, events, texts, fmt = t => t) {
+    this.texts = texts; this.fmt = fmt;
     this.hearts = root.querySelector('#hearts');
     this.room = root.querySelector('#room');
     this.boss = root.querySelector('#boss');
@@ -20,17 +21,24 @@ export class Hud {
     // indication contextuelle (« E : pirater »...) : (source, texte) pour l'afficher, (source, null) pour la retirer
     this.promptOwner = null;
     events.on('hud:prompt', (owner, text) => this.prompt(owner, text));
-    events.on('inventory:changed', it => {
-      const [name, keys] = this.texts.items[it.id];
-      this.itemEl.innerHTML = `${name}<small>${keys}</small>`; this.itemEl.style.display = 'block';
-    });
+    events.on('inventory:changed', it => { this.item = it; this.renderItem(); });
+    // on change d'appareil : les icônes suivent (clavier <-> manette Xbox / PlayStation)
+    events.on('input:device', () => { this.renderItem(); if (this.promptText) this.promptEl.innerHTML = this.fmt(this.promptText); });
+    this.noticeEl = root.querySelector('#notice');
+    events.on('input:notice', text => { this.noticeEl.textContent = text || ''; this.noticeEl.style.display = text ? 'block' : 'none'; });
     events.on('hud:caption', text => { this.captionEl.textContent = text || ''; this.captionEl.style.display = text ? 'block' : 'none'; });
   }
   prompt(owner, text) {
     if (!text && owner !== this.promptOwner) return; // une autre source a pris la main entre-temps
     this.promptOwner = text ? owner : null;
-    this.promptEl.textContent = text || '';
+    this.promptText = text || null;
+    this.promptEl.innerHTML = text ? this.fmt(text) : '';
     this.promptEl.style.display = text ? 'block' : 'none';
+  }
+  renderItem() {
+    if (!this.item) return;
+    const [name, keys] = this.texts.items[this.item.id];
+    this.itemEl.innerHTML = `${name}<small>${this.fmt(keys)}</small>`; this.itemEl.style.display = 'block';
   }
   // pluie de caractères (branchement de force sur le Serveur central)
   glitch(on) {

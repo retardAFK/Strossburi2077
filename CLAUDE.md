@@ -82,6 +82,8 @@ src/
     Cutscene.js           cinématiques : plans de caméra + sous-titres minutés (événement 'hud:caption')
     Animator.js           poses procédurales sur les pivots (hipN, kneeN, shN, elN, torso, head...)
     Hud.js                interface HTML (cœurs, objet équipé, barre de boss)
+    Prompts.js            indications qui suivent le dernier appareil : jetons {use}, {attack}... -> E / Y / △ (icônes canvas)
+    Menus.js              textes des menus avec icônes + écran « Commandes » (clavier / manette)
     World.js              construit le décor d'un niveau à partir de son layout (murs, néons, pubs holo, herses...)
     Textures.js           textures procédurales en pixels (pavés, grès rose, carrelage, panneaux holo...)
     Fx.js / Particles.js  réticule, ondes de choc, étoiles, bulles de texte, particules
@@ -152,6 +154,10 @@ tools/blender/            un script Python par modèle + lib commune (s3k_lib.py
 - PWA : `src/pwa/` (manifeste, icônes, `sw.js` « réseau d'abord ») copié dans `dist/` par le build ; le nom du
   cache change à chaque build. Installation : « Ajouter à l'écran d'accueil » (iPhone) / « Installer » (Android).
   Anti-zoom iOS : `blockZoom()` dans `src/touch.js` + `text-size-adjust` + taille calée sur `visualViewport`.
+- Manette : disposition « standard » (Xbox / PlayStation), mapping dans `core/Input.js`, réglages dans `TUNING.pad`.
+  **Les textes n'écrivent jamais une touche** : ils écrivent l'action entre accolades (`{use} : pirater`),
+  affichée selon l'appareil (`TEXTS.glyphs`). Tester sans manette : `?debug=1&fakepad=xbox` (ou `ps`),
+  manette virtuelle au pavé numérique (`src/fakepad.js`, « / » débranche pour tester la pause automatique).
 - Debug : ajouter `?debug=1` à l'URL (`dist/index.html?debug=1`) active les raccourcis de `src/debug.js` :
   **F2** salle suivante (points `warps` du layout ; le script répond à 'debug:warp' pour remettre la salle
   en état ; sans warps, téléporte devant le prochain terminal / interrupteur), **F3** élimine tous les ennemis. Ex. `dist/index.html?level=petite-france&debug=1`.

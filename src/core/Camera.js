@@ -28,8 +28,7 @@ export class Camera {
   // look = { dx, dy } en pixels, stick = { x, y } (-1..1)
   steer(dt, look, stick, locked) {
     const M = TUNING.camera.mouse, P = TUNING.camera.pad;
-    const dz = v => (Math.abs(v) < P.deadzone ? 0 : v);
-    const sx = dz(stick?.x || 0), sy = dz(stick?.y || 0);
+    const sx = stick?.x || 0, sy = stick?.y || 0; // stick déjà traité par Input (zone morte radiale + courbe)
     const yawIn = (look?.dx || 0) * M.sens + sx * P.speed * dt;
     const pitchIn = ((look?.dy || 0) * M.sens + sy * P.speed * dt) * (M.invertY ? -1 : 1);
     if (!yawIn && !pitchIn) { this.idle += dt; return; }

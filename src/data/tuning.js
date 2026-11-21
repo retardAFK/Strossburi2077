@@ -1,5 +1,8 @@
 // Tous les réglages chiffrés du jeu (vitesses en unités/s, temps en s).
 export const TUNING = {
+  // manette (disposition standard) : zone morte radiale, courbe de réponse (>1 = plus doux au centre),
+  // vibrations : activées par défaut, déclenchées quand la secousse caméra dépasse rumbleFrom
+  pad: { deadzone: 0.18, curve: 1.6, rumble: true, rumbleFrom: 0.25, rumbleMs: 160 },
   render: { width: 480, height: 270, fov: 55, fogNear: 14, fogFar: 40 },
   player: {
     hp: 6, speed: 8, lockSpeed: 6, radius: 0.55, invulnAfterHit: 1.0,
@@ -29,7 +32,7 @@ export const TUNING = {
     dist: 7.5, height: 4.4, bossDist: 9.5, bossHeight: 5.2, followRate: 1.6, lockRate: 6, posRate: 6, minHeight: 0.6,
     // souris : sens en rad/pixel ; pitch = angle au-dessus de l'horizontale (rad) ; recenterDelay en s (0 = jamais)
     mouse: { sens: 0.0025, invertY: false, pitchMin: -0.1, pitchMax: 1.1, recenterDelay: 2.5, posRate: 18 },
-    pad: { speed: 2.6, deadzone: 0.2 } // stick droit : rad/s à fond
+    pad: { speed: 2.6 } // stick droit : rad/s à fond (sensibilité séparée de la souris)
   },
   // tactile (core/Touch.js) : rayon du joystick (px CSS), zone morte (0..1), sensibilité caméra (multiplie
   // les pixels glissés avant camera.mouse.sens), toucher = glisser de moins de tapMove px en moins de tapTime ms

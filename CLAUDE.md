@@ -23,9 +23,14 @@ de nouveaux chemins), ton satirique et loufoque, 100 % Strasbourg.
 | 3 | Port du Rhin | BlingCo Immobilier (boboïsation) | dockers, mariniers → gaffe-grappin | Le Promoteur et sa grue |
 | 4 | Place Kléber | Siège du marché de Noël permanent | tout le monde | PDG déguisé en Père Noël en costard (la corruption) |
 
-Chronologie : le niveau 1 se passe dans le futur. À la fin, **SCN** (« Stras c'est nous », réseau underground
+Chronologie :
+- **2023** : BlingCo Multi-Holdings rachète le club de la Meinau.
+- **2026** : tout bascule, BlingCo commence à racheter toute la ville. C'est là que l'Ultra est envoyé.
+- **2067** : le futur, la ville entière appartient à BlingCo (niveau 1).
+
+Le niveau 1 se passe dans le futur. À la fin, **SCN** (« Stras c'est nous », réseau underground
 et populaire, de la rue et des tribunes : « Celui du stade », « Celle du stade ») envoie l'Ultra de force en
-**2026**, notre époque, quand tout a basculé. Le niveau 2 est la Meinau en 2026. Plus tard, retour brutal vers
+**2026**, quand tout a basculé. Le niveau 2 est la Meinau en 2026. Plus tard, retour brutal vers
 le futur (partie 2), final à la Meinau du futur. L'année du futur est **2067** : elle est dans UNE constante
 (`YEAR` / `TEXTS.year` dans `texts.fr.js`), jamais écrite en dur dans le code ni les textes.
 

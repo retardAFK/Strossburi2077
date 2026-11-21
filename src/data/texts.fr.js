@@ -72,8 +72,8 @@ export const TEXTS = {
     // ouverture : voix off (survol de la Petite France), un sous-titre par plan
     opening: [
       `Strasbourg, ${YEAR}.`,
-      "Ça a commencé en 2026, au stade. Un consortium a racheté notre club : BlingCo Multi-Holdings. « Club satellite », qu'ils disaient.",
-      "Puis ils ont racheté le reste. Les rues, les ponts, les winstubs. Le marché de Noël ouvert 365 jours par an.",
+      "Ça a commencé en 2023, au stade. Un consortium a racheté notre club : BlingCo Multi-Holdings. « Club satellite », qu'ils disaient.",
+      "En 2026, ils ont commencé à racheter le reste. Les rues, les ponts, les winstubs. Le marché de Noël ouvert 365 jours par an.",
       "Ici, ils ont même réécrit l'histoire. La Petite France est devenue une « Expérience Authentique® ».",
       "Les gens d'ici paient pour rentrer chez eux. Moi, j'ai encore mon écharpe."
     ],
@@ -82,7 +82,7 @@ export const TEXTS = {
     plaques: {
       p1: { lie: 'Food Court Premium depuis toujours.', truth: "Cœur du quartier des tanneurs, au bord de l'Ill." },
       p3: { lie: 'Construits par BlingCo en 2061.', truth: 'Commencés en 1230, ouverts en 1250. Leurs toitures en bois ont disparu en 1784, le nom est resté.' },
-      p4: { lie: 'Rooftop Premium, accès VIP.', truth: "Bâti par Vauban à partir de 1686 pour barrer l'accès par l'eau. Terrasse panoramique ouverte à tous depuis 1966." },
+      p4: { lie: 'Rooftop Premium, accès VIP.', truth: "Bâti par Vauban à partir de 1686 pour barrer l'accès par l'eau. Promenade panoramique depuis 1966." },
       p2: { lie: 'Patrimoine sous licence BlingCo.', truth: "Quartier populaire de tanneurs, meuniers et pêcheurs. Patrimoine mondial de l'UNESCO depuis 1988." }
     },
     plaqueRestored: { who: "L'ULTRA", txt: "Voilà. Notre histoire, pas la leur." },
@@ -207,7 +207,7 @@ export const TEXTS = {
     // cliffhanger : SCN révèle tout et envoie l'Ultra en 2026
     cliff: [
       { who: 'CELLE DU STADE', txt: "Tu l'as eu ! Écoute-moi bien, on n'a pas beaucoup de temps." },
-      { who: 'CELUI DU STADE', txt: `Tout ça, ça ne commence pas en ${YEAR}. Ça commence en 2026. Le jour où ils ont racheté le club.` },
+      { who: 'CELUI DU STADE', txt: "Le club, ils l'ont racheté en 2023. Mais c'est en 2026 que tout a basculé : ils ont commencé à racheter la ville. C'est là qu'il faut les arrêter." },
       { who: 'CELLE DU STADE', txt: "On a trouvé une faille dans le Serveur central. Une seule personne peut y passer : toi. C'est pour ça qu'on t'attendait." },
       { who: "L'ULTRA", txt: 'Attends... passer où ?' },
       { who: 'CELUI DU STADE', txt: "En 2026. Désolé, l'écharpe : pas le temps de demander poliment." }

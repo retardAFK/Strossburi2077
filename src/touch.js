@@ -30,7 +30,9 @@ export function setupTouch(game, dom) {
     onFirstInput: () => game.audio.unlock(),
     // toucher l'écran (sans glisser) : valider le titre et les dialogues, passer les cinématiques, reprendre la pause
     tapAction: () => {
-      if (game.mode === 'title' || game.mode === 'cutscene') return 'ok';
+      if (game.mode === 'title') return 'ok';
+      // cinématique : pas dans la première seconde (un toucher qui finissait un dialogue ne la saute pas)
+      if (game.mode === 'cutscene') return game.cutscene?.t > 1 ? 'ok' : null;
       if (game.mode === 'paused') return 'pause';
       if (game.dialog.active) return 'ok';
       return null;

@@ -27,6 +27,14 @@ import bacScript from './bac-a-sable/script.js';
 import { Mannequin } from '../entities/props/Mannequin.js';
 import { Sbire } from '../entities/enemies/Sbire.js';
 import { CaisseFleches } from '../entities/props/CaisseFleches.js';
+import { StewardRobot } from '../entities/enemies/StewardRobot.js';
+import { Egboehly } from '../entities/bosses/Egboehly.js';
+import { Figurant } from '../entities/props/Figurant.js';
+import { Crochet } from '../entities/props/Crochet.js';
+import { EcranGeant } from '../entities/props/EcranGeant.js';
+import { TifoGeant } from '../entities/props/TifoGeant.js';
+import mei2Layout from './meinau/layout.js';
+import mei2Script from './meinau/script.js';
 
 // modèles exportés par tools/blender/*.py (embarqués dans le build par esbuild, chargés à la demande)
 import ultra from '../../assets/models/ultra.glb';
@@ -63,8 +71,12 @@ import pf_arche_barrage from '../../assets/models/pf_arche_barrage.glb';
 import asr from '../../assets/models/asr.glb';
 import pnj_celui_du_stade from '../../assets/models/pnj_celui_du_stade.glb';
 import arc_drapeau from '../../assets/models/arc_drapeau.glb';
+import steward_robot from '../../assets/models/steward_robot.glb';
+import egboehly from '../../assets/models/egboehly.glb';
+import decor_meinau_ext from '../../assets/models/decor_meinau_ext.glb';
+import decor_meinau_bol from '../../assets/models/decor_meinau_bol.glb';
 
-export const DEFAULT_LEVEL = 'petite-france'; // la Meinau reste accessible avec ?level=meinau-ouest
+export const DEFAULT_LEVEL = 'petite-france'; // l'ancien prototype reste accessible avec ?level=meinau-ouest
 // Partie 1, dans l'ordre (docs/decisions.md). Seuls les niveaux déjà inscrits dans LEVELS sont joués ;
 // la fin d'un niveau lance le suivant (systems/Progress.js). La partie 2 (2067) viendra plus tard.
 export const CAMPAIGN_ORDER = ['petite-france', 'meinau', 'port-rhin', 'marche2000', 'kalt', 'kleber'];
@@ -83,6 +95,13 @@ export const LEVELS = {
       pf_cible_tpe, pf_vitre, pf_arche_barrage, asr, pnj_celui_du_stade },
     types: { serveur: Serveur, sommelier: Sommelier, terminal: Terminal, borne: Borne, plaque: Plaque,
       barque: Barque, lever: Lever, pnj: Pnj, coffre: Coffre, videur: VideurMaitreHotel, cible: Cible, asr: Asr67 }
+  },
+  meinau: {
+    layout: mei2Layout, script: mei2Script, texts: TEXTS.meinau, subtitle: TEXTS.meinau.subtitle,
+    models: { ultra, steward_robot, egboehly, arc_drapeau, bretzel_boomerang, pf_cible_tpe, pf_herse_laser, terminal,
+      decor_meinau_ext, decor_meinau_bol },
+    types: { steward: StewardRobot, egboehly: Egboehly, figurant: Figurant, crochet: Crochet, ecran: EcranGeant,
+      tifo: TifoGeant, caisse: CaisseFleches, cible: Cible, terminal: Terminal }
   },
   'bac-a-sable': {
     debugOnly: true, layout: bacLayout, script: bacScript, texts: TEXTS.bac, subtitle: TEXTS.bac.subtitle,

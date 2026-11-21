@@ -6,6 +6,7 @@ et `types` (les classes que layout et script peuvent créer). Le niveau est choi
 | Dossier | Niveau |
 |---|---|
 | `petite-france/` | Niveau 1, Petite France (futur) : `layout.js` (données), `script.js` qui branche `salle1.js` … `salle5.js` |
+| `meinau/` | Niveau 2, la Meinau en 2026 : `script.js` branche `parvis.js` (parvis + coursive), `local.js` (Arc-Drapeau, tuto de tir), `kop.js` (énigme du tifo), `pelouse.js` (boss Egboehly) ; répliques dans `data/dialogues/meinau.fr.js` |
 | `meinau-ouest/` | Prototype : tribune ouest de la Meinau (futur), boss Directeur ; recyclé plus tard dans le final (`docs/decisions.md`) |
 | `bac-a-sable/` | Salle grise de réglage (`?level=bac-a-sable&debug=1`) : cibles, mannequins, fossé, grille, mur haut ; donne le bretzel et l'arc |
 

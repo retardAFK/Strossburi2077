@@ -94,6 +94,7 @@ export const TEXTS = {
   buvette: ['BUVETTE 2.0', 'BIÈRE SANS ALCOOL SANS BIÈRE : 18 BC'],
 
   barks: {
+    steward: ['Billet ?', 'Scan en cours…', 'Accès refusé : supporter détecté.', 'Ce pigeon n\'a pas payé sa place.'],
     consultant: ['On va optimiser ta ferveur !', 'Ton chant n\'est pas monétisable.', 'Synergie !', 'Je te passe en freemium !', 'C\'est pas personnel, c\'est stratégique.'],
     juriste: ['Article 12 : interdiction de chanter !', 'Signe ici, ici, et là.', 'Clause de non-supportérisme !', 'Vous avez lu les CGU ? Non ? Parfait.'],
     serveur: ['Votre table est prête. Votre carte bancaire aussi ?', "Une carafe d'eau ? Option Premium.", 'Le menu « Authentique® » vous tend les bras !', 'Pourboire inclus. Et re-inclus.'],
@@ -298,6 +299,19 @@ export const TEXTS = {
     end: ["STRASBOURG N'EST PAS À VENDRE", "Fin de la démo du niveau 1. Merci d'avoir joué !"]
   },
   // bac à sable de test (?level=bac-a-sable&debug=1) : pas un vrai niveau, textes de service
+  // ------------------------------------------------ niveau 2 : la Meinau (2026). Répliques : data/dialogues/meinau.fr.js
+  meinau: {
+    subtitle: 'NIVEAU 2 : LA MEINAU, 2026',
+    rooms: { parvis: 'LE PARVIS · « BLINGCO ARENA »', coursive: 'LA COURSIVE', local: 'LE LOCAL DU KOP', kop: 'LE KOP', pelouse: 'LA PELOUSE' },
+    ads: [['BLINGCO FOOTBALL', 'MULTI-CLUB · 5 CLUBS, 1 PROPRIÉTAIRE'], ['ABONNEMENT', 'PREMIUM+ : 89 BC / MATCH'],
+      ['CLUB SATELLITE', 'VOTRE CLUB, NOTRE ACTIF'], ['BUVETTE', 'BIÈRE TOKENISÉE : 14 BC']],
+    tifo: 'PAS À VENDRE',
+    boss: 'EGBOEHLY · LE MULTIPROPRIÉTAIRE',
+    headDown: 'TÊTE KO', planted: 'DRAPEAU PLANTÉ !', antiEcharpe: 'ANTI-ÉCHARPE !',
+    tutoDone: ['TUTO RÉUSSI', 'LE KOP VOUS ATTEND'], gateOpen: ['PORTIQUE COUPÉ', 'LES ANCIENS SONT LIBRES'], tifoDone: ['TIFO DÉPLOYÉ', 'LA PELOUSE EST OUVERTE'],
+    opening: [`Strasbourg, 2026. La Meinau.`, "Le jour où BlingCo rachète le club. Le jour où tout commence.", "Cette fois, l'Ultra arrive avant eux."],
+    end: ['MEINAU LIBÉRÉE', 'Les anciens du kop rejoignent la résistance. Suite : le Port du Rhin.']
+  },
   bac: {
     subtitle: 'BAC À SABLE · TESTS (DEBUG)',
     rooms: { bac: 'BAC À SABLE · SALLE DE TEST' },

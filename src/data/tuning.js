@@ -85,6 +85,10 @@ export const TUNING = {
   // ---------------------------------------------------------------- partie 1 (socle) : sbires, flèches spéciales, caisses
   // sbires (kit générique entities/enemies/Sbire.js) : vision (portée, cône en cos, ouïe), vitesses, attaque
   sbires: {
+    // Robot-Steward (Meinau 2026) : robot (court-circuit l'étourdit) ; s'arrête parfois pour scanner un pigeon
+    steward: { hp: 3, radius: 0.5, height: 2.2, speed: 2, runSpeed: 4.2, wander: 4, view: 10, fov: 0.55, hear: 2.5,
+      alertTime: 0.7, lose: 2.5, reach: 1.9, windup: 0.6, attack: 'lunge', lunge: 9, attackTime: 0.22, recover: 0.8, dmg: 1,
+      robot: true, scanEvery: 7, scanTime: 2 },
     test: { hp: 3, radius: 0.55, height: 1.9, speed: 2.2, runSpeed: 4.4, wander: 4, view: 11, fov: 0.5, hear: 2.5,
       alertTime: 0.6, lose: 2.5, reach: 1.9, windup: 0.5, attack: 'lunge', lunge: 10, attackTime: 0.22, recover: 0.7, dmg: 1, robot: true },
     testTireur: { hp: 3, radius: 0.55, height: 1.9, speed: 2, runSpeed: 3.6, wander: 3, view: 13, fov: 0.45, hear: 2.5,
@@ -96,5 +100,13 @@ export const TUNING = {
     short: { radius: 2.5, stun: 3 },               // court-circuit : rayon, étourdissement des robots (s)
     fire: { radius: 1.8, dmg: 1 }                  // enflammée : rayon, dégâts aux sbires
   },
-  crates: { amount: 3, respawn: 8, useRange: 2.2 } // caisses de flèches : quantité, réapparition (s), portée de E
+  crates: { amount: 3, respawn: 8, useRange: 2.2 }, // caisses de flèches : quantité, réapparition (s), portée de E
+  // ---------------------------------------------------------------- niveau 2 : la Meinau (2026)
+  // tifo : couleurs des 5 crochets (ordre de la séquence montrée sur l'écran géant), durée d'une couleur à l'écran
+  tifo: { colors: [0x1f5fd0, 0xf4f6ff, 0xd01a2a, 0xffd23f, 0x2ab04a], show: 0.9, pause: 2.2, arrowsAtLocal: 5, time: 600 },
+  // Egboehly : 5 têtes (PV, morsure télégraphiée, repousse sauf bannière plantée), puis le pilote exposé
+  egboehly: {
+    headHp: 3, headRadius: 0.9, biteEvery: 2.6, aimTime: 0.8, biteTime: 0.45, biteReach: 6, recover: 1.1, dmg: 1,
+    regrow: 7, spitEvery: 5, spitSpeed: 9, pilotHp: 6, pilotStun: 2.5, scale: 1.25
+  }
 };

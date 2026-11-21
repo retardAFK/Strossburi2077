@@ -24,6 +24,7 @@ await h.run(() => window.S3K.completeLevel(['FIN', 'test']));
 const save = await h.run(() => JSON.parse(localStorage.getItem('s3k.save')));
 T.check('fin de niveau : sauvegarde écrite', save && save.level && Array.isArray(save.items), JSON.stringify(save));
 T.check('sauvegarde : objets emportés', save.items.includes('boomerang'));
+T.check('sauvegarde : niveau suivant = la Meinau', save.level === 'meinau', save.level);
 T.check('fin de niveau : écran de fin', (await h.state()).mode === 'end');
 
 // 3) rechargement sans ?level : on reprend la sauvegarde, titre « CONTINUER », bretzel rendu

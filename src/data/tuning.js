@@ -31,6 +31,9 @@ export const TUNING = {
     mouse: { sens: 0.0025, invertY: false, pitchMin: -0.1, pitchMax: 1.1, recenterDelay: 2.5, posRate: 18 },
     pad: { speed: 2.6, deadzone: 0.2 } // stick droit : rad/s à fond
   },
+  // tactile (core/Touch.js) : rayon du joystick (px CSS), zone morte (0..1), sensibilité caméra (multiplie
+  // les pixels glissés avant camera.mouse.sens), toucher = glisser de moins de tapMove px en moins de tapTime ms
+  touch: { stickRadius: 56, deadzone: 0.15, lookSens: 1.8, tapMove: 14, tapTime: 300 },
   // terminaux piratables (tous niveaux) : portée de la touche E, marqueur néon au-dessus
   terminal: {
     useRange: 2.2,

@@ -17,6 +17,23 @@ export const TEXTS = {
     hack: 'E : pirater', activate: 'E : activer', restore: 'E : restaurer la plaque', talk: 'E : parler', open: 'E : ouvrir',
     lever: 'E : actionner le levier', valve: 'E : tourner la vanne', board: 'E : monter dans la barque', sail: 'E : larguer les amarres'
   },
+  // ------------------------------------------------ tactile (téléphone / tablette)
+  touch: {
+    buttons: { attack: 'ÉCHARPE', roll: 'ROULADE', lock: 'CIBLE', throw: 'BRETZEL', use: 'AGIR', pause: '❚❚' },
+    rotate: 'Tourne ton téléphone en paysage 📱↻',
+    // textes remplacés quand on joue au doigt : [chemin dans TEXTS, nouveau texte]
+    overrides: [
+      ['controls', 'Pouce gauche : bouger · Glisser à droite : caméra<br>ÉCHARPE : 3 coups · ROULADE · CIBLE : verrouiller · BRETZEL : objet · AGIR : interagir<br>Toucher l\'écran : dialogues'],
+      ['pressStart', "TOUCHE L'ÉCRAN"],
+      ['pauseHint', 'TOUCHE L\'ÉCRAN POUR REPRENDRE'],
+      ['skip', "TOUCHER L'ÉCRAN : PASSER"],
+      ['items.boomerang.1', 'BOUTON BRETZEL'],
+      ['intro.2.txt', "ÉCHARPE pour fouetter, trois fois pour le combo. ROULADE pour esquiver. CIBLE pour verrouiller un costard."],
+      ['laser.txt', "Un portique laser « Accès Premium ». Le terminal qui clignote, là, doit le couper : je m'approche et AGIR pour le pirater. Ou un bon coup d'écharpe."],
+      ['pf.boomerangGot.1', 'BOUTON BRETZEL : lancer'],
+      ['pf.boomerangTuto.0.txt', "Le bouton BRETZEL lance le bretzel-boomerang. Il touche à distance : ennemis, bornes, cibles. Il revient tout seul."]
+    ]
+  },
   hero: "L'ULTRA",
   rooms: { entree: 'PORTE OUEST', coursive: 'COURSIVE DE LA TRIBUNE OUEST', vip: 'SALON « EXPÉRIENCE CLIENT » BLINGCO', sortie: 'VERS LA TRIBUNE' },
 

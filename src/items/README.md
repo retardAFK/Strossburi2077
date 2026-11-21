@@ -11,6 +11,7 @@ n'est verrouillé, F, RB/R1) et change d'objet (Tab, croix haut / bas, bouton �
 | `index.js` | Registre `ITEMS` (id → classe) : la sauvegarde rend les objets d'un niveau à l'autre |
 | `BretzelBoomerang.js` | Bretzel-boomerang (niveau 1) : courbe aller-retour, touche à distance ennemis, bornes, terminaux et cibles ; survole l'eau et les vitres anti-écharpe. Un seul en vol. |
 | `ArcDrapeau.js` | Arc-Drapeau (niveau 2) : tir simple vers la cible verrouillée, ou en visée (clic droit / LB maintenu), ou droit devant ; flèches simples illimitées, flèches spéciales en données (`data/arrows.js`, désactivées tant que non codées). Projectile : `entities/props/Arrow.js`. |
+| `GaffeGrappin.js` | Gaffe-grappin (niveau 3) : crochet vers la cible verrouillée (sinon devant), corde bleu-blanc, retour. Anneau (`isAnchor`, `land`) → l'Ultra y est tiré (état `zip`, survole l'eau) ; objet avec `pull(from)` (conteneur, caisse, préfabriqué) → il réagit ; ennemi → tiré vers l'Ultra, sbire étourdi. Événements `gaffe:hook`, `gaffe:zip`, `gaffe:land`. |
 
 Événements : `inventory:changed` (objet équipé, nombre d'objets), `hud:aim` (visée de l'arc), `arrow:hit` ; voir `docs/EVENTS.md`.
 Ce qui est touché est ce qui porte `isEnemy`, `isSwitch`, `isTerminal` ou `isTarget` ; le projectile porte `isPlayerShot`

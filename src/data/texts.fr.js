@@ -12,7 +12,7 @@ export const TEXTS = {
   continueStart: '{ok} : CONTINUER · {back} : NOUVELLE PARTIE', // titre, partie sauvegardée
   nextLevel: '{ok} : NIVEAU SUIVANT', // écran de fin de niveau (campagne)
   controls: '{move} bouger · {camera} caméra · {attack} écharpe (3 coups) · {roll} roulade · {lock} cible<br>{throw} objet · {use} interagir · {ok} valider · {pause} pause<br>{use} sur cet écran : toutes les commandes · au clavier, clic : capturer la souris',
-  items: { boomerang: ['BRETZEL-BOOMERANG', '{throw}'], arc: ['ARC-DRAPEAU', '{throw} tirer · {aim} viser'] },
+  items: { boomerang: ['BRETZEL-BOOMERANG', '{throw}'], arc: ['ARC-DRAPEAU', '{throw} tirer · {aim} viser'], gaffe: ['GAFFE-GRAPPIN', '{throw} : grappin'] },
   itemSwitch: '{switch} changer',
   // types de flèches (data/arrows.js), affichés sous l'objet équipé
   arrows: { simple: 'FLÈCHES', banniere: 'BANNIÈRE', fumigene: 'FUMIGÈNE', enflammee: 'ENFLAMMÉE', court_circuit: 'COURT-CIRCUIT' },
@@ -48,7 +48,7 @@ export const TEXTS = {
   // ------------------------------------------------ tactile (téléphone / tablette)
   touch: {
     buttons: { attack: 'ÉCHARPE', roll: 'ROULADE', lock: 'CIBLE', throw: 'BRETZEL', use: 'AGIR', pause: '❚❚', switch: '⇄', aim: 'VISER' },
-    itemButtons: { boomerang: 'BRETZEL', arc: 'ARC' }, // libellé du bouton d'objet selon l'objet équipé
+    itemButtons: { boomerang: 'BRETZEL', arc: 'ARC', gaffe: 'GRAPPIN' }, // libellé du bouton d'objet selon l'objet équipé
     rotate: 'Tourne ton téléphone en paysage 📱↻',
     // écran d'accueil sur mobile (src/install.js) : installer le jeu comme une appli (plein écran, sans barres)
     install: {
@@ -95,6 +95,7 @@ export const TEXTS = {
 
   barks: {
     steward: ['Billet ?', 'Scan en cours…', 'Accès refusé : supporter détecté.', 'Ce pigeon n\'a pas payé sa place.'],
+    agent: ['VENDU !', 'Vous aussi : VENDU !', 'Vue sur Rhin, 9 999 BC le m² !', 'Coup de cœur garanti !', "Frais d'agence inclus."],
     consultant: ['On va optimiser ta ferveur !', 'Ton chant n\'est pas monétisable.', 'Synergie !', 'Je te passe en freemium !', 'C\'est pas personnel, c\'est stratégique.'],
     juriste: ['Article 12 : interdiction de chanter !', 'Signe ici, ici, et là.', 'Clause de non-supportérisme !', 'Vous avez lu les CGU ? Non ? Parfait.'],
     serveur: ['Votre table est prête. Votre carte bancaire aussi ?', "Une carafe d'eau ? Option Premium.", 'Le menu « Authentique® » vous tend les bras !', 'Pourboire inclus. Et re-inclus.'],
@@ -311,6 +312,20 @@ export const TEXTS = {
     tutoDone: ['TUTO RÉUSSI', 'LE KOP VOUS ATTEND'], gateOpen: ['PORTIQUE COUPÉ', 'LES ANCIENS SONT LIBRES'], tifoDone: ['TIFO DÉPLOYÉ', 'LA PELOUSE EST OUVERTE'],
     opening: [`Strasbourg, 2026. La Meinau.`, "Le jour où BlingCo rachète le club. Le jour où tout commence.", "Cette fois, l'Ultra arrive avant eux."],
     end: ['MEINAU LIBÉRÉE', 'Les anciens du kop rejoignent la résistance. Suite : le Port du Rhin.']
+  },
+  portRhin: {
+    subtitle: 'NIVEAU 3 : LE PORT DU RHIN, 2026',
+    rooms: { quai: 'LE QUAI · PALISSADE « BLINGCO LOFTS »', moulin: 'LE VIEUX MOULIN', conteneurs: 'CONTENEURS ET PÉNICHES',
+      chantier: 'LE QUAI DU CHANTIER' },
+    ads: [['BLINGCO LOFTS', 'VUE SUR RHIN · DÈS 9 999 BC / M²'], ['BIENTÔT ICI', 'VOTRE LOFT DE CARACTÈRE'],
+      ['ANCIEN MOULIN', 'BIENTÔT ROOFTOP PREMIUM'], ['PÉNICHE-LOFT', 'LE CHARME DU PORT, SANS LE PORT']],
+    boss: 'LE PROMOTEUR · BLINGCO IMMOBILIER',
+    antiEcharpe: 'ANTI-ÉCHARPE !',
+    palissade: ['PALISSADE TOMBÉE', 'LE MOULIN EST OUVERT'], gaffeGot: ['GAFFE-GRAPPIN', '{throw} : lancer le grappin'],
+    gateOpen: ['QUAI LIBÉRÉ', 'LE CHANTIER EST OUVERT'],
+    opening: [`Strasbourg, 2026. Le Port du Rhin.`, "Les quais, les péniches, le vieux moulin. BlingCo y voit des « lofts de caractère ».",
+      "Les dockers et les mariniers tiennent bon. Pour l'instant."],
+    end: ['PORT DU RHIN LIBÉRÉ', 'Les dockers et les mariniers rejoignent la résistance. Suite : le Marché 2000.']
   },
   bac: {
     subtitle: 'BAC À SABLE · TESTS (DEBUG)',

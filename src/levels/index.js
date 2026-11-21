@@ -33,6 +33,13 @@ import { Figurant } from '../entities/props/Figurant.js';
 import { Crochet } from '../entities/props/Crochet.js';
 import { EcranGeant } from '../entities/props/EcranGeant.js';
 import { TifoGeant } from '../entities/props/TifoGeant.js';
+import { AgentImmo } from '../entities/enemies/AgentImmo.js';
+import { Promoteur } from '../entities/bosses/Promoteur.js';
+import { Anneau } from '../entities/props/Anneau.js';
+import { Tractable } from '../entities/props/Tractable.js';
+import { Pancarte } from '../entities/props/Pancarte.js';
+import prhLayout from './port-rhin/layout.js';
+import prhScript from './port-rhin/script.js';
 import mei2Layout from './meinau/layout.js';
 import mei2Script from './meinau/script.js';
 
@@ -75,6 +82,14 @@ import steward_robot from '../../assets/models/steward_robot.glb';
 import egboehly from '../../assets/models/egboehly.glb';
 import decor_meinau_ext from '../../assets/models/decor_meinau_ext.glb';
 import decor_meinau_bol from '../../assets/models/decor_meinau_bol.glb';
+import decor_port_rhin from '../../assets/models/decor_port_rhin.glb';
+import agent_immo from '../../assets/models/agent_immo.glb';
+import pancarte_vendu from '../../assets/models/pancarte_vendu.glb';
+import promoteur from '../../assets/models/promoteur.glb';
+import prefab_boite from '../../assets/models/prefab_boite.glb';
+import prefab_bureau from '../../assets/models/prefab_bureau.glb';
+import prefab_loft from '../../assets/models/prefab_loft.glb';
+import gaffe_grappin from '../../assets/models/gaffe_grappin.glb';
 
 export const DEFAULT_LEVEL = 'petite-france'; // l'ancien prototype reste accessible avec ?level=meinau-ouest
 // Partie 1, dans l'ordre (docs/decisions.md). Seuls les niveaux déjà inscrits dans LEVELS sont joués ;
@@ -102,6 +117,12 @@ export const LEVELS = {
       decor_meinau_ext, decor_meinau_bol },
     types: { steward: StewardRobot, egboehly: Egboehly, figurant: Figurant, crochet: Crochet, ecran: EcranGeant,
       tifo: TifoGeant, caisse: CaisseFleches, cible: Cible, terminal: Terminal }
+  },
+  'port-rhin': {
+    layout: prhLayout, script: prhScript, texts: TEXTS.portRhin, subtitle: TEXTS.portRhin.subtitle,
+    models: { ultra, agent_immo, pancarte_vendu, promoteur, prefab_boite, prefab_bureau, prefab_loft, gaffe_grappin,
+      arc_drapeau, bretzel_boomerang, pf_herse_laser, decor_port_rhin },
+    types: { agent: AgentImmo, promoteur: Promoteur, anneau: Anneau, tractable: Tractable, pancarte: Pancarte, figurant: Figurant }
   },
   'bac-a-sable': {
     debugOnly: true, layout: bacLayout, script: bacScript, texts: TEXTS.bac, subtitle: TEXTS.bac.subtitle,

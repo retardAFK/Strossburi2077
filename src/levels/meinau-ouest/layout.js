@@ -1,6 +1,9 @@
 // Prototype : coursives de la tribune ouest, Meinau, 2067. DONNÉES UNIQUEMENT.
 // Repère : x à droite, z négatif = vers le fond. Rectangles de zone : [x0, x1, zHaut, zBas].
+import { TEXTS } from '../../data/texts.fr.js';
+
 const PI = Math.PI;
+const G = TEXTS.graffiti;
 const CYAN = 0x38f2ff, PINK = 0xff2e88, GOLD = 0xffc040;
 
 export default {
@@ -51,10 +54,10 @@ export default {
     { x: -6, z: -74.9, w: 4.5, y: 3.8, idx: 7 }, { x: 6, z: -74.9, w: 4.5, y: 3.8, idx: 5 }
   ],
   graffiti: [
-    { text: 'TRIBUNE OUEST', color: '#38f2ff', x: -7.9, z: -6, rotY: PI / 2 },
-    { text: 'PAS À VENDRE', color: '#f4f6ff', x: 4.9, z: -40, rotY: -PI / 2 },
-    { text: 'RCS', color: '#1f8fff', x: -4.9, z: -31, rotY: PI / 2, y: 2.2 },
-    { text: 'ICI C\'EST LA MEINAU', color: '#ffd23f', x: 7.9, z: -9, rotY: -PI / 2 }
+    { text: G[0], color: '#38f2ff', x: -7.9, z: -6, rotY: PI / 2 },
+    { text: G[1], color: '#f4f6ff', x: 4.9, z: -40, rotY: -PI / 2 },
+    { text: G[2], color: '#1f8fff', x: -4.9, z: -31, rotY: PI / 2, y: 2.2 },
+    { text: G[3], color: '#ffd23f', x: 7.9, z: -9, rotY: -PI / 2 }
   ],
   vomitoires: [{ x: -4.95, z: -17, rotY: PI / 2 }, { x: -4.95, z: -47, rotY: PI / 2 }, { x: 0, z: -79.9, rotY: 0 }],
   buvettes: [{ x: 3, z: -24, w: 3.2, signDz: 0.6 }],

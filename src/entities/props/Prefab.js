@@ -17,6 +17,7 @@ export class Prefab extends Entity {
     this.circle = null; this.sync();
   }
   get lockable() { return this.state === 'ground'; }
+  get grabbable() { return this.state === 'ground'; } // en l'air, le grappin passe à travers
   takeHit() {}
   // le gaffe-grappin l'accroche : renvoyé au Promoteur
   pull() {

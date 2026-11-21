@@ -55,7 +55,7 @@ class Hook extends Entity {
     const t = this.target;
     for (const e of this.game.entities) {
       if (e === this || e === this.game.player || !e.alive || e.isProjectile) continue;
-      if (!(e.isAnchor || e.pull || e.isEnemy)) continue;
+      if (!(e.isAnchor || e.pull || e.isEnemy) || e.grabbable === false) continue;
       if (t && e !== t && !e.isEnemy) continue; // verrouillé : on n'accroche que la cible (ou un ennemi en travers)
       if (e.isAnchor && Math.hypot(e.x - this.ox, e.z - this.oz) < 2) continue; // l'anneau sous lequel on se tient
       if (Math.hypot(e.x - this.x, e.z - this.z) > (e.grabR || e.r) + this.r) continue;

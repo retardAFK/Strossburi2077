@@ -1,50 +1,39 @@
-# Strasbourg 3000 — La Revanche du Marché de Noël Éternel (POC)
+# Stras 2067 — Strasbourg n'est pas à vendre
 
-Beat'em up 2D pixel art. 2077 : le maire Konrad von Lebkuchen a instauré le marché de Noël éternel.
-Marcel Bretzel remonte en 2026, place Kléber, pour empêcher la cuisson du Grand Kougelhopf maudit.
+Aventure-action 3D façon N64 / GameCube, satirique et 100 % strasbourgeoise. En 2067, le consortium BlingCo a racheté
+la ville ; un ultra de la Meinau, écharpe bleue et blanche au poing, se bat pour la rendre aux Strasbourgeois.
 
-## Jouer
-Double-cliquer sur `game/index.html` (Chrome / Edge / Firefox). Aucune installation.
+**Jouer en ligne** : https://stras2067.duckdns.org (ordinateur, manette, téléphone ; installable sur mobile).
 
-- Flèches ou ZQSD : se déplacer
-- J ou X : frapper (enchaîner = combo poing, poing, poing, coup de pied)
-- K, C ou Espace : sauter (frapper en l'air = coup de pied sauté)
-- L ou V : Tornade de Bretzel (attaque tournante, coûte 6 PV)
-- Entrée : valider · P : pause · M : couper le son · manette compatible
-
-## Contenu du niveau
-- 3 zones de combat + mini-boss, place Kléber (statue de Kléber, grand sapin, chalets, tram, écran holographique du maire)
-- Ennemis : lutin syndiqué (rapide), vendeur de vin chaud zombifié (lance des chopes brûlantes), cigogne-drone 3000 (bec long, attaque en piqué)
-- Mini-boss : le Grand Kougelhopf (écrasement, roulade sucrée, appelle des renforts)
-- Soins : bretzel (+20), flammekueche (+50)
-
-## Assets (Blender)
-Tous les sprites et le décor sont modélisés et rendus dans Blender (moteur Workbench, sans anti-aliasing,
-caméra orthographique à 24 px/unité), puis assemblés en planches PNG.
-
-Pour régénérer, dans la console Python de Blender :
-```python
-exec(open(r"C:\Users\mbarbe\Desktop\Stras3000\tools\build_characters.py").read())
-exec(open(r"C:\Users\mbarbe\Desktop\Stras3000\tools\build_background.py").read())
+## Jouer en local
 ```
-Les scripts créent leurs propres scènes (`S3K_Sprites`, `S3K_Kleber`) et ne touchent pas à la scène ouverte.
-`tools/stras3000_assets.blend` contient une copie des scènes. Les poses sont décrites en Python
-(`HERO_ANIMS`, `LUTIN_ANIMS`…), `S3K_ONLY = ['hero']` permet de ne régénérer qu'un perso.
+npm ci
+npm run build          # ou npm run dev : reconstruit à chaque modification
+```
+Puis ouvrir `dist/index.html` d'un double-clic (hors ligne, modèles et Three.js embarqués).
 
-Musique et bruitages : chiptune original généré en direct (WebAudio).
+Commandes : clavier / souris, manette Xbox ou PlayStation, ou tactile. L'écran « Commandes » (titre ou pause) les
+montre toutes ; les indications à l'écran suivent l'appareil utilisé.
 
----
+## Tester
+```
+npm test               # build + tests (Chrome installé, piloté sans fenêtre par playwright-core)
+```
+Tests : parcours du niveau 1, énigmes salle par salle, boss ASR-67 (avec instantané des réglages), Meinau,
+manette simulée, contenu et conventions. La mise en ligne ne se fait que si tous les tests passent.
 
-# Prototype 3D : Donjon I, la Cathédrale (`proto3d/`)
-Aventure 3D façon N64/GameCube (rendu basse résolution, low poly). Double-cliquer sur `proto3d/index.html`
-(connexion internet nécessaire pour charger Three.js depuis le CDN).
+Options de l'URL : `?debug=1` (F2 salle suivante, F3 tue les ennemis), `?level=meinau-ouest`, `?seed=1`,
+`?fakepad=xbox|ps` (manette virtuelle au pavé numérique), `?touch=1` (commandes tactiles sur ordinateur).
 
-- ZQSD / flèches : bouger · J / clic gauche : bâton-bretzel · Espace : roulade
-- Maj / L / clic droit : verrouiller une cible (et recentrer la caméra) · E : ouvrir · Entrée : dialogues · M : son
+## Pour contribuer (humains et IA)
+- **`CLAUDE.md`** : la référence (histoire, règles de contenu, architecture, méthode). `AGENTS.md` pour les autres IA.
+- Un `README.md` par dossier de `src/`, les événements du bus dans `docs/EVENTS.md`, les décisions dans
+  `docs/decisions.md`, les designs validés (faits dans Cowork) dans `docs/designs/`.
+- Satire de **types**, jamais de vraies personnes ; culture alsacienne montrée avec respect ; faits historiques exacts.
+- Exception assumée par Maxime : des noms parodiques déformés qui évoquent des figures du football (« Egboehly »,
+  « Marco CeKlair ») ; visage, physique, traits et actions restent inventés, aucune citation ni fait attribué à une
+  vraie personne (voir `CLAUDE.md` §3).
 
-Déroulé : la nef (lutins aérobic, pots de choucroute, coffre et clé), l'horloge astronomique (sonner les
-cloches dans l'ordre des lampes), le chœur (boss : le Coq de l'horloge, qu'il faut faire charger dans un mur
-pour l'étourdir avant de le frapper).
-
-Modèles : `tools/build3d.py` dans Blender (exporte les .glb dans `proto3d/models/` et les embarque dans
-`proto3d/models.js`). Les membres sont animés en code via les pivots nommés (hipN, shN, head…).
+## Historique
+Les anciens prototypes restent comme référence : `game/` (beat'em up 2D « Strasbourg 3000 ») et `proto3d/`
+(donjon de la cathédrale).

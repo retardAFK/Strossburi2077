@@ -10,7 +10,7 @@ const SNAP = 'tests/snapshots/asr67.json', current = JSON.stringify(TUNING.asr, 
 if (process.argv.includes('--update-snapshots') || process.env.UPDATE_SNAPSHOTS) {
   mkdirSync('tests/snapshots', { recursive: true }); writeFileSync(SNAP, current); console.log('instantané mis à jour :', SNAP);
 }
-const same = existsSync(SNAP) && readFileSync(SNAP, 'utf8') === current;
+const same = existsSync(SNAP) && JSON.stringify(JSON.parse(readFileSync(SNAP, 'utf8'))) === JSON.stringify(TUNING.asr); // indépendant des fins de ligne
 T.check('réglages TUNING.asr = instantané', same,
   same ? '' : existsSync(SNAP) ? 'différent : lancer npm run test:update-snapshots si c\'est voulu' : 'instantané absent');
 

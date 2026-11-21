@@ -15,6 +15,8 @@ import { World } from './systems/World.js';
 import { Fx } from './systems/Fx.js';
 import { Cutscene } from './systems/Cutscene.js';
 import { Inventory } from './systems/Inventory.js';
+import { Prompts } from './systems/Prompts.js';
+import { Menus } from './systems/Menus.js';
 import { Ultra } from './entities/player/Ultra.js';
 import { Pickup } from './entities/props/Pickup.js';
 import { TEXTS } from './data/texts.fr.js';
@@ -34,10 +36,13 @@ export class Game {
     this.camera = new Camera(this.renderer.camera);
     this.combat = new Combat(this);
     this.dialog = new Dialog(this, dom.dialog);
-    this.hud = new Hud(dom.hud, this.events, TEXTS);
+    this.prompts = new Prompts(this, TEXTS.glyphs); // indications qui suivent l'appareil (clavier / Xbox / PlayStation)
+    this.hud = new Hud(dom.hud, this.events, TEXTS, t => this.prompts.format(t));
     this.particles = new Particles(this.renderer.scene);
     this.fx = new Fx(this, dom.bubbles);
     this.inventory = new Inventory(this);
+    this.menus = new Menus(this, dom); // textes des menus avec icônes + écran « Commandes »
+    this.lastShake = 0;
     this.entities = []; this.triggers = []; this.groups = {};
     this.mode = 'title'; this.time = 0; this.dt = STEP; this.hitstop = 0; this.zone = null;
   }
@@ -106,7 +111,7 @@ export class Game {
   playCutscene(shots, captions, onDone) {
     this.mode = 'cutscene'; this.cutsceneDone = onDone;
     this.fx.clearBubbles(); this.events.emit('hud:cinema', true);
-    this.dom.skip.textContent = this.texts.skip; this.dom.skip.style.display = 'block';
+    this.dom.skip.innerHTML = this.prompts.format(this.texts.skip); this.dom.skip.style.display = 'block';
     this.cutscene = new Cutscene(this, { shots, captions });
   }
   endCutscene() {
@@ -121,6 +126,12 @@ export class Game {
     this.time += dt; this.dt = dt;
     const I = this.input;
     if (I.pressed.mute) this.audio.toggleMute();
+    this.prompts.update(); // appareil courant (émet 'input:device', 'input:notice')
+    if (I.pressed.rumble) { I.toggleRumble(); this.menus.render(); }
+    this.rumbleOnShake();
+    if (this.menus.update()) return; // écran « Commandes » ouvert (titre / pause)
+    // manette débranchée en pleine partie : pause automatique
+    if (I.pressed.padLost && this.mode === 'play') { this.mode = 'paused'; this.dom.pause.style.display = 'flex'; return; }
     if (this.mode === 'cutscene') {
       this.world.update(dt, this.time); this.particles.update(dt); this.cutscene.update(dt);
       if (this.cutscene.done || I.pressed.ok) this.endCutscene();
@@ -134,7 +145,7 @@ export class Game {
       return;
     }
     // pause : P / Échap, ou souris libérée par le navigateur ; reprise : P / Échap ou clic (qui recapture la souris)
-    if (this.mode === 'paused') { if (I.pressed.pause || I.pressed.capture) { this.mode = 'play'; this.dom.pause.style.display = 'none'; } return; }
+    if (this.mode === 'paused') { if (I.pressed.pause || I.pressed.capture || I.pressed.back) { this.mode = 'play'; this.dom.pause.style.display = 'none'; } return; }
     if ((I.pressed.pause || I.pressed.release) && this.mode === 'play' && !this.dialog.active) {
       this.mode = 'paused'; this.dom.pause.style.display = 'flex'; I.releasePointer(); return;
     }
@@ -153,6 +164,12 @@ export class Game {
     this.fx.update(dt, this.player.target);
     this.updateCamera(dt);
     this.hud.setHealth(Math.max(0, this.player.hp), this.player.maxHp);
+  }
+  // vibration de la manette quand la caméra tremble fort (coup reçu, impacts de boss)
+  rumbleOnShake() {
+    const s = this.camera.shake, P = TUNING.pad;
+    if (s >= P.rumbleFrom && s > this.lastShake + 0.05) this.input.rumble(Math.min(1, s), P.rumbleMs);
+    this.lastShake = s;
   }
   updateCamera(dt) {
     const boss = this.entities.find(e => e.isBoss && e.alive);

@@ -4,6 +4,9 @@ import { LEVELS, DEFAULT_LEVEL } from './levels/index.js';
 import { TEXTS } from './data/texts.fr.js';
 import { installDebug } from './debug.js';
 import { setupTouch, touchWanted } from './touch.js';
+import { installFakePad } from './fakepad.js';
+
+installFakePad(); // ?debug=1&fakepad=xbox|ps : manette virtuelle au pavé numérique
 
 const params = new URLSearchParams(location.search);
 const level = LEVELS[params.get('level')] || LEVELS[DEFAULT_LEVEL];
@@ -13,7 +16,7 @@ if (touch) for (const [path, txt] of TEXTS.touch.overrides) setPath(TEXTS, path,
 const $ = s => document.querySelector(s);
 const dom = {
   canvas: $('#c'), stage: $('#stage'), hud: $('#hud'), dialog: $('#dialog'), bubbles: $('#bubbles'),
-  title: $('#title'), pause: $('#pause'), end: $('#end'), skip: $('#skip')
+  title: $('#title'), pause: $('#pause'), end: $('#end'), skip: $('#skip'), commands: $('#commands')
 };
 $('#title h1').textContent = TEXTS.title;
 $('#title h2').textContent = level.subtitle;

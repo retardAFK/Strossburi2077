@@ -12,6 +12,8 @@ export class Dialog {
   update(dt, input) {
     if (!this.cur && this.queue.length) {
       this.cur = this.queue.shift(); this.t = 0;
+      // jetons d'actions ({use}...) -> libellé de l'appareil utilisé (E, Y, △...)
+      if (this.game.prompts) this.cur = { ...this.cur, txt: this.game.prompts.format(this.cur.txt, 'text') };
       this.el.style.display = 'block'; this.who.textContent = this.cur.who;
     }
     if (!this.cur) return false;

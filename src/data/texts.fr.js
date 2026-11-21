@@ -199,7 +199,7 @@ export const TEXTS = {
     ],
     cibles: [
       { who: "L'ULTRA", txt: "Trois terminaux derrière des vitres anti-écharpe. Et les néons au-dessus des arches : rouge, or, cyan." },
-      { who: 'TUTO', txt: "Touche les 3 cibles avec le bretzel dans l'ordre des néons, en moins de {t} secondes." }
+      { who: 'TUTO', txt: "Touche les 3 cibles avec le bretzel dans l'ordre des néons, en moins de {t} secondes. Astuce : verrouille une cible pour viser juste." }
     ],
     antiEcharpe: 'ANTI-ÉCHARPE !',
     ciblesFail: ['PAIEMENT REFUSÉ', "mauvais ordre, ou trop lent"],

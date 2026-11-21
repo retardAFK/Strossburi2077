@@ -81,10 +81,17 @@ export class Ultra extends Entity {
     const dx = f.x * a.y + r.x * a.x, dz = f.z * a.y + r.z * a.x, l = Math.hypot(dx, dz);
     return { x: dx / l, z: dz / l };
   }
+  // verrouillage : ennemis, et cibles-TPE pas encore validées (pour viser au bretzel, au doigt comme au clavier).
+  // On prend la plus proche en privilégiant ce qui est devant l'Ultra.
   toggleLock() {
     if (this.target) { this.target = null; return; }
-    let best = null, bd = T.lockRange;
-    for (const e of this.enemies) { const d = this.dist(e); if (d < bd) { bd = d; best = e; } }
+    let best = null, bs = Infinity;
+    const lockables = this.game.entities.filter(e => (e.isEnemy && e.alive) || (e.isTarget && !e.done && !e.lit));
+    for (const e of lockables) {
+      const d = this.dist(e); if (d > T.lockRange) continue;
+      const front = ((e.x - this.x) * this.fx + (e.z - this.z) * this.fz) / (d || 1); // 1 = pile devant
+      const s = d * (2 - front); if (s < bs) { bs = s; best = e; }
+    }
     this.target = best;
     if (!best) this.game.camera.snapBehind(this.face);
   }
@@ -107,6 +114,7 @@ export class Ultra extends Entity {
     this.comboTimer -= dt;
     if (this.game.input.pressed.lock && this.alive) this.toggleLock();
     if (this.target && (!this.target.alive || this.dist(this.target) > T.lockRange + 4)) this.target = null;
+    if (this.target?.isTarget && (this.target.lit || this.target.done)) this.target = null; // cible touchée : on lâche, prêt pour la suivante
     super.update(dt);
     this.animate();
   }

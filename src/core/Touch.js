@@ -27,6 +27,13 @@ export class Touch {
       ${BUTTONS.map(a => `<button class="t-btn t-${a}" data-a="${a}"><span>${this.opts.labels[a] || ''}</span></button>`).join('')}
       <div class="t-rotate"><p>${this.opts.rotateText || ''}</p></div>`;
     document.body.appendChild(root);
+    // la couche tactile couvre exactement la zone visible (pas sous les barres de Safari) ;
+    // les boutons gardent en plus leur marge d'encoche (env(safe-area-inset-*) dans le CSS)
+    const place = () => {
+      const vv = window.visualViewport; if (!vv) return;
+      Object.assign(root.style, { left: vv.offsetLeft + 'px', top: vv.offsetTop + 'px', width: vv.width + 'px', height: vv.height + 'px', right: 'auto', bottom: 'auto' });
+    };
+    addEventListener('s3k:viewport', place); place();
     this.base = root.querySelector('.t-stick'); this.knob = root.querySelector('.t-knob');
     this.btn = {}; for (const a of BUTTONS) this.btn[a] = root.querySelector('.t-' + a);
     this.setVisible('throw', false); this.setVisible('use', false);

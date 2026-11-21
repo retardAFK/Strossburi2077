@@ -10,8 +10,21 @@ export function touchWanted(params) {
   return matchMedia('(pointer: coarse)').matches || (navigator.maxTouchPoints > 0 && !matchMedia('(pointer: fine)').matches);
 }
 
+// Safari iOS ignore « user-scalable=no » : on bloque nous-mêmes le pincement, le double-tap et le défilement
+function blockZoom() {
+  const stop = e => e.preventDefault();
+  for (const ev of ['gesturestart', 'gesturechange', 'gestureend', 'dblclick']) document.addEventListener(ev, stop, { passive: false });
+  // la page ne défile ni ne zoome jamais (sauf l'écran d'installation, qui peut défiler sur petit écran)
+  const inInstall = e => !!e.target.closest?.('#install');
+  document.addEventListener('touchmove', e => { if (e.touches.length > 1 || !inInstall(e)) e.preventDefault(); }, { passive: false });
+  document.addEventListener('touchstart', e => { if (e.touches.length > 1) e.preventDefault(); }, { passive: false });
+  let lastEnd = 0; // double-tap rapide : pas de zoom (les boutons de l'écran d'installation restent cliquables)
+  document.addEventListener('touchend', e => { const now = Date.now(); if (now - lastEnd < 350 && !inInstall(e)) e.preventDefault(); lastEnd = now; }, { passive: false });
+}
+
 export function setupTouch(game, dom) {
   const T = TEXTS.touch;
+  blockZoom();
   const touch = new Touch(game.input, {
     labels: T.buttons, rotateText: T.rotate,
     onFirstInput: () => game.audio.unlock(),

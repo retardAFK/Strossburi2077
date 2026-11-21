@@ -5,6 +5,7 @@ import { TEXTS } from './data/texts.fr.js';
 import { installDebug } from './debug.js';
 import { setupTouch, touchWanted } from './touch.js';
 import { installFakePad } from './fakepad.js';
+import { showInstallScreen } from './install.js';
 
 installFakePad(); // ?debug=1&fakepad=xbox|ps : manette virtuelle au pavé numérique
 
@@ -25,10 +26,16 @@ $('#title .go').textContent = TEXTS.pressStart;
 $('#pause .hint').textContent = TEXTS.pauseHint;
 
 const game = new Game(dom, level.types);
-if (touch) setupTouch(game, dom);
+if (touch) {
+  setupTouch(game, dom);
+  // mobile dans le navigateur : on propose d'abord d'installer le jeu (?install=0 pour passer, en test)
+  if (params.get('install') !== '0') showInstallScreen(() => game.audio.unlock());
+}
 game.start(level.models, level) // seuls les modèles de ce niveau sont décodés
   .catch(err => { console.error(err); document.body.insertAdjacentHTML('beforeend', `<pre class="err">${err}</pre>`); });
 window.S3K = game; // accès debug depuis la console
+// PWA : installable (écran d'accueil) et jouable hors-ligne une fois chargée ; rien en double-clic (file://)
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('sw.js').catch(() => {});
 installDebug(game); // raccourcis ?debug=1
 
 // 'a.b.0.c' -> obj.a.b[0].c = value (ignore les chemins absents)

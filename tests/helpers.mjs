@@ -29,6 +29,8 @@ export async function launch(T, { query = 'debug=1', pad = null } = {}) {
   const browser = await chromium.launch({ channel: process.env.CHROME_CHANNEL || 'chrome', headless: true });
   const page = await browser.newPage();
   page.on('pageerror', e => T.fail('erreur de page : ' + e.message));
+  // toute erreur dans la console du jeu fait échouer le test (sauf polices Google bloquées hors ligne)
+  page.on('console', m => { if (m.type() === 'error' && !/fonts\.(googleapis|gstatic)|ERR_INTERNET_DISCONNECTED|net::ERR/.test(m.text())) T.fail('console : ' + m.text()); });
   if (pad) await page.addInitScript(id => {
     window.__pad = { id, index: 0, connected: true, mapping: 'standard', timestamp: 0,
       buttons: Array.from({ length: 17 }, () => ({ pressed: false, value: 0 })), axes: [0, 0, 0, 0] };

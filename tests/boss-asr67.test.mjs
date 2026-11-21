@@ -22,6 +22,23 @@ await h.run(() => { const g = window.S3K; window.__phases = []; window.__defeate
   g.events.on('boss:phase', n => window.__phases.push(n)); g.events.on('boss:defeated', () => window.__defeated++); });
 T.check('ASR-67 en jeu', await h.run(() => window.S3K.entities.some(e => e.isBoss && e.constructor.name === 'Asr67')));
 
+// phase 1 : tickets d'addition en éventail, puis plats brûlants (avertissement → brûlure)
+const attack = st => h.run(async st => {
+  const g = window.S3K, b = g.entities.find(e => e.isBoss), seen = new Set(g.entities); let n = 0;
+  b.setState(st);
+  for (let i = 0; i < 40; i++) { for (const e of g.entities) if (!seen.has(e)) { seen.add(e); if (st === 'tickets' ? e.isProjectile : e.isHazard) n++; } await new Promise(r => setTimeout(r, 50)); }
+  return n;
+}, st);
+const tickets = await attack('tickets');
+T.check('phase 1 : tickets en éventail', tickets === TUNING.asr.tickets, `${tickets} tickets`);
+T.check('phase 1 : plats brûlants au sol', await attack('plates') >= 3);
+T.check('phase 1 : il alterne seul tickets / plats', await h.run(async () => {
+  const b = window.S3K.entities.find(e => e.isBoss), st = new Set(); b.setState('walk'); b.cd = 0;
+  for (let i = 0; i < 240; i++) { st.add(b.stateName); await new Promise(r => setTimeout(r, 50)); }
+  return st.has('tickets') || st.has('plates');
+}));
+await h.run(() => { for (const e of [...window.S3K.entities]) if (e.isHazard || e.isProjectile) e.remove(); });
+
 // hp, état ; coup venant d'un côté donné (n = direction attaquant → boss) ; « src » : 'whip' (l'Ultra) ou 'bretzel'
 const hit = (side, src, prep) => h.run(([side, src, prep]) => {
   const g = window.S3K, b = g.entities.find(e => e.isBoss);

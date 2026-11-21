@@ -1,5 +1,5 @@
 // Commandes tactiles (téléphone / tablette) -> mêmes actions abstraites que le clavier et la manette.
-//  - moitié gauche de l'écran : joystick virtuel qui apparaît sous le pouce (déplacement analogique -> input.move)
+//  - moitié gauche de l'écran : joystick virtuel qui apparaît sous le pouce (déplacement analogique -> input.touchMove)
 //  - moitié droite : glisser le doigt = caméra (input.look), toucher = valider dans les dialogues / menus
 //  - boutons : écharpe, roulade, cible, objet (s'il y en a un), agir (s'il y a quelque chose à portée), pause
 // Ne connaît rien du jeu : les libellés, la visibilité des boutons et le « toucher = valider » sont fournis par main.js.
@@ -47,13 +47,13 @@ export class Touch {
 
   // premier contact : son, plein écran et paysage (si le navigateur l'autorise)
   first() {
-    this.opts.onFirstInput?.();
+    this.opts.onFirstInput?.(); this.input.device = 'touch';
     if (this.firstDone) return;
     this.firstDone = true;
     const el = document.documentElement;
     try { el.requestFullscreen?.({ navigationUI: 'hide' })?.then(() => screen.orientation?.lock?.('landscape'))?.catch?.(() => {}); } catch (e) { /* refus */ }
   }
-  press(a) { const I = this.input; if (!I.held[a]) I.pressed[a] = true; I.held[a] = true; }
+  press(a) { const I = this.input; I.device = 'touch'; if (!I.held[a]) I.pressed[a] = true; I.held[a] = true; }
   release(a) { this.input.held[a] = false; }
 
   stickStart(e) {
@@ -80,8 +80,8 @@ export class Touch {
       this.knob.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
       const m = Math.min(1, d / R);
       const k = m < T.deadzone ? 0 : (m - T.deadzone) / (1 - T.deadzone) / (m || 1);
-      this.input.move.x = (dx / R) * k;
-      this.input.move.y = (dy / R) * k; // même convention que le stick gauche d'une manette (y vers le bas)
+      this.input.touchMove.x = (dx / R) * k;
+      this.input.touchMove.y = (dy / R) * k; // même convention que le stick gauche d'une manette (y vers le bas)
     } else if (this.look && e.pointerId === this.look.id) {
       this.input.look.dx += (e.clientX - this.look.x) * T.lookSens;
       this.input.look.dy += (e.clientY - this.look.y) * T.lookSens;
@@ -91,7 +91,7 @@ export class Touch {
   end(e) {
     if (this.stick && e.pointerId === this.stick.id) {
       this.stick = null; this.base.style.display = 'none';
-      this.input.move.x = 0; this.input.move.y = 0;
+      this.input.touchMove.x = 0; this.input.touchMove.y = 0;
     } else if (this.look && e.pointerId === this.look.id) {
       const L = this.look; this.look = null;
       // un simple toucher (sans glisser) valide les dialogues et l'écran titre, reprend la pause

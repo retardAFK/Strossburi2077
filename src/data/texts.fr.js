@@ -38,6 +38,9 @@ export const TEXTS = {
     juriste: ['Article 12 : interdiction de chanter !', 'Signe ici, ici, et là.', 'Clause de non-supportérisme !', 'Vous avez lu les CGU ? Non ? Parfait.'],
     serveur: ['Votre table est prête. Votre carte bancaire aussi ?', "Une carafe d'eau ? Option Premium.", 'Le menu « Authentique® » vous tend les bras !', 'Pourboire inclus. Et re-inclus.'],
     videur: ["Vous n'êtes pas sur la liste.", 'Tenue correcte exigée. Écharpe interdite.', 'Réservation obligatoire, même pour respirer.', "Je ne bouge pas. Je suis payé à l'heure."],
+    // ASR-67 : répliques du GDD, gardées telles quelles (dont les « euros numériques »)
+    asr: ["La tarte flambée, c'est 30 euros numériques.", 'Service non compris. Respiration non comprise.',
+      'Gloire à l\'axe Londres – New Strasbourg.', 'La choucroute traditionnelle est un abonnement mensuel.'],
     sommelier: ['Notes de fruits rouges et de frais de service.', "Le vin d'ici, avec notre marge d'ailleurs.", 'Bouchonné ? Non : facturé.', 'Je vous sers un fond ? Au prix de la bouteille.']
   },
 
@@ -87,7 +90,7 @@ export const TEXTS = {
       ruelle: 'PETITE FRANCE · RUELLE SOUS LICENCE', foodcourt: 'QUARTIER DES TANNEURS · « FOOD COURT PREMIUM »', terrasse: 'TERRASSE (ACCÈS PAYANT)',
       ecluse: "L'ÉCLUSE · « PASSAGE PREMIUM »", canal: 'CANAL · BARQUE AUTONOME (2 BC / MIN)', quaiHaut: 'QUAI HAUT',
       peage: 'PONTS COUVERTS · « PÉAGE PATRIMOINE »', ponts: 'PONTS COUVERTS · ARÈNE DU PÉAGE', sortie3: 'VERS LE BARRAGE VAUBAN',
-      barrage: 'BARRAGE VAUBAN · « ROOFTOP PREMIUM »'
+      barrage: 'BARRAGE VAUBAN · « ROOFTOP PREMIUM »', cuisine: 'SOUS LE BARRAGE · CUISINE AUTOMATISÉE', meinau: ''
     },
     ads: [
       ['FOOD COURT PREMIUM', 'EXPÉRIENCE AUTHENTIQUE®'],
@@ -101,7 +104,10 @@ export const TEXTS = {
       ['PÉAGE PATRIMOINE', 'TRAVERSÉE : 25 BC'],
       ['PONTS COUVERTS®', 'MARQUE DÉPOSÉE'],
       ['ROOFTOP PREMIUM', 'ACCÈS VIP : 120 BC'],
-      ['PAIEMENT SANS CONTACT', 'SUIVEZ LES NÉONS']
+      ['PAIEMENT SANS CONTACT', 'SUIVEZ LES NÉONS'],
+      ['SERVEUR CENTRAL', 'BLINGCO · ACCÈS RACINE'],
+      ['CUISINE AUTOMATISÉE', '0 HUMAIN · 100 % MARGE'],
+      ['STADE DE LA MEINAU', 'STRASBOURG']
     ],
     intro: [
       { who: "L'ULTRA", txt: "La Petite France, de nuit. Avant, ça sentait le bois mouillé et la tarte flambée. Maintenant ça sent le terminal de paiement." },
@@ -184,7 +190,36 @@ export const TEXTS = {
       { who: 'LE PDG DE BLINGCO', txt: "L'histoire appartient à ceux qui la possèdent." },
       { who: "L'ULTRA", txt: "Alors on va la reprendre." }
     ],
-    end: ['FIN DE LA DÉMO', "Suite : l'ASR-67 (en construction)"]
+    // salle 5 : l'ASR-67, dans la cuisine automatisée sous le barrage
+    asr: {
+      name: 'ASR-67 · ANDROÏDE DE SERVICE RESTAURATION', shield: 'SERVICE EN COURS !',
+      intro: [
+        { who: 'ASR-67', txt: 'Bienvenue dans votre Expérience Gastronomique Authentique®. Votre satisfaction est obligatoire.' },
+        { who: 'CELLE DU STADE', txt: "Sa toque bloque tout de face. Son terminal de paiement est dans son dos : vise-le avec le bretzel !" }
+      ],
+      refused: 'PAIEMENT REFUSÉ. PAIEMENT REFUSÉ.',
+      phase2: "Client non solvable détecté. Procédure d'évacuation.",
+      phase3: 'Coup de feu. Coup de feu. COUP DE FEU.',
+      phase2hint: { who: 'CELLE DU STADE', txt: "Il charge avec son chariot ! Mets un fourneau entre vous deux." },
+      playerDeath: 'Merci de votre visite. Laissez un avis cinq étoiles.',
+      defeat: [{ who: 'ASR-67', txt: "Erreur... recette originale... introuvable... Gloire à l'axe..." }]
+    },
+    // cliffhanger : SCN révèle tout et envoie l'Ultra en 2026
+    cliff: [
+      { who: 'CELLE DU STADE', txt: "Tu l'as eu ! Écoute-moi bien, on n'a pas beaucoup de temps." },
+      { who: 'CELUI DU STADE', txt: `Tout ça, ça ne commence pas en ${YEAR}. Ça commence en 2026. Le jour où ils ont racheté le club.` },
+      { who: 'CELLE DU STADE', txt: "On a trouvé une faille dans le Serveur central. Une seule personne peut y passer : toi. C'est pour ça qu'on t'attendait." },
+      { who: "L'ULTRA", txt: 'Attends... passer où ?' },
+      { who: 'CELUI DU STADE', txt: "En 2026. Désolé, l'écharpe : pas le temps de demander poliment." }
+    ],
+    cliffGlitch: ['CONNEXION FORCÉE...', 'TRANSFERT EN COURS...'],
+    arrival: ['Strasbourg, 2026.', "Le jour où tout a basculé. Ou presque."],
+    finale: [
+      'À suivre...',
+      'Prochainement : la Meinau, 2026 · Le Port du Rhin · La place Kléber',
+      "STRASBOURG N'EST PAS À VENDRE"
+    ],
+    end: ["STRASBOURG N'EST PAS À VENDRE", "Fin de la démo du niveau 1. Merci d'avoir joué !"]
   },
   shield: 'TING !'
 };

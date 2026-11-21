@@ -12,6 +12,10 @@ export class Hud {
     this.promptEl = root.querySelector('#prompt');
     this.captionEl = root.querySelector('#caption');
     this.itemEl = root.querySelector('#item');
+    this.fadeEl = root.querySelector('#fade'); this.glitchEl = root.querySelector('#glitch');
+    events.on('hud:fade', a => { this.fadeEl.style.opacity = a; });
+    events.on('hud:cinema', on => root.classList.toggle('cinema', on)); // cinématique : HUD de jeu masqué
+    events.on('hud:glitch', on => this.glitch(on));
     this.lastHearts = '';
     // indication contextuelle (« E : pirater »...) : (source, texte) pour l'afficher, (source, null) pour la retirer
     this.promptOwner = null;
@@ -27,6 +31,22 @@ export class Hud {
     this.promptOwner = text ? owner : null;
     this.promptEl.textContent = text || '';
     this.promptEl.style.display = text ? 'block' : 'none';
+  }
+  // pluie de caractères (branchement de force sur le Serveur central)
+  glitch(on) {
+    clearInterval(this.gt); this.glitchEl.style.display = on ? 'block' : 'none';
+    if (!on) return;
+    const c = this.glitchEl, g = c.getContext('2d'), cols = Array.from({ length: 40 }, () => Math.random() * 30);
+    c.width = 160; c.height = 90;
+    this.gt = setInterval(() => {
+      g.fillStyle = 'rgba(5,5,20,0.25)'; g.fillRect(0, 0, c.width, c.height);
+      g.font = '6px monospace';
+      cols.forEach((y, i) => {
+        g.fillStyle = Math.random() < 0.1 ? '#ff2e88' : '#38f2ff';
+        g.fillText(String.fromCharCode(0x30 + Math.random() * 60 | 0), i * 4, y * 3);
+        cols[i] = y > 30 || Math.random() < 0.02 ? 0 : y + 1;
+      });
+    }, 40);
   }
   setHealth(hp, max) {
     let html = '';

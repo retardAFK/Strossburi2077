@@ -2,7 +2,9 @@
 // Salle 1 : ruelle en bord d'Ill puis Quartier des Tanneurs devenu « Food Court Premium » (z 6 → -52).
 // Salle 2 : l'Écluse, canal à 3 niveaux d'eau, barque, pont bas, quai haut (z -52 → -104).
 // Salle 3 : les Ponts Couverts « Péage Patrimoine », arène entre les tours, coffre, borne sur pile (z -104 → -150).
-// Salle 4 : le Barrage Vauban « Rooftop Premium », cibles-TPE derrière vitres, écran du PDG (z -150 → -175). Repère : x à droite, z négatif = vers le fond.
+// Salle 4 : le Barrage Vauban « Rooftop Premium », cibles-TPE derrière vitres, écran du PDG (z -150 → -175).
+// Salle 5 : la cuisine automatisée sous le barrage, boss ASR-67 (x 40 → 64, on y est téléporté).
+// Décor du cliffhanger : la Meinau en 2026, plan fixe (x 100 → 140). Repère : x à droite, z négatif = vers le fond.
 // Rectangles : [x0, x1, zHaut, zBas]. Les modèles pf_* regardent vers +x (rotY 0).
 const PI = Math.PI;
 const CYAN = 0x38f2ff, PINK = 0xff2e88, GOLD = 0xffc040;
@@ -28,7 +30,7 @@ export default {
   warps: [
     { id: 'salle1-enigme', x: 0, z: -30, face: PI / 2 }, { id: 'salle2', x: 0, z: -55, face: PI / 2 },
     { id: 'salle3', x: 12, z: -105, face: PI / 2 }, { id: 'salle3-coffre', x: 12, z: -124, face: PI / 2 },
-    { id: 'salle4', x: 12, z: -146, face: PI / 2 }
+    { id: 'salle4', x: 12, z: -146, face: PI / 2 }, { id: 'salle5', x: 52, z: -153, face: PI / 2 }
   ],
 
   // plaque historique holo (textes : TEXTS.pf.plaques)
@@ -45,7 +47,9 @@ export default {
     { id: 'peage', rect: [9, 15, -104, -112], cam: [2, 22, -100, -136] },
     { id: 'ponts', rect: [2, 22, -112, -136.5] },
     { id: 'sortie3', rect: [9, 15, -136.5, -150], cam: [2, 22, -112, -150] },
-    { id: 'barrage', rect: [0, 24, -150, -171], cam: [0, 24, -146, -171] }
+    { id: 'barrage', rect: [0, 24, -150, -171], cam: [0, 24, -146, -171] },
+    { id: 'cuisine', rect: [40, 64, -150, -176] },
+    { id: 'meinau', rect: [100, 140, -150, -185] }
   ],
   floors: [
     { rect: [-3.5, 3, 6, -18], tex: 'paves', sky: true },          // ruelle (le quai a son propre pavage)
@@ -60,7 +64,9 @@ export default {
     { rect: [10, 14, -100, -112], tex: 'paves', sky: true },       // vers les Ponts Couverts
     { rect: [2, 22, -112, -136], tex: 'paves', sky: true },        // arène du péage
     { rect: [10, 14, -136, -150], tex: 'paves', sky: true },       // sortie vers le barrage
-    { rect: [0, 24, -150, -171], tex: 'paves', sky: true }         // toit-terrasse du barrage
+    { rect: [0, 24, -150, -171], tex: 'paves', sky: true },        // toit-terrasse du barrage
+    { rect: [40, 64, -150, -176], tex: 'carrelage' },              // cuisine automatisée (boss)
+    { rect: [100, 140, -150, -185], tex: 'beton', sky: true }      // parvis de la Meinau, 2026
   ],
   // [x0, x1, z0, z1, texture]
   walls: [
@@ -75,7 +81,9 @@ export default {
     [8, 10, -100, -101, 'gres'], [14, 17, -100, -101, 'gres'],
     [9, 10, -100, -108, 'gres'], [14, 15, -100, -108, 'gres'],
     // ponts couverts : sortie
-    [9, 10, -137.5, -150, 'gres'], [14, 15, -137.5, -150, 'gres']
+    [9, 10, -137.5, -150, 'gres'], [14, 15, -137.5, -150, 'gres'],
+    // cuisine du boss
+    [39, 65, -149, -150, 'gres'], [39, 40, -150, -176, 'gres'], [64, 65, -150, -176, 'gres'], [39, 65, -176, -177, 'gres']
   ],
   // collisions seules : façades des maisons (gauche), rambarde du quai (droite)
   blockers: [[-10, -3.5, 7, -15.5], [6.75, 10, 7, -18], [-9, 2, -68, -100], [8, 20, -52, -85],
@@ -93,7 +101,16 @@ export default {
     { id: 'ill-barrage-o', rect: [-10, -1, -146, -176], levels: [-3] }, { id: 'ill-barrage-e', rect: [25, 34, -146, -176], levels: [-3] }
   ],
   // pile de pont (décor) qui porte la borne hors de portée de l'écharpe
-  blocks: [{ x: 27, z: -130, w: 1.8, d: 1.8, h: 1.25, y: -1.25 }],
+  blocks: [
+    { x: 27, z: -130, w: 1.8, d: 1.8, h: 1.25, y: -1.25 },
+    // cuisine : le four au centre, le Serveur central au fond
+    { x: 52, z: -163, w: 2.4, d: 2.4, h: 1.6, tex: 'beton', solid: true },
+    { x: 52, z: -175, w: 8, d: 1.4, h: 5, tex: 'beton', solid: true },
+    // Meinau 2026 : façade du stade (plan fixe du cliffhanger)
+    { x: 120, z: -183, w: 40, d: 4, h: 14, tex: 'mur' }, { x: 120, z: -180.5, w: 12, d: 1, h: 4, tex: 'beton' }
+  ],
+  // piliers-fourneaux de la cuisine : l'ASR-67 s'y assomme en chargeant
+  pillars: [{ x: 45, z: -157 }, { x: 59, z: -157 }, { x: 45, z: -169 }, { x: 59, z: -169 }],
   // objets génériques (types du registre) : barque, levier, vanne, PNJ
   objects: [
     { type: 'barque', water: 'eau', x: 5, start: 0, stops: [
@@ -140,6 +157,9 @@ export default {
     { model: 'pf_compteur', x: 6.3, z: -4.2, solid: 0.25 }, { model: 'pf_compteur', x: 6.3, z: -5.2, solid: 0.25 },
     // message holo de Celle du stade (réseau SCN), affiché quand la herse s'ouvre
     { id: 'celle', model: 'pnj_celle_du_stade', x: -4.5, z: -40.6, rotY: -PI / 2, holo: true, hidden: true },
+    // cuisine : Celle et Celui du stade en hologramme devant le Serveur central (cliffhanger)
+    { id: 'celle5', model: 'pnj_celle_du_stade', x: 48.5, z: -172.5, rotY: -PI / 2, holo: true, hidden: true },
+    { id: 'celui5', model: 'pnj_celui_du_stade', x: 55.5, z: -172.5, rotY: -PI / 2, holo: true, hidden: true },
     // écluse : cage « Tradition Certifiée » de la winstubière, pont bas, maisons des berges
     { id: 'cageWinstub', model: 'pf_cage', x: -5, z: -62, solid: 1.1 },
     { model: 'pf_pont', x: 5, z: -70 },
@@ -176,9 +196,12 @@ export default {
     { x: -7.9, z: -60, rotY: PI / 2, idx: 6 }, { x: 11.9, z: -71, rotY: -PI / 2, w: 2.4, y: 2.6, idx: 7 },
     { x: 15.9, z: -93, rotY: -PI / 2, idx: 2 },
     { x: 12, z: -107.8, w: 4, y: 5.2, idx: 8 }, { x: 12, z: -133.8, w: 4, y: 5.2, idx: 9 },
-    { x: 4, z: -149.9, rotY: PI, w: 3, y: 3.4, idx: 10 }, { x: 9.5, z: -163.5, w: 2.4, y: 3.4, idx: 11 }
+    { x: 4, z: -149.9, rotY: PI, w: 3, y: 3.4, idx: 10 }, { x: 9.5, z: -163.5, w: 2.4, y: 3.4, idx: 11 },
+    { x: 52, z: -174.25, w: 5, y: 3.6, idx: 12 }, { x: 40.1, z: -163, rotY: PI / 2, idx: 13 }, { x: 63.9, z: -163, rotY: -PI / 2, idx: 13 },
+    { x: 120, z: -180.9, w: 10, y: 9, idx: 14 }
   ],
   neons: [
+    { x: 52, y: 5.2, z: -150.1, len: 24, axis: 'x', color: 0xff5a1a }, { x: 120, y: 7, z: -180.9, len: 40, axis: 'x', color: 0x1f5fd0 },
     { x: -3.45, y: 0.12, z: -5, len: 22, axis: 'z', color: PINK },
     { x: -8.9, y: 5.2, z: -30.5, len: 23, axis: 'z', color: CYAN }, { x: 8.9, y: 5.2, z: -30.5, len: 23, axis: 'z', color: PINK },
     { x: 0, y: 5.2, z: -18.9, len: 18, axis: 'x', color: GOLD },
@@ -201,6 +224,9 @@ export default {
     { x: 12, z: -92, color: GOLD, i: 12 }, { x: 12, z: -102, color: CYAN, i: 8 },
     { x: 7, z: -120, color: PINK, i: 16, d: 18 }, { x: 17, z: -130, color: CYAN, i: 16, d: 18 }, { x: 26, z: -130, y: 3, color: GOLD, i: 10 },
     { x: 12, z: -142, color: GOLD, i: 8 },
-    { x: 6, z: -156, color: PINK, i: 14, d: 18 }, { x: 18, z: -156, color: CYAN, i: 14, d: 18 }, { x: 12, z: -166, y: 6, color: GOLD, i: 14, d: 16 }
+    { x: 6, z: -156, color: PINK, i: 14, d: 18 }, { x: 18, z: -156, color: CYAN, i: 14, d: 18 }, { x: 12, z: -166, y: 6, color: GOLD, i: 14, d: 16 },
+    { x: 45, z: -157, y: 2, color: 0xff5a1a, i: 10, d: 10 }, { x: 59, z: -169, y: 2, color: 0xff5a1a, i: 10, d: 10 },
+    { x: 52, z: -156, color: PINK, i: 16, d: 20 }, { x: 52, z: -170, color: CYAN, i: 16, d: 20 },
+    { x: 120, z: -170, y: 8, color: 0xbfe8ff, i: 30, d: 40 }
   ]
 };

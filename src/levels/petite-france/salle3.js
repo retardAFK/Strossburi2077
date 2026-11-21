@@ -55,10 +55,10 @@ export function salle3(game, { T, W, E }) {
 
   // debug F2 : 'salle3-coffre' = arène déjà vidée
   E.on('debug:warp', id => {
-    if (id !== 'salle3-coffre' && id !== 'salle4') return;
+    if (id !== 'salle3-coffre' && id !== 'salle4' && id !== 'salle5') return;
     enter.done = true; W.setDoor('peage', false);
     freed();
-    if (id === 'salle4') { // ponts couverts terminés : bretzel en main, herse ouverte
+    if (id !== 'salle3-coffre') { // ponts couverts terminés : bretzel en main, herse ouverte
       if (!game.inventory.has('boomerang')) game.inventory.give(new BretzelBoomerang(game));
       W.setGate('herse3', true);
     }

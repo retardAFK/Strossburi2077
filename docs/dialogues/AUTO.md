@@ -2,7 +2,7 @@
 
 Générée par `node tools/dialogues-export.mjs` : les répliques dont la remarque commence par « auto ».
 Pour corriger : le fichier docs/dialogues/<niveau>.md, puis `node tools/dialogues-import.mjs`.
-Total : 18 réplique(s).
+Total : 35 réplique(s).
 
 | niveau | id | qui | réplique |
 |---|---|---|---|
@@ -24,3 +24,20 @@ Total : 18 réplique(s).
 | meinau | mei.boss.pilot | EGBOEHLY | Mes actifs ! Mes cinq actifs ! Bon... je vends. Non, attendez, j'achète ! |
 | meinau | mei.boss.end | EGBOEHLY | Une hydre se revend toujours. On se reverra, au port. |
 | meinau | mei.end.1 | UN ANCIEN DU KOP | Le kop est avec toi. Et pas seulement le kop : au Port du Rhin, ils rasent les quais pour des lofts. File. |
+| port-rhin | prh.quai.1 | L'ULTRA | Le Port du Rhin. Une palissade « BlingCo LOFTS » de cent mètres... Ils emballent le port comme un cadeau. |
+| port-rhin | prh.quai.2 | AGENT IMMO | Bonjour ! Ce quai est VENDU. Ce bassin est VENDU. Cette mouette... VENDUE. Et vous, vous cherchez quelle surface ? |
+| port-rhin | prh.quai.3 | TUTO | Les agents immobiliers plantent des pancartes VENDU partout, même sur toi : une roulade ({roll}) et elle tombe. |
+| port-rhin | prh.palissade | L'ULTRA | La palissade est tombée. Derrière, le vieux moulin : il y a encore de la lumière. |
+| port-rhin | prh.moulin.1 | UN DOCKER | Doucement, l'écharpe ! On est retranchés ici depuis qu'ils ont « requalifié » le quai. Toi, t'es pas un agent, t'as pas de doudoune. |
+| port-rhin | prh.moulin.2 | UNE MARINIÈRE | Prends ça : une gaffe de marinier, avec un treuil bricolé par SCN. Ça accroche tout : les anneaux, les caisses... et les promoteurs. |
+| port-rhin | prh.moulin.3 | TUTO | {throw} lance le grappin (vers la cible verrouillée avec {lock}). Sur un anneau, il te tire de l'autre côté du bief. |
+| port-rhin | prh.moulin.4 | TUTO | Une caisse bouche la sortie : accroche-la au grappin pour la tirer vers toi. |
+| port-rhin | prh.conteneurs.1 | UN DOCKER | Les conteneurs, c'est notre métier. Celui-là bouche le passage : tire-le, il viendra. |
+| port-rhin | prh.peniches.1 | UNE MARINIÈRE | Pour traverser le canal, accroche-toi aux grues, de péniche en péniche. Ils voulaient en faire des « péniches-lofts ». |
+| port-rhin | prh.quai2.1 | AGENT IMMO | Monsieur ! Vous traversez une zone de valorisation. Signez ici, ici, et là. |
+| port-rhin | prh.boss.1 | LE PROMOTEUR | Ah, un client ! J'ai exactement ce qu'il vous faut : 9 mètres carrés, vue sur un autre loft, 2 000 BC par mois. Coup de cœur ! |
+| port-rhin | prh.boss.2 | UN DOCKER | Il largue ses préfabriqués sur nos quais ! Accroche-les au grappin et renvoie-les-lui. Après, tape tant qu'il est sonné ! |
+| port-rhin | prh.boss.phase1 | LE PROMOTEUR | Vous faites baisser la valeur du quartier. Agents ! Plantez-moi des pancartes ! |
+| port-rhin | prh.boss.phase2 | LE PROMOTEUR | Phase deux du projet : on densifie ! Tout doit partir ! |
+| port-rhin | prh.boss.end | LE PROMOTEUR | Mon exosquelette... il n'était même pas à moi. Il était en leasing. |
+| port-rhin | prh.end.1 | UNE MARINIÈRE | Le port reste au port. Les dockers et les mariniers sont avec toi. Au Marché 2000, on dit qu'ils ferment la nuit... mais pas pour tout le monde. |

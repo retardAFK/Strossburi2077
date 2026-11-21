@@ -89,6 +89,9 @@ export const TUNING = {
     steward: { hp: 3, radius: 0.5, height: 2.2, speed: 2, runSpeed: 4.2, wander: 4, view: 10, fov: 0.55, hear: 2.5,
       alertTime: 0.7, lose: 2.5, reach: 1.9, windup: 0.6, attack: 'lunge', lunge: 9, attackTime: 0.22, recover: 0.8, dmg: 1,
       robot: true, scanEvery: 7, scanTime: 2 },
+    // agent immobilier-clone (Port du Rhin 2026) : plante des pancartes VENDU (TUNING.agentImmo)
+    agent: { hp: 3, radius: 0.45, height: 1.9, speed: 2.3, runSpeed: 4.6, wander: 4, view: 10, fov: 0.5, hear: 2.5,
+      alertTime: 0.6, lose: 2.5, reach: 1.8, windup: 0.5, attack: 'lunge', lunge: 10, attackTime: 0.22, recover: 0.8, dmg: 1 },
     test: { hp: 3, radius: 0.55, height: 1.9, speed: 2.2, runSpeed: 4.4, wander: 4, view: 11, fov: 0.5, hear: 2.5,
       alertTime: 0.6, lose: 2.5, reach: 1.9, windup: 0.5, attack: 'lunge', lunge: 10, attackTime: 0.22, recover: 0.7, dmg: 1, robot: true },
     testTireur: { hp: 3, radius: 0.55, height: 1.9, speed: 2, runSpeed: 3.6, wander: 3, view: 13, fov: 0.45, hear: 2.5,
@@ -108,5 +111,19 @@ export const TUNING = {
   egboehly: {
     headHp: 3, headRadius: 0.9, biteEvery: 2.6, aimTime: 0.8, biteTime: 0.45, biteReach: 6, recover: 1.1, dmg: 1,
     regrow: 7, spitEvery: 5, spitSpeed: 9, pilotHp: 6, pilotStun: 2.5, scale: 1.25
+  },
+  // ---------------------------------------------------------------- niveau 3 : Port du Rhin (2026)
+  // gaffe-grappin : portée, vitesses (aller, retour, Ultra tiré vers un anneau), recharge, étourdissement des sbires tirés
+  gaffe: { range: 13, speed: 28, back: 34, zip: 15, cooldown: 0.3, height: 1.3, hitR: 0.7, enemyPull: 5, stun: 1.6,
+    hand: { pos: [0.15, 1.05, 0.35] }, scale: 1 },
+  // objets qu'on tire au grappin (conteneurs, caisses) : pas par traction (m), vitesse de glissement
+  pull: { step: 4, speed: 7 },
+  // agent immobilier-clone : pancartes VENDU plantées (toutes les n s, max par agent), pancarte sur l'Ultra (s)
+  agentImmo: { plantEvery: 6, plantMax: 2, onPlayer: 6 },
+  // le Promoteur : PV, marche, largage de préfabriqués (télégraphe au sol, chute, durée au sol), renvoi au grappin
+  promoteur: {
+    hp: 9, scale: 1.4, speed: 1.6, dropEvery: 3.2, aimTime: 1.1, fallTime: 0.7, prefabLife: 7, prefabScale: 2.4,
+    prefabR: 1.6, dropDmg: 1, returnDmg: 2, returnSpeed: 18, stun: 3, phases: [0.66, 0.33], phaseDrops: [1, 2, 3],
+    agentsAt: [1, 2], contact: 1
   }
 };

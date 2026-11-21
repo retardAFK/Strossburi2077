@@ -159,7 +159,10 @@ tools/blender/            un script Python par modèle + lib commune (s3k_lib.py
   Décor : `tools/blender/decor_kit.py` exporte les pièces de `decor_meinau.py` (`decor_meinau_ext`, `decor_meinau_bol`).
   Personnages sans design (anciens du kop, pigeon, kop) : placeholders gris étiquetés (`systems/Placeholder.js`).
   Répliques auto-validées à relire : `docs/dialogues/AUTO.md`.
-- **Objets et Arc-Drapeau** (règles : `docs/decisions.md`) : `items/Weapon.js` (interface commune), `systems/Inventory.js`
+- **Niveau 3 jouable (maquette grise)** : `levels/port-rhin` (`?level=port-rhin`) : quai et palissade (agents immobiliers-clones),
+  vieux moulin (**gaffe-grappin** `items/GaffeGrappin.js` : anneaux → l'Ultra est tiré, objets `pull()` → tirés, sbires étourdis),
+  conteneurs et péniches (grues), boss le Promoteur (`bosses/Promoteur.js` + `props/Prefab.js`).
+ (règles : `docs/decisions.md`) : `items/Weapon.js` (interface commune), `systems/Inventory.js`
   (objets dans l'ordre d'obtention, Tab / croix haut-bas / bouton ⇄ pour changer), `items/ArcDrapeau.js` (verrouillage ou visée
   par-dessus l'épaule : clic droit / LB maintenus, VISER à bascule au tactile ; tir F / RB / bouton ARC, clic gauche en visée),
   `entities/props/Arrow.js`, types de flèches dans `data/arrows.js` (seule la flèche simple est activée), réglages `TUNING.arc`
@@ -177,7 +180,7 @@ tools/blender/            un script Python par modèle + lib commune (s3k_lib.py
 - Tests (filet anti-régression) : `npm test` = build + `tests/run-all.mjs` (Chrome installé piloté par
   `playwright-core`, sans fenêtre). `niveau1` (parcours complet via F2), `boss-asr67` (graine `?seed=1`,
   instantané des réglages `tests/snapshots/asr67.json`, mise à jour volontaire : `npm run test:update-snapshots`),
-  `meinau` (parcours du niveau 2), `boss-egboehly` (instantané `tests/snapshots/egboehly.json`), `meinau-ouest` (fumée), `manette` (Xbox / PlayStation simulées), `arc-drapeau` (bac à sable : changement d'objet, tir,
+  `meinau` (parcours du niveau 2), `boss-egboehly` (instantané `tests/snapshots/egboehly.json`), `port-rhin`, `boss-promoteur`, `meinau-ouest` (fumée), `manette` (Xbox / PlayStation simulées), `arc-drapeau` (bac à sable : changement d'objet, tir,
   visée, munitions, tactile). Outils communs : `tests/helpers.mjs`. Sans Chrome installé (conteneur) :
   `CHROME_PATH=<binaire Chromium> npm test`.
   Toute PR garde `npm test` vert ; une PR qui touche `entities/bosses/` met à jour le test du boss.

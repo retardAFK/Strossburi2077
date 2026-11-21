@@ -1,0 +1,29 @@
+{
+  "hp": 9,
+  "scale": 1.4,
+  "speed": 1.6,
+  "dropEvery": 3.2,
+  "aimTime": 1.1,
+  "fallTime": 0.7,
+  "prefabLife": 7,
+  "prefabScale": 2.4,
+  "prefabR": 1.6,
+  "dropDmg": 1,
+  "returnDmg": 2,
+  "returnSpeed": 18,
+  "stun": 3,
+  "phases": [
+    0.66,
+    0.33
+  ],
+  "phaseDrops": [
+    1,
+    2,
+    3
+  ],
+  "agentsAt": [
+    1,
+    2
+  ],
+  "contact": 1
+}

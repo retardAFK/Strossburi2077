@@ -5,8 +5,9 @@
 // Circuit de relecture : tools/dialogues-export.mjs → docs/dialogues/<niveau>.md → tools/dialogues-import.mjs.
 import basASable from './bac-a-sable.fr.js';
 import meinau from './meinau.fr.js';
+import portRhin from './port-rhin.fr.js';
 
-export const DIALOGUES = { 'bac-a-sable': basASable, meinau };
+export const DIALOGUES = { 'bac-a-sable': basASable, meinau, 'port-rhin': portRhin };
 
 const BY_ID = new Map();
 for (const lines of Object.values(DIALOGUES)) for (const l of lines) BY_ID.set(l.id, l);

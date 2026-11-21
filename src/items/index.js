@@ -2,5 +2,6 @@
 // Ajouter un objet = l'importer ici avec son id (celui passé à Weapon : 'boomerang', 'arc', ...).
 import { BretzelBoomerang } from './BretzelBoomerang.js';
 import { ArcDrapeau } from './ArcDrapeau.js';
+import { GaffeGrappin } from './GaffeGrappin.js';
 
-export const ITEMS = { boomerang: BretzelBoomerang, arc: ArcDrapeau };
+export const ITEMS = { boomerang: BretzelBoomerang, arc: ArcDrapeau, gaffe: GaffeGrappin };

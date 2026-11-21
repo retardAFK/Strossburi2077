@@ -1,6 +1,7 @@
 // Interface HTML : bretzels de vie, nom de zone, barre de boss, bandeaux, indication d'action, sous-titres.
 export class Hud {
-  constructor(root, events) {
+  constructor(root, events, texts) {
+    this.texts = texts;
     this.hearts = root.querySelector('#hearts');
     this.room = root.querySelector('#room');
     this.boss = root.querySelector('#boss');
@@ -10,10 +11,15 @@ export class Hud {
     this.flashEl = root.querySelector('#flash');
     this.promptEl = root.querySelector('#prompt');
     this.captionEl = root.querySelector('#caption');
+    this.itemEl = root.querySelector('#item');
     this.lastHearts = '';
     // indication contextuelle (« E : pirater »...) : (source, texte) pour l'afficher, (source, null) pour la retirer
     this.promptOwner = null;
     events.on('hud:prompt', (owner, text) => this.prompt(owner, text));
+    events.on('inventory:changed', it => {
+      const [name, keys] = this.texts.items[it.id];
+      this.itemEl.innerHTML = `${name}<small>${keys}</small>`; this.itemEl.style.display = 'block';
+    });
     events.on('hud:caption', text => { this.captionEl.textContent = text || ''; this.captionEl.style.display = text ? 'block' : 'none'; });
   }
   prompt(owner, text) {

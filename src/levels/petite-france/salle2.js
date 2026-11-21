@@ -7,6 +7,15 @@ const PI = Math.PI;
 export function salle2(game, { T, W, E }) {
   const eau = game.add(new MultiState(game, { id: 'eau', count: 3, start: W.waters.eau.level }));
   E.on('state:eau', v => W.setWaterLevel('eau', v));
+  // l'eau atteint le quai haut : la cage « Tradition Certifiée » saute, la winstubière file aux Ponts Couverts
+  let freed = false;
+  E.on('state:eau', v => {
+    if (v !== 2 || freed) return;
+    freed = true; W.removeProp('cageWinstub');
+    game.particles.burst(-5, 1.5, -62, 24, 0xffc040, 6); game.audio.play('door');
+    E.emit('pnj:hide:winstubiere');
+    game.say(T.winstubFreed);
+  });
   E.on('lever:used', id => {
     if (id === 'levier') eau.set(eau.value === 0 ? 1 : 0);
     if (id === 'vanne') eau.set(eau.value === 2 ? 0 : 2);
@@ -38,6 +47,6 @@ export function salle2(game, { T, W, E }) {
     game.spawn('serveur', 14, -88, 'quai', { face: PI });
   });
 
-  // fin provisoire de la démo : la sortie mène aux Ponts Couverts
-  game.trigger([10, 14, -102, -104], () => game.win(T.end));
+  // debug F2 : salles suivantes = écluse passée (eau haute, winstubière libre)
+  E.on('debug:warp', id => { if (id.startsWith('salle3')) { landed = true; eau.set(2); } });
 }

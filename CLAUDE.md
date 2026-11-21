@@ -26,8 +26,8 @@ de nouveaux chemins), ton satirique et loufoque, 100 % Strasbourg.
 Chronologie : le niveau 1 se passe dans le futur. À la fin, **SCN** (« Stras c'est nous », réseau underground
 et populaire, de la rue et des tribunes : « Celui du stade », « Celle du stade ») envoie l'Ultra de force en
 **2026**, notre époque, quand tout a basculé. Le niveau 2 est la Meinau en 2026. Plus tard, retour brutal vers
-le futur (partie 2), final à la Meinau du futur. L'année du futur (2077 ou 2067) n'est pas tranchée : elle est
-dans UNE constante (`YEAR` / `TEXTS.year` dans `texts.fr.js`), jamais écrite en dur.
+le futur (partie 2), final à la Meinau du futur. L'année du futur est **2067** : elle est dans UNE constante
+(`YEAR` / `TEXTS.year` dans `texts.fr.js`), jamais écrite en dur dans le code ni les textes.
 
 Héros : veste en jean noire, casquette, lunettes de soleil, écharpe en satin bleu et blanc (arme de départ
 et signe de ralliement).
@@ -121,13 +121,15 @@ tools/blender/            un script Python par modèle + lib commune (s3k_lib.py
 - Chaque nouveau design est d'abord **rendu en planche de présentation** et validé avant d'être intégré.
 
 ## 7. Où en est-on
-- Niveau jouable : `levels/meinau-ouest` (coursives de la tribune ouest en 2077 : consultants, juristes,
+- Niveau jouable : `levels/meinau-ouest` (coursives de la tribune ouest en 2067 : consultants, juristes,
   portique laser + terminal, boss « Directeur de la Valorisation »). Modèles : `tools/blender/ultra.py`,
-  `tools/blender/meinau_cast.py`. C'est le niveau par défaut tant que la Petite France n'est pas complète.
-- En cours : `levels/petite-france` (`?level=petite-france`), démo du niveau 1 (une PR par étape, voir
+  `tools/blender/meinau_cast.py`. Accessible avec `?level=meinau-ouest`.
+- En cours : `levels/petite-france` (niveau par défaut), démo du niveau 1 (une PR par étape, voir
   `prompts/03-demo-niveau1-petite-france.md`). Jouables : ouverture, salle 1 (Quartier des Tanneurs : vagues,
   3 bornes, herse, plaque 1, Celle du stade), salle 2 (l'Écluse : levier, vanne, 3 niveaux d'eau, barque,
-  winstubière, plaque 2). Un fichier de script par salle (`salle1.js`, `salle2.js`...).
+  winstubière libérée quand l'eau atteint le quai haut, plaque 2), salle 3 (Ponts Couverts : arène, 3 vagues,
+  Videur-Maître d'hôtel, coffre → bretzel-boomerang, borne sur pile, plaque 3). Un fichier de script par salle.
+  Objet : `items/BretzelBoomerang.js` via `systems/Inventory.js` (clic droit si rien n'est verrouillé, sinon F).
   Le layout déclare ses objets génériques dans `objects: [{ type, ... }]` (barque, leviers, PNJ...).
   Modèles : `tools/blender/{sbires,decor_pf,salles_pf}.py`.
 - Debug : `window.S3K` dans la console donne accès au Game (entités, monde, joueur).

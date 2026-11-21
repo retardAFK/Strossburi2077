@@ -30,7 +30,8 @@ function nextWarp(game) {
 }
 
 function killAll(game) {
-  for (const e of game.entities) if (e.isEnemy && e.alive) e.takeHit(99, 0, 1, 5, null);
+  // copie : une vague vidée en fait apparaître une autre, qu'on ne veut pas tuer dans la foulée
+  for (const e of [...game.entities]) if (e.isEnemy && e.alive) e.takeHit(99, 0, 1, 5, null);
 }
 
 export function installDebug(game) {

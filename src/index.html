@@ -44,6 +44,8 @@
   #prompt { position:absolute; left:0; right:0; bottom:24%; text-align:center; display:none; color:var(--cyan);
             text-shadow:2px 2px 0 #000; animation:pulse 1.2s ease-in-out infinite; }
   @keyframes pulse { 50% { opacity:.55; } }
+  #item { position:absolute; left:2.5%; top:12%; display:none; color:var(--gold); text-shadow:2px 2px 0 #000; font-size:.8em; }
+  #item small { display:block; margin-top:.4em; font-size:.75em; color:#b8b0e0; }
   #caption { position:absolute; left:10%; right:10%; bottom:9%; display:none; text-align:center; line-height:1.9;
              color:var(--fg); text-shadow:2px 2px 0 #000, 0 0 8px #000; }
   #skip { position:absolute; right:2.5%; bottom:3%; display:none; font-size:.6em; color:#b8b0e0; }
@@ -58,6 +60,7 @@
   <div id="hud">
     <div id="hearts"></div>
     <div id="room"></div>
+    <div id="item"></div>
     <div id="boss"><span id="bossname"></span><div id="bossbar"><div id="bossfill"></div></div></div>
     <div id="banner"></div>
     <div id="prompt"></div>

@@ -59,9 +59,13 @@ T.check('bannière : accroche sur un crochet', await h.until(() => window.__dev.
 T.check('événements arrow:effect', JSON.stringify(await G(() => [...new Set(window.__fx)].sort())) === JSON.stringify(['banniere', 'court_circuit', 'enflammee', 'fumigene']));
 
 // tireur : il tire à distance ; puis mort
+// (on dissipe la fumée des étapes précédentes : sinon l'Ultra, caché dedans, n'est pas vu ; CI plus lente)
+await G(() => { const g = window.S3K; for (const e of [...g.entities]) if (e.isSmoke) e.remove();
+  window.__s.takeHit(99, 0, 1, 5, null); Object.assign(g.player, { x: g.player.x - 6 }); });
+await h.wait(300);
 await G(() => { const g = window.S3K, p = g.player; window.__t = g.spawn('sbire', p.x + 7, p.z, 'socle2', { kind: 'testTireur' }); window.__t.faceTo(p.x, p.z); window.__nproj = g.entities.filter(e => e.isProjectile && !e.isPlayerShot).length; });
 T.check('tireur : tire un projectile', await h.until(() => window.S3K.entities.filter(e => e.isProjectile && !e.isPlayerShot).length > window.__nproj, 8000));
-await G(() => { for (const s of [window.__s, window.__t]) s.takeHit(99, 0, 1, 5, null); });
+await G(() => { for (const s of [window.__s, window.__t]) if (s.alive) s.takeHit(99, 0, 1, 5, null); });
 T.check('mort : retiré du monde', await h.until(() => window.__s.removed && window.__t.removed, 3000));
 
 await T.finish(browser);

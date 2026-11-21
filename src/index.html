@@ -105,6 +105,18 @@
   #touch .t-rotate { display:none; position:fixed; inset:0; pointer-events:auto; background:#07081a; color:#ffd23f;
                      align-items:center; justify-content:center; text-align:center; padding:0 10%; line-height:2; font-size:12px; }
   #touch.idle .t-btn:not(.t-pause) { visibility:hidden; }
+  /* AGIR : libellé court sur 2 lignes max, posé au-dessus de la grappe, jamais plus large qu'un tiers d'écran */
+  #touch .t-use { max-width:min(34vw, 190px); height:auto; min-height:40px; padding:6px 12px; border-radius:16px;
+                  white-space:normal; line-height:1.4; text-align:center; font-size:7px; right:calc(18px + env(safe-area-inset-right));
+                  bottom:calc(200px + env(safe-area-inset-bottom)); }
+  /* petits écrans en paysage (hauteur < 420 px) : grappe réduite pour rester dans l'écran */
+  @media (max-height: 420px) {
+    #touch .t-attack { width:68px; height:68px; right:calc(16px + env(safe-area-inset-right)); bottom:calc(16px + env(safe-area-inset-bottom)); font-size:8px; }
+    #touch .t-roll { width:50px; height:50px; right:calc(94px + env(safe-area-inset-right)); bottom:calc(10px + env(safe-area-inset-bottom)); font-size:7px; }
+    #touch .t-lock { width:50px; height:50px; right:calc(26px + env(safe-area-inset-right)); bottom:calc(96px + env(safe-area-inset-bottom)); font-size:7px; }
+    #touch .t-throw { width:50px; height:50px; right:calc(96px + env(safe-area-inset-right)); bottom:calc(72px + env(safe-area-inset-bottom)); font-size:7px; }
+    #touch .t-use { bottom:calc(156px + env(safe-area-inset-bottom)); max-width:min(30vw, 160px); }
+  }
   @media (orientation: portrait) { #touch .t-rotate { display:flex; } }
   /* écran « installe le jeu » (src/install.js), au-dessus de tout, lisible en portrait comme en paysage */
   #install { position:fixed; inset:0; z-index:20; display:flex; align-items:center; justify-content:center; overflow:auto;

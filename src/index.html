@@ -41,6 +41,10 @@
   #banner { position:absolute; left:0; right:0; top:36%; text-align:center; display:none; color:var(--gold);
             font-size:clamp(12px,2.4vw,26px); text-shadow:3px 3px 0 var(--blue); }
   #banner small { display:block; margin-top:.6em; font-size:.5em; color:var(--fg); }
+  #prompt { position:absolute; left:0; right:0; bottom:24%; text-align:center; display:none; color:var(--cyan);
+            text-shadow:2px 2px 0 #000; animation:pulse 1.2s ease-in-out infinite; }
+  @keyframes pulse { 50% { opacity:.55; } }
+  #pause .hint { margin:0; font-size:clamp(7px,1vw,11px); color:#b8b0e0; }
   .err { color:#f66; position:fixed; top:0; left:0; z-index:9; white-space:pre-wrap; }
 </style>
 </head>
@@ -53,9 +57,10 @@
     <div id="room"></div>
     <div id="boss"><span id="bossname"></span><div id="bossbar"><div id="bossfill"></div></div></div>
     <div id="banner"></div>
+    <div id="prompt"></div>
     <div id="dialog"><div class="who"></div><div class="txt"></div><div class="next">▼</div></div>
     <div id="flash"></div>
-    <div id="pause" class="overlay"><h2 style="color:#fff">PAUSE</h2></div>
+    <div id="pause" class="overlay"><h2 style="color:#fff">PAUSE</h2><p class="hint"></p></div>
     <div id="end" class="overlay"><h1></h1><p></p></div>
     <div id="title" class="overlay"><h1></h1><h2></h2><p class="controls"></p><p class="go"></p></div>
   </div>

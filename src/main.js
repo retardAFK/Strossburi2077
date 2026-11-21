@@ -7,6 +7,7 @@ import { Terminal } from './entities/props/Terminal.js';
 import layout from './levels/meinau-ouest/layout.js';
 import script from './levels/meinau-ouest/script.js';
 import { TEXTS } from './data/texts.fr.js';
+import { installDebug } from './debug.js';
 
 // modèles exportés par tools/blender/*.py (embarqués dans le build par esbuild)
 import ultra from '../assets/models/ultra.glb';
@@ -26,8 +27,10 @@ $('#title h1').textContent = TEXTS.title;
 $('#title h2').textContent = TEXTS.subtitle;
 $('#title .controls').innerHTML = TEXTS.controls;
 $('#title .go').textContent = TEXTS.pressStart;
+$('#pause .hint').textContent = TEXTS.pauseHint;
 
 const game = new Game(dom, { consultant: Consultant, juriste: Juriste, directeur: Directeur, terminal: Terminal });
 game.start({ ultra, consultant, juriste, directeur, drone, terminal, portique }, { layout, script })
   .catch(err => { console.error(err); document.body.insertAdjacentHTML('beforeend', `<pre class="err">${err}</pre>`); });
 window.S3K = game; // accès debug depuis la console
+installDebug(game); // raccourcis ?debug=1

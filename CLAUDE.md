@@ -111,6 +111,8 @@ tools/blender/            un script Python par modèle + lib commune (s3k_lib.py
   portique laser + terminal, boss « Directeur de la Valorisation »). Modèles : `tools/blender/ultra.py`,
   `tools/blender/meinau_cast.py`.
 - Debug : `window.S3K` dans la console donne accès au Game (entités, monde, joueur).
+- Debug : ajouter `?debug=1` à l'URL (`dist/index.html?debug=1`) active les raccourcis de `src/debug.js` :
+  **F2** téléporte l'Ultra devant le prochain terminal encore actif (n'importe quel niveau).
 
 ## 8. Méthode de travail
 - On avance **un élément à la fois, validé par Maxime** (design, puis intégration, puis réglages).

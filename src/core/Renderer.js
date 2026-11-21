@@ -12,12 +12,18 @@ export class Renderer {
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(R.fov, this.w / this.h, 0.1, 150);
     this.stage = stage;
+    // taille réellement visible (visualViewport : barres de Safari, clavier, zoom) ; sinon la fenêtre
     const fit = () => {
-      const s = Math.min(innerWidth / this.w, innerHeight / this.h);
+      const vv = window.visualViewport;
+      const W = vv ? vv.width : innerWidth, H = vv ? vv.height : innerHeight;
+      const s = Math.min(W / this.w, H / this.h);
       stage.style.width = Math.floor(this.w * s) + 'px';
       stage.style.height = Math.floor(this.h * s) + 'px';
+      window.scrollTo(0, 0); // iOS : annule un éventuel décalage de la page après rotation
     };
-    addEventListener('resize', fit); fit();
+    addEventListener('resize', fit); addEventListener('orientationchange', () => setTimeout(fit, 250));
+    window.visualViewport?.addEventListener('resize', fit);
+    fit();
   }
   setAtmosphere(bg, fogNear, fogFar) {
     this.scene.background = new THREE.Color(bg);

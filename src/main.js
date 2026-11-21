@@ -26,6 +26,8 @@ if (touch) setupTouch(game, dom);
 game.start(level.models, level) // seuls les modèles de ce niveau sont décodés
   .catch(err => { console.error(err); document.body.insertAdjacentHTML('beforeend', `<pre class="err">${err}</pre>`); });
 window.S3K = game; // accès debug depuis la console
+// PWA : installable (écran d'accueil) et jouable hors-ligne une fois chargée ; rien en double-clic (file://)
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('sw.js').catch(() => {});
 installDebug(game); // raccourcis ?debug=1
 
 // 'a.b.0.c' -> obj.a.b[0].c = value (ignore les chemins absents)

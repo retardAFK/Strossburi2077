@@ -2,7 +2,7 @@
 // Le résultat s'ouvre d'un double-clic sur dist/index.html, sans serveur.
 //   npm run build   |   npm run dev (reconstruit à chaque modification)
 import * as esbuild from 'esbuild';
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 
 mkdirSync('dist', { recursive: true });
@@ -14,6 +14,11 @@ const writeOut = { name: 'write', setup(b) { b.onEnd(r => {
   // cache-busting : game.js?v=<empreinte du contenu>, les joueurs ont toujours la dernière version
   const html = readFileSync('src/index.html', 'utf8').replace('src="game.js"', `src="game.js?v=${hash}"`);
   writeFileSync('dist/index.html', html);
+  // PWA : manifeste, icônes et service worker (cache renommé à chaque build)
+  for (const f of readdirSync('src/pwa')) {
+    if (f === 'sw.js') writeFileSync('dist/sw.js', readFileSync('src/pwa/sw.js', 'utf8').replace('__BUILD__', hash));
+    else writeFileSync('dist/' + f, readFileSync('src/pwa/' + f));
+  }
   console.log('[build] dist/ à jour');
 }); } };
 const options = {

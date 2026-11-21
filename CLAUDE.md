@@ -149,6 +149,9 @@ tools/blender/            un script Python par modèle + lib commune (s3k_lib.py
   forcées avec `?touch=1` (ou coupées avec `?touch=0`) pour tester sur ordinateur. Jouer en paysage.
   Les textes qui citent des touches ont leur version tactile dans `TEXTS.touch.overrides` (à compléter
   quand on ajoute un tuto qui parle de touches). Réglages dans `TUNING.touch`.
+- PWA : `src/pwa/` (manifeste, icônes, `sw.js` « réseau d'abord ») copié dans `dist/` par le build ; le nom du
+  cache change à chaque build. Installation : « Ajouter à l'écran d'accueil » (iPhone) / « Installer » (Android).
+  Anti-zoom iOS : `blockZoom()` dans `src/touch.js` + `text-size-adjust` + taille calée sur `visualViewport`.
 - Debug : ajouter `?debug=1` à l'URL (`dist/index.html?debug=1`) active les raccourcis de `src/debug.js` :
   **F2** salle suivante (points `warps` du layout ; le script répond à 'debug:warp' pour remettre la salle
   en état ; sans warps, téléporte devant le prochain terminal / interrupteur), **F3** élimine tous les ennemis. Ex. `dist/index.html?level=petite-france&debug=1`.

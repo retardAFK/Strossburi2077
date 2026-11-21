@@ -6,12 +6,20 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Strasbourg">
+<meta name="theme-color" content="#07081a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png">
 <title>Strasbourg n'est pas à vendre</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
 <style>
   :root { --bg:#07081a; --fg:#fff8e8; --cyan:#38f2ff; --pink:#ff2e88; --gold:#ffd23f; --blue:#1f5fd0; }
   html,body { margin:0; height:100%; background:var(--bg); color:var(--fg); overflow:hidden;
               font-family:"Press Start 2P", ui-monospace, monospace; }
+  /* pas d'agrandissement automatique du texte (iPhone en paysage) ni de page qui « flotte » / zoome */
+  html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+  html, body { position:fixed; inset:0; width:100%; overscroll-behavior:none; }
   #wrap { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; }
   #stage { position:relative; }
   canvas { display:block; width:100%; height:100%; image-rendering:pixelated; image-rendering:crisp-edges; }
@@ -59,6 +67,7 @@
   .err { color:#f66; position:fixed; top:0; left:0; z-index:9; white-space:pre-wrap; }
 
   /* ---------- tactile (core/Touch.js) ---------- */
+  html:has(body.touch) { touch-action:none; }
   body.touch { touch-action:none; -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; overscroll-behavior:none; }
   body.touch #prompt { display:none !important; } /* l'indication devient le bouton AGIR */
   body.touch #hud { font-size:clamp(8px,2vw,14px); }

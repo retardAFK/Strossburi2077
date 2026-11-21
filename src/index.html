@@ -6,12 +6,20 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Strasbourg">
+<meta name="theme-color" content="#07081a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png">
 <title>Strasbourg n'est pas à vendre</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
 <style>
   :root { --bg:#07081a; --fg:#fff8e8; --cyan:#38f2ff; --pink:#ff2e88; --gold:#ffd23f; --blue:#1f5fd0; }
   html,body { margin:0; height:100%; background:var(--bg); color:var(--fg); overflow:hidden;
               font-family:"Press Start 2P", ui-monospace, monospace; }
+  /* pas d'agrandissement automatique du texte (iPhone en paysage) ni de page qui « flotte » / zoome */
+  html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+  html, body { position:fixed; inset:0; width:100%; overscroll-behavior:none; }
   #wrap { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; }
   #stage { position:relative; }
   canvas { display:block; width:100%; height:100%; image-rendering:pixelated; image-rendering:crisp-edges; }
@@ -69,6 +77,7 @@
   .err { color:#f66; position:fixed; top:0; left:0; z-index:9; white-space:pre-wrap; }
 
   /* ---------- tactile (core/Touch.js) ---------- */
+  html:has(body.touch) { touch-action:none; }
   body.touch { touch-action:none; -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; overscroll-behavior:none; }
   body.touch #prompt { display:none !important; } /* l'indication devient le bouton AGIR */
   body.touch #hud { font-size:clamp(8px,2vw,14px); }
@@ -96,7 +105,36 @@
   #touch .t-rotate { display:none; position:fixed; inset:0; pointer-events:auto; background:#07081a; color:#ffd23f;
                      align-items:center; justify-content:center; text-align:center; padding:0 10%; line-height:2; font-size:12px; }
   #touch.idle .t-btn:not(.t-pause) { visibility:hidden; }
+  /* AGIR : libellé court sur 2 lignes max, posé au-dessus de la grappe, jamais plus large qu'un tiers d'écran */
+  #touch .t-use { max-width:min(34vw, 190px); height:auto; min-height:40px; padding:6px 12px; border-radius:16px;
+                  white-space:normal; line-height:1.4; text-align:center; font-size:7px; right:calc(18px + env(safe-area-inset-right));
+                  bottom:calc(200px + env(safe-area-inset-bottom)); }
+  /* petits écrans en paysage (hauteur < 420 px) : grappe réduite pour rester dans l'écran */
+  @media (max-height: 420px) {
+    #touch .t-attack { width:68px; height:68px; right:calc(16px + env(safe-area-inset-right)); bottom:calc(16px + env(safe-area-inset-bottom)); font-size:8px; }
+    #touch .t-roll { width:50px; height:50px; right:calc(94px + env(safe-area-inset-right)); bottom:calc(10px + env(safe-area-inset-bottom)); font-size:7px; }
+    #touch .t-lock { width:50px; height:50px; right:calc(26px + env(safe-area-inset-right)); bottom:calc(96px + env(safe-area-inset-bottom)); font-size:7px; }
+    #touch .t-throw { width:50px; height:50px; right:calc(96px + env(safe-area-inset-right)); bottom:calc(72px + env(safe-area-inset-bottom)); font-size:7px; }
+    #touch .t-use { bottom:calc(156px + env(safe-area-inset-bottom)); max-width:min(30vw, 160px); }
+  }
   @media (orientation: portrait) { #touch .t-rotate { display:flex; } }
+  /* écran « installe le jeu » (src/install.js), au-dessus de tout, lisible en portrait comme en paysage */
+  #install { position:fixed; inset:0; z-index:20; display:flex; align-items:center; justify-content:center; overflow:auto;
+             background:radial-gradient(ellipse at center, #14204a, #07081a 70%); touch-action:auto;
+             padding:max(12px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); }
+  #install .i-box { max-width:560px; width:100%; text-align:center; line-height:1.8; font-size:10px; }
+  #install .i-icon { width:56px; height:56px; image-rendering:pixelated; border-radius:12px; }
+  #install h2 { margin:.4em 0; color:var(--gold); font-size:15px; text-shadow:3px 3px 0 var(--blue); }
+  #install p { margin:.3em 0 .8em; color:#d8d0f0; }
+  #install .i-steps { text-align:left; margin:.6em auto 1em; padding-left:2em; color:#fff; max-width:440px; }
+  #install .i-steps li { margin:.4em 0; }
+  #install .i-share { width:1.6em; height:1.6em; vertical-align:-.45em; color:var(--cyan); }
+  #install button { font:inherit; display:block; margin:.5em auto; padding:.9em 1.4em; border:3px solid #000; color:#fff;
+                    box-shadow:0 4px 0 rgba(0,0,0,.5); cursor:pointer; }
+  #install .i-go { background:var(--pink); font-size:12px; }
+  #install .i-go[hidden] { display:none; }
+  #install .i-go:not([hidden]) ~ .i-steps { display:none; } /* vrai bouton dispo : pas besoin du tuto */
+  #install .i-browser { background:transparent; border-color:#5a5f80; color:#b8b0e0; box-shadow:none; font-size:9px; }
 </style>
 </head>
 <body>

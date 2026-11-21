@@ -1,0 +1,17 @@
+{
+  "name": "strasbourg-nest-pas-a-vendre",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Aventure-action 3D satirique a Strasbourg (prototype)",
+  "type": "module",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "dev": "node tools/build.mjs --watch"
+  },
+  "dependencies": {
+    "three": "0.160.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.24.0"
+  }
+}

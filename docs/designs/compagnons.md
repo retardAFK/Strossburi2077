@@ -19,8 +19,9 @@ Style validé : mélange « supporters du kop » + « membres de SCN ». Express
 - Taille : aux genoux de l'Ultra (≈ 0,6).
 - Pivots : `root`, `body`, `legN/legF`, `tail`, `head`, `drum` (centre de l'onde de choc), `pack` (origine de l'effet de soin).
 
-## Encore ouvert (gameplay, pas design)
-Où on les obtient, comment on les invoque (jauge / recharge / endroits précis), un seul à la fois ou non.
+## Gameplay (tranché le 21/11/2026, détail dans `docs/decisions.md`)
+Stork au Marché 2000, Dylagne au Kalt ; invocation partout avec recharge (+ endroits spéciaux d'énigme) ;
+un seul à la fois ; un bouton par compagnon.
 
 ## Citations de Maxime
 « Attaquante » · « Heal et dégât de zone » · « mélange 1 et 3 » · « Cris + bulles d'icônes » · « parfait »

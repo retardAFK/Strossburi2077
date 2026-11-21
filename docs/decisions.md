@@ -89,3 +89,26 @@ et son test fumée reste en place.
   arènes et phases, durée du faux final, PDG de 2026 = PDG final ?, revanche ASR-67, Coq, 5 boss ensemble,
   les deux kops qui chantent.
 - Énigmes de la Meinau 2026 (tifo aux flèches-bannières : détail à écrire dans la fiche du niveau).
+
+---
+
+## Décisions antérieures (journal)
+| Date | Sujet | Décision |
+|---|---|---|
+| 21/11/2026 | Chronologie | 2023 rachat du club · 2026 BlingCo rachète la ville, l'Ultra y est envoyé · 2067 le futur (`YEAR`) |
+| 21/11/2026 | Niveau 1 | Petite France (2067), boss ASR-67, fin : SCN envoie l'Ultra en 2026 |
+| 21/11/2026 | Niveau par défaut | `petite-france` ; `meinau-ouest` accessible avec `?level=meinau-ouest` |
+| 21/11/2026 | Noms parodiques | « Egboehly », « Marco CeKlair » autorisés (exception `CLAUDE.md` §3), le reste inventé |
+| 21/11/2026 | Salle 1 | « Quartier des Tanneurs » (le bâtiment réel abrite un restaurant) |
+| 21/11/2026 | Prix | En BlingCoins (BC), sauf « 30 euros numériques » (réplique de l'ASR-67) |
+| 21/11/2026 | Bretzel-boomerang | Obtenu aux Ponts Couverts avant le Videur-Maître d'hôtel (combat-tuto) |
+| 21/11/2026 | Manette | Disposition standard (Xbox / PlayStation), indications qui suivent l'appareil |
+| 21/11/2026 | Tests | `npm test` obligatoire ; la CI ne déploie pas si un test échoue |
+| 21/11/2026 | Designs | Faits dans Cowork, déposés dans `docs/designs/` ; Claude Code n'invente aucun design |
+
+## Intégrations
+Ce qui a été branché dans `src/` à partir d'une fiche de `docs/designs/` (date, élément, fiche utilisée).
+
+| Date | Élément | Fiche utilisée |
+|---|---|---|
+| — | (rien encore : les designs de `docs/designs/` ne sont pas branchés dans `src/`) | — |

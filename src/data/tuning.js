@@ -65,6 +65,7 @@ export const TUNING = {
     chargeWindup: 0.8, chargeSpeed: 13, chargeTime: 1.3, pillarReach: 1.3,
     flames: { arms: 3, length: 9, speed: 0.7, width: 0.45 }
   },
-  // Videur-Maître d'hôtel : garde de face (cos de l'angle), recul subi réduit, repousse l'Ultra quand il bloque
-  videur: { hp: 10, radius: 0.85, scale: 1.4, guard: 0.35, knockTaken: 0.3, pushBack: 7 }
+  // Videur-Maître d'hôtel : pare tout sauf le bretzel, qui l'assomme stun (s) ; recul subi réduit,
+  // repousse l'Ultra quand il pare ; rappel de la winstubière au bout de hintAfter parades
+  videur: { hp: 10, radius: 0.85, scale: 1.4, stun: 2.6, knockTaken: 0.3, pushBack: 7, hintAfter: 3 }
 };

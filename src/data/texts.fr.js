@@ -55,7 +55,9 @@ export const TEXTS = {
       ['intro.2.txt', "ÉCHARPE pour fouetter, trois fois pour le combo. ROULADE pour esquiver. CIBLE pour verrouiller un costard."],
       ['laser.txt', "Un portique laser « Accès Premium ». Le terminal qui clignote, là, doit le couper : je m'approche et AGIR pour le pirater. Ou un bon coup d'écharpe."],
       ['pf.boomerangGot.1', 'BOUTON BRETZEL : lancer'],
-      ['pf.boomerangTuto.0.txt', "Le bouton BRETZEL lance le bretzel-boomerang. Il touche à distance : ennemis, bornes, cibles. Il revient tout seul."]
+      ['pf.boomerangTuto.0.txt', "Le bouton BRETZEL lance le bretzel-boomerang. Il touche à distance : ennemis, bornes, cibles. Il revient tout seul."],
+      ['pf.videur.intro.1.txt', "Il pare tout au plateau ! Envoie-lui le bretzel (bouton BRETZEL) pour l'assommer, puis tape pendant qu'il voit des étoiles."],
+      ['pf.videur.hint.txt', "L'écharpe ne passe pas son plateau ! Le BRETZEL d'abord, l'ÉCHARPE ensuite !"]
     ]
   },
   hero: "L'ULTRA",
@@ -199,22 +201,29 @@ export const TEXTS = {
       { who: "L'ULTRA", txt: "Ils font payer les ponts, maintenant. Des ponts qui ne sont même pas à eux." }
     ],
     videur: {
-      name: "LE VIDEUR-MAÎTRE D'HÔTEL", shield: 'NON RÉSERVÉ !',
+      name: "LE VIDEUR-MAÎTRE D'HÔTEL", shield: 'NON RÉSERVÉ !', stunned: 'MON PLATEAU !',
       intro: [
         { who: "LE VIDEUR-MAÎTRE D'HÔTEL", txt: "Vous n'êtes pas sur la liste. Personne n'est sur la liste. C'est ça, l'exclusivité." },
-        { who: 'LA WINSTUBIÈRE', txt: "De face, il bloque tout ! Fais-le charger dans le vide, ou prends-le de dos." }
-      ]
+        { who: 'LA WINSTUBIÈRE', txt: "Il pare tout au plateau ! Envoie-lui le bretzel ({throw}) pour l'assommer, puis tape pendant qu'il voit des étoiles." }
+      ],
+      hint: { who: 'LA WINSTUBIÈRE', txt: "L'écharpe ne passe pas son plateau ! Le BRETZEL ({throw}) d'abord, l'écharpe ensuite !" }
     },
+    // après la vague 2 : la winstubière arrive avec la clé du coffre, avant le Videur
+    coffre: [
+      { who: 'LA WINSTUBIÈRE', txt: "Tiens bon ! Les commerçants sont enfermés dans les tours, et leur Videur-Maître d'hôtel arrive." },
+      { who: 'UN COMMERÇANT', txt: "(depuis la tour) On t'a gardé quelque chose dans le coffre du péage. Un bretzel... pas tout à fait comme les autres." },
+      { who: 'LA WINSTUBIÈRE', txt: "Ouvre-le vite. Et lance-le fort : il revient toujours vers celui qui l'a lancé." }
+    ],
     freed: [
-      { who: 'LA WINSTUBIÈRE', txt: "Bien joué ! Les commerçants du pont étaient enfermés dans les tours de péage. Ils sont libres." },
-      { who: 'UN COMMERÇANT', txt: "On t'a gardé quelque chose dans le coffre du péage. Un bretzel... pas tout à fait comme les autres." },
-      { who: 'LA WINSTUBIÈRE', txt: "Ouvre-le. Et lance-le fort : il revient toujours vers celui qui l'a lancé." }
+      { who: 'LA WINSTUBIÈRE', txt: "Il est sorti de la liste ! Les commerçants du pont sont libres." },
+      { who: 'LA WINSTUBIÈRE', txt: "La herse de sortie s'ouvre avec la borne, là-bas, sur la pile du pont. Personne ne peut l'atteindre... sauf ton bretzel." }
     ],
     boomerangGot: ['BRETZEL-BOOMERANG', "{throw} : lancer (ou clic droit si rien n'est verrouillé)"],
     boomerangTuto: [
       { who: 'TUTO', txt: "{throw} pour lancer le bretzel-boomerang. Il touche à distance : ennemis, bornes, cibles. Il revient tout seul." },
-      { who: 'LA WINSTUBIÈRE', txt: "La herse de sortie s'ouvre avec la borne, là-bas, sur la pile du pont. Personne ne peut l'atteindre... sauf toi, maintenant." }
+      { who: "LE VIDEUR-MAÎTRE D'HÔTEL", txt: "(au loin) Qui a ouvert le coffre ? Ce n'est pas sur la liste, ça !" }
     ],
+    winstubHintVideur: "Le bretzel dans son plateau, puis l'écharpe pendant qu'il est sonné !",
     winstubHint3: "La borne sur la pile du pont ! Vise-la avec le bretzel.",
     // salle 4 : le Barrage Vauban, « Rooftop Premium »
     rooftop: [

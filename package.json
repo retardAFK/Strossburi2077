@@ -6,12 +6,16 @@
   "type": "module",
   "scripts": {
     "build": "node tools/build.mjs",
-    "dev": "node tools/build.mjs --watch"
+    "dev": "node tools/build.mjs --watch",
+    "test:pad": "node tests/manette.test.mjs",
+    "test": "npm run build && node tests/run-all.mjs",
+    "test:update-snapshots": "npm run build && node tests/run-all.mjs --update-snapshots"
   },
   "dependencies": {
     "three": "0.160.0"
   },
   "devDependencies": {
-    "esbuild": "0.24.0"
+    "esbuild": "0.24.0",
+    "playwright-core": "1.48.2"
   }
 }

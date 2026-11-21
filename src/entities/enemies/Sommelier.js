@@ -4,13 +4,14 @@ import { Enemy } from './Enemy.js';
 import { Projectile } from '../props/Projectile.js';
 import { pose, walkPose, walkBob } from '../../systems/Animator.js';
 import { TUNING } from '../../data/tuning.js';
+import { rng } from '../../core/Random.js';
 
 const S = TUNING.sommelier;
 
 export class Sommelier extends Enemy {
   constructor(game, opts) {
     super(game, { ...opts, r: S.radius, hp: S.hp, model: 'sommelier' });
-    this.baseScale = 1; this.cd = 1 + Math.random(); this.strafe = Math.random() < 0.5 ? 1 : -1;
+    this.baseScale = 1; this.cd = 1 + rng(); this.strafe = rng() < 0.5 ? 1 : -1;
     this.states = {
       wait: { update() { if (this.t > 0.6) this.setState('keep'); } },
       keep: { update: this.keepUpdate },
@@ -41,7 +42,7 @@ export class Sommelier extends Enemy {
     if (this.hitWall) this.strafe *= -1;
     this.separate(dt);
     this.cd -= dt;
-    if (this.cd <= 0 && d < S.fireRange) { this.cd = S.fireEvery + Math.random(); this.setState('windup'); }
+    if (this.cd <= 0 && d < S.fireRange) { this.cd = S.fireEvery + rng(); this.setState('windup'); }
     this.bark('sommelier');
   }
   shoot() {

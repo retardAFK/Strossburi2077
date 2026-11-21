@@ -2,6 +2,7 @@
 import { Enemy } from './Enemy.js';
 import { pose, walkPose, walkBob } from '../../systems/Animator.js';
 import { TUNING } from '../../data/tuning.js';
+import { rng } from '../../core/Random.js';
 
 const C = TUNING.consultant;
 
@@ -10,7 +11,7 @@ export class Consultant extends Enemy {
     super(game, { ...opts, r: C.radius, hp: C.hp, model: 'consultant', scale: 1.05 });
     this.baseScale = 1.05;
     this.states = {
-      wait: { update() { if (this.t > 0.5 + Math.random() * 0.5) this.setState('chase'); } },
+      wait: { update() { if (this.t > 0.5 + rng() * 0.5) this.setState('chase'); } },
       chase: { update: this.chaseUpdate },
       windup: { update(dt) { this.telegraph = true; this.faceTo(this.player.x, this.player.z, dt * 8); if (this.t > C.windup) this.setState('lunge'); } },
       lunge: {

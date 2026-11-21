@@ -151,6 +151,13 @@ tools/blender/            un script Python par modèle + lib commune (s3k_lib.py
   Objet : `items/BretzelBoomerang.js` via `systems/Inventory.js` (clic droit si rien n'est verrouillé, sinon F).
   Le layout déclare ses objets génériques dans `objects: [{ type, ... }]` (barque, leviers, PNJ...).
   Modèles : `tools/blender/{sbires,decor_pf,salles_pf}.py`.
+- Tests (filet anti-régression) : `npm test` = build + `tests/run-all.mjs` (Chrome installé piloté par
+  `playwright-core`, sans fenêtre). `niveau1` (parcours complet via F2), `boss-asr67` (graine `?seed=1`,
+  instantané des réglages `tests/snapshots/asr67.json`, mise à jour volontaire : `npm run test:update-snapshots`),
+  `meinau-ouest` (fumée), `manette` (Xbox / PlayStation simulées). Outils communs : `tests/helpers.mjs`.
+  Toute PR garde `npm test` vert ; une PR qui touche `entities/bosses/` met à jour le test du boss.
+- Aléatoire : la logique de jeu (IA, attaques, objets lâchés) tire dans `core/Random.js` (`rng()`), graine `?seed=<n>` ;
+  les effets visuels gardent `Math.random()`.
 - Debug : `window.S3K` dans la console donne accès au Game (entités, monde, joueur).
 - Mobile : commandes tactiles activées automatiquement sur téléphone / tablette (écran tactile principal),
   forcées avec `?touch=1` (ou coupées avec `?touch=0`) pour tester sur ordinateur. Jouer en paysage.

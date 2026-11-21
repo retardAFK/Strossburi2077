@@ -6,10 +6,12 @@ import { installDebug } from './debug.js';
 import { setupTouch, touchWanted } from './touch.js';
 import { installFakePad } from './fakepad.js';
 import { showInstallScreen } from './install.js';
+import { seed } from './core/Random.js';
 
 installFakePad(); // ?debug=1&fakepad=xbox|ps : manette virtuelle au pavé numérique
 
 const params = new URLSearchParams(location.search);
+if (params.has('seed')) seed(params.get('seed')); // ?seed=<n> : partie reproductible (tests)
 const level = LEVELS[params.get('level')] || LEVELS[DEFAULT_LEVEL];
 const touch = touchWanted(params); // téléphone / tablette, ou ?touch=1 pour tester sur ordinateur
 if (touch) for (const [path, txt] of TEXTS.touch.overrides) setPath(TEXTS, path, txt);

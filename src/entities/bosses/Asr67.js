@@ -8,6 +8,7 @@ import { Projectile } from '../props/Projectile.js';
 import { Hazard } from '../props/Hazard.js';
 import { pose, walkPose, walkBob } from '../../systems/Animator.js';
 import { TUNING } from '../../data/tuning.js';
+import { rng } from '../../core/Random.js';
 
 const A = TUNING.asr;
 
@@ -88,7 +89,7 @@ export class Asr67 extends PhasedBoss {
     if (this.cd > 0 || this.t < 0.6) return;
     this.cd = A.attackEvery;
     // choix de l'attaque selon la phase
-    const r = Math.random();
+    const r = rng();
     if (this.phase === 0) return this.setState(r < 0.5 ? 'tickets' : 'plates');
     if (r < 0.5) return this.setState('chargeWindup');
     return this.setState(this.phase === 1 ? 'tickets' : (r < 0.75 ? 'plates' : 'tickets'));
@@ -103,7 +104,7 @@ export class Asr67 extends PhasedBoss {
   }
   dropPlate() {
     const p = this.player, j = A.plateJitter;
-    const x = p.x + (Math.random() - 0.5) * j, z = p.z + (Math.random() - 0.5) * j;
+    const x = p.x + (rng() - 0.5) * j, z = p.z + (rng() - 0.5) * j;
     this.game.add(new Hazard(this.game, { x, z, r: A.plateRadius, warn: A.plateWarn, life: A.plateLife, dmg: A.dmg }));
   }
   update(dt) {

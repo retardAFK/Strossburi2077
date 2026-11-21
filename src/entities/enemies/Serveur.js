@@ -4,16 +4,17 @@ import { Enemy } from './Enemy.js';
 import { Projectile } from '../props/Projectile.js';
 import { pose, walkPose, walkBob } from '../../systems/Animator.js';
 import { TUNING } from '../../data/tuning.js';
+import { rng } from '../../core/Random.js';
 
 const S = TUNING.serveur;
 
 export class Serveur extends Enemy {
   constructor(game, opts) {
     super(game, { ...opts, r: S.radius, hp: S.hp, model: 'serveur' });
-    this.baseScale = 1; this.throwCd = S.throwEvery * Math.random(); this.trayT = 0;
+    this.baseScale = 1; this.throwCd = S.throwEvery * rng(); this.trayT = 0;
     this.tray = this.obj.userData.J.tray;
     this.states = {
-      wait: { update() { if (this.t > 0.4 + Math.random() * 0.5) this.setState('chase'); } },
+      wait: { update() { if (this.t > 0.4 + rng() * 0.5) this.setState('chase'); } },
       chase: { update: this.chaseUpdate },
       windup: { update(dt) { this.telegraph = true; this.faceTo(this.player.x, this.player.z, dt * 8); if (this.t > S.windup) this.setState('lunge'); } },
       lunge: {
@@ -47,7 +48,7 @@ export class Serveur extends Enemy {
     this.game.audio.play('throw');
     this.game.add(new Projectile(this.game, { x: this.x + this.fx * 0.8, z: this.z + this.fz * 0.8, face: this.face,
       speed: S.plateSpeed, dmg: S.dmg, shape: 'assiette', y: 1.1, spin: 14 }));
-    this.throwCd = S.throwEvery + Math.random(); this.trayT = S.trayBack;
+    this.throwCd = S.throwEvery + rng(); this.trayT = S.trayBack;
     this.setState('chase');
   }
   update(dt) {

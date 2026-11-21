@@ -21,6 +21,7 @@ import { Ultra } from './entities/player/Ultra.js';
 import { Pickup } from './entities/props/Pickup.js';
 import { TEXTS } from './data/texts.fr.js';
 import { TUNING } from './data/tuning.js';
+import { rng } from './core/Random.js';
 
 const STEP = 1 / 60;
 
@@ -94,7 +95,7 @@ export class Game {
 
   onEnemyKilled(e) {
     if (e.group && this.groups[e.group] && --this.groups[e.group] === 0) this.events.emit('group:cleared:' + e.group);
-    if (!e.isBoss && Math.random() < TUNING.pickup.dropChance) this.add(new Pickup(this, { x: e.x, z: e.z }));
+    if (!e.isBoss && rng() < TUNING.pickup.dropChance) this.add(new Pickup(this, { x: e.x, z: e.z }));
   }
 
   // ouverture du niveau (cinématique avant l'écran titre), passable avec Entrée

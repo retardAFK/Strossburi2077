@@ -128,7 +128,9 @@ tools/blender/            un script Python par modèle + lib commune (s3k_lib.py
   `prompts/03-demo-niveau1-petite-france.md`). Jouables : ouverture, salle 1 (Quartier des Tanneurs : vagues,
   3 bornes, herse, plaque 1, Celle du stade), salle 2 (l'Écluse : levier, vanne, 3 niveaux d'eau, barque,
   winstubière libérée quand l'eau atteint le quai haut, plaque 2), salle 3 (Ponts Couverts : arène, 3 vagues,
-  Videur-Maître d'hôtel, coffre → bretzel-boomerang, borne sur pile, plaque 3). Un fichier de script par salle.
+  Videur-Maître d'hôtel, coffre → bretzel-boomerang, borne sur pile, plaque 3), salle 4 (Barrage Vauban :
+  cibles-TPE dans l'ordre des néons derrière des vitres anti-écharpe, écran du PDG, plaque 4).
+  Un fichier de script par salle.
   Objet : `items/BretzelBoomerang.js` via `systems/Inventory.js` (clic droit si rien n'est verrouillé, sinon F).
   Le layout déclare ses objets génériques dans `objects: [{ type, ... }]` (barque, leviers, PNJ...).
   Modèles : `tools/blender/{sbires,decor_pf,salles_pf}.py`.

@@ -14,6 +14,7 @@ import { Barque } from '../entities/props/Barque.js';
 import { Lever } from '../entities/props/Lever.js';
 import { Pnj } from '../entities/props/Pnj.js';
 import { Coffre } from '../entities/props/Coffre.js';
+import { Cible } from '../entities/props/Cible.js';
 import { VideurMaitreHotel } from '../entities/enemies/VideurMaitreHotel.js';
 import meinauLayout from './meinau-ouest/layout.js';
 import meinauScript from './meinau-ouest/script.js';
@@ -49,6 +50,9 @@ import pf_cage from '../../assets/models/pf_cage.glb';
 import pf_tour_peage from '../../assets/models/pf_tour_peage.glb';
 import pf_coffre from '../../assets/models/pf_coffre.glb';
 import bretzel_boomerang from '../../assets/models/bretzel_boomerang.glb';
+import pf_cible_tpe from '../../assets/models/pf_cible_tpe.glb';
+import pf_vitre from '../../assets/models/pf_vitre.glb';
+import pf_arche_barrage from '../../assets/models/pf_arche_barrage.glb';
 
 export const DEFAULT_LEVEL = 'petite-france'; // la Meinau reste accessible avec ?level=meinau-ouest
 
@@ -62,8 +66,9 @@ export const LEVELS = {
     layout: pfLayout, script: pfScript, texts: TEXTS.pf, subtitle: TEXTS.pf.subtitle,
     models: { ultra, serveur, sommelier, terminal, pf_maison_a, pf_maison_b, pf_maison_b_licence, pf_maison_c,
       pf_quai, pf_lampadaire, pf_compteur, pf_borne, pf_herse_laser, pnj_celle_du_stade,
-      pnj_winstubiere, pf_pont, pf_barque, pf_vanne, pf_levier, pf_cage, drone, pf_tour_peage, pf_coffre, bretzel_boomerang },
+      pnj_winstubiere, pf_pont, pf_barque, pf_vanne, pf_levier, pf_cage, drone, pf_tour_peage, pf_coffre, bretzel_boomerang,
+      pf_cible_tpe, pf_vitre, pf_arche_barrage },
     types: { serveur: Serveur, sommelier: Sommelier, terminal: Terminal, borne: Borne, plaque: Plaque,
-      barque: Barque, lever: Lever, pnj: Pnj, coffre: Coffre, videur: VideurMaitreHotel }
+      barque: Barque, lever: Lever, pnj: Pnj, coffre: Coffre, videur: VideurMaitreHotel, cible: Cible }
   }
 };

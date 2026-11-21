@@ -45,3 +45,34 @@ export class MultiState {
   }
   update() {}
 }
+
+// OrderedSequence : toucher des cibles dans un ordre donné (clés), avant la fin du chrono qui démarre
+// à la première bonne cible. Une erreur ou le temps écoulé remet tout à zéro.
+// Écoute 'target:hit' (cible { group, key }). Émet (<g> = groupe) : 'puzzle:progress:<g>' (n, total, temps),
+// 'puzzle:failed:<g>', 'puzzle:solved:<g>', 'target:reset:<g>', 'target:lock:<g>'.
+export class OrderedSequence {
+  constructor(game, { group, order, time }) {
+    this.game = game; this.group = group; this.order = order; this.time = time;
+    this.i = 0; this.left = 0; this.solved = false; this.removed = false;
+    game.events.on('target:hit', t => this.onHit(t));
+  }
+  onHit(t) {
+    if (this.solved || t.group !== this.group) return;
+    if (t.key !== this.order[this.i]) return this.fail();
+    if (this.i === 0) this.left = this.time;
+    this.i++;
+    const E = this.game.events, g = this.group;
+    E.emit('puzzle:progress:' + g, this.i, this.order.length, this.left);
+    if (this.i >= this.order.length) { this.solved = true; E.emit('target:lock:' + g); E.emit('puzzle:solved:' + g); }
+  }
+  fail() {
+    this.i = 0;
+    this.game.events.emit('target:reset:' + this.group);
+    this.game.events.emit('puzzle:failed:' + this.group);
+  }
+  update(dt) {
+    if (this.solved || !this.i) return;
+    this.left -= dt;
+    if (this.left <= 0) this.fail();
+  }
+}

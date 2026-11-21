@@ -8,6 +8,7 @@ n'est verrouillé, F, RB/R1) et change d'objet (Tab, croix haut / bas, bouton �
 | Fichier | Objet |
 |---|---|
 | `Weapon.js` | Interface commune des objets du sélecteur |
+| `index.js` | Registre `ITEMS` (id → classe) : la sauvegarde rend les objets d'un niveau à l'autre |
 | `BretzelBoomerang.js` | Bretzel-boomerang (niveau 1) : courbe aller-retour, touche à distance ennemis, bornes, terminaux et cibles ; survole l'eau et les vitres anti-écharpe. Un seul en vol. |
 | `ArcDrapeau.js` | Arc-Drapeau (niveau 2) : tir simple vers la cible verrouillée, ou en visée (clic droit / LB maintenu), ou droit devant ; flèches simples illimitées, flèches spéciales en données (`data/arrows.js`, désactivées tant que non codées). Projectile : `entities/props/Arrow.js`. |
 

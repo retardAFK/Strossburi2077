@@ -64,6 +64,8 @@ export class Game {
     for (const o of level.layout.objects || []) this.add(new this.types[o.type](this, o)); // barque, leviers, PNJ...
     this.events.on('enemy:killed', e => this.onEnemyKilled(e));
     level.script(this);
+    this.progress?.restore(); // partie reprise : objets, flèches, compagnons
+    this.menus.render(); // titre : « Continuer » si une partie est sauvegardée
     this.startOpening(level.layout.opening);
     let last = performance.now(), acc = 0;
     const frame = now => {
@@ -138,6 +140,8 @@ export class Game {
       if (this.cutscene.done || I.pressed.ok) this.endCutscene();
       return;
     }
+    if (this.mode === 'end') { if (this.nextLevel && I.pressed.ok) this.progress.goto(); return; } // niveau suivant
+    if (this.mode === 'title' && this.progress?.fromSave && I.pressed.back) return this.progress.newGame();
     if (this.mode === 'title') {
       this.renderer.camera.position.set(Math.sin(this.time * 0.25) * 3, 3, -4 + Math.cos(this.time * 0.25) * 2);
       this.renderer.camera.lookAt(0, 2, -14);
@@ -194,6 +198,8 @@ export class Game {
     }
   }
   // fin de niveau (ou de démo) : [titre, sous-titre]
+  // fin de niveau : sauvegarde + niveau suivant (systems/Progress.js), sinon simple écran de fin
+  completeLevel(text) { if (this.progress) this.progress.complete(text); else this.win(text); }
   win(text = this.texts.victory) {
     this.mode = 'end'; this.input.releasePointer(); this.audio.music(null); this.audio.play('win');
     const [t, sub] = text;

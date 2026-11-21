@@ -1,0 +1,61 @@
+# CI/CD : chaque push/PR construit le jeu ; seul un push sur main déploie sur le VPS.
+# Secrets requis : SSH_HOST, SSH_USER, SSH_KEY, SSH_KNOWN_HOSTS
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+          retention-days: 7
+
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    concurrency: production
+    environment: production
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - name: Clé SSH
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_deploy && chmod 600 ~/.ssh/id_deploy
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+
+      - name: Envoi + bascule (garde les 5 dernières versions)
+        env:
+          H: ${{ secrets.SSH_HOST }}
+          U: ${{ secrets.SSH_USER }}
+        run: |
+          ROOT=/var/www/s3k
+          REL="$ROOT/releases/$(date -u +%Y%m%d%H%M%S)-${GITHUB_SHA::7}"
+          SSH="ssh -i ~/.ssh/id_deploy"
+          $SSH "$U@$H" "mkdir -p '$REL'"
+          rsync -az --delete -e "$SSH" dist/ "$U@$H:$REL/"
+          $SSH "$U@$H" "ln -sfn '$REL' $ROOT/current.tmp && mv -Tf $ROOT/current.tmp $ROOT/current \
+            && ls -1d $ROOT/releases/2* | sort | head -n -5 | xargs -r rm -rf"
+          echo "Déployé : $REL"

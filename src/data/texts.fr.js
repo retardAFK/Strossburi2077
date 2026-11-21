@@ -18,6 +18,7 @@ export const TEXTS = {
   rumbleState: ['NON', 'OUI'],
   padUnknown: 'Manette non reconnue : utilise Steam Input ou une manette Xbox / PlayStation. Le clavier reste actif.',
   skip: '{ok} : PASSER',
+  draftBadge: 'BROUILLON', // réplique non validée par Maxime (visible seulement avec ?debug=1)
   prompts: {
     hack: '{use} : pirater', activate: '{use} : activer', restore: '{use} : restaurer la plaque', talk: '{use} : parler', open: '{use} : ouvrir',
     lever: '{use} : actionner le levier', valve: '{use} : tourner la vanne', board: '{use} : monter dans la barque', sail: '{use} : larguer les amarres'

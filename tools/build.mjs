@@ -20,6 +20,11 @@ const writeOut = { name: 'write', setup(b) { b.onEnd(r => {
     else writeFileSync('dist/' + f, readFileSync('src/pwa/' + f));
   }
   console.log('[build] dist/ à jour');
+  // dialogues : signale (sans échouer) les répliques encore en brouillon, à faire relire par Maxime
+  import('../src/data/dialogues/index.js?t=' + Date.now()).then(({ drafts }) => {
+    const d = drafts();
+    if (d.length) console.log(`[build] ${d.length} réplique(s) en brouillon : ${d.map(l => l.id).join(', ')} (relecture : node tools/dialogues-export.mjs)`);
+  });
 }); } };
 const options = {
   entryPoints: ['src/main.js'], bundle: true, format: 'iife', outfile: 'dist/game.js', write: false,

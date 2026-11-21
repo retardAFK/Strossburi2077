@@ -1,3 +1,4 @@
 node_modules/
 dist/
 deploy/PROMPT_CLAUDE_CODE.md
+Claude outputs/

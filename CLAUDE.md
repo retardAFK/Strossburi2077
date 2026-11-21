@@ -59,12 +59,14 @@ et signe de ralliement).
 ```
 src/
   main.js                 point d'entrée : choisit le niveau (?level=<id>), branche le DOM, charge ses modèles
+  touch.js                branche les commandes tactiles sur le jeu (quand les afficher, boutons AGIR / BRETZEL)
   Game.js                 chef d'orchestre : boucle fixe 60 Hz, scènes (titre, jeu, pause, fin), API des niveaux
                           (spawn, trigger, onGroupCleared, say, setCheckpoint, win)
   index.html              page + HUD (copiée dans dist/)
   core/                   moteur, ne connaît RIEN du contenu du jeu
     Renderer.js           Three.js, rendu basse résolution (480x270) + upscale pixelisé
     Input.js              clavier / souris / manette -> actions abstraites (move, attack, roll, lock, use, ok)
+    Touch.js              tactile -> mêmes actions : joystick virtuel (input.move), glisser = caméra, boutons
     Audio.js              WebAudio : sfx et musiques décrits par des données
     Assets.js             chargement des .glb, clonage, index des pivots nommés
     Events.js             bus d'événements (emit/on) : seul moyen pour les systèmes de se parler
@@ -143,6 +145,10 @@ tools/blender/            un script Python par modèle + lib commune (s3k_lib.py
   Le layout déclare ses objets génériques dans `objects: [{ type, ... }]` (barque, leviers, PNJ...).
   Modèles : `tools/blender/{sbires,decor_pf,salles_pf}.py`.
 - Debug : `window.S3K` dans la console donne accès au Game (entités, monde, joueur).
+- Mobile : commandes tactiles activées automatiquement sur téléphone / tablette (écran tactile principal),
+  forcées avec `?touch=1` (ou coupées avec `?touch=0`) pour tester sur ordinateur. Jouer en paysage.
+  Les textes qui citent des touches ont leur version tactile dans `TEXTS.touch.overrides` (à compléter
+  quand on ajoute un tuto qui parle de touches). Réglages dans `TUNING.touch`.
 - Debug : ajouter `?debug=1` à l'URL (`dist/index.html?debug=1`) active les raccourcis de `src/debug.js` :
   **F2** salle suivante (points `warps` du layout ; le script répond à 'debug:warp' pour remettre la salle
   en état ; sans warps, téléporte devant le prochain terminal / interrupteur), **F3** élimine tous les ennemis. Ex. `dist/index.html?level=petite-france&debug=1`.

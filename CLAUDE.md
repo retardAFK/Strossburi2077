@@ -18,13 +18,16 @@ de nouveaux chemins), ton satirique et loufoque, 100 % Strasbourg.
 
 | # | Niveau | Filiale du consortium | Peuple libéré → objet | Boss |
 |---|--------|----------------------|------------------------|------|
-| 1 | Petite France 2077 | BlingCo Restauration (restos à touristes hors de prix) | winstubs, petits commerçants → bretzel-boomerang | Androïde de Service Restauration ASR-67 |
+| 1 | Petite France (futur) | BlingCo Restauration (restos à touristes hors de prix) | winstubs, petits commerçants → bretzel-boomerang | Androïde de Service Restauration ASR-67 |
 | 2 | Meinau (quartier + stade) | BlingCo Football (multipropriété) | habitants, anciens du kop → mégaphone | Le Multipropriétaire (hydre à têtes de clubs) |
 | 3 | Port du Rhin | BlingCo Immobilier (boboïsation) | dockers, mariniers → gaffe-grappin | Le Promoteur et sa grue |
 | 4 | Place Kléber | Siège du marché de Noël permanent | tout le monde | PDG déguisé en Père Noël en costard (la corruption) |
 
-Fin du niveau 1 : l'Ultra est envoyé de force dans le passé par **SCN** (« Stras c'est nous », le réseau de
-résistance des Strasbourgeois ; contact : Celle du stade).
+Chronologie : le niveau 1 se passe dans le futur. À la fin, **SCN** (« Stras c'est nous », réseau underground
+et populaire, de la rue et des tribunes : « Celui du stade », « Celle du stade ») envoie l'Ultra de force en
+**2026**, notre époque, quand tout a basculé. Le niveau 2 est la Meinau en 2026. Plus tard, retour brutal vers
+le futur (partie 2), final à la Meinau du futur. L'année du futur (2077 ou 2067) n'est pas tranchée : elle est
+dans UNE constante (`YEAR` / `TEXTS.year` dans `texts.fr.js`), jamais écrite en dur.
 
 Héros : veste en jean noire, casquette, lunettes de soleil, écharpe en satin bleu et blanc (arme de départ
 et signe de ralliement).
@@ -37,6 +40,7 @@ et signe de ralliement).
 - La culture alsacienne est toujours montrée avec respect. La satire vise uniquement ce que le consortium
   en fait (androïdes, « Expériences Authentiques® », péages, cages « Tradition Certifiée »). Les gens
   (winstubière, commerçants, supporters) et les traditions sont ce qu'on défend, jamais une cible.
+- Les faits historiques affichés en jeu sont exacts et sourcés ; chaque texte historique est relu par Maxime.
 - Tous les textes du jeu sont en français, dans `src/data/texts.fr.js` (jamais en dur dans le code).
 
 ## 4. Stack (100 % open source)
@@ -68,6 +72,7 @@ src/
     Dialog.js             file de dialogues, machine à écrire, portraits
     Puzzle.js             briques d'énigmes : interrupteur, séquence, porte, minuterie (TimedSwitchGroup)
     Interact.js           interaction de proximité (touche E) + indication HUD par événement 'hud:prompt'
+    Cutscene.js           cinématiques : plans de caméra + sous-titres minutés (événement 'hud:caption')
     Animator.js           poses procédurales sur les pivots (hipN, kneeN, shN, elN, torso, head...)
     Hud.js                interface HTML (cœurs, objet équipé, barre de boss)
     World.js              construit le décor d'un niveau à partir de son layout (murs, néons, pubs holo, herses...)
@@ -124,8 +129,8 @@ tools/blender/            un script Python par modèle + lib commune (s3k_lib.py
   message holo de Celle du stade). Modèles : `tools/blender/{sbires,decor_pf,salles_pf}.py`.
 - Debug : `window.S3K` dans la console donne accès au Game (entités, monde, joueur).
 - Debug : ajouter `?debug=1` à l'URL (`dist/index.html?debug=1`) active les raccourcis de `src/debug.js` :
-  **F2** téléporte l'Ultra devant le prochain terminal ou interrupteur (borne...) encore à activer,
-  **F3** élimine tous les ennemis présents (n'importe quel niveau). Ex. `dist/index.html?level=petite-france&debug=1`.
+  **F2** salle suivante (points `warps` du layout ; le script répond à 'debug:warp' pour remettre la salle
+  en état ; sans warps, téléporte devant le prochain terminal / interrupteur), **F3** élimine tous les ennemis. Ex. `dist/index.html?level=petite-france&debug=1`.
 
 ## 8. Méthode de travail
 - On avance **un élément à la fois, validé par Maxime** (design, puis intégration, puis réglages).

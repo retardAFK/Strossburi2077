@@ -10,7 +10,7 @@ const level = LEVELS[id] || LEVELS[DEFAULT_LEVEL];
 const $ = s => document.querySelector(s);
 const dom = {
   canvas: $('#c'), stage: $('#stage'), hud: $('#hud'), dialog: $('#dialog'), bubbles: $('#bubbles'),
-  title: $('#title'), pause: $('#pause'), end: $('#end')
+  title: $('#title'), pause: $('#pause'), end: $('#end'), skip: $('#skip')
 };
 $('#title h1').textContent = TEXTS.title;
 $('#title h2').textContent = level.subtitle;

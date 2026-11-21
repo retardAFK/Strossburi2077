@@ -153,7 +153,8 @@ export class World {
     for (const id in this.doors) {
       const d = this.doors[id];
       d.t = Math.max(0, Math.min(1, d.t + (d.open ? dt : -dt) * 1.2));
-      d.m.position.y = WALL_H / 2 + d.t * (WALL_H - 0.4);
+      // rideau qui s'enroule vers le haut (ne dépasse jamais du mur, même en extérieur)
+      const h = Math.max(0.02, 1 - d.t * 0.94); d.m.scale.y = h; d.m.position.y = WALL_H - WALL_H * h / 2;
     }
     for (const id in this.lasers) { const l = this.lasers[id]; if (l.on) l.beams.forEach((b, i) => (b.material.opacity = 1, b.scale.y = 1 + 0.5 * Math.sin(t * 30 + i))); }
   }

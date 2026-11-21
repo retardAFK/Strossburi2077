@@ -11,9 +11,8 @@ Points connus, à traiter dans des tâches séparées.
 - Sensibilité de la souris et inversion verticale à proposer dans un menu d'options.
 
 ## Debug
-- **F2 avant les vagues** (`?debug=1`) : F2 téléporte devant les bornes même si les vagues n'ont pas
-  été déclenchées ; elles restent alors verrouillées. Pour tester l'énigme : entrer dans le food court,
-  F3, F3, puis F2. À améliorer (ex. F2 déclenche et vide les vagues, ou déverrouille les bornes).
+- ~~F2 avant les vagues~~ : réglé, F2 = salle suivante ; le point « salle1-enigme » saute les vagues et
+  déverrouille les bornes.
 
 ## Build
 - **Build web plus léger** : `game.js` embarque tous les modèles de tous les niveaux (4,8 Mo avec la

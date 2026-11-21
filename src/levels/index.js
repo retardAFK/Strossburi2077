@@ -9,6 +9,7 @@ import { Serveur } from '../entities/enemies/Serveur.js';
 import { Sommelier } from '../entities/enemies/Sommelier.js';
 import { Terminal } from '../entities/props/Terminal.js';
 import { Borne } from '../entities/props/Borne.js';
+import { Plaque } from '../entities/props/Plaque.js';
 import meinauLayout from './meinau-ouest/layout.js';
 import meinauScript from './meinau-ouest/script.js';
 import pfLayout from './petite-france/layout.js';
@@ -47,6 +48,6 @@ export const LEVELS = {
     layout: pfLayout, script: pfScript, texts: TEXTS.pf, subtitle: TEXTS.pf.subtitle,
     models: { ultra, serveur, sommelier, terminal, pf_maison_a, pf_maison_b, pf_maison_b_licence, pf_maison_c,
       pf_quai, pf_lampadaire, pf_compteur, pf_borne, pf_herse_laser, pnj_celle_du_stade },
-    types: { serveur: Serveur, sommelier: Sommelier, terminal: Terminal, borne: Borne }
+    types: { serveur: Serveur, sommelier: Sommelier, terminal: Terminal, borne: Borne, plaque: Plaque }
   }
 };

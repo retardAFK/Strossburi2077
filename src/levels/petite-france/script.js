@@ -14,7 +14,7 @@ export default function script(game) {
   });
 
   // entrée dans le food court : le rideau tombe derrière l'Ultra, vague 1
-  game.trigger([-9, 9, -20, -24], () => {
+  const enterFoodCourt = game.trigger([-9, 9, -20, -24], () => {
     W.setDoor('entree', false);
     game.setCheckpoint(0, -21, PI / 2);
     game.say(T.foodcourt);
@@ -46,6 +46,16 @@ export default function script(game) {
     game.setCheckpoint(0, -40, PI / 2);
     W.setPropVisible('celle', true);
     game.say(T.celle);
+  });
+
+  E.on('plaque:restored', () => game.say(T.plaqueRestored));
+
+  // debug F2 : on saute les vagues, l'énigme des bornes est prête
+  E.on('debug:warp', id => {
+    if (id !== 'salle1-enigme') return;
+    enterFoodCourt.done = true; W.setDoor('entree', false);
+    for (const e of game.entities) if (e.isEnemy && e.alive) e.takeHit(99, 0, 1, 5, null);
+    E.emit('switch:enable:bornes');
   });
 
   // fin provisoire de la démo : la terrasse mène à l'écluse

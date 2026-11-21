@@ -3,13 +3,14 @@ import { Enemy } from './Enemy.js';
 import { Contrat } from '../props/Contrat.js';
 import { pose, walkPose, walkBob } from '../../systems/Animator.js';
 import { TUNING } from '../../data/tuning.js';
+import { rng } from '../../core/Random.js';
 
 const J = TUNING.juriste;
 
 export class Juriste extends Enemy {
   constructor(game, opts) {
     super(game, { ...opts, r: J.radius, hp: J.hp, model: 'juriste', scale: 1.05 });
-    this.baseScale = 1.05; this.cd = 1 + Math.random(); this.strafe = Math.random() < 0.5 ? 1 : -1;
+    this.baseScale = 1.05; this.cd = 1 + rng(); this.strafe = rng() < 0.5 ? 1 : -1;
     this.states = {
       wait: { update() { if (this.t > 0.6) this.setState('keep'); } },
       keep: { update: this.keepUpdate },
@@ -31,7 +32,7 @@ export class Juriste extends Enemy {
     if (this.hitWall) this.strafe *= -1;
     this.separate(dt);
     this.cd -= dt;
-    if (this.cd <= 0 && d < 16) { this.cd = J.throwEvery + Math.random(); this.setState('windup'); }
+    if (this.cd <= 0 && d < 16) { this.cd = J.throwEvery + rng(); this.setState('windup'); }
     this.bark('juriste');
   }
   throwContract() {

@@ -16,11 +16,6 @@ Points connus, à traiter dans des tâches séparées.
 - ~~F2 avant les vagues~~ : réglé, F2 = salle suivante ; le point « salle1-enigme » saute les vagues et
   déverrouille les bornes.
 
-## Manette
-- **Test automatique** `npm run test:pad` (`tests/manette.test.mjs`) : simule une manette Xbox puis PlayStation
-  dans le Chrome installé. Il attend la dépendance de dev `playwright-core` (à valider par Maxime :
-  `npm i -D playwright-core`) ; aucun navigateur n'est téléchargé.
-
 ## Build
 - **Build web plus léger** : `game.js` embarque tous les modèles de tous les niveaux (4,8 Mo avec la
   Petite France). Pistes : un fichier par niveau, ou modèles servis à part pour la version en ligne,

@@ -4,8 +4,9 @@
 // Usage dans un script : game.dialog.sayIds(['niveau.scene.1', ...], suite) ; ou line(id) pour une réplique seule.
 // Circuit de relecture : tools/dialogues-export.mjs → docs/dialogues/<niveau>.md → tools/dialogues-import.mjs.
 import basASable from './bac-a-sable.fr.js';
+import meinau from './meinau.fr.js';
 
-export const DIALOGUES = { 'bac-a-sable': basASable };
+export const DIALOGUES = { 'bac-a-sable': basASable, meinau };
 
 const BY_ID = new Map();
 for (const lines of Object.values(DIALOGUES)) for (const l of lines) BY_ID.set(l.id, l);

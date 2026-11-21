@@ -153,6 +153,12 @@ tools/blender/            un script Python par modèle + lib commune (s3k_lib.py
   Objet : `items/BretzelBoomerang.js` via `systems/Inventory.js` (clic droit si rien n'est verrouillé, sinon F).
   Le layout déclare ses objets génériques dans `objects: [{ type, ... }]` (barque, leviers, PNJ...).
   Modèles : `tools/blender/{sbires,decor_pf,salles_pf}.py`.
+- **Niveau 2 jouable** : `levels/meinau` (`?level=meinau`, enchaîné après le niveau 1), la Meinau en 2026 : parvis (stewards-robots),
+  coursive (terminal → portique des anciens du kop), local du kop (Arc-Drapeau + flèches-bannières, tuto sur 3 cibles), kop (énigme du
+  tifo : l'écran géant donne l'ordre des couleurs, « PAS À VENDRE »), pelouse (boss Egboehly, `bosses/Egboehly.js` + `HydraHead.js`).
+  Décor : `tools/blender/decor_kit.py` exporte les pièces de `decor_meinau.py` (`decor_meinau_ext`, `decor_meinau_bol`).
+  Personnages sans design (anciens du kop, pigeon, kop) : placeholders gris étiquetés (`systems/Placeholder.js`).
+  Répliques auto-validées à relire : `docs/dialogues/AUTO.md`.
 - **Objets et Arc-Drapeau** (règles : `docs/decisions.md`) : `items/Weapon.js` (interface commune), `systems/Inventory.js`
   (objets dans l'ordre d'obtention, Tab / croix haut-bas / bouton ⇄ pour changer), `items/ArcDrapeau.js` (verrouillage ou visée
   par-dessus l'épaule : clic droit / LB maintenus, VISER à bascule au tactile ; tir F / RB / bouton ARC, clic gauche en visée),
@@ -171,7 +177,7 @@ tools/blender/            un script Python par modèle + lib commune (s3k_lib.py
 - Tests (filet anti-régression) : `npm test` = build + `tests/run-all.mjs` (Chrome installé piloté par
   `playwright-core`, sans fenêtre). `niveau1` (parcours complet via F2), `boss-asr67` (graine `?seed=1`,
   instantané des réglages `tests/snapshots/asr67.json`, mise à jour volontaire : `npm run test:update-snapshots`),
-  `meinau-ouest` (fumée), `manette` (Xbox / PlayStation simulées), `arc-drapeau` (bac à sable : changement d'objet, tir,
+  `meinau` (parcours du niveau 2), `boss-egboehly` (instantané `tests/snapshots/egboehly.json`), `meinau-ouest` (fumée), `manette` (Xbox / PlayStation simulées), `arc-drapeau` (bac à sable : changement d'objet, tir,
   visée, munitions, tactile). Outils communs : `tests/helpers.mjs`. Sans Chrome installé (conteneur) :
   `CHROME_PATH=<binaire Chromium> npm test`.
   Toute PR garde `npm test` vert ; une PR qui touche `entities/bosses/` met à jour le test du boss.

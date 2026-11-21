@@ -1,0 +1,16 @@
+{
+  "headHp": 3,
+  "headRadius": 0.9,
+  "biteEvery": 2.6,
+  "aimTime": 0.8,
+  "biteTime": 0.45,
+  "biteReach": 6,
+  "recover": 1.1,
+  "dmg": 1,
+  "regrow": 7,
+  "spitEvery": 5,
+  "spitSpeed": 9,
+  "pilotHp": 6,
+  "pilotStun": 2.5,
+  "scale": 1.25
+}

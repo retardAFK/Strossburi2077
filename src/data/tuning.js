@@ -18,6 +18,12 @@ export const TUNING = {
     hp: 12, speed: 3.0, radius: 1.3, slamWindup: 0.9, slamRange: 4.2, stunned: 1.8, dmg: 2,
     volleyEvery: 4, volleyCount: 3, summonAt: 0.5
   },
+  // Petite France : androïdes de BlingCo Restauration
+  serveur: {
+    hp: 3, speed: 4.6, radius: 0.6, reach: 1.9, windup: 0.45, lunge: 10, lungeTime: 0.22, recover: 0.7, dmg: 1,
+    throwMin: 4, throwMax: 8, throwEvery: 3.2, throwWindup: 0.5, plateSpeed: 9, trayBack: 1.4
+  },
+  sommelier: { hp: 3, speed: 3.4, radius: 0.6, keepDist: 8, fireRange: 15, fireEvery: 2.8, windup: 0.45, burst: 2, burstGap: 0.2, corkSpeed: 16, dmg: 1 },
   pickup: { heal: 2, dropChance: 0.35 },
   camera: {
     dist: 7.5, height: 4.4, bossDist: 9.5, bossHeight: 5.2, followRate: 1.6, lockRate: 6, posRate: 6, minHeight: 0.6,
@@ -30,5 +36,8 @@ export const TUNING = {
     useRange: 2.2,
     marker: { y: 3.1, size: 0.32, bob: 0.18, bobSpeed: 3, spin: 2.2, color: 0x38f2ff },
     debugDist: 1.6 // F2 (?debug=1) : distance devant le terminal
-  }
+  },
+  // interrupteurs d'énigme (bornes...) : portée de E, couleurs du voyant, clignotement (Hz x 2π)
+  switches: { useRange: 2.2, onColor: 0x38f2ff, offColor: 0xffc040, blinkSpeed: 6 },
+  puzzle: { pfBornesTime: 6 } // Petite France salle 1 : 3 bornes en moins de 6 s
 };

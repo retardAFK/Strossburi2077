@@ -5,7 +5,7 @@ export const TEXTS = {
   pressStart: 'APPUIE SUR ENTRÉE',
   controls: 'Clic : capturer la souris · Souris : caméra · Échap : libérer (pause)<br>ZQSD / flèches : bouger · J / clic : écharpe (3 coups) · Espace : roulade<br>Maj / L / clic droit : verrouiller · E : interagir / pirater · Entrée : dialogues · M : son',
   pauseHint: 'CLIC : REPRENDRE · P : REPRENDRE SANS SOURIS',
-  prompts: { hack: 'E : pirater' },
+  prompts: { hack: 'E : pirater', activate: 'E : activer' },
   hero: "L'ULTRA",
   rooms: { entree: 'PORTE OUEST', coursive: 'COURSIVE DE LA TRIBUNE OUEST', vip: 'SALON « EXPÉRIENCE CLIENT » BLINGCO', sortie: 'VERS LA TRIBUNE' },
 
@@ -24,7 +24,9 @@ export const TEXTS = {
 
   barks: {
     consultant: ['On va optimiser ta ferveur !', 'Ton chant n\'est pas monétisable.', 'Synergie !', 'Je te passe en freemium !', 'C\'est pas personnel, c\'est stratégique.'],
-    juriste: ['Article 12 : interdiction de chanter !', 'Signe ici, ici, et là.', 'Clause de non-supportérisme !', 'Vous avez lu les CGU ? Non ? Parfait.']
+    juriste: ['Article 12 : interdiction de chanter !', 'Signe ici, ici, et là.', 'Clause de non-supportérisme !', 'Vous avez lu les CGU ? Non ? Parfait.'],
+    serveur: ['Votre table est prête. Votre carte bancaire aussi ?', "Une carafe d'eau ? Option Premium.", 'Le menu « Authentique® » vous tend les bras !', 'Pourboire inclus. Et re-inclus.'],
+    sommelier: ['Notes de fruits rouges et de frais de service.', "Le vin d'ici, avec notre marge d'ailleurs.", 'Bouchonné ? Non : facturé.', 'Je vous sers un fond ? Au prix de la bouteille.']
   },
 
   intro: [
@@ -48,5 +50,39 @@ export const TEXTS = {
   ],
   victory: ['TRIBUNE OUEST LIBÉRÉE !', 'Les anciens du kop rejoignent la résistance. Fin du niveau 1 (prototype).'],
   gameOver: "Tu t'es fait licencier... Retour au dernier point de contrôle.",
+
+  // ------------------------------------------------ Niveau 1 : Petite France 2077 (salle 1 : Quartier des Tanneurs)
+  pf: {
+    subtitle: 'NIVEAU 1 : PETITE FRANCE 2077',
+    rooms: { ruelle: 'PETITE FRANCE · RUELLE SOUS LICENCE', foodcourt: 'QUARTIER DES TANNEURS · « FOOD COURT PREMIUM »', terrasse: 'TERRASSE (ACCÈS PAYANT)' },
+    ads: [
+      ['FOOD COURT PREMIUM', 'EXPÉRIENCE AUTHENTIQUE®'],
+      ['TARTE FLAMBÉE', '89 BC · FEU EN OPTION'],
+      ['COLOMBAGES®', 'PROPRIÉTÉ BLINGCO'],
+      ["VUE SUR L'ILL", '2 BC / MINUTE'],
+      ['COMMANDEZ ICI', 'SOURIEZ, VOUS PAYEZ'],
+      ['BRETZEL', "À L'UNITÉ OU PAR ABONNEMENT"]
+    ],
+    intro: [
+      { who: "L'ULTRA", txt: "La Petite France, de nuit. Avant, ça sentait le bois mouillé et la tarte flambée. Maintenant ça sent le terminal de paiement." },
+      { who: "L'ULTRA", txt: "Tout est « sous licence BlingCo » : les colombages, les géraniums, même le reflet dans l'Ill. Et les gens d'ici se font sortir de chez eux." },
+      { who: 'TUTO', txt: "Souris pour regarder, ZQSD pour avancer. Au Quartier des Tanneurs, BlingCo a ouvert un « Food Court Premium » : c'est au bout de la ruelle." }
+    ],
+    foodcourt: { who: 'ANDROÏDE SERVEUR', txt: "Bienvenue au Food Court Premium ! La table, c'est 40 BlingCoins. Ressortir, c'est plus cher." },
+    wave2: { who: 'ANDROÏDE SOMMELIER', txt: "Monsieur n'a pas consommé. Monsieur va être servi." },
+    herse: [
+      { who: "L'ULTRA", txt: "La sortie vers la terrasse est bloquée par une herse laser. Trois bornes « sans contact »... il faut les allumer presque en même temps." },
+      { who: 'TUTO', txt: "Active les 3 bornes (E ou écharpe) en moins de {t} secondes." }
+    ],
+    puzzleFail: ['PAIEMENT EXPIRÉ', 'veuillez recommencer'],
+    herseOpen: ['HERSE OUVERTE', 'paiement refusé : vous êtes libre'],
+    celle: [
+      { who: 'CELLE DU STADE', txt: "Eh, l'écharpe bleue et blanche ! T'inquiète, c'est Celle du stade. J'ai emprunté leur écran deux minutes." },
+      { who: 'CELLE DU STADE', txt: "Nous, c'est SCN : Stras c'est nous. Des gens d'ici. Winstubs, mariniers, anciens du kop, mamies du quartier. On ne lâche rien." },
+      { who: 'CELLE DU STADE', txt: "Ils ont bloqué l'écluse pour faire payer le passage. File là-bas, on t'y attend. Et méfie-toi des sommeliers : ils visent bien." },
+      { who: "L'ULTRA", txt: "Reçu. Direction l'écluse." }
+    ],
+    end: ['FIN DE LA DÉMO', "Suite : l'Écluse (en construction)"]
+  },
   shield: 'TING !'
 };

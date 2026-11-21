@@ -21,8 +21,18 @@ export function salle4(game, { T, W, E }) {
   });
   game.onGroupCleared('toit', () => game.say(T.cibles.map(l => ({ ...l, txt: l.txt.replace('{t}', time) }))));
 
-  E.on('puzzle:progress:cibles', (n, total) => game.hud.banner(`${n} / ${total}`, '', 0.8));
-  E.on('puzzle:failed:cibles', () => { game.hud.banner(...T.ciblesFail); game.audio.play('hurt'); });
+  // indices progressifs : un conseil par échec, puis la prochaine cible clignote (la difficulté reste la même)
+  const ORDER = ['rouge', 'or', 'cyan'];
+  let fails = 0;
+  const hint = n => { if (fails >= T.ciblesHints.length) E.emit('target:hint:cibles', ORDER[n] || null); };
+  E.on('puzzle:progress:cibles', (n, total) => { game.hud.banner(`${n} / ${total}`, '', 0.8); hint(n); });
+  E.on('puzzle:failed:cibles', () => {
+    game.hud.banner(...T.ciblesFail); game.audio.play('hurt');
+    const h = T.ciblesHints[Math.min(fails, T.ciblesHints.length - 1)];
+    fails++;
+    if (fails <= T.ciblesHints.length) game.say(h);
+    hint(0);
+  });
   E.on('puzzle:solved:cibles', () => {
     W.setGate('herse4', true);
     game.hud.banner(...T.herseOpen);

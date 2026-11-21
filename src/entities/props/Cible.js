@@ -20,7 +20,9 @@ export class Cible extends Entity {
     });
     game.collision.addCircle(x, z, 0.45, 'target');
     game.events.on('target:reset:' + group, () => this.setLit(false));
-    game.events.on('target:lock:' + group, () => { this.done = true; this.setLit(true); });
+    game.events.on('target:lock:' + group, () => { this.done = true; this.hinted = false; this.setLit(true); });
+    // indice : la prochaine cible à toucher clignote (clé, ou null pour arrêter)
+    game.events.on('target:hint:' + group, key => { this.hinted = key === this.key && !this.done; if (!this.hinted && !this.lit) this.setLit(false); });
     this.sync(); this.setLit(false);
   }
   setLit(on) {
@@ -40,5 +42,9 @@ export class Cible extends Entity {
   update(dt) {
     this.time += dt;
     if (this.head && this.spin > 0) { const d = Math.min(this.spin, dt * 10); this.spin -= d; this.head.rotation.y += d; }
+    if (this.hinted && !this.lit) { // clignotement de l'indice, sans compter comme « allumée »
+      const m = this.screen?.material, on = Math.sin(this.time * 10) > 0;
+      if (m) { m.emissive.setHex(on ? this.color : 0x000000); m.emissiveIntensity = on ? 0.8 : 0; }
+    }
   }
 }

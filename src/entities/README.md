@@ -8,10 +8,10 @@ Une entité = un fichier, construite sur `Entity.js` (position `x, z, y`, orient
 | `player/Ultra.js` | Le héros : écharpe (combo 3 coups), roulade, verrouillage. **Ne pas modifier son design.** |
 | `enemies/` | `Enemy.js` (base : agro, mort, répliques `bark`), Consultant, Juriste, Serveur, Sommelier, VideurMaitreHotel |
 | `bosses/` | `PhasedBoss.js` (générique : phases par PV, `react(côté, source)` → `block` / `weak` / `hit`), `Asr67.js`, `Directeur.js` |
-| `props/` | Objets génériques : Terminal, Borne, Cible, Lever, Coffre, Plaque, Pnj, Barque, Projectile, Contrat, Hazard, Flames, Pickup |
+| `props/` | Objets génériques : Terminal, Borne, Cible, Lever, Coffre, Plaque, Pnj, Barque, Projectile, Contrat, Arrow (flèche de l'arc), Hazard, Flames, Pickup, Mannequin (bac à sable, placeholder gris) |
 
 Drapeaux utiles : `isEnemy`, `isBoss`, `isMiniBoss`, `isSwitch`, `isTarget`, `isTerminal`, `isPlaque`, `isChest`,
-`isBoat`, `isProjectile`, `isPlayerShot` (le bretzel), `isHazard`. Une entité morte a `alive = false` ; retirée, `removed = true`.
+`isBoat`, `isProjectile`, `isPlayerShot` (bretzel, flèche), `isHazard`, `lockable` (verrouillable par l'arc). Une entité morte a `alive = false` ; retirée, `removed = true`.
 
 Règles : chiffres dans `TUNING.<entité>`, répliques dans `texts.fr.js` (`barks.<type>`), aléatoire via `core/Random.js`
 (`rng()`, sauf effets visuels), communication par le bus (`game.events.emit`), jamais de référence directe à un niveau.

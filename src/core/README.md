@@ -14,7 +14,8 @@ Ne connaît **rien** du contenu du jeu (aucun niveau, ennemi ni texte). Ne dépe
 | `Audio.js` | WebAudio : `play(sfx)`, `music(nom | null)`, bruitages et musiques décrits en données |
 | `Random.js` | Aléatoire à graine (`seed(n)`, `rng()`) pour la **logique** de jeu ; graine `?seed=<n>` |
 
-Actions abstraites : `up down left right attack roll lock use throw ok back pause rumble mute`, plus `alt` (clic droit),
+Actions abstraites : `up down left right attack roll lock use throw ok back pause rumble mute`, objets `switch switchPrev
+aim arrowNext arrowPrev` (+ `arrowPick`, 1 à 4 au clavier), plus `alt` (clic droit),
 `capture` (clic qui capture la souris), `release` (souris libérée), `padLost` (manette débranchée).
 
 Événements : `core/` n'en émet aucun lui-même (il fournit le bus) ; voir `docs/EVENTS.md`.

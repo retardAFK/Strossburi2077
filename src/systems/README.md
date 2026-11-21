@@ -9,7 +9,7 @@ Réutilisées par tous les niveaux. Dépendent de `core/` et de `data/`, jamais 
 | `Combat.js` | `swing(attaquant, {range, arc, dmg, knock, targets, hitSet})`, `blast(x, z, r, dmg, knock, cibles)` |
 | `Interact.js` | `interact(e, texte, portée)` → true si E à portée (l'objet le plus proche a la main) ; `clearPrompt(e)` |
 | `Puzzle.js` | `TimedSwitchGroup` (interrupteurs à minuterie), `OrderedSequence` (cibles dans l'ordre), `MultiState` (état à plusieurs niveaux) |
-| `Inventory.js` | `give(objet)`, `has(id)`, `equipped` ; clic droit / F → `use()` de l'objet équipé |
+| `Inventory.js` | `give(objet)`, `has(id)`, `equipped`, changement d'objet ; clic droit / F → `use()` de l'objet équipé (interface `items/Weapon.js`) |
 | `Dialog.js` | File de répliques à machine à écrire ; `game.say(lignes, suite)` ; les jetons `{use}`… sont remplacés |
 | `Hud.js` | Vie, zone, barre de boss (`showBoss`, `setBoss`), bandeaux (`banner`), indication d'action, sous-titres, fondu, glitch |
 | `Prompts.js` | Dernier appareil utilisé ; `format(texte, 'html' | 'text')` remplace `{action}` par une icône ou un libellé |

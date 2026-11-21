@@ -6,7 +6,8 @@ et `types` (les classes que layout et script peuvent créer). Le niveau est choi
 | Dossier | Niveau |
 |---|---|
 | `petite-france/` | Niveau 1, Petite France (futur) : `layout.js` (données), `script.js` qui branche `salle1.js` … `salle5.js` |
-| `meinau-ouest/` | Prototype : tribune ouest de la Meinau (futur), boss Directeur |
+| `meinau-ouest/` | Prototype : tribune ouest de la Meinau (futur), boss Directeur ; recyclé plus tard dans le final (`docs/decisions.md`) |
+| `bac-a-sable/` | Salle grise de réglage (`?level=bac-a-sable&debug=1`) : cibles, mannequins, fossé, grille, mur haut ; donne le bretzel et l'arc |
 
 **`layout.js` = DONNÉES uniquement** : `zones` (rect + `cam`), `floors`, `walls`, `blockers`, `doors`, `gates`, `waters`,
 `switches`, `plaques`, `objects: [{ type, ... }]`, `props` (`.glb`), `ads`, `neons`, `lights`, `opening` (cinématique),

@@ -4,6 +4,7 @@
 |---|---|
 | `texts.fr.js` | **Tous** les textes du jeu, en français : titres, contrôles, indications, répliques, plaques historiques, noms de zones, panneaux. `TEXTS.<niveau>` pour un niveau (ex. `TEXTS.pf`). Année du futur dans la seule constante `YEAR`. |
 | `tuning.js` | **Tous** les réglages chiffrés : vitesses, PV, dégâts, timings, portées, couleurs de gameplay. `TUNING.<entité ou système>`. |
+| `arrows.js` | Types de flèches de l'Arc-Drapeau (données) : 4 spéciales à terme, désactivées tant que leurs effets ne sont pas codés ; la flèche tag est retirée. |
 
 Règles (`CLAUDE.md` §3 et §5) :
 - Jamais de texte ni de chiffre en dur dans le code.

@@ -7,6 +7,7 @@ Certains noms viennent des **données** et n'apparaissent pas comme émis ici : 
 
 | Événement | Émis par | Écouté par | Arguments (extrait de l'appel) |
 |---|---|---|---|
+| `arrow:hit` | `entities/props/Arrow.js` | — | `e, this` |
 | `boat:arrived` | `entities/props/Barque.js` | — | `this.here.id` |
 | `boat:blocked` | `entities/props/Barque.js` | `levels/petite-france/salle2.js` | `i + 1 < n ? 'pass' : 'end', this.here.id` |
 | `boat:board` | `entities/props/Barque.js` | — | `this.here.id` |
@@ -15,12 +16,13 @@ Certains noms viennent des **données** et n'apparaissent pas comme émis ici : 
 | `boss:phase` | `entities/bosses/PhasedBoss.js` | `levels/petite-france/salle5.js` | `ph, this` |
 | `chest:opened` | `entities/props/Coffre.js` | `levels/petite-france/salle3.js` | `this.id` |
 | `chest:unlock:<id>` | `levels/petite-france/salle3.js` | `entities/props/Coffre.js` | — |
-| `debug:warp` | `debug.js` | `levels/petite-france/salle1.js`<br>`levels/petite-france/salle2.js`<br>`levels/petite-france/salle3.js`<br>`levels/petite-france/salle5.js` | `w.id` |
+| `debug:warp` | `debug.js` | `levels/bac-a-sable/script.js`<br>`levels/petite-france/salle1.js`<br>`levels/petite-france/salle2.js`<br>`levels/petite-france/salle3.js`<br>`levels/petite-france/salle5.js` | `w.id` |
 | `enemy:killed` | `entities/bosses/PhasedBoss.js`<br>`entities/enemies/Enemy.js` | `Game.js` | `this` |
 | `enemy:removed` | `entities/enemies/Enemy.js` | — | `this` |
-| `game:start` | `Game.js` | `levels/meinau-ouest/script.js`<br>`levels/petite-france/salle1.js` | — |
+| `game:start` | `Game.js` | `levels/bac-a-sable/script.js`<br>`levels/meinau-ouest/script.js`<br>`levels/petite-france/salle1.js` | — |
 | `group:cleared:<id>` | `Game.js` | `Game.js` | — |
-| `hit` | `entities/Entity.js` | — | `this, from` |
+| `hit` | `entities/Entity.js`<br>`entities/props/Mannequin.js` | — | `this, from` |
+| `hud:aim` | `items/ArcDrapeau.js` | `systems/Hud.js`<br>`touch.js` | `on` |
 | `hud:caption` | `systems/Cutscene.js` | `systems/Hud.js` | `i >= 0 ? this.captions[i].txt : null`<br>`null` |
 | `hud:cinema` | `Game.js` | `systems/Hud.js` | `false`<br>`true` |
 | `hud:fade` | `levels/petite-france/salle5.js` | `systems/Hud.js` | `0`<br>`1` |
@@ -28,7 +30,7 @@ Certains noms viennent des **données** et n'apparaissent pas comme émis ici : 
 | `hud:prompt` | `systems/Interact.js` | `systems/Hud.js`<br>`touch.js` | `e, on ? text : null` |
 | `input:device` | `systems/Prompts.js` | `systems/Hud.js`<br>`systems/Menus.js` | `d` |
 | `input:notice` | `systems/Prompts.js` | `systems/Hud.js` | `this.notice ? this.game.texts.padUnknown : null` |
-| `inventory:changed` | `systems/Inventory.js` | `systems/Hud.js`<br>`touch.js` | `item` |
+| `inventory:changed` | `systems/Inventory.js` | `systems/Hud.js`<br>`touch.js` | `this.equipped, this.order.length` |
 | `lever:enable:<id>` | — | `entities/props/Lever.js` | — |
 | `lever:used` | `entities/props/Lever.js` | `levels/petite-france/salle2.js` | `this.id, this.down` |
 | `pf:boss` | `levels/petite-france/salle4.js` | `levels/petite-france/salle5.js` | — |
@@ -46,7 +48,7 @@ Certains noms viennent des **données** et n'apparaissent pas comme émis ici : 
 | `switch:on` | `entities/props/Borne.js` | `levels/petite-france/salle3.js`<br>`systems/Puzzle.js` | `this` |
 | `switch:reset:<id>` | `systems/Puzzle.js` | `entities/props/Borne.js` | — |
 | `target:hint:<id>` | `levels/petite-france/salle4.js` | `entities/props/Cible.js` | `ORDER[n] \|\| null` |
-| `target:hit` | `entities/props/Cible.js` | `systems/Puzzle.js` | `this` |
+| `target:hit` | `entities/props/Cible.js` | `levels/bac-a-sable/script.js`<br>`systems/Puzzle.js` | `this` |
 | `target:lock:<id>` | `systems/Puzzle.js` | `entities/props/Cible.js` | — |
 | `target:reset:<id>` | `systems/Puzzle.js` | `entities/props/Cible.js` | — |
 | `terminal:laser` | — | `levels/meinau-ouest/script.js` | — |

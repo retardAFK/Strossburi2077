@@ -12,6 +12,9 @@ const SHAPES = {
     rim.rotation.x = Math.PI / 2; rim.position.y = 0.03; g.add(rim);
     return g;
   },
+  ticket() { // ticket d'addition qui vole à plat
+    return new THREE.Mesh(new THREE.PlaneGeometry(0.35, 0.6), new THREE.MeshBasicMaterial({ color: 0xfffbe8, side: THREE.DoubleSide, fog: false }));
+  },
   bouchon() {
     return new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.07, 0.2, 6), new THREE.MeshBasicMaterial({ color: 0xc89a5a, fog: false }));
   }

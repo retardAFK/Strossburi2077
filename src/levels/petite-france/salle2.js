@@ -48,5 +48,5 @@ export function salle2(game, { T, W, E }) {
   });
 
   // debug F2 : salles suivantes = écluse passée (eau haute, winstubière libre)
-  E.on('debug:warp', id => { if (id.startsWith('salle3') || id === 'salle4') { landed = true; eau.set(2); } });
+  E.on('debug:warp', id => { if (id.startsWith('salle3') || id === 'salle4' || id === 'salle5') { landed = true; eau.set(2); } });
 }

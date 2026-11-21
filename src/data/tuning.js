@@ -50,7 +50,15 @@ export const TUNING = {
   // bretzel-boomerang : portée (m), vitesse (m/s), courbe latérale (m), rayon de touche, retour (m), durée max (s)
   // cibles-TPE : couleurs des clés (ordre des néons)
   targets: { colors: { rouge: 0xff1a3c, or: 0xffc040, cyan: 0x38f2ff } },
-  boomerang: { range: 11, speed: 15, curve: 1.6, radius: 0.55, catch: 0.9, maxTime: 4, height: 1.2, spin: 18, scale: 0.6, dmg: 1, knock: 6 },
+  boomerang: { range: 11, speed: 15, curve: 0.7, radius: 0.55, catch: 0.9, maxTime: 4, height: 1.2, spin: 18, scale: 0.6, dmg: 1, knock: 6 },
+  // ASR-67 (boss du niveau 1) : PV, seuils de phase, cadence, tickets, plats brûlants, charge, flammes du four
+  asr: {
+    hp: 24, phases: [0.66, 0.33], radius: 0.9, speed: 2.6, turn: 2.2, attackEvery: 2.6, dmg: 1, stunned: 2.2, recover: 0.7,
+    tickets: 5, ticketSpread: 0.22, ticketSpeed: 10, ticketWindup: 0.6,
+    plates: 3, plateGap: 0.45, plateRadius: 1.4, plateWarn: 0.9, plateLife: 2.6, plateJitter: 3,
+    chargeWindup: 0.8, chargeSpeed: 13, chargeTime: 1.3, pillarReach: 1.3,
+    flames: { arms: 3, length: 9, speed: 0.7, width: 0.45 }
+  },
   // Videur-Maître d'hôtel : garde de face (cos de l'angle), recul subi réduit, repousse l'Ultra quand il bloque
   videur: { hp: 10, radius: 0.85, scale: 1.4, guard: 0.35, knockTaken: 0.3, pushBack: 7 }
 };

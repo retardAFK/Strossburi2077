@@ -35,5 +35,6 @@ export function salle4(game, { T, W, E }) {
     game.audio.play('laser'); game.camera.shake = 0.3;
     game.say(T.pdg);
   });
-  game.trigger([19, 22, -167.3, -168.3], () => game.win(T.end));
+  // porte du boss : on descend dans la cuisine sous le barrage (salle5.js)
+  game.trigger([19, 22, -167.3, -168.3], () => E.emit('pf:boss'));
 }

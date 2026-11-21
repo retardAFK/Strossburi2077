@@ -96,13 +96,24 @@ export class Game {
   startOpening(o) {
     const lines = this.levelTexts.opening;
     if (!o || !lines) return;
-    this.mode = 'opening'; this.dom.title.style.display = 'none';
-    this.dom.skip.textContent = this.texts.skip; this.dom.skip.style.display = 'block';
-    this.cutscene = new Cutscene(this, { shots: o.shots, captions: lines.map((txt, i) => ({ at: o.captionAt[i] ?? 0, txt })) });
+    this.dom.title.style.display = 'none';
+    this.playCutscene(o.shots, lines.map((txt, i) => ({ at: o.captionAt[i] ?? 0, txt })), () => {
+      this.mode = 'title'; this.dom.title.style.display = 'flex';
+    });
   }
-  endOpening() {
-    this.cutscene.end(); this.cutscene = null; this.mode = 'title';
-    this.dom.skip.style.display = 'none'; this.dom.title.style.display = 'flex';
+  // cinématique : plans de caméra + sous-titres, passable avec Entrée. À la fin, retour au jeu
+  // (sauf si onDone enchaîne autre chose : une autre cinématique, l'écran de fin...).
+  playCutscene(shots, captions, onDone) {
+    this.mode = 'cutscene'; this.cutsceneDone = onDone;
+    this.fx.clearBubbles(); this.events.emit('hud:cinema', true);
+    this.dom.skip.textContent = this.texts.skip; this.dom.skip.style.display = 'block';
+    this.cutscene = new Cutscene(this, { shots, captions });
+  }
+  endCutscene() {
+    this.cutscene.end(); this.cutscene = null; this.dom.skip.style.display = 'none';
+    const f = this.cutsceneDone; this.cutsceneDone = null; this.mode = 'play';
+    this.events.emit('hud:cinema', false);
+    f?.();
   }
 
   // ---------------------------------------------------------------- boucle
@@ -110,9 +121,9 @@ export class Game {
     this.time += dt; this.dt = dt;
     const I = this.input;
     if (I.pressed.mute) this.audio.toggleMute();
-    if (this.mode === 'opening') {
-      this.world.update(dt, this.time); this.cutscene.update(dt);
-      if (this.cutscene.done || I.pressed.ok) this.endOpening();
+    if (this.mode === 'cutscene') {
+      this.world.update(dt, this.time); this.particles.update(dt); this.cutscene.update(dt);
+      if (this.cutscene.done || I.pressed.ok) this.endCutscene();
       return;
     }
     if (this.mode === 'title') {

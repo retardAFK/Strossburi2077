@@ -100,12 +100,15 @@ export const TEXTS = {
     { who: 'LE DIRECTEUR DE LA VALORISATION', txt: "Ce club est à moi. Et à moi. Et encore à moi : c'est ça, la multipropriété." },
     { who: "L'ULTRA", txt: "Ta mallette, elle bloque tout de face. Faut le faire frapper dans le vide, puis lui tomber dessus." }
   ],
+  bossName: 'LE DIRECTEUR DE LA VALORISATION',
   bossShield: 'CLAUSE DE NON-AGRESSION !',
   bossSummon: "Stagiaires ! Venez défendre mon EBITDA !",
   bossDefeat: [
     { who: 'LE DIRECTEUR DE LA VALORISATION', txt: "Mes... mes actionnaires vont m'entendre. Et le reste de la ville aussi !" },
     { who: "L'ULTRA", txt: "La tribune ouest est libérée. Prochaine étape : la Petite France. Allez, on chante !" }
   ],
+  banners: { entree: ['PASSAGE OUVERT', 'direction la coursive'], sortie: ['LA TRIBUNE VOUS ATTEND'] },
+  graffiti: ['TRIBUNE OUEST', 'PAS À VENDRE', 'RCS', "ICI C'EST LA MEINAU"],
   victory: ['TRIBUNE OUEST LIBÉRÉE !', 'Les anciens du kop rejoignent la résistance. Fin du niveau 1 (prototype).'],
   gameOver: "Tu t'es fait licencier... Retour au dernier point de contrôle.",
 

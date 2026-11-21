@@ -12,7 +12,7 @@ export default function script(game) {
 
   game.onGroupCleared('entree', () => {
     W.setDoor('entree', true);
-    game.hud.banner('PASSAGE OUVERT', 'direction la coursive');
+    game.hud.banner(...T.banners.entree);
     game.say(T.entreeCleared);
     game.setCheckpoint(0, -12, Math.PI / 2);
   });
@@ -41,7 +41,7 @@ export default function script(game) {
     game.setCheckpoint(0, -56, Math.PI / 2);
     boss = game.spawn('directeur', 0, -70, null, { face: -Math.PI / 2 });
     game.audio.music('boss');
-    game.hud.showBoss('LE DIRECTEUR DE LA VALORISATION');
+    game.hud.showBoss(T.bossName);
     game.hud.setBoss(1);
     game.say(T.bossIntro, () => boss.setState('walk'));
   });
@@ -55,7 +55,7 @@ export default function script(game) {
     game.hud.showBoss(null);
     game.player.target = null;
     for (const e of game.entities) if (e.isEnemy && e.alive && !e.isBoss) e.takeHit(99, 0, 1, 5, null);
-    game.say(T.bossDefeat, () => { W.setDoor('sortie', true); game.hud.banner('LA TRIBUNE VOUS ATTEND'); });
+    game.say(T.bossDefeat, () => { W.setDoor('sortie', true); game.hud.banner(...T.banners.sortie); });
   });
 
   game.trigger([-2.5, 2.5, -77, -80], () => game.win());

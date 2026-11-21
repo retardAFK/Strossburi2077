@@ -135,22 +135,26 @@ tools/blender/            un script Python par modèle + lib commune (s3k_lib.py
 - Chaque nouveau design est d'abord **rendu en planche de présentation** et validé avant d'être intégré.
 
 ## 7. Où en est-on
-- Niveau jouable : `levels/meinau-ouest` (coursives de la tribune ouest en 2067 : consultants, juristes,
-  portique laser + terminal, boss « Directeur de la Valorisation »). Modèles : `tools/blender/ultra.py`,
-  `tools/blender/meinau_cast.py`. Accessible avec `?level=meinau-ouest`.
-- En cours : `levels/petite-france` (niveau par défaut), démo du niveau 1 (une PR par étape, voir
-  `prompts/03-demo-niveau1-petite-france.md`). Jouables : ouverture, salle 1 (Quartier des Tanneurs : vagues,
-  3 bornes, herse, plaque 1, Celle du stade), salle 2 (l'Écluse : levier, vanne, 3 niveaux d'eau, barque,
-  winstubière libérée quand l'eau atteint le quai haut, plaque 2), salle 3 (Ponts Couverts : arène, 3 vagues,
-  Videur-Maître d'hôtel, coffre → bretzel-boomerang, borne sur pile, plaque 3), salle 4 (Barrage Vauban :
-  cibles-TPE dans l'ordre des néons derrière des vitres anti-écharpe, écran du PDG, plaque 4), salle 5 (boss
-  ASR-67 en 3 phases dans la cuisine sous le barrage, puis cliffhanger : SCN, branchement sur le Serveur central,
-  « Strasbourg, 2026 », « À suivre »). Démo complète, de l'ouverture au cliffhanger. Un fichier de script par salle.
+- **Niveau 1 jouable de bout en bout** : `levels/petite-france` (niveau par défaut), Petite France en 2067.
+  Ouverture, salle 1 (Quartier des Tanneurs : vagues, 3 bornes, herse, plaque 1, Celle du stade), salle 2
+  (l'Écluse : levier, vanne, 3 niveaux d'eau, barque, winstubière libérée, plaque 2), salle 3 (Ponts Couverts :
+  arène, 3 vagues, coffre → bretzel-boomerang, puis Videur-Maître d'hôtel en combat-tuto du bretzel, borne sur pile,
+  plaque 3), salle 4 (Barrage Vauban « Rooftop Premium » : cibles-TPE dans l'ordre des néons, indices progressifs,
+  écran du PDG, plaque 4), salle 5 (boss ASR-67 en 3 phases, puis cliffhanger SCN → « Strasbourg, 2026 », « À suivre »).
+  Un fichier de script par salle (`salle1.js` … `salle5.js`).
   Boss : `bosses/PhasedBoss.js` (générique : phases par PV, garde de face, point faible) → `bosses/Asr67.js`.
   Cinématiques : `game.playCutscene(plans, sous-titres, suite)` ; HUD : 'hud:fade', 'hud:glitch', 'hud:cinema'.
   Objet : `items/BretzelBoomerang.js` via `systems/Inventory.js` (clic droit si rien n'est verrouillé, sinon F).
   Le layout déclare ses objets génériques dans `objects: [{ type, ... }]` (barque, leviers, PNJ...).
   Modèles : `tools/blender/{sbires,decor_pf,salles_pf}.py`.
+- Ancien prototype, toujours jouable : `levels/meinau-ouest` (coursives de la tribune ouest en 2067 : consultants,
+  juristes, portique laser + terminal, boss « Directeur de la Valorisation »), avec `?level=meinau-ouest`.
+  Modèles : `tools/blender/ultra.py`, `tools/blender/meinau_cast.py`.
+- **Designs validés, pas encore intégrés en jeu** : fiches et planches dans `docs/designs/` (voir son README),
+  scripts Blender dans `tools/blender/`, modèles déjà exportés dans `assets/models/`. L'intégration se fait
+  un élément à la fois, validé par Maxime (section 8).
+- Fichiers générés non versionnés (voir `.gitignore`) : `tools/_frames/`, `tools/blender/out/` (rendus de planches ;
+  les planches validées vont dans `docs/designs/`), `__pycache__/`.
 - Tests (filet anti-régression) : `npm test` = build + `tests/run-all.mjs` (Chrome installé piloté par
   `playwright-core`, sans fenêtre). `niveau1` (parcours complet via F2), `boss-asr67` (graine `?seed=1`,
   instantané des réglages `tests/snapshots/asr67.json`, mise à jour volontaire : `npm run test:update-snapshots`),

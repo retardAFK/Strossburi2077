@@ -2,3 +2,8 @@ node_modules/
 dist/
 deploy/PROMPT_CLAUDE_CODE.md
 Claude outputs/
+
+# fichiers générés (rendus, images intermédiaires, cache Python)
+tools/_frames/
+tools/blender/out/
+__pycache__/

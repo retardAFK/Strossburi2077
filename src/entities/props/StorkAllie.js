@@ -40,6 +40,8 @@ export class StorkAllie extends Entity {
   // place près de l'Ultra : au-dessus de son épaule, un peu en arrière
   slot() { const p = this.game.player; return { x: p.x - p.fx * 0.9 + p.fz * 0.6, y: 2.2, z: p.z - p.fz * 0.9 - p.fx * 0.6 }; }
   moveTo(g, speed, dt, soft = false) {
+    // l'Ultra est loin (téléporté : point de reprise, F2) : elle le rejoint d'un coup d'aile
+    if (this.stateName !== 'dive' && Math.hypot(g.x - this.x, g.z - this.z) > K.snap) Object.assign(this, { x: g.x, y: g.y, z: g.z });
     const dx = g.x - this.x, dy = g.y - this.y, dz = g.z - this.z, d = Math.hypot(dx, dy, dz);
     if (d < 0.25) return true;
     const v = soft ? Math.min(d * 4, speed) * dt : Math.min(d, speed * dt);

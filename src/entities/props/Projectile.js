@@ -28,6 +28,9 @@ const SHAPES = {
     g.add(new THREE.Mesh(new THREE.OctahedronGeometry(0.16), new THREE.MeshBasicMaterial({ color: 0xffffff, fog: false })));
     return g;
   },
+  neige() { // boule de neige payante du neigeur (Kléber)
+    return new THREE.Mesh(new THREE.IcosahedronGeometry(0.22), new THREE.MeshBasicMaterial({ color: 0xe8f0ff, fog: false }));
+  },
   bouchon() {
     return new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.07, 0.2, 6), new THREE.MeshBasicMaterial({ color: 0xc89a5a, fog: false }));
   }

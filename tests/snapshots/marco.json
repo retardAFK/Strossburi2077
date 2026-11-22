@@ -1,0 +1,33 @@
+{
+  "hp": 12,
+  "scale": 1.6,
+  "speed": 2.4,
+  "attackEvery": 1.6,
+  "dmg": 1,
+  "phases": [
+    0.66,
+    0.33
+  ],
+  "chargeAim": 0.9,
+  "chargeSpeed": [
+    9,
+    10.5,
+    12
+  ],
+  "chargeMax": 3.2,
+  "gifts": [
+    3,
+    4,
+    6
+  ],
+  "giftGap": 0.3,
+  "giftTime": 0.9,
+  "giftR": 1.3,
+  "giftLife": 1.6,
+  "giftSpread": 5,
+  "dazeTime": 3.5,
+  "storkDmg": 3,
+  "drumDmg": 3,
+  "stun": 1.5,
+  "sloganEvery": 4
+}

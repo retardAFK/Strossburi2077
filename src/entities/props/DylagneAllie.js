@@ -37,6 +37,7 @@ export class DylagneAllie extends Entity {
   slot() { const p = this.game.player; return { x: p.x - p.fx * 1.3 - p.fz * 0.7, z: p.z - p.fz * 1.3 + p.fx * 0.7 }; }
   walkTo(g, dt) {
     const dx = g.x - this.x, dz = g.z - this.z, d = Math.hypot(dx, dz);
+    if (d > K.snap) { this.x = g.x; this.z = g.z; return; } // l'Ultra a été téléporté (reprise, F2) : il le rejoint
     if (d < 0.2) return;
     const v = Math.min(d * 4, K.follow * (d > 6 ? 2 : 1)) * dt;
     this.x += dx / d * Math.min(v, d); this.z += dz / d * Math.min(v, d); this.face = Math.atan2(-dz, dx);

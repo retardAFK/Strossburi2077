@@ -170,6 +170,10 @@ tools/blender/            un script Python par modèle + lib commune (s3k_lib.py
   physios `enemies/Physio.js`), la cour, la salle « rythme + lumières » (`props/Sono.js` : portiques laser ouverts sur les basses, physios `dark`
   visibles aux flashs du strobo ; projecteur VIP `props/Projecteur.js` à la flèche court-circuit), la cave (Dylagne, `props/DylagneAllie.js`,
   version événement en attendant l'étape F), boss le Magnat du Carré VIP (`bosses/MagnatVip.js`). Décors : `decor_kalt`, `decor_kalt_ext`.
+- **Niveau 6 jouable (maquette grise), fin de la partie 1** : `levels/kleber` (`?level=kleber`) : péages (borne à pirater), labyrinthe de chalets
+  (3 tampons officiels, flèche enflammée → `props/NeigePayante.js`, étal au grappin, horloge de la signature `props/Horloge.js`), sapin-écran
+  (Stork + Dylagne + court-circuit), boss Marco CeKlair (`bosses/MarcoCeKlair.js`, attelage au sol), faux final → glitch → PARADOXE → « À suivre ».
+  Agents `enemies/{Peagiste,AgentBouclier,Neigeur}.js`. Décor : `decor_kleber` (decor_kit). Slogan de Marco : proposition provisoire.
  (règles : `docs/decisions.md`) : `items/Weapon.js` (interface commune), `systems/Inventory.js`
   (objets dans l'ordre d'obtention, Tab / croix haut-bas / bouton ⇄ pour changer), `items/ArcDrapeau.js` (verrouillage ou visée
   par-dessus l'épaule : clic droit / LB maintenus, VISER à bascule au tactile ; tir F / RB / bouton ARC, clic gauche en visée),
@@ -188,7 +192,7 @@ tools/blender/            un script Python par modèle + lib commune (s3k_lib.py
 - Tests (filet anti-régression) : `npm test` = build + `tests/run-all.mjs` (Chrome installé piloté par
   `playwright-core`, sans fenêtre). `niveau1` (parcours complet via F2), `boss-asr67` (graine `?seed=1`,
   instantané des réglages `tests/snapshots/asr67.json`, mise à jour volontaire : `npm run test:update-snapshots`),
-  `meinau` (parcours du niveau 2), `boss-egboehly` (instantané `tests/snapshots/egboehly.json`), `port-rhin`, `boss-promoteur`, `marche2000`, `boss-gerant` (instantané `tests/snapshots/gerant.json`), `kalt`, `boss-magnat` (instantané `tests/snapshots/magnat.json`), `meinau-ouest` (fumée), `manette` (Xbox / PlayStation simulées), `arc-drapeau` (bac à sable : changement d'objet, tir,
+  `meinau` (parcours du niveau 2), `boss-egboehly` (instantané `tests/snapshots/egboehly.json`), `port-rhin`, `boss-promoteur`, `marche2000`, `boss-gerant` (instantané `tests/snapshots/gerant.json`), `kalt`, `boss-magnat` (instantané `tests/snapshots/magnat.json`), `kleber`, `boss-marco` (instantané `tests/snapshots/marco.json`), `meinau-ouest` (fumée), `manette` (Xbox / PlayStation simulées), `arc-drapeau` (bac à sable : changement d'objet, tir,
   visée, munitions, tactile). Outils communs : `tests/helpers.mjs`. Sans Chrome installé (conteneur) :
   `CHROME_PATH=<binaire Chromium> npm test`.
   Toute PR garde `npm test` vert ; une PR qui touche `entities/bosses/` met à jour le test du boss.

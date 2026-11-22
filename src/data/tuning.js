@@ -101,6 +101,14 @@ export const TUNING = {
     // physio cyborg BlingCo (Kalt) : armoire à glace, lent mais solide, coup de tampon
     physio: { hp: 4, radius: 0.55, height: 2.2, speed: 1.6, runSpeed: 3.8, wander: 3, view: 9, fov: 0.5, hear: 3,
       alertTime: 0.6, lose: 3, reach: 2, windup: 0.75, attack: 'lunge', lunge: 8, attackTime: 0.25, recover: 0.9, dmg: 1 },
+    // agents de sécurité BlingCo de la place Kléber : péagiste (TPE-matraque), bouclier pub (pare de face), neigeur (tire)
+    peagiste: { hp: 3, radius: 0.45, height: 1.9, speed: 2.2, runSpeed: 4.4, wander: 4, view: 10, fov: 0.5, hear: 2.5,
+      alertTime: 0.6, lose: 2.5, reach: 1.8, windup: 0.55, attack: 'lunge', lunge: 10, attackTime: 0.22, recover: 0.8, dmg: 1 },
+    bouclier: { hp: 3, radius: 0.5, height: 1.9, speed: 1.8, runSpeed: 3.4, wander: 3, view: 10, fov: 0.5, hear: 2.5,
+      alertTime: 0.6, lose: 3, reach: 1.9, windup: 0.7, attack: 'lunge', lunge: 8, attackTime: 0.25, recover: 1, dmg: 1, shieldCos: 0.3 },
+    neigeur: { hp: 2, radius: 0.45, height: 1.9, speed: 1.8, runSpeed: 3.2, wander: 3, view: 12, fov: 0.5, hear: 2.5,
+      alertTime: 0.7, lose: 2.5, attack: 'shoot', shootRange: 9, windup: 0.8, attackTime: 0.3, recover: 1.4, projSpeed: 9, dmg: 1,
+      shape: 'neige', slow: 0.6, slowTime: 1.2 },
     test: { hp: 3, radius: 0.55, height: 1.9, speed: 2.2, runSpeed: 4.4, wander: 4, view: 11, fov: 0.5, hear: 2.5,
       alertTime: 0.6, lose: 2.5, reach: 1.9, windup: 0.5, attack: 'lunge', lunge: 10, attackTime: 0.22, recover: 0.7, dmg: 1, robot: true },
     testTireur: { hp: 3, radius: 0.55, height: 1.9, speed: 2, runSpeed: 3.6, wander: 3, view: 13, fov: 0.45, hear: 2.5,
@@ -142,8 +150,8 @@ export const TUNING = {
   camScan: { range: 7, fov: 0.93, speed: 0.6, cooldown: 2, short: 8 },
   // infiltration : délai minimal entre deux « repéré ! » (s)
   stealth: { caughtCd: 1.5 },
-  // Stork (version événement du Marché 2000) : taille, vitesses (envol, suivi, piqué)
-  stork: { scale: 0.85, fly: 9, follow: 7, dive: 18 },
+  // Stork (version événement du Marché 2000) : taille, vitesses (envol, suivi, piqué), distance où elle rejoint l'Ultra d'un coup
+  stork: { scale: 0.85, fly: 9, follow: 7, dive: 18, snap: 25 },
   // le Gérant de nuit : PV, glisse derrière le comptoir, étiquettes x10 (visée, écart, rafale par phase, vitesse,
   // distance de départ devant le comptoir), scanner (portée, demi-cône en cos, arc de balayage, durée par phase),
   // tiroir ouvert (s), piqué de Stork, étourdissement
@@ -161,8 +169,8 @@ export const TUNING = {
   // durée pendant laquelle un ennemi « dans le noir » reste visible après le flash (s)
   sono: { bpm: 124, cycle: 8, bass: 4, flash: 0.08, glow: 0.14 },
   // Dylagne (version événement du Kalt) : taille, suivi, onde de choc de la grosse caisse (rayon, dégâts aux sbires,
-  // recharge), soin passif (1 bretzel toutes les healEvery s si l'Ultra est blessé)
-  dylagne: { scale: 1, follow: 5, drumR: 5, drumDmg: 2, drumCd: 1.5, healEvery: 15, heal: 1 },
+  // recharge), soin passif (1 bretzel toutes les healEvery s si l'Ultra est blessé), distance où il rejoint l'Ultra d'un coup
+  dylagne: { scale: 1, follow: 5, drumR: 5, drumDmg: 2, drumCd: 1.5, healEvery: 15, heal: 1, snap: 25 },
   // le Magnat du Carré VIP : PV, taille, vol (hauteur, rayon et vitesse de la ronde par phase), attaques en alternance :
   // bouteilles à étincelles (rafale par phase, visée, écart, angle, vitesse), pluie de bouchons (zones par phase, rayon,
   // avertissement, durée, dispersion) ; court-circuit → chute (s) → au sol (s, point faible), remontée (s) ; grosse caisse
@@ -171,5 +179,19 @@ export const TUNING = {
     phases: [0.66, 0.33], sparks: [3, 5, 7], sparkAim: 0.6, sparkGap: 0.14, sparkSpread: 0.24, sparkSpeed: 9,
     rain: [3, 4, 6], rainR: 1.3, rainWarn: 1.1, rainLife: 1.4, rainSpread: 4,
     fallTime: 0.7, landTime: 4.5, riseTime: 1.2, drumDmg: 3, stun: 1.5
+  },
+  // ---------------------------------------------------------------- niveau 6 : la place Kléber
+  // horloge de la « signature » de la vente (s) : à chaque échéance, renfort d'agents (jamais d'échec), au plus `waves` fois
+  kleber: { signature: 75, waves: 2, fakeEnd: 5 },
+  // neige payante : temps de fonte sous la flèche enflammée (s)
+  neige: { melt: 0.8 },
+  // Marco CeKlair : PV, taille, charges de l'attelage au sol (visée, vitesse par phase, durée max), virage, cadeaux piégés
+  // (nombre par phase, écart, temps de vol, zone : rayon, durée, dispersion), encastré dans un mur (s, point faible),
+  // piqué de Stork, grosse caisse de Dylagne, étourdissement, slogan (bulle toutes les n s)
+  marco: {
+    hp: 12, scale: 1.6, speed: 2.4, attackEvery: 1.6, dmg: 1, phases: [0.66, 0.33],
+    chargeAim: 0.9, chargeSpeed: [9, 10.5, 12], chargeMax: 3.2,
+    gifts: [3, 4, 6], giftGap: 0.3, giftTime: 0.9, giftR: 1.3, giftLife: 1.6, giftSpread: 5,
+    dazeTime: 3.5, storkDmg: 3, drumDmg: 3, stun: 1.5, sloganEvery: 4
   }
 };

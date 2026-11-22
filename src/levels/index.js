@@ -55,6 +55,14 @@ import { Projecteur } from '../entities/props/Projecteur.js';
 import { DylagneAllie } from '../entities/props/DylagneAllie.js';
 import kaltLayout from './kalt/layout.js';
 import kaltScript from './kalt/script.js';
+import { Peagiste } from '../entities/enemies/Peagiste.js';
+import { AgentBouclier } from '../entities/enemies/AgentBouclier.js';
+import { Neigeur } from '../entities/enemies/Neigeur.js';
+import { MarcoCeKlair } from '../entities/bosses/MarcoCeKlair.js';
+import { NeigePayante } from '../entities/props/NeigePayante.js';
+import { TamponOfficiel } from '../entities/props/TamponOfficiel.js';
+import kleberLayout from './kleber/layout.js';
+import kleberScript from './kleber/script.js';
 import prhLayout from './port-rhin/layout.js';
 import prhScript from './port-rhin/script.js';
 import mei2Layout from './meinau/layout.js';
@@ -118,6 +126,13 @@ import magnat_vip from '../../assets/models/magnat_vip.glb';
 import dylagne from '../../assets/models/dylagne.glb';
 import decor_kalt from '../../assets/models/decor_kalt.glb';
 import decor_kalt_ext from '../../assets/models/decor_kalt_ext.glb';
+import agent_kleber_peagiste from '../../assets/models/agent_kleber_peagiste.glb';
+import agent_kleber_bouclier from '../../assets/models/agent_kleber_bouclier.glb';
+import agent_kleber_neigeur from '../../assets/models/agent_kleber_neigeur.glb';
+import marco_ceklair from '../../assets/models/marco_ceklair.glb';
+import cadeau_interdiction from '../../assets/models/cadeau_interdiction.glb';
+import cadeau_billet from '../../assets/models/cadeau_billet.glb';
+import decor_kleber from '../../assets/models/decor_kleber.glb';
 
 export const DEFAULT_LEVEL = 'petite-france'; // l'ancien prototype reste accessible avec ?level=meinau-ouest
 // Partie 1, dans l'ordre (docs/decisions.md). Seuls les niveaux déjà inscrits dans LEVELS sont joués ;
@@ -164,6 +179,14 @@ export const LEVELS = {
       decor_kalt, decor_kalt_ext },
     types: { physio: Physio, cordon: RobotCordon, magnat: MagnatVip, sono: Sono, projo: Projecteur, dylagne: DylagneAllie,
       figurant: Figurant, caisse: CaisseFleches }
+  },
+  kleber: {
+    layout: kleberLayout, script: kleberScript, texts: TEXTS.kleber, subtitle: TEXTS.kleber.subtitle,
+    models: { ultra, agent_kleber_peagiste, agent_kleber_bouclier, agent_kleber_neigeur, marco_ceklair, cadeau_interdiction,
+      cadeau_billet, stork, dylagne, terminal, arc_drapeau, bretzel_boomerang, gaffe_grappin, decor_kleber },
+    types: { peagiste: Peagiste, bouclier: AgentBouclier, neigeur: Neigeur, marco: MarcoCeKlair, neige: NeigePayante,
+      tampon: TamponOfficiel, tractable: Tractable, projo: Projecteur, stork: StorkAllie, dylagne: DylagneAllie,
+      terminal: Terminal, figurant: Figurant, caisse: CaisseFleches }
   },
   'bac-a-sable': {
     debugOnly: true, layout: bacLayout, script: bacScript, texts: TEXTS.bac, subtitle: TEXTS.bac.subtitle,

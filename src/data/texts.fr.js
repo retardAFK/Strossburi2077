@@ -27,7 +27,8 @@ export const TEXTS = {
   prompts: {
     hack: '{use} : pirater', activate: '{use} : activer', restore: '{use} : restaurer la plaque', talk: '{use} : parler', crate: '{use} : prendre des flèches', open: '{use} : ouvrir',
     lever: '{use} : actionner le levier', valve: '{use} : tourner la vanne', board: '{use} : monter dans la barque', sail: '{use} : larguer les amarres',
-    storkDive: '{use} : STORK, PIQUÉ !', dylagneDrum: '{use} : DYLAGNE, GROSSE CAISSE !'
+    storkDive: '{use} : STORK, PIQUÉ !', dylagneDrum: '{use} : DYLAGNE, GROSSE CAISSE !',
+    tampon: '{use} : prendre le tampon'
   },
   // ------------------------------------------------ indications de commandes (systems/Prompts.js)
   // Les textes écrivent des ACTIONS entre accolades ({use}, {attack}...), jamais des touches : l'icône affichée
@@ -97,6 +98,9 @@ export const TEXTS = {
   barks: {
     steward: ['Billet ?', 'Scan en cours…', 'Accès refusé : supporter détecté.', 'Ce pigeon n\'a pas payé sa place.'],
     vigile: ['x10 !', 'Ronde de nuit : tarif de nuit.', 'Produit étiqueté. Client aussi.', 'Après 22 h, tout est x10.'],
+    peagiste: ['2 BC le mètre !', 'Vous respirez ? Péage.', 'Badge, carte, empreinte.', 'Le trottoir est une option.'],
+    bouclier: ['PUB : vin chaud à 79 BC !', 'PUB : la neige, maintenant en abonnement !', 'Circulez, consommez.'],
+    neigeur: ['Neige premium !', 'Gelé ? Payez pour dégeler.', 'Flocon facturé.'],
     physio: ['PAS CE SOIR.', 'Baskets : 3 cm de trop.', 'Tu es sur la liste ? Non.', 'Dress code : pas toi.', 'Même lui, pas ce soir.'],
     cordon: ['ACCÈS VIP.', 'Bip. Liste fermée.', 'Cordon déployé.'],
     chariot: ['x10 !', 'Article non scanné détecté.', 'Bip. Bip. Majoration.', 'Rayon fermé. Prix ouvert.'],
@@ -367,6 +371,26 @@ export const TEXTS = {
     opening: ['Strasbourg, 2026. Rue la Fayette, la nuit.', 'Le Kalt, la boîte techno du quartier. BlingCo y a posé un tapis doré, un cordon rouge... et un carré VIP.',
       'Ce soir, le peuple techno reste dehors. Pas pour longtemps.'],
     end: ['LE KALT LIBÉRÉ', 'Le peuple techno et Dylagne rejoignent la résistance. Suite : la place Kléber.']
+  },
+  kleber: {
+    subtitle: 'NIVEAU 6 : PLACE KLÉBER, 2026 (FIN DE LA PARTIE 1)',
+    rooms: { peages: 'LES PORTIQUES-PÉAGES', chalets: 'LE LABYRINTHE DE CHALETS', sapin: 'LE SAPIN-ÉCRAN', estrade: "L'ESTRADE · LA SIGNATURE" },
+    ads: [['MARCHÉ DE NOËL PERMANENT', '365 JOURS PAR AN · ENTRÉE 15 BC'], ['VIN CHAUD', '79 BC LE GOBELET MINUSCULE'],
+      ['NEIGE PAYANTE', '5 BC LE FLOCON'], ['STRASBOURG', 'VENDUE CE SOIR · SIGNATURE SUR L\'ESTRADE']],
+    boss: 'MARCO CEKLAIR · BLINGCO',
+    // slogan : PROPOSITION provisoire, inventée (la formulation finale s'écrit avec Maxime : docs/decisions.md « Encore ouvert »)
+    slogan: ['VOTRE PASSION, NOTRE PRODUIT !', 'LE MARCHÉ DE DEMAIN, PAYÉ AUJOURD\'HUI !', 'VOTRE PASSION, NOTRE PRODUIT !'],
+    pay: '2 BC LE MÈTRE !', frozen: 'GELÉ !', melted: 'LA NEIGE PAYANTE FOND',
+    peagesOpen: ['PÉAGE PIRATÉ', 'ENTRÉE GRATUITE'],
+    tampon: n => [`TAMPON OFFICIEL ${n} / 3`, n < 3 ? 'AVANT LA SIGNATURE !' : 'LE CHEMIN DU SAPIN EST OUVERT'],
+    signature: ['LA SIGNATURE APPROCHE', 'BLINGCO ENVOIE DES RENFORTS'],
+    locks: n => [`VERROU DU SAPIN ${n} / 3`, n < 3 ? "IL EN RESTE ENCORE" : "L'ESTRADE EST OUVERTE"],
+    crash: 'ENCASTRÉ !',
+    opening: ['Strasbourg, 2026. Place Kléber, la nuit.', 'Le siège du marché de Noël permanent. Ce soir, BlingCo signe la vente de la ville.',
+      'Il faut trois tampons officiels pour signer. Il ne les aura pas.'],
+    fakeEnd: ['STRASBOURG LIBÉRÉE !', 'LA VENTE EST ANNULÉE'],
+    glitch: ['ERREUR TEMPORELLE', `${YEAR}... RECALCULÉ`],
+    end: ['À SUIVRE', 'Fin de la partie 1.']
   },
   bac: {
     subtitle: 'BAC À SABLE · TESTS (DEBUG)',

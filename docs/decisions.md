@@ -84,7 +84,6 @@ et son test fumée reste en place.
 
 ## Encore ouvert
 - Retour vers le futur : A (BlingCo arrache l'Ultra via le Serveur), B (paradoxe + rappel par SCN), ou A+B.
-- Slogan de Marco CeKlair : reformuler ensemble la phrase source (voir `docs/designs/marco-ceklair.md`).
 - Les questions boss restantes du fichier `docs/Stras2067_reponses_niveaux.xlsx` (onglet « Questions boss ») :
   arènes et phases, durée du faux final, PDG de 2026 = PDG final ?, revanche ASR-67, Coq, 5 boss ensemble,
   les deux kops qui chantent.
@@ -98,6 +97,8 @@ et son test fumée reste en place.
 | 21/11/2026 | Chronologie | 2023 rachat du club · 2026 BlingCo rachète la ville, l'Ultra y est envoyé · 2067 le futur (`YEAR`) |
 | 21/11/2026 | Niveau 1 | Petite France (2067), boss ASR-67, fin : SCN envoie l'Ultra en 2026 |
 | 21/11/2026 | Niveau par défaut | `petite-france` ; `meinau-ouest` accessible avec `?level=meinau-ouest` |
+| 22/11/2026 | Slogan de Marco CeKlair | « Votre passion, notre produit ! » + « Le club de demain avec les consommateurs de demain ! » + « Le marché de demain, payé aujourd'hui ! » (`docs/designs/marco-ceklair.md`) |
+| 22/11/2026 | Partie 1 : crédits et répliques | Crédits de fin de partie 1 validés ; répliques du Kalt et de Kléber validées (modifiables plus tard) |
 | 21/11/2026 | Noms parodiques | « Egboehly », « Marco CeKlair » autorisés (exception `CLAUDE.md` §3), le reste inventé |
 | 21/11/2026 | Salle 1 | « Quartier des Tanneurs » (le bâtiment réel abrite un restaurant) |
 | 21/11/2026 | Prix | En BlingCoins (BC), sauf « 30 euros numériques » (réplique de l'ASR-67) |

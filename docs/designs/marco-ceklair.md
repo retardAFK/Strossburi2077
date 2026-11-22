@@ -26,6 +26,9 @@ jamais l'inverse. La hotte-réacteur ne sert qu'à des à-coups de vitesse, pas 
 Répété « de manière débile, en mode lavage de cerveau » sur l'écran `slogan` et dans ses bulles. Phrase source de Maxime,
 mot pour mot : « il repère guy ouvre la porte et le club de demain avec les consommateurs d'aujourd'hui ».
 Formulation finale à écrire ensemble (protocole dialogues).
+**Tranché le 22/11/2026** (« ton invention est cool, j'aimais bien aussi “le club de demain avec les consommateurs de
+demain” ») : en boucle, « VOTRE PASSION, NOTRE PRODUIT ! », « LE CLUB DE DEMAIN AVEC LES CONSOMMATEURS DE DEMAIN ! »,
+« LE MARCHÉ DE DEMAIN, PAYÉ AUJOURD'HUI ! » (`TEXTS.kleber.slogan`).
 
 ## Pivots
 `root` · `traineau` · `santa` · `head` · `hotte` · `slogan` · `agent` ×4 (`lean`, `head`, `hipN/hipF`, `shN/shF`, `rope`) · `gift_*`.

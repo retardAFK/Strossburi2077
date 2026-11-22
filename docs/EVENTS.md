@@ -18,14 +18,14 @@ Certains noms viennent des **données** et n'apparaissent pas comme émis ici : 
 | `chest:opened` | `entities/props/Coffre.js` | `levels/petite-france/salle3.js` | `this.id` |
 | `chest:unlock:<id>` | `levels/petite-france/salle3.js` | `entities/props/Coffre.js` | — |
 | `crate:opened` | `entities/props/CaisseFleches.js` | `levels/marche2000/arriere.js` | `this.arrow, this` |
-| `debug:warp` | `debug.js` | `levels/bac-a-sable/script.js`<br>`levels/marche2000/arriere.js`<br>`levels/marche2000/magasin.js`<br>`levels/marche2000/rayons.js`<br>`levels/marche2000/reserve.js`<br>`levels/marche2000/toit.js`<br>`levels/meinau/kop.js`<br>`levels/meinau/local.js`<br>`levels/meinau/parvis.js`<br>`levels/meinau/pelouse.js`<br>`levels/petite-france/salle1.js`<br>`levels/petite-france/salle2.js`<br>`levels/petite-france/salle3.js`<br>`levels/petite-france/salle5.js`<br>`levels/port-rhin/chantier.js`<br>`levels/port-rhin/conteneurs.js`<br>`levels/port-rhin/moulin.js`<br>`levels/port-rhin/quai.js` | `w.id` |
+| `debug:warp` | `debug.js` | `levels/bac-a-sable/script.js`<br>`levels/marche2000/arriere.js`<br>`levels/marche2000/magasin.js`<br>`levels/marche2000/marchenoir.js`<br>`levels/marche2000/rayons.js`<br>`levels/marche2000/reserve.js`<br>`levels/marche2000/toit.js`<br>`levels/meinau/kop.js`<br>`levels/meinau/local.js`<br>`levels/meinau/parvis.js`<br>`levels/meinau/pelouse.js`<br>`levels/petite-france/salle1.js`<br>`levels/petite-france/salle2.js`<br>`levels/petite-france/salle3.js`<br>`levels/petite-france/salle5.js`<br>`levels/port-rhin/chantier.js`<br>`levels/port-rhin/conteneurs.js`<br>`levels/port-rhin/moulin.js`<br>`levels/port-rhin/quai.js` | `w.id` |
 | `egboehly:head` | `entities/bosses/HydraHead.js` | `entities/bosses/Egboehly.js`<br>`levels/meinau/pelouse.js` | `this.index, 'down'`<br>`this.index, 'planted'`<br>`this.index, 'up'` |
 | `enemy:killed` | `entities/bosses/PhasedBoss.js`<br>`entities/enemies/Enemy.js` | `Game.js` | `this` |
 | `enemy:removed` | `entities/enemies/Enemy.js` | — | `this` |
 | `gaffe:hook` | `items/GaffeGrappin.js` | — | `e` |
 | `gaffe:land` | `items/GaffeGrappin.js` | `levels/port-rhin/conteneurs.js`<br>`levels/port-rhin/moulin.js` | `a` |
 | `gaffe:zip` | `items/GaffeGrappin.js` | — | `a` |
-| `game:start` | `Game.js` | `levels/bac-a-sable/script.js`<br>`levels/marche2000/arriere.js`<br>`levels/meinau-ouest/script.js`<br>`levels/meinau/parvis.js`<br>`levels/petite-france/salle1.js`<br>`levels/port-rhin/quai.js` | — |
+| `game:start` | `Game.js` | `levels/bac-a-sable/script.js`<br>`levels/marche2000/arriere.js`<br>`levels/marche2000/marchenoir.js`<br>`levels/meinau-ouest/script.js`<br>`levels/meinau/parvis.js`<br>`levels/petite-france/salle1.js`<br>`levels/port-rhin/quai.js` | — |
 | `gerant:close` | `entities/bosses/GerantNuit.js` | `levels/marche2000/magasin.js` | `this` |
 | `gerant:open` | `entities/bosses/GerantNuit.js` | `levels/marche2000/magasin.js` | `this` |
 | `group:cleared:<id>` | `Game.js` | `Game.js` | — |
@@ -41,7 +41,7 @@ Certains noms viennent des **données** et n'apparaissent pas comme émis ici : 
 | `inventory:changed` | `systems/Inventory.js` | `systems/Hud.js`<br>`touch.js` | `this.equipped, this.order.length` |
 | `lever:enable:<id>` | — | `entities/props/Lever.js` | — |
 | `lever:used` | `entities/props/Lever.js` | `levels/petite-france/salle2.js` | `this.id, this.down` |
-| `m2k:rayons` | `levels/marche2000/arriere.js` | `levels/marche2000/rayons.js` | — |
+| `m2k:rayons` | `levels/marche2000/arriere.js`<br>`levels/marche2000/marchenoir.js` | `levels/marche2000/rayons.js` | — |
 | `m2k:reserve` | `levels/marche2000/rayons.js` | `levels/marche2000/reserve.js` | — |
 | `neon:off` | `entities/props/NeonCour.js` | `levels/marche2000/arriere.js` | `this` |
 | `pf:boss` | `levels/petite-france/salle4.js` | `levels/petite-france/salle5.js` | — |

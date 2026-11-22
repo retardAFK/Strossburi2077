@@ -3,6 +3,7 @@
 // rouge (se cacher derrière une palette, ou dans la fumée), puis « encaisse » : son tiroir-caisse s'ouvre, c'est le
 // point faible. Le piqué de Stork (StorkAllie) y fait TUNING.gerant.storkDmg et l'étourdit ; une flèche, le bretzel ou
 // l'écharpe y font 1. Ailleurs, ça rebondit (« ting »). Phases aux seuils de PV : plus d'étiquettes, scanner plus rapide.
+// Une étiquette reçue ralentit l'Ultra (TUNING.gerant.labelSlow pendant labelSlowTime).
 // États : intro, glide, label, scan, open, stunned, die. Événements : 'gerant:open', 'gerant:close', 'boss:phase' (n),
 // 'boss:defeated'.
 import { Enemy } from '../enemies/Enemy.js';
@@ -61,7 +62,8 @@ export class GerantNuit extends Enemy {
     if (this.shots < n && this.t > P.labelAim + this.shots * P.labelGap) {
       const a = this.face + (this.shots - (n - 1) / 2) * P.labelSpread;
       this.game.add(new Projectile(this.game, { x: this.x + Math.cos(a) * P.labelFrom, z: this.z - Math.sin(a) * P.labelFrom, face: a,
-        speed: P.labelSpeed, dmg: P.dmg, shape: 'etiquette', y: 1.4, spin: 0, r: 0.35 }));
+        speed: P.labelSpeed, dmg: P.dmg, shape: 'etiquette', y: 1.4, spin: 0, r: 0.35,
+        slow: { k: P.labelSlow, t: P.labelSlowTime, text: this.game.levelTexts.labelSlow } }));
       this.shots++; this.game.audio.play('throw');
     }
     if (this.shots >= n && this.t > P.labelAim + n * P.labelGap + 0.4) this.setState('glide');

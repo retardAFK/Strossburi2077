@@ -1,5 +1,5 @@
 // Projectile générique (assiette, bouchon...) : vole tout droit, s'écrase sur les murs,
-// et l'écharpe peut le renvoyer vers les ennemis.
+// et l'écharpe peut le renvoyer vers les ennemis. Option slow: { k, t, text } : s'il touche l'Ultra, il le ralentit.
 import * as THREE from 'three';
 import { Entity } from '../Entity.js';
 
@@ -28,9 +28,9 @@ const SHAPES = {
 };
 
 export class Projectile extends Entity {
-  constructor(game, { x, z, face, speed, dmg, shape, y = 1.3, spin = 12, life = 3, r = 0.35 }) {
+  constructor(game, { x, z, face, speed, dmg, shape, y = 1.3, spin = 12, life = 3, r = 0.35, slow = null }) {
     super(game, { x, z, face, r, hp: 1 });
-    Object.assign(this, { speed, dmg, y, spin, life, owner: 'enemy', isProjectile: true });
+    Object.assign(this, { speed, dmg, y, spin, life, slow, owner: 'enemy', isProjectile: true });
     this.obj = SHAPES[shape](); game.renderer.scene.add(this.obj);
     this.place();
   }
@@ -50,6 +50,7 @@ export class Projectile extends Entity {
     const targets = this.owner === 'enemy' ? [this.game.player] : this.game.entities.filter(e => e.isEnemy && e.alive);
     for (const t of targets) {
       if (t.alive && Math.hypot(t.x - this.x, t.z - this.z) < t.r + this.r) {
+        if (this.owner === 'enemy' && this.slow && !(t.inv > 0)) t.slowDown?.(this.slow);
         t.takeHit(this.owner === 'enemy' ? this.dmg : 2, this.fx, this.fz, 8, this); this.life = 0; break;
       }
     }

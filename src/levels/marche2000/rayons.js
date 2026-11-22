@@ -11,7 +11,9 @@ export function rayons(game, { E, say }) {
     game.spawn('chariot', 7.5, -51, 'rayons', { face: PI / 2, stealth: true, patrol: [[7.5, -38], [7.5, -51]] });
     game.spawn('chariot', -8, -54.5, 'rayons', { face: 0, stealth: true, patrol: [[8, -54.5], [-8, -54.5]] });
   };
+  let entered = false; // par la porte de service ou par le marché noir
   E.on('m2k:rayons', () => {
+    if (entered) return; entered = true;
     game.setCheckpoint(0, -32.5, PI / 2); spawn();
     say(['m2k.rayons.1']);
   });
@@ -20,6 +22,7 @@ export function rayons(game, { E, say }) {
 
   E.on('debug:warp', id => {
     if (id === 'arriere') return;
+    entered = true;
     if (id === 'rayons') { game.setCheckpoint(0, -32.5, PI / 2); return spawn(); }
     out.done = true;
     for (const e of game.entities) if (e.group === 'rayons' && e.alive) e.takeHit(99, 0, 1, 5, null);

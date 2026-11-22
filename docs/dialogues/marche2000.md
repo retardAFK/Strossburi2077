@@ -9,6 +9,7 @@ Jetons de touches : `{use}`, `{attack}`… (remplacés en jeu par la touche de l
 | m2k.arriere.1 | L'ULTRA | Le Marché 2000. Rideau baissé, mais ça bouge derrière : des robots-vigiles font leur ronde dans la cour. | ok | auto — à relire par Maxime |
 | m2k.arriere.2 | TUTO | Reste hors des faisceaux. Sous un néon allumé, on te voit de loin : casse-les à l'arc ({throw}). Repéré ? Retour au début de la cour. | ok | auto — à relire par Maxime |
 | m2k.arriere.3 | TUTO | Des flèches fumigènes ! Dans la fumée, les vigiles ne te voient plus. {arrow} : changer de flèche. | ok | auto — à relire par Maxime |
+| m2k.noir.1 | L'ULTRA | Le marché noir de BlingCo : des écharpes confisquées, des bretzels du quartier... revendus x10. Par ici, je ressors dans les rayons. | ok | auto — à relire par Maxime |
 | m2k.rayons.1 | L'ULTRA | Les rayons. Des chariots qui roulent tout seuls, des caméras qui scannent tout... même les clients. | ok | auto — à relire par Maxime |
 | m2k.cliente | CLIENTE | Je venais pour du lait : 14 BC le litre après 22 h. Psst : derrière les palettes, les scanners ne te voient pas. | ok | auto — à relire par Maxime |
 | m2k.employe | EMPLOYÉ DE NUIT | Vingt ans que je travaille ici. Maintenant, j'étiquette les étiquettes. Les caméras ? Une flèche court-circuit et elles dorment. | ok | auto — à relire par Maxime |

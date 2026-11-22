@@ -164,7 +164,7 @@ tools/blender/            un script Python par modèle + lib commune (s3k_lib.py
   conteneurs et péniches (grues), boss le Promoteur (`bosses/Promoteur.js` + `props/Prefab.js`).
 - **Niveau 4 jouable (maquette grise)** : `levels/marche2000` (`?level=marche2000`), la nuit : l'arrière et les rayons en infiltration
   (`systems/Stealth.js` : faisceaux des `Guetteur` vigiles / chariots, caméras-scanners, néons, palettes, fumigènes ; « repéré ! » → retour au
-  début de la salle), la réserve (vagues), le toit (enseigne « MARCHÉ 2000 » → Stork, `props/StorkAllie.js`, version événement en attendant
+  début de la salle), passage optionnel du marché noir (porte violette → rayons), la réserve (vagues), le toit (enseigne « MARCHÉ 2000 » → Stork, `props/StorkAllie.js`, version événement en attendant
   l'étape F), boss le Gérant de nuit (`bosses/GerantNuit.js` : tiroir-caisse ouvert = piqué de Stork). Décor : `decor_marche2000` (decor_kit).
  (règles : `docs/decisions.md`) : `items/Weapon.js` (interface commune), `systems/Inventory.js`
   (objets dans l'ordre d'obtention, Tab / croix haut-bas / bouton ⇄ pour changer), `items/ArcDrapeau.js` (verrouillage ou visée

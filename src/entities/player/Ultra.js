@@ -47,7 +47,7 @@ export class Ultra extends Entity {
     const dir = this.inputDir();
     if (I.pressed.roll) { this.rollDir = dir || { x: this.fx, z: this.fz }; return this.setState('roll'); }
     if (dir) {
-      const sp = this.aiming ? T.speed * TUNING.arc.aimSpeed : this.target ? T.lockSpeed : T.speed;
+      const sp = (this.aiming ? T.speed * TUNING.arc.aimSpeed : this.target ? T.lockSpeed : T.speed) * (this.slowT > 0 ? this.slowK : 1);
       this.x += dir.x * sp * dt; this.z += dir.z * sp * dt;
       if (!this.target && !this.aiming) this.face += angDiff(this.face, faceOf(dir.x, dir.z)) * Math.min(1, dt * 14);
       this.walkT += dt * (this.target ? 9 : 11);
@@ -111,9 +111,11 @@ export class Ultra extends Entity {
     this.setState('idle');
   }
   heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }
+  // ralenti un moment (étiquettes x10 du Gérant...) : { k: facteur de vitesse, t: durée, text: bulle }
+  slowDown({ k, t, text }) { this.slowK = k; this.slowT = t; if (text) this.game.bubble(this, text, 1); }
 
   update(dt) {
-    this.comboTimer -= dt;
+    this.comboTimer -= dt; this.slowT = Math.max(0, (this.slowT || 0) - dt);
     if (this.game.input.pressed.lock && this.alive) this.toggleLock();
     if (this.target && (!this.target.alive || this.dist(this.target) > T.lockRange + 4)) this.target = null;
     super.update(dt);

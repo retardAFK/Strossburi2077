@@ -1,5 +1,5 @@
 // Boss le Gérant de nuit BlingCo (niveau 4, graine ?seed=1) : garde (ça rebondit hors tiroir ouvert), rafale
-// d'étiquettes x10, scanner qui blesse à découvert mais pas derrière une palette, « encaisse » → tiroir ouvert :
+// d'étiquettes x10 (une étiquette reçue ralentit l'Ultra), scanner qui blesse à découvert mais pas derrière une palette, « encaisse » → tiroir ouvert :
 // une vraie flèche y fait 1, le piqué de Stork (vraie touche E) fait TUNING.gerant.storkDmg et l'étourdit ; phases
 // (rafales plus fournies, renforts de chariots) ; défaite → fin du niveau.
 // Instantané des réglages : tests/snapshots/gerant.json (mise à jour volontaire : npm run test:update-snapshots).
@@ -40,6 +40,13 @@ await force('label');
 await h.until(() => window.S3K.entities.find(e => e.isBoss).stateName === 'glide', 4000);
 const labels = await h.run(() => window.S3K.entities.filter(e => e.isProjectile && !e.removed).length);
 T.check('rafale d\'étiquettes x10', labels > 0 && labels <= P.labels[0], `${labels} étiquettes`);
+// une étiquette reçue ralentit l'Ultra
+await h.run(() => { const g = window.S3K, p = g.player; for (const e of g.entities) if (e.isProjectile) e.remove();
+  Object.assign(p, { x: 3, z: -112, inv: 0, hp: p.maxHp, slowT: 0 }); p.sync(); });
+await force('label');
+T.check('étiquette reçue : l\'Ultra est ralenti', await h.until(() => window.S3K.player.slowT > 0, 4000) &&
+  await h.run(k => window.S3K.player.slowK === k, P.labelSlow));
+await h.until(() => window.S3K.entities.find(e => e.isBoss).stateName === 'glide', 4000);
 
 // scanner : blesse à découvert, pas derrière une palette
 const scan = async (x, z) => {

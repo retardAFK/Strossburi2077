@@ -147,6 +147,7 @@ export const TUNING = {
   gerant: {
     hp: 9, scale: 1.6, speed: 2.2, glideRange: 6, attackEvery: 2.4, dmg: 1, phases: [0.66, 0.33],
     labelAim: 0.6, labelGap: 0.12, labelSpread: 0.22, labels: [3, 5, 7], labelSpeed: 10, labelFrom: 3.8,
+    labelSlow: 0.55, labelSlowTime: 1.6, // étiquette x10 reçue : vitesse de l'Ultra x0.55 pendant 1.6 s (réponse de Maxime : « ok pour ralentir »)
     scanRange: 22, scanCos: 0.995, scanArc: 1.1, scanTime: [2.6, 2.2, 1.8],
     openTime: 3.5, storkDmg: 3, stun: 2.5
   }

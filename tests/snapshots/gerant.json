@@ -19,6 +19,8 @@
   ],
   "labelSpeed": 10,
   "labelFrom": 3.8,
+  "labelSlow": 0.55,
+  "labelSlowTime": 1.6,
   "scanRange": 22,
   "scanCos": 0.995,
   "scanArc": 1.1,

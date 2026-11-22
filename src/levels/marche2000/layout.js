@@ -3,6 +3,7 @@
 // Décor de la rue (tools/blender/decors_nuit.py → decor_marche2000.glb) en toile de fond, à l'ouest de la cour.
 // 1 l'arrière, cour rue de la Farine (z 8 → -30) · 2 les rayons (→ -62) · 3 la réserve (→ -84) · 4 le toit et
 // l'enseigne (→ -104) · B le magasin côté tram (→ -132), le Gérant derrière son comptoir.
+// Passage optionnel : le marché noir (x 11 → 19), derrière la porte violette de la cour, ressort dans les rayons.
 const PI = Math.PI;
 const VIO = 0xa98bff, PINK = 0xff4fa3, CYAN = 0x38f2ff, ORANGE = 0xff7a1a;
 // enseigne « MARCHÉ 2000 » au bord du toit, lue depuis la rue : vue du toit, de derrière, elle se lit de droite à gauche
@@ -22,6 +23,7 @@ export default {
   },
   zones: [
     { id: 'arriere', rect: [-10, 10, 8, -30] },
+    { id: 'marchenoir', rect: [10, 19, -12, -44] },
     { id: 'rayons', rect: [-10, 10, -30, -62] },
     { id: 'reserve', rect: [-10, 10, -62, -84] },
     { id: 'toit', rect: [-10, 10, -84, -104] },
@@ -29,13 +31,16 @@ export default {
   ],
   floors: [
     { rect: [-10, 10, 8, -30], tex: 'paves', sky: true },
+    { rect: [10, 19, -12, -44], tex: 'beton' },
     { rect: [-10, 10, -30, -62], tex: 'carrelage' },
     { rect: [-10, 10, -62, -84], tex: 'beton' },
     { rect: [-10, 10, -84, -104], tex: 'beton', sky: true },
     { rect: [-12, 12, -104, -132], tex: 'carrelage' }
   ],
   walls: [
-    [-11, -10, 8, -84, 'mur'], [10, 11, 8, -84, 'mur'],
+    [-11, -10, 8, -84, 'mur'], [10, 11, 8, -17, 'mur'], [10, 11, -19, -40, 'mur'], [10, 11, -42, -84, 'mur'],
+    // le marché noir : couloir d'étals entre la cour (porte violette) et les rayons (passage ouvert)
+    [11, 20, -11, -12, 'mur'], [19, 20, -12, -44, 'mur'], [11, 20, -44, -45, 'mur'],
     [-11, -1.5, -30, -31, 'mur'], [1.5, 11, -30, -31, 'mur'],
     [-11, -1.5, -62, -63, 'mur'], [1.5, 11, -62, -63, 'mur'],
     [-11, -1.5, -84, -85, 'beton'], [1.5, 11, -84, -85, 'beton'],
@@ -47,6 +52,9 @@ export default {
     // l'arrière : caisses et poubelles qui cachent des lampes
     { x: -5, z: -8, w: 3, d: 2, h: 1.4, tex: 'beton', solid: true }, { x: 4.5, z: -14, w: 2, d: 3, h: 1.4, tex: 'beton', solid: true },
     { x: -3.5, z: -21, w: 3, d: 2, h: 1.4, tex: 'beton', solid: true }, { x: 6.5, z: -22, w: 2, d: 2, h: 1.4, tex: 'beton', solid: true },
+    // le marché noir : étals de marchandises confisquées (on se cache derrière)
+    { x: 13, z: -16, w: 2, d: 1.2, h: 1.2, tex: 'sol', solid: true }, { x: 17, z: -22, w: 2, d: 1.2, h: 1.2, tex: 'sol', solid: true },
+    { x: 13, z: -29, w: 2, d: 1.2, h: 1.2, tex: 'sol', solid: true }, { x: 17, z: -36, w: 2, d: 1.2, h: 1.2, tex: 'sol', solid: true },
     // les rayons : 3 étagères, et des palettes « Tradition Certifiée » pour se cacher des scanners
     { x: -5, z: -44, w: 1.2, d: 14, h: 2.4, tex: 'mur', solid: true }, { x: 0, z: -44, w: 1.2, d: 14, h: 2.4, tex: 'mur', solid: true },
     { x: 5, z: -44, w: 1.2, d: 14, h: 2.4, tex: 'mur', solid: true },
@@ -60,6 +68,7 @@ export default {
   // le comptoir arrête l'Ultra mais pas les flèches, le bretzel ni les étiquettes renvoyées
   glass: [[-9, 9, -124.2, -124.8]],
   doors: [
+    { id: 'violette', rect: [10, 11, -17, -19], open: false },
     { id: 'escalier', rect: [-1.5, 1.5, -83.5, -84.5], open: false },
     { id: 'magasin', rect: [7.5, 10, -103.6, -104.6], open: false }
   ],
@@ -77,6 +86,7 @@ export default {
     { type: 'figurant', id: 'scn', label: 'SCN', x: -7.5, z: -80, rotY: PI / 2, talk: true, hidden: true },
     { type: 'figurant', id: 'scn2', label: 'SCN', x: -5.5, z: -81, rotY: PI / 2, hidden: true },
     { type: 'caisse', x: 8.8, z: -53.5, arrow: 'court_circuit' },
+    { type: 'caisse', x: 18, z: -42.5, arrow: 'court_circuit' },
     ...WORD.map((char, i) => ({ type: 'lettre', x: 6.3 - i * 1.4, z: -103.6, y: 2.4, rotY: PI, char, lit: !OFF.includes(i),
       group: 'enseigne', key: OFF.indexOf(i) })),
     { type: 'stork', x: -8.6, z: -103.4, y: 2.2 }
@@ -84,16 +94,19 @@ export default {
   ads: [
     { x: -9.9, z: -24, rotY: PI / 2, w: 3, y: 3, idx: 0 }, { x: 0, z: -61.4, w: 4, y: 3.2, idx: 1 },
     { x: 9.9, z: -72, rotY: -PI / 2, w: 3, y: 3, idx: 2 }, { x: -11.9, z: -116, rotY: PI / 2, w: 3.4, y: 3.4, idx: 3 },
-    { x: 0, z: -131.9, w: 5, y: 4, idx: 0 }
+    { x: 0, z: -131.9, w: 5, y: 4, idx: 0 },
+    { x: 18.9, z: -18, rotY: -PI / 2, w: 3, y: 2.8, idx: 4 }, { x: 18.9, z: -30, rotY: -PI / 2, w: 3, y: 2.8, idx: 5 }
   ],
   neons: [
     { x: -9.8, y: 3.6, z: -46, len: 28, axis: 'z', color: VIO }, { x: 9.8, y: 3.6, z: -46, len: 28, axis: 'z', color: VIO },
-    { x: 0, y: 3.4, z: -84.4, len: 3, axis: 'x', color: ORANGE }, { x: 0, y: 4.2, z: -131.8, len: 16, axis: 'x', color: PINK }
+    { x: 0, y: 3.4, z: -84.4, len: 3, axis: 'x', color: ORANGE }, { x: 0, y: 4.2, z: -131.8, len: 16, axis: 'x', color: PINK },
+    { x: 18.8, y: 3.2, z: -28, len: 30, axis: 'z', color: VIO }
   ],
   lights: [
     { x: 0, z: -8, y: 7, color: 0x6a5acd, i: 8, d: 24 }, { x: 0, z: -22, y: 7, color: 0x6a5acd, i: 8, d: 24 },
     { x: 0, z: -38, y: 4, color: 0xc8d8ff, i: 9, d: 18 }, { x: 0, z: -54, y: 4, color: 0xc8d8ff, i: 9, d: 18 },
     { x: 0, z: -73, y: 4, color: 0xffc040, i: 12, d: 22 }, { x: 0, z: -94, y: 7, color: ORANGE, i: 10, d: 26 },
+    { x: 15, z: -20, y: 4, color: 0x9a4dff, i: 7, d: 16 }, { x: 15, z: -36, y: 4, color: 0x9a4dff, i: 7, d: 16 },
     { x: 0, z: -112, y: 5, color: 0xffffff, i: 16, d: 26 }, { x: 0, z: -126, y: 5, color: VIO, i: 16, d: 22 }
   ],
   warps: [

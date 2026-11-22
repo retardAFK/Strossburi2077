@@ -6,6 +6,7 @@ export default [
   { id: "m2k.arriere.1", who: "L'ULTRA", txt: "Le Marché 2000. Rideau baissé, mais ça bouge derrière : des robots-vigiles font leur ronde dans la cour.", status: "ok", note: "auto — à relire par Maxime" },
   { id: "m2k.arriere.2", who: "TUTO", txt: "Reste hors des faisceaux. Sous un néon allumé, on te voit de loin : casse-les à l'arc ({throw}). Repéré ? Retour au début de la cour.", status: "ok", note: "auto — à relire par Maxime" },
   { id: "m2k.arriere.3", who: "TUTO", txt: "Des flèches fumigènes ! Dans la fumée, les vigiles ne te voient plus. {arrow} : changer de flèche.", status: "ok", note: "auto — à relire par Maxime" },
+  { id: "m2k.noir.1", who: "L'ULTRA", txt: "Le marché noir de BlingCo : des écharpes confisquées, des bretzels du quartier... revendus x10. Par ici, je ressors dans les rayons.", status: "ok", note: "auto — à relire par Maxime" },
   { id: "m2k.rayons.1", who: "L'ULTRA", txt: "Les rayons. Des chariots qui roulent tout seuls, des caméras qui scannent tout... même les clients.", status: "ok", note: "auto — à relire par Maxime" },
   { id: "m2k.cliente", who: "CLIENTE", txt: "Je venais pour du lait : 14 BC le litre après 22 h. Psst : derrière les palettes, les scanners ne te voient pas.", status: "ok", note: "auto — à relire par Maxime" },
   { id: "m2k.employe", who: "EMPLOYÉ DE NUIT", txt: "Vingt ans que je travaille ici. Maintenant, j'étiquette les étiquettes. Les caméras ? Une flèche court-circuit et elles dorment.", status: "ok", note: "auto — à relire par Maxime" },

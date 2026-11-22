@@ -1,5 +1,5 @@
 // Parcours du niveau 4 (Marché 2000, la nuit, 2026), avec de vraies flèches : l'arrière (vigiles, « repéré ! » → retour
-// au départ, néon cassé, caisse de fumigènes, fumée qui aveugle), les rayons (étagères et palettes qui cachent, caméra
+// au départ, néon cassé, porte violette → marché noir → rayons, caisse de fumigènes, fumée qui aveugle), les rayons (étagères et palettes qui cachent, caméra
 // coupée au court-circuit), la réserve (2 vagues, escalier), le toit (lettres de l'enseigne : mauvais ordre puis bon
 // ordre → Stork rejoint l'Ultra), le magasin (piqué de Stork sur le tiroir ouvert), fin du niveau. Puis F2 partout.
 import { launch, checker } from './helpers.mjs';
@@ -20,7 +20,7 @@ await h.start(); await h.god();
 await h.run(() => { window.__caught = 0; window.S3K.events.on('stealth:caught', () => window.__caught++); });
 T.check('départ : l\'arrière', (await h.state()).room.includes('ARRIÈRE'));
 T.check('objets des niveaux 1 à 3 donnés (niveau lancé seul)', await h.run(() => ['boomerang', 'arc', 'gaffe'].every(i => window.S3K.inventory.has(i))));
-T.check('2 robots-vigiles en ronde, 3 néons allumés', await count('VigileNuit') === 2 && await h.run(() => window.S3K.entities.filter(e => e.isLight && e.on).length === 3));
+T.check('3 robots-vigiles en ronde (cour + marché noir), 3 néons allumés', await count('VigileNuit') === 3 && await h.run(() => window.S3K.entities.filter(e => e.isLight && e.on).length === 3));
 
 // repéré : dans le faisceau d'un vigile → retour au départ de la cour
 await h.run(() => { const g = window.S3K, v = g.entities.find(e => e.constructor.name === 'VigileNuit'), p = g.player;
@@ -51,6 +51,15 @@ await h.until(() => window.S3K.inventory.items.arc.ready, 3000); await place(); 
 T.check('flèche fumigène contre le mur : nuage', await h.until(() => window.S3K.entities.some(e => e.isSmoke && !e.removed), 3000));
 T.check("dans la fumée : le vigile ne voit plus l'Ultra", await facing() === false);
 await h.run(v => { eval(v).resetPatrol(); }, V);
+
+// la porte violette → le marché noir, qui ressort dans les rayons
+await tp(8.8, -18, 0); await h.wait(300); await h.skipDialogs();
+T.check('porte violette : elle s\'ouvre', await h.run(() => window.S3K.world.doors.violette.open));
+await tp(14, -25, -Math.PI / 2); await h.wait(200);
+T.check('le marché noir : une salle, un vigile', (await h.state()).room.includes('MARCHÉ NOIR') &&
+  await h.run(() => window.S3K.entities.filter(e => e.group === 'noir' && e.alive).length === 1));
+await tp(9.7, -41, Math.PI); await h.wait(300); await h.skipDialogs();
+T.check('sortie du marché noir → les rayons commencent', await count('ChariotRobot') === 3);
 
 // porte de service → les rayons
 await tp(0, -30.8); await h.wait(300); await h.skipDialogs();

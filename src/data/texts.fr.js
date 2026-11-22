@@ -26,7 +26,8 @@ export const TEXTS = {
   crate: 'CAISSE', // caisse de flèches spéciales
   prompts: {
     hack: '{use} : pirater', activate: '{use} : activer', restore: '{use} : restaurer la plaque', talk: '{use} : parler', crate: '{use} : prendre des flèches', open: '{use} : ouvrir',
-    lever: '{use} : actionner le levier', valve: '{use} : tourner la vanne', board: '{use} : monter dans la barque', sail: '{use} : larguer les amarres'
+    lever: '{use} : actionner le levier', valve: '{use} : tourner la vanne', board: '{use} : monter dans la barque', sail: '{use} : larguer les amarres',
+    storkDive: '{use} : STORK, PIQUÉ !'
   },
   // ------------------------------------------------ indications de commandes (systems/Prompts.js)
   // Les textes écrivent des ACTIONS entre accolades ({use}, {attack}...), jamais des touches : l'icône affichée
@@ -95,6 +96,8 @@ export const TEXTS = {
 
   barks: {
     steward: ['Billet ?', 'Scan en cours…', 'Accès refusé : supporter détecté.', 'Ce pigeon n\'a pas payé sa place.'],
+    vigile: ['x10 !', 'Ronde de nuit : tarif de nuit.', 'Produit étiqueté. Client aussi.', 'Après 22 h, tout est x10.'],
+    chariot: ['x10 !', 'Article non scanné détecté.', 'Bip. Bip. Majoration.', 'Rayon fermé. Prix ouvert.'],
     agent: ['VENDU !', 'Vous aussi : VENDU !', 'Vue sur Rhin, 9 999 BC le m² !', 'Coup de cœur garanti !', "Frais d'agence inclus."],
     consultant: ['On va optimiser ta ferveur !', 'Ton chant n\'est pas monétisable.', 'Synergie !', 'Je te passe en freemium !', 'C\'est pas personnel, c\'est stratégique.'],
     juriste: ['Article 12 : interdiction de chanter !', 'Signe ici, ici, et là.', 'Clause de non-supportérisme !', 'Vous avez lu les CGU ? Non ? Parfait.'],
@@ -326,6 +329,22 @@ export const TEXTS = {
     opening: [`Strasbourg, 2026. Le Port du Rhin.`, "Les quais, les péniches, le vieux moulin. BlingCo y voit des « lofts de caractère ».",
       "Les dockers et les mariniers tiennent bon. Pour l'instant."],
     end: ['PORT DU RHIN LIBÉRÉ', 'Les dockers et les mariniers rejoignent la résistance. Suite : le Marché 2000.']
+  },
+  marche2000: {
+    subtitle: 'NIVEAU 4 : MARCHÉ 2000, 2026 (LA NUIT)',
+    rooms: { arriere: "L'ARRIÈRE · RUE DE LA FARINE", rayons: 'LES RAYONS', reserve: 'LA RÉSERVE', toit: "LE TOIT · L'ENSEIGNE",
+      magasin: 'LE MAGASIN · CÔTÉ TRAM' },
+    ads: [['BLINGCO NUIT', 'OUVERT 24 H / 24 · PRIX x10 APRÈS 22 H'], ['TRADITION CERTIFIÉE', 'LE BRETZEL « AUTHENTIQUE® » : 12 BC'],
+      ['ÉPICERIE PREMIUM', "L'EAU DU ROBINET, EN BOUTEILLE"], ['CARTE FIDÉLITÉ', 'PLUS VOUS ACHETEZ, PLUS ÇA COÛTE']],
+    boss: 'LE GÉRANT DE NUIT · BLINGCO NUIT',
+    gerantOpen: 'x10 ENCAISSÉ !',
+    caught: ['REPÉRÉ !', 'RETOUR AU DÉBUT DE LA SALLE'],
+    neonsOff: ['COUR DANS LE NOIR', 'LA PORTE DE SERVICE EST LIBRE'],
+    reserveOpen: ['RÉSERVE LIBÉRÉE', "L'ESCALIER DU TOIT EST OUVERT"],
+    enseigne: 'MARCHÉ 2000', enseigneDone: ['ENSEIGNE RALLUMÉE', 'STORK REJOINT LA RÉSISTANCE'],
+    opening: [`Strasbourg, 2026. Porte de l'Hôpital, la nuit.`, "Le Marché 2000, l'épicerie du quartier. BlingCo l'a « optimisée » : rideau baissé, prix x10 après 22 h.",
+      "Derrière la porte violette, un marché noir. Et quelque part, SCN se cache."],
+    end: ['MARCHÉ 2000 LIBÉRÉ', 'Les clients, les employés et Stork rejoignent la résistance. Suite : le Kalt.']
   },
   bac: {
     subtitle: 'BAC À SABLE · TESTS (DEBUG)',

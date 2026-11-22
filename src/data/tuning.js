@@ -92,6 +92,12 @@ export const TUNING = {
     // agent immobilier-clone (Port du Rhin 2026) : plante des pancartes VENDU (TUNING.agentImmo)
     agent: { hp: 3, radius: 0.45, height: 1.9, speed: 2.3, runSpeed: 4.6, wander: 4, view: 10, fov: 0.5, hear: 2.5,
       alertTime: 0.6, lose: 2.5, reach: 1.8, windup: 0.5, attack: 'lunge', lunge: 10, attackTime: 0.22, recover: 0.8, dmg: 1 },
+    // robot-vigile à lampe (Marché 2000) : guetteur (litView : portée quand l'Ultra est sous un néon allumé)
+    vigile: { hp: 3, radius: 0.5, height: 2, speed: 1.8, runSpeed: 4.2, wander: 3, view: 7, fov: 0.82, hear: 1.2, litView: 13,
+      alertTime: 1, lose: 2.5, reach: 1.9, windup: 0.6, attack: 'lunge', lunge: 9, attackTime: 0.22, recover: 0.8, dmg: 1, robot: true },
+    // chariot-robot de rayon (Marché 2000) : guetteur à scanner court, rapide
+    chariot: { hp: 2, radius: 0.55, height: 1.2, speed: 2.4, runSpeed: 5, wander: 3, view: 5.5, fov: 0.85, hear: 1, litView: 0,
+      alertTime: 1, lose: 2, reach: 1.7, windup: 0.5, attack: 'lunge', lunge: 11, attackTime: 0.2, recover: 0.9, dmg: 1, robot: true },
     test: { hp: 3, radius: 0.55, height: 1.9, speed: 2.2, runSpeed: 4.4, wander: 4, view: 11, fov: 0.5, hear: 2.5,
       alertTime: 0.6, lose: 2.5, reach: 1.9, windup: 0.5, attack: 'lunge', lunge: 10, attackTime: 0.22, recover: 0.7, dmg: 1, robot: true },
     testTireur: { hp: 3, radius: 0.55, height: 1.9, speed: 2, runSpeed: 3.6, wander: 3, view: 13, fov: 0.45, hear: 2.5,
@@ -125,5 +131,23 @@ export const TUNING = {
     hp: 9, scale: 1.4, speed: 1.6, dropEvery: 3.2, aimTime: 1.1, fallTime: 0.7, prefabLife: 7, prefabScale: 2.4,
     prefabR: 1.6, dropDmg: 1, returnDmg: 2, returnSpeed: 18, stun: 3, phases: [0.66, 0.33], phaseDrops: [1, 2, 3],
     agentsAt: [1, 2], contact: 1
+  },
+  // ---------------------------------------------------------------- niveau 4 : Marché 2000 (2026, la nuit)
+  // néons de la cour : rayon du disque éclairé (m) · caméras-scanners : portée, demi-cône (cos), vitesse du balayage,
+  // délai entre deux « repéré ! », coupure par la flèche court-circuit (s)
+  neonCour: { radius: 3.2 },
+  camScan: { range: 7, fov: 0.93, speed: 0.6, cooldown: 2, short: 8 },
+  // infiltration : délai minimal entre deux « repéré ! » (s)
+  stealth: { caughtCd: 1.5 },
+  // Stork (version événement du Marché 2000) : taille, vitesses (envol, suivi, piqué)
+  stork: { scale: 0.85, fly: 9, follow: 7, dive: 18 },
+  // le Gérant de nuit : PV, glisse derrière le comptoir, étiquettes x10 (visée, écart, rafale par phase, vitesse,
+  // distance de départ devant le comptoir), scanner (portée, demi-cône en cos, arc de balayage, durée par phase),
+  // tiroir ouvert (s), piqué de Stork, étourdissement
+  gerant: {
+    hp: 9, scale: 1.6, speed: 2.2, glideRange: 6, attackEvery: 2.4, dmg: 1, phases: [0.66, 0.33],
+    labelAim: 0.6, labelGap: 0.12, labelSpread: 0.22, labels: [3, 5, 7], labelSpeed: 10, labelFrom: 3.8,
+    scanRange: 22, scanCos: 0.995, scanArc: 1.1, scanTime: [2.6, 2.2, 1.8],
+    openTime: 3.5, storkDmg: 3, stun: 2.5
   }
 };

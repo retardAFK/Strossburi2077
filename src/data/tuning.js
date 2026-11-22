@@ -98,6 +98,9 @@ export const TUNING = {
     // chariot-robot de rayon (Marché 2000) : guetteur à scanner court, rapide
     chariot: { hp: 2, radius: 0.55, height: 1.2, speed: 2.4, runSpeed: 5, wander: 3, view: 5.5, fov: 0.85, hear: 1, litView: 0,
       alertTime: 1, lose: 2, reach: 1.7, windup: 0.5, attack: 'lunge', lunge: 11, attackTime: 0.2, recover: 0.9, dmg: 1, robot: true },
+    // physio cyborg BlingCo (Kalt) : armoire à glace, lent mais solide, coup de tampon
+    physio: { hp: 4, radius: 0.55, height: 2.2, speed: 1.6, runSpeed: 3.8, wander: 3, view: 9, fov: 0.5, hear: 3,
+      alertTime: 0.6, lose: 3, reach: 2, windup: 0.75, attack: 'lunge', lunge: 8, attackTime: 0.25, recover: 0.9, dmg: 1 },
     test: { hp: 3, radius: 0.55, height: 1.9, speed: 2.2, runSpeed: 4.4, wander: 4, view: 11, fov: 0.5, hear: 2.5,
       alertTime: 0.6, lose: 2.5, reach: 1.9, windup: 0.5, attack: 'lunge', lunge: 10, attackTime: 0.22, recover: 0.7, dmg: 1, robot: true },
     testTireur: { hp: 3, radius: 0.55, height: 1.9, speed: 2, runSpeed: 3.6, wander: 3, view: 13, fov: 0.45, hear: 2.5,
@@ -150,5 +153,23 @@ export const TUNING = {
     labelSlow: 0.55, labelSlowTime: 1.6, // étiquette x10 reçue : vitesse de l'Ultra x0.55 pendant 1.6 s (réponse de Maxime : « ok pour ralentir »)
     scanRange: 22, scanCos: 0.995, scanArc: 1.1, scanTime: [2.6, 2.2, 1.8],
     openTime: 3.5, storkDmg: 3, stun: 2.5
+  },
+  // ---------------------------------------------------------------- niveau 5 : le Kalt
+  // robot-cordon : PV, taille du modèle, longueur du cordon (m, = modèle x taille), retour à sa place (vitesse)
+  cordon: { hp: 3, scale: 1.5, len: 2.55, speed: 1.5 },
+  // sono de la salle : tempo, cycle (temps), temps de basses en début de cycle (portiques ouverts), flash du strobo (s),
+  // durée pendant laquelle un ennemi « dans le noir » reste visible après le flash (s)
+  sono: { bpm: 124, cycle: 8, bass: 4, flash: 0.08, glow: 0.14 },
+  // Dylagne (version événement du Kalt) : taille, suivi, onde de choc de la grosse caisse (rayon, dégâts aux sbires,
+  // recharge), soin passif (1 bretzel toutes les healEvery s si l'Ultra est blessé)
+  dylagne: { scale: 1, follow: 5, drumR: 5, drumDmg: 2, drumCd: 1.5, healEvery: 15, heal: 1 },
+  // le Magnat du Carré VIP : PV, taille, vol (hauteur, rayon et vitesse de la ronde par phase), attaques en alternance :
+  // bouteilles à étincelles (rafale par phase, visée, écart, angle, vitesse), pluie de bouchons (zones par phase, rayon,
+  // avertissement, durée, dispersion) ; court-circuit → chute (s) → au sol (s, point faible), remontée (s) ; grosse caisse
+  magnat: {
+    hp: 10, scale: 1.5, hoverY: 4.2, landY: 0.2, orbit: 6, orbitSpeed: [0.45, 0.6, 0.75], attackEvery: 2.6, dmg: 1,
+    phases: [0.66, 0.33], sparks: [3, 5, 7], sparkAim: 0.6, sparkGap: 0.14, sparkSpread: 0.24, sparkSpeed: 9,
+    rain: [3, 4, 6], rainR: 1.3, rainWarn: 1.1, rainLife: 1.4, rainSpread: 4,
+    fallTime: 0.7, landTime: 4.5, riseTime: 1.2, drumDmg: 3, stun: 1.5
   }
 };

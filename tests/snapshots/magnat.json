@@ -1,0 +1,41 @@
+{
+  "hp": 10,
+  "scale": 1.5,
+  "hoverY": 4.2,
+  "landY": 0.2,
+  "orbit": 6,
+  "orbitSpeed": [
+    0.45,
+    0.6,
+    0.75
+  ],
+  "attackEvery": 2.6,
+  "dmg": 1,
+  "phases": [
+    0.66,
+    0.33
+  ],
+  "sparks": [
+    3,
+    5,
+    7
+  ],
+  "sparkAim": 0.6,
+  "sparkGap": 0.14,
+  "sparkSpread": 0.24,
+  "sparkSpeed": 9,
+  "rain": [
+    3,
+    4,
+    6
+  ],
+  "rainR": 1.3,
+  "rainWarn": 1.1,
+  "rainLife": 1.4,
+  "rainSpread": 4,
+  "fallTime": 0.7,
+  "landTime": 4.5,
+  "riseTime": 1.2,
+  "drumDmg": 3,
+  "stun": 1.5
+}

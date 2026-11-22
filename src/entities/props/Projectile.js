@@ -22,6 +22,12 @@ const SHAPES = {
     s.position.y = 0.01; g.add(s);
     return g;
   },
+  etincelle() { // jet de la bouteille à étincelles du Magnat (Kalt) : éclat doré, cœur blanc
+    const g = new THREE.Group();
+    g.add(new THREE.Mesh(new THREE.OctahedronGeometry(0.3), new THREE.MeshBasicMaterial({ color: 0xffc040, fog: false })));
+    g.add(new THREE.Mesh(new THREE.OctahedronGeometry(0.16), new THREE.MeshBasicMaterial({ color: 0xffffff, fog: false })));
+    return g;
+  },
   bouchon() {
     return new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.07, 0.2, 6), new THREE.MeshBasicMaterial({ color: 0xc89a5a, fog: false }));
   }

@@ -47,6 +47,14 @@ import { LettreNeon } from '../entities/props/LettreNeon.js';
 import { StorkAllie } from '../entities/props/StorkAllie.js';
 import m2kLayout from './marche2000/layout.js';
 import m2kScript from './marche2000/script.js';
+import { Physio } from '../entities/enemies/Physio.js';
+import { RobotCordon } from '../entities/enemies/RobotCordon.js';
+import { MagnatVip } from '../entities/bosses/MagnatVip.js';
+import { Sono } from '../entities/props/Sono.js';
+import { Projecteur } from '../entities/props/Projecteur.js';
+import { DylagneAllie } from '../entities/props/DylagneAllie.js';
+import kaltLayout from './kalt/layout.js';
+import kaltScript from './kalt/script.js';
 import prhLayout from './port-rhin/layout.js';
 import prhScript from './port-rhin/script.js';
 import mei2Layout from './meinau/layout.js';
@@ -104,6 +112,12 @@ import chariot_robot from '../../assets/models/chariot_robot.glb';
 import gerant_nuit from '../../assets/models/gerant_nuit.glb';
 import stork from '../../assets/models/stork.glb';
 import decor_marche2000 from '../../assets/models/decor_marche2000.glb';
+import physio_kalt from '../../assets/models/physio_kalt.glb';
+import robot_cordon from '../../assets/models/robot_cordon.glb';
+import magnat_vip from '../../assets/models/magnat_vip.glb';
+import dylagne from '../../assets/models/dylagne.glb';
+import decor_kalt from '../../assets/models/decor_kalt.glb';
+import decor_kalt_ext from '../../assets/models/decor_kalt_ext.glb';
 
 export const DEFAULT_LEVEL = 'petite-france'; // l'ancien prototype reste accessible avec ?level=meinau-ouest
 // Partie 1, dans l'ordre (docs/decisions.md). Seuls les niveaux déjà inscrits dans LEVELS sont joués ;
@@ -143,6 +157,13 @@ export const LEVELS = {
     models: { ultra, vigile_nuit, chariot_robot, gerant_nuit, stork, arc_drapeau, bretzel_boomerang, gaffe_grappin, decor_marche2000 },
     types: { vigile: VigileNuit, chariot: ChariotRobot, gerant: GerantNuit, neon: NeonCour, camera: CameraScanner,
       lettre: LettreNeon, stork: StorkAllie, figurant: Figurant, caisse: CaisseFleches }
+  },
+  kalt: {
+    layout: kaltLayout, script: kaltScript, texts: TEXTS.kalt, subtitle: TEXTS.kalt.subtitle,
+    models: { ultra, physio_kalt, robot_cordon, magnat_vip, dylagne, arc_drapeau, bretzel_boomerang, gaffe_grappin,
+      decor_kalt, decor_kalt_ext },
+    types: { physio: Physio, cordon: RobotCordon, magnat: MagnatVip, sono: Sono, projo: Projecteur, dylagne: DylagneAllie,
+      figurant: Figurant, caisse: CaisseFleches }
   },
   'bac-a-sable': {
     debugOnly: true, layout: bacLayout, script: bacScript, texts: TEXTS.bac, subtitle: TEXTS.bac.subtitle,

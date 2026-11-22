@@ -22,6 +22,9 @@ const SFX = {
 const MUSIC = {
   coursive: { step: 0.15, lead: [64, 0, 67, 0, 71, 0, 67, 69, 0, 67, 64, 0, 62, 0, 64, 0, 64, 0, 67, 0, 71, 0, 74, 72, 0, 71, 67, 0, 69, 0, 0, 0],
     bass: [40, 40, 52, 40, 43, 43, 55, 43, 45, 45, 57, 45, 38, 38, 50, 38], drums: true },
+  // le Kalt : techno à 124 BPM (4 pas par temps, comme TUNING.sono), grosse caisse sur chaque temps
+  kalt: { step: 60 / 124 / 4, lead: [0, 0, 69, 0, 0, 0, 72, 0, 0, 0, 69, 0, 0, 76, 0, 0, 0, 0, 69, 0, 0, 0, 72, 0, 0, 0, 74, 0, 72, 0, 0, 0],
+    bass: [33, 45, 33, 45, 36, 48, 36, 48], drums: true, heavy: true },
   boss: { step: 0.13, lead: [57, 57, 60, 57, 63, 62, 60, 58, 57, 57, 60, 64, 65, 64, 62, 58],
     bass: [33, 33, 45, 33, 36, 36, 48, 36], drums: true, heavy: true }
 };

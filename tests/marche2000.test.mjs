@@ -39,15 +39,17 @@ await tp(-7, 3.2); await h.wait(200); await h.key('KeyE'); await h.wait(200); aw
 T.check('caisse : flèches fumigènes', await h.run(() => window.S3K.inventory.items.arc.ammo.fumigene > 0));
 // fumigène tiré contre le mur, à côté du vigile ; l'Ultra dans la fumée, sous ses yeux
 const V = "window.S3K.entities.find(e => e.constructor.name === 'VigileNuit' && e.start.z > -15)";
+// (les deux vigiles sont figés pendant ce test : aucune ronde ne renvoie l'Ultra au départ entre deux étapes)
+const freeze = () => h.run(() => { for (const w of window.S3K.entities) if (w.constructor.name === 'VigileNuit') { w.setState('stunned'); w.stunT = 99; } });
+const place = () => h.run(() => { const p = window.S3K.player; Object.assign(p, { x: -8.5, z: -13, face: Math.PI, vx: 0, vz: 0, target: null }); p.sync(); });
 const facing = () => h.run(v => { const g = window.S3K, w = eval(v), p = g.player;
-  w.resetPatrol(); w.setState('stunned'); w.stunT = 99; Object.assign(w, { x: -6.5, z: -11.5 }); w.faceTo(p.x, p.z); w.blinded = 0; return w.sees(); }, V);
-await tp(-8.5, -13, Math.PI);
+  Object.assign(p, { x: -8.5, z: -13 }); Object.assign(w, { x: -6.5, z: -11.5 }); w.faceTo(p.x, p.z); w.blinded = 0; return w.sees(); }, V);
+await h.skipDialogs(); await freeze(); await place();
 T.check('à découvert, face au vigile : vu', await facing() === true);
-await h.run(() => { const p = window.S3K.player; p.target = null; window.__caught = 0; });
-await h.run(() => { const a = window.S3K.inventory.items.arc; a.arrow = 'fumigene'; window.S3K.player.target = null; });
-await h.until(() => window.S3K.inventory.items.arc.ready, 3000); await h.key('KeyF'); await h.wait(600);
-T.check('flèche fumigène contre le mur : nuage', await h.run(() => window.S3K.entities.some(e => e.isSmoke && !e.removed)));
-T.check("dans la fumée : le vigile ne voit plus l'Ultra",await facing() === false);
+await h.run(() => { window.S3K.inventory.items.arc.arrow = 'fumigene'; window.__caught = 0; });
+await h.until(() => window.S3K.inventory.items.arc.ready, 3000); await place(); await h.key('KeyF');
+T.check('flèche fumigène contre le mur : nuage', await h.until(() => window.S3K.entities.some(e => e.isSmoke && !e.removed), 3000));
+T.check("dans la fumée : le vigile ne voit plus l'Ultra", await facing() === false);
 await h.run(v => { eval(v).resetPatrol(); }, V);
 
 // porte de service → les rayons

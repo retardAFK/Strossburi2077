@@ -140,7 +140,7 @@ export class Game {
       if (this.cutscene.done || I.pressed.ok) this.endCutscene();
       return;
     }
-    if (this.mode === 'end') { if (this.nextLevel && I.pressed.ok) this.progress.goto(); return; } // niveau suivant
+    if (this.mode === 'end') { if ((this.nextLevel || this.partEnd) && I.pressed.ok) this.progress.goto(); return; } // niveau suivant / titre
     if (this.mode === 'title' && this.progress?.fromSave && I.pressed.back) return this.progress.newGame();
     if (this.mode === 'title') {
       this.renderer.camera.position.set(Math.sin(this.time * 0.25) * 3, 3, -4 + Math.cos(this.time * 0.25) * 2);

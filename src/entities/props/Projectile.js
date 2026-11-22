@@ -15,6 +15,13 @@ const SHAPES = {
   ticket() { // ticket d'addition qui vole à plat
     return new THREE.Mesh(new THREE.PlaneGeometry(0.35, 0.6), new THREE.MeshBasicMaterial({ color: 0xfffbe8, side: THREE.DoubleSide, fog: false }));
   },
+  etiquette() { // étiquette de prix « x10 » du Marché 2000 : orange, liseré rouge
+    const g = new THREE.Group();
+    g.add(new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.04, 0.32), new THREE.MeshBasicMaterial({ color: 0xff8a1a, fog: false })));
+    const s = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.05, 0.08), new THREE.MeshBasicMaterial({ color: 0xff1a3c, fog: false }));
+    s.position.y = 0.01; g.add(s);
+    return g;
+  },
   bouchon() {
     return new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.07, 0.2, 6), new THREE.MeshBasicMaterial({ color: 0xc89a5a, fog: false }));
   }

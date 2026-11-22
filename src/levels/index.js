@@ -38,6 +38,15 @@ import { Promoteur } from '../entities/bosses/Promoteur.js';
 import { Anneau } from '../entities/props/Anneau.js';
 import { Tractable } from '../entities/props/Tractable.js';
 import { Pancarte } from '../entities/props/Pancarte.js';
+import { VigileNuit } from '../entities/enemies/VigileNuit.js';
+import { ChariotRobot } from '../entities/enemies/ChariotRobot.js';
+import { GerantNuit } from '../entities/bosses/GerantNuit.js';
+import { NeonCour } from '../entities/props/NeonCour.js';
+import { CameraScanner } from '../entities/props/CameraScanner.js';
+import { LettreNeon } from '../entities/props/LettreNeon.js';
+import { StorkAllie } from '../entities/props/StorkAllie.js';
+import m2kLayout from './marche2000/layout.js';
+import m2kScript from './marche2000/script.js';
 import prhLayout from './port-rhin/layout.js';
 import prhScript from './port-rhin/script.js';
 import mei2Layout from './meinau/layout.js';
@@ -90,6 +99,11 @@ import prefab_boite from '../../assets/models/prefab_boite.glb';
 import prefab_bureau from '../../assets/models/prefab_bureau.glb';
 import prefab_loft from '../../assets/models/prefab_loft.glb';
 import gaffe_grappin from '../../assets/models/gaffe_grappin.glb';
+import vigile_nuit from '../../assets/models/vigile_nuit.glb';
+import chariot_robot from '../../assets/models/chariot_robot.glb';
+import gerant_nuit from '../../assets/models/gerant_nuit.glb';
+import stork from '../../assets/models/stork.glb';
+import decor_marche2000 from '../../assets/models/decor_marche2000.glb';
 
 export const DEFAULT_LEVEL = 'petite-france'; // l'ancien prototype reste accessible avec ?level=meinau-ouest
 // Partie 1, dans l'ordre (docs/decisions.md). Seuls les niveaux déjà inscrits dans LEVELS sont joués ;
@@ -123,6 +137,12 @@ export const LEVELS = {
     models: { ultra, agent_immo, pancarte_vendu, promoteur, prefab_boite, prefab_bureau, prefab_loft, gaffe_grappin,
       arc_drapeau, bretzel_boomerang, pf_herse_laser, decor_port_rhin },
     types: { agent: AgentImmo, promoteur: Promoteur, anneau: Anneau, tractable: Tractable, pancarte: Pancarte, figurant: Figurant }
+  },
+  marche2000: {
+    layout: m2kLayout, script: m2kScript, texts: TEXTS.marche2000, subtitle: TEXTS.marche2000.subtitle,
+    models: { ultra, vigile_nuit, chariot_robot, gerant_nuit, stork, arc_drapeau, bretzel_boomerang, gaffe_grappin, decor_marche2000 },
+    types: { vigile: VigileNuit, chariot: ChariotRobot, gerant: GerantNuit, neon: NeonCour, camera: CameraScanner,
+      lettre: LettreNeon, stork: StorkAllie, figurant: Figurant, caisse: CaisseFleches }
   },
   'bac-a-sable': {
     debugOnly: true, layout: bacLayout, script: bacScript, texts: TEXTS.bac, subtitle: TEXTS.bac.subtitle,

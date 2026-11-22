@@ -16,6 +16,8 @@ Réutilisées par tous les niveaux. Dépendent de `core/` et de `data/`, jamais 
 | `Menus.js` | Titre, pause, « passer », écran « Commandes » (deux colonnes clavier / manette) |
 | `Cutscene.js` | Plans de caméra + sous-titres minutés ; lancé par `game.playCutscene(plans, sous-titres, suite)` |
 | `Progress.js` | Campagne de la partie 1 : sauvegarde locale (niveau, objets, flèches, compagnons), « Continuer / Nouvelle partie », `complete(texte)` → niveau suivant |
+| `Stealth.js` | Infiltration : `spots(game, guetteur, angle, { range, cos, litRange })` (faisceau, obstacles via `clearLine`, fumée `inSmoke`, lumières `isLit`) |
+| `Beam.js` | Faisceau visible au sol (`beamMesh`, `beamAlert`) pour les guetteurs |
 | `Placeholder.js` | `placeholder(game, nom, hauteur, 'perso' \| 'boite')` : silhouette grise étiquetée pour tout élément sans design validé |
 | `Animator.js` | `pose(holder, {pivot: degrés})`, `walkPose`, `walkBob`, `tint` (télégraphie) |
 | `Fx.js` / `Particles.js` | Réticule, ondes de choc, étoiles, bulles de texte ; `particles.burst(x, y, z, n, couleur, vitesse)` |

@@ -11,7 +11,7 @@ export const TEXTS = {
   pressStart: 'APPUIE SUR {ok}',
   continueStart: '{ok} : CONTINUER · {back} : NOUVELLE PARTIE', // titre, partie sauvegardée
   doneStart: '{ok} : REJOUER LA PLACE KLÉBER · {back} : NOUVELLE PARTIE', // titre, partie 1 terminée
-  // fin de la partie 1 (après la place Kléber) : écran de fin + crédits courts (proposition, à relire par Maxime)
+  // fin de la partie 1 (après la place Kléber) : écran de fin + crédits courts (validés par Maxime le 22/11/2026)
   partEnd: {
     title: 'PARTIE 1 TERMINÉE', sub: 'À SUIVRE…', back: '{ok} : RETOUR AU TITRE',
     credits: ['Idée, univers et niveaux : Maxime', 'Designs : Maxime, avec Cowork · Code et modèles : Claude Code',
@@ -387,8 +387,9 @@ export const TEXTS = {
     ads: [['MARCHÉ DE NOËL PERMANENT', '365 JOURS PAR AN · ENTRÉE 15 BC'], ['VIN CHAUD', '79 BC LE GOBELET MINUSCULE'],
       ['NEIGE PAYANTE', '5 BC LE FLOCON'], ['STRASBOURG', 'VENDUE CE SOIR · SIGNATURE SUR L\'ESTRADE']],
     boss: 'MARCO CEKLAIR · BLINGCO',
-    // slogan : PROPOSITION provisoire, inventée (la formulation finale s'écrit avec Maxime : docs/decisions.md « Encore ouvert »)
-    slogan: ['VOTRE PASSION, NOTRE PRODUIT !', 'LE MARCHÉ DE DEMAIN, PAYÉ AUJOURD\'HUI !', 'VOTRE PASSION, NOTRE PRODUIT !'],
+    // slogan, répété en boucle (validé par Maxime le 22/11/2026, docs/designs/marco-ceklair.md)
+    slogan: ['VOTRE PASSION, NOTRE PRODUIT !', 'LE CLUB DE DEMAIN AVEC LES CONSOMMATEURS DE DEMAIN !', 'VOTRE PASSION, NOTRE PRODUIT !',
+      'LE MARCHÉ DE DEMAIN, PAYÉ AUJOURD\'HUI !'],
     pay: '2 BC LE MÈTRE !', frozen: 'GELÉ !', melted: 'LA NEIGE PAYANTE FOND',
     peagesOpen: ['PÉAGE PIRATÉ', 'ENTRÉE GRATUITE'],
     tampon: n => [`TAMPON OFFICIEL ${n} / 3`, n < 3 ? 'AVANT LA SIGNATURE !' : 'LE CHEMIN DU SAPIN EST OUVERT'],

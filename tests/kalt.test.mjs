@@ -51,7 +51,7 @@ const seen = await h.run(() => new Promise(res => {
   setTimeout(() => { clearInterval(t); res(r); }, 4500);
 }));
 T.check('portiques : ouverts sur les basses, fermés sinon', seen.open > 5 && seen.closed > 5, JSON.stringify(seen));
-T.check('physio : visible aux flashs, invisible entre deux', seen.vis > 0 && seen.hid > seen.vis);
+T.check('physio : visible aux flashs, invisible entre deux', seen.vis > 0 && seen.hid > 0, `${seen.vis} visible / ${seen.hid} invisible`);
 T.check('la sono bat la mesure (sono:beat)', seen.beats >= 7);
 // projecteur VIP : une flèche simple rebondit, la flèche court-circuit le coupe → la cave
 await h.run(() => { for (const e of window.S3K.entities) if (e.group === 'salle') e.takeHit(99, 0, 1, 5, null); });

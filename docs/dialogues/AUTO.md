@@ -2,7 +2,7 @@
 
 Générée par `node tools/dialogues-export.mjs` : les répliques dont la remarque commence par « auto ».
 Pour corriger : le fichier docs/dialogues/<niveau>.md, puis `node tools/dialogues-import.mjs`.
-Total : 70 réplique(s).
+Total : 85 réplique(s).
 
 | niveau | id | qui | réplique |
 |---|---|---|---|
@@ -76,3 +76,18 @@ Total : 70 réplique(s).
 | kalt | kalt.boss.phase2 | LE MAGNAT DU CARRÉ VIP | Sécurité ! Videz-moi cette piste ! Je veux la boîte pour moi tout seul ! |
 | kalt | kalt.boss.end | LE MAGNAT DU CARRÉ VIP | Mon carré... mes bouteilles... Je suis sur la liste... non ? |
 | kalt | kalt.end.1 | PUBLIC TECHNO | Le Kalt rouvre à tout le monde, comme avant : pas de carré, pas de liste. Merci l'Ultra. Prochaine étape : Kléber. |
+| kleber | kleber.peages.1 | L'ULTRA | Place Kléber. Des portiques-péages partout : la file VIP passe, le peuple est parqué derrière des barrières. |
+| kleber | kleber.peages.2 | SCN | La borne du péage est un terminal BlingCo comme les autres. Pirate-la ({use}) : entrée gratuite pour tout le monde. |
+| kleber | kleber.chalets.1 | SCN | La vente de la ville se signe ce soir sur l'estrade. Il leur faut trois tampons officiels : ils sont cachés dans les chalets. Trouve-les avant eux ! |
+| kleber | kleber.chalets.2 | TUTO | Des flèches enflammées, en souvenir des torches de la tribune ! La neige payante fond, les bâches brûlent. {arrow} : changer de flèche. |
+| kleber | kleber.chalets.3 | L'ULTRA | Un étal à roulettes devant ce chalet... un coup de gaffe-grappin et on verra ce qu'il cache. |
+| kleber | kleber.sapin.1 | SCN | Le sapin-écran verrouille l'estrade : son cimier, son socle payant et son générateur. Stork, Dylagne : c'est le moment. |
+| kleber | kleber.sapin.2 | TUTO | {use} : piqué de Stork sur le cimier, puis grosse caisse de Dylagne au pied du sapin. Le générateur ? Une flèche court-circuit. |
+| kleber | kleber.boss.1 | MARCO CEKLAIR | Ho, ho, ho ! Votre passion, notre produit ! Ce soir, je signe, et toute la ville passe en abonnement premium. |
+| kleber | kleber.boss.2 | TUTO | Son attelage fonce tout droit : esquive ({roll}) et laisse-le s'encastrer. Sonné, il est à toi : {use} pour Stork ou Dylagne ! |
+| kleber | kleber.boss.phase1 | MARCO CEKLAIR | Cadeaux pour tout le monde ! Interdiction de stade pour toi, billet à 900 BC pour toi ! |
+| kleber | kleber.boss.phase2 | MARCO CEKLAIR | Plus vite, l'attelage ! Votre passion... notre produit... votre passion... |
+| kleber | kleber.boss.end | MARCO CEKLAIR | Le contrat... n'est pas... signé... |
+| kleber | kleber.fin.1 | SCN | On a gagné ! La vente est annulée, Strasbourg n'est pas à vendre ! Tout le monde est là : les winstubs, le kop, les dockers, le peuple techno... |
+| kleber | kleber.fin.2 | SCN | L'Ultra... ça ne va pas. En battant Marco ici, en 2026, tu as changé le passé. Le futur s'est recalculé. Et il est pire. |
+| kleber | kleber.fin.3 | SCN | On te rappelle. Accroche-toi à ton écharpe. |

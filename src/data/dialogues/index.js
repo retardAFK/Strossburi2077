@@ -8,8 +8,9 @@ import meinau from './meinau.fr.js';
 import portRhin from './port-rhin.fr.js';
 import marche2000 from './marche2000.fr.js';
 import kalt from './kalt.fr.js';
+import kleber from './kleber.fr.js';
 
-export const DIALOGUES = { 'bac-a-sable': basASable, meinau, 'port-rhin': portRhin, marche2000, kalt };
+export const DIALOGUES = { 'bac-a-sable': basASable, meinau, 'port-rhin': portRhin, marche2000, kalt, kleber };
 
 const BY_ID = new Map();
 for (const lines of Object.values(DIALOGUES)) for (const l of lines) BY_ID.set(l.id, l);

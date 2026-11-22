@@ -9,7 +9,8 @@ export class Menus {
   render() {
     const g = this.game, T = g.texts, f = t => g.prompts.format(t), $ = s => this.dom.title.parentNode.querySelector(s);
     $('#title .controls').innerHTML = f(T.controls);
-    $('#title .go').innerHTML = f(g.progress?.fromSave ? T.continueStart : T.pressStart); // partie sauvegardée
+    const save = g.progress?.fromSave; // partie sauvegardée (terminée : on rejoue le dernier niveau)
+    $('#title .go').innerHTML = f(save ? (save.done ? T.doneStart : T.continueStart) : T.pressStart);
     $('#pause .hint').innerHTML = f(T.pauseHint.replace('{state}', T.rumbleState[g.input.rumbleOn ? 1 : 0]));
     this.dom.skip.innerHTML = f(T.skip);
     if (this.open) this.renderCommands();

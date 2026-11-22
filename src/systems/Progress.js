@@ -2,6 +2,7 @@
 // Sauvegarde locale ('s3k.save', avec try/catch : le jeu marche sans stockage). Un niveau demandé par ?level=<id>
 // (debug, tests) ne touche jamais à la sauvegarde. Fin de niveau : complete(texte) → sauvegarde → écran de fin
 // → {ok} : niveau suivant (la page se recharge sur la sauvegarde). Titre : {ok} continuer, {back} nouvelle partie.
+// Dernier niveau de la campagne : écran « Partie 1 terminée — À suivre » + crédits, {ok} : retour au titre.
 const KEY = 's3k.save';
 
 export class Progress {
@@ -39,11 +40,23 @@ export class Progress {
     if (this.campaign.includes(this.id)) this.write({ level: next || this.id, done: !next, ...this.snapshot() });
     g.win(text);
     g.nextLevel = next;
-    if (next) {
-      let el = g.dom.end.querySelector('.next');
-      if (!el) { el = document.createElement('p'); el.className = 'next'; g.dom.end.appendChild(el); }
-      el.innerHTML = g.prompts.format(g.texts.nextLevel);
-    }
+    if (next) this.endLine('next', g.prompts.format(g.texts.nextLevel));
+    else if (this.id === this.campaign[this.campaign.length - 1]) this.partEnd();
+  }
+  // ligne ajoutée à l'écran de fin (classe css)
+  endLine(cls, html) {
+    const end = this.game.dom.end;
+    let el = end.querySelector('.' + cls);
+    if (!el) { el = document.createElement(cls === 'credits' ? 'div' : 'p'); el.className = cls; end.appendChild(el); }
+    el.innerHTML = html;
+  }
+  // fin de la partie 1 : « Partie 1 terminée — À suivre », crédits courts, {ok} : retour au titre
+  partEnd() {
+    const g = this.game, P = g.texts.partEnd, end = g.dom.end;
+    g.partEnd = true;
+    end.querySelector('h1').textContent = P.title; end.querySelector('p').textContent = P.sub;
+    this.endLine('credits', [g.texts.title, ...P.credits].map(t => `<p>${t}</p>`).join(''));
+    this.endLine('next', g.prompts.format(P.back));
   }
   // recharge la page sur la sauvegarde (garde ?debug, ?seed... mais pas ?level)
   goto() {

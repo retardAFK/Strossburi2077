@@ -10,6 +10,13 @@ export const TEXTS = {
   subtitle: 'NIVEAU 1 : LA TRIBUNE OUEST',
   pressStart: 'APPUIE SUR {ok}',
   continueStart: '{ok} : CONTINUER · {back} : NOUVELLE PARTIE', // titre, partie sauvegardée
+  doneStart: '{ok} : REJOUER LA PLACE KLÉBER · {back} : NOUVELLE PARTIE', // titre, partie 1 terminée
+  // fin de la partie 1 (après la place Kléber) : écran de fin + crédits courts (proposition, à relire par Maxime)
+  partEnd: {
+    title: 'PARTIE 1 TERMINÉE', sub: 'À SUIVRE…', back: '{ok} : RETOUR AU TITRE',
+    credits: ['Idée, univers et niveaux : Maxime', 'Designs : Maxime, avec Cowork · Code et modèles : Claude Code',
+      'Satire de types : marques, noms et personnages inventés', 'Merci aux Strasbourgeoises et aux Strasbourgeois.']
+  },
   nextLevel: '{ok} : NIVEAU SUIVANT', // écran de fin de niveau (campagne)
   controls: '{move} bouger · {camera} caméra · {attack} écharpe (3 coups) · {roll} roulade · {lock} cible<br>{throw} objet · {use} interagir · {ok} valider · {pause} pause<br>{use} sur cet écran : toutes les commandes · au clavier, clic : capturer la souris',
   items: { boomerang: ['BRETZEL-BOOMERANG', '{throw}'], arc: ['ARC-DRAPEAU', '{throw} tirer · {aim} viser'], gaffe: ['GAFFE-GRAPPIN', '{throw} : grappin'] },
@@ -66,6 +73,8 @@ export const TEXTS = {
       ['controls', 'Pouce gauche : bouger · Glisser à droite : caméra<br>ÉCHARPE : 3 coups · ROULADE · CIBLE : verrouiller · BRETZEL : objet · AGIR : interagir<br>Toucher l\'écran : dialogues'],
       ['pressStart', "TOUCHE L'ÉCRAN"],
       ['continueStart', "TOUCHE L'ÉCRAN : CONTINUER"],
+      ['doneStart', "TOUCHE L'ÉCRAN : REJOUER LA PLACE KLÉBER"],
+      ['partEnd.back', "TOUCHE L'ÉCRAN : RETOUR AU TITRE"],
       ['pauseHint', 'TOUCHE L\'ÉCRAN POUR REPRENDRE'],
       ['skip', "TOUCHER L'ÉCRAN : PASSER"],
       ['items.boomerang.1', 'BOUTON BRETZEL'],

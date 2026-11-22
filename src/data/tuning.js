@@ -167,7 +167,7 @@ export const TUNING = {
   cordon: { hp: 3, scale: 1.5, len: 2.55, speed: 1.5 },
   // sono de la salle : tempo, cycle (temps), temps de basses en début de cycle (portiques ouverts), flash du strobo (s),
   // durée pendant laquelle un ennemi « dans le noir » reste visible après le flash (s)
-  sono: { bpm: 124, cycle: 8, bass: 4, flash: 0.08, glow: 0.14 },
+  sono: { bpm: 124, cycle: 8, bass: 4, flash: 0.08, glow: 0.1 },
   // Dylagne (version événement du Kalt) : taille, suivi, onde de choc de la grosse caisse (rayon, dégâts aux sbires,
   // recharge), soin passif (1 bretzel toutes les healEvery s si l'Ultra est blessé), distance où il rejoint l'Ultra d'un coup
   dylagne: { scale: 1, follow: 5, drumR: 5, drumDmg: 2, drumCd: 1.5, healEvery: 15, heal: 1, snap: 25 },

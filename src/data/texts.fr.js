@@ -27,7 +27,7 @@ export const TEXTS = {
   prompts: {
     hack: '{use} : pirater', activate: '{use} : activer', restore: '{use} : restaurer la plaque', talk: '{use} : parler', crate: '{use} : prendre des flèches', open: '{use} : ouvrir',
     lever: '{use} : actionner le levier', valve: '{use} : tourner la vanne', board: '{use} : monter dans la barque', sail: '{use} : larguer les amarres',
-    storkDive: '{use} : STORK, PIQUÉ !'
+    storkDive: '{use} : STORK, PIQUÉ !', dylagneDrum: '{use} : DYLAGNE, GROSSE CAISSE !'
   },
   // ------------------------------------------------ indications de commandes (systems/Prompts.js)
   // Les textes écrivent des ACTIONS entre accolades ({use}, {attack}...), jamais des touches : l'icône affichée
@@ -97,6 +97,8 @@ export const TEXTS = {
   barks: {
     steward: ['Billet ?', 'Scan en cours…', 'Accès refusé : supporter détecté.', 'Ce pigeon n\'a pas payé sa place.'],
     vigile: ['x10 !', 'Ronde de nuit : tarif de nuit.', 'Produit étiqueté. Client aussi.', 'Après 22 h, tout est x10.'],
+    physio: ['PAS CE SOIR.', 'Baskets : 3 cm de trop.', 'Tu es sur la liste ? Non.', 'Dress code : pas toi.', 'Même lui, pas ce soir.'],
+    cordon: ['ACCÈS VIP.', 'Bip. Liste fermée.', 'Cordon déployé.'],
     chariot: ['x10 !', 'Article non scanné détecté.', 'Bip. Bip. Majoration.', 'Rayon fermé. Prix ouvert.'],
     agent: ['VENDU !', 'Vous aussi : VENDU !', 'Vue sur Rhin, 9 999 BC le m² !', 'Coup de cœur garanti !', "Frais d'agence inclus."],
     consultant: ['On va optimiser ta ferveur !', 'Ton chant n\'est pas monétisable.', 'Synergie !', 'Je te passe en freemium !', 'C\'est pas personnel, c\'est stratégique.'],
@@ -348,6 +350,23 @@ export const TEXTS = {
     opening: [`Strasbourg, 2026. Porte de l'Hôpital, la nuit.`, "Le Marché 2000, l'épicerie du quartier. BlingCo l'a « optimisée » : rideau baissé, prix x10 après 22 h.",
       "Derrière la porte violette, un marché noir. Et quelque part, SCN se cache."],
     end: ['MARCHÉ 2000 LIBÉRÉ', 'Les clients, les employés et Stork rejoignent la résistance. Suite : le Kalt.']
+  },
+  kalt: {
+    subtitle: 'NIVEAU 5 : LE KALT, 2026 (LA NUIT)',
+    rooms: { file: 'LA FILE · RUE LA FAYETTE', cour: "L'ALLÉE ET LA COUR", salle: 'LA SALLE · LE HANGAR ROUGE', cave: 'LA CAVE',
+      piste: 'LA PISTE · LE CARRÉ VIP' },
+    ads: [['BLINGCO NIGHT', 'CARRÉ VIP · LA BOUTEILLE À 900 BC'], ['DRESS CODE', 'BASKETS : 30 BC LE CENTIMÈTRE'],
+      ['LISTE VIP', "VOUS N'Y ÊTES PAS"], ['OPEN BAR', 'OUVERT AU BAR, PAS À VOUS']],
+    boss: 'LE MAGNAT DU CARRÉ VIP · BLINGCO NIGHT',
+    stamp: 'REFOULÉ !', vipOnly: 'VIP ONLY !', landed: 'RÉACTEURS COUPÉS !',
+    fileOpen: ['LE CORDON EST TOMBÉ', "L'ALLÉE EST LIBRE"],
+    courOpen: ['LA COUR EST LIBRE', 'LE HANGAR ROUGE EST OUVERT'],
+    vipOff: ['PORTIQUE VIP COUPÉ', 'LA CAVE EST OUVERTE'],
+    dylagne: ['DYLAGNE REJOINT LA RÉSISTANCE', 'SA GROSSE CAISSE TIENT LE RYTHME'],
+    pisteOpen: ['BOUM !', 'LE RIDEAU DE LA PISTE TOMBE'],
+    opening: ['Strasbourg, 2026. Rue la Fayette, la nuit.', 'Le Kalt, la boîte techno du quartier. BlingCo y a posé un tapis doré, un cordon rouge... et un carré VIP.',
+      'Ce soir, le peuple techno reste dehors. Pas pour longtemps.'],
+    end: ['LE KALT LIBÉRÉ', 'Le peuple techno et Dylagne rejoignent la résistance. Suite : la place Kléber.']
   },
   bac: {
     subtitle: 'BAC À SABLE · TESTS (DEBUG)',

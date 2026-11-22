@@ -4,7 +4,7 @@ Réutilisées par tous les niveaux. Dépendent de `core/` et de `data/`, jamais 
 
 | Fichier | Rôle et API |
 |---|---|
-| `World.js` | Construit le décor depuis `layout.js` : sols (`sky`), murs, `blockers`, portes (`setDoor`), lasers, herses (`setGate`), eaux (`setWaterLevel`), props `.glb` (`setPropVisible`, `removeProp`), hologrammes, tables, blocs, écrans |
+| `World.js` | Construit le décor depuis `layout.js` : sols (`sky`), murs, `blockers`, portes (`setDoor`), lasers (`setLaser(id, on, quiet)`), herses (`setGate`), eaux (`setWaterLevel`), props `.glb` (`setPropVisible`, `removeProp`), hologrammes, tables, blocs, écrans |
 | `Textures.js` | Textures procédurales en pixels (`TEX.paves`, `gres`, `carrelage`, `eau`…), panneaux holo, silhouette |
 | `Combat.js` | `swing(attaquant, {range, arc, dmg, knock, targets, hitSet})`, `blast(x, z, r, dmg, knock, cibles)` |
 | `Interact.js` | `interact(e, texte, portée)` → true si E à portée (l'objet le plus proche a la main) ; `clearPrompt(e)` |

@@ -184,10 +184,10 @@ export class World {
     const d = this.doors[id]; if (!d || d.open === open) return;
     d.open = open; d.box.on = !open; this.game.audio.play('door');
   }
-  setLaser(id, on) {
+  setLaser(id, on, quiet = false) {
     const l = this.lasers[id]; if (!l) return;
     l.on = on; l.box.on = on; for (const b of l.beams) b.visible = on;
-    this.game.audio.play('laser');
+    if (!quiet) this.game.audio.play('laser');
   }
   update(dt, t) {
     for (const f of this.anim) f(t);

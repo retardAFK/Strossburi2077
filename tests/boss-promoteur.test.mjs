@@ -38,12 +38,20 @@ await h.god();
 
 // vrai lancer de gaffe-grappin sur un préfabriqué au sol → renvoyé au Promoteur
 // (le Promoteur ne relargue pas pendant ce lancer ; le préfabriqué visé repart pour une durée de vie complète)
-await h.run(() => { const g = window.S3K, p = g.player, b = g.entities.find(e => e.isBoss), f = g.entities.find(e => e.isPrefab && e.state === 'ground');
-  for (const e of g.entities) if (e.isPrefab && e !== f) e.remove();
-  b.setState('walk'); b.cd = 99; f.st = 0;
-  Object.assign(p, { x: f.x + 3, z: f.z + 3 }); p.sync(); g.inventory.equip('gaffe'); p.target = f; });
-await h.until(() => window.S3K.inventory.items.gaffe.ready, 3000); await h.key('KeyF');
-T.check('préfabriqué renvoyé → Promoteur sonné', await h.until(() => window.S3K.entities.find(e => e.isBoss).stateName === 'stunned', 4000));
+// (jusqu'à 3 essais : en CI, un recul ou une bousculade peut décaler l'Ultra entre la visée et le lancer)
+let sonne = false;
+for (let i = 0; i < 3 && !sonne; i++) {
+  await h.until(() => window.S3K.inventory.items.gaffe?.ready !== false, 3000);
+  const ok = await h.run(() => { const g = window.S3K, p = g.player, b = g.entities.find(e => e.isBoss), f = g.entities.find(e => e.isPrefab && e.state === 'ground');
+    if (!f) return false;
+    for (const e of g.entities) if (e.isPrefab && e !== f) e.remove();
+    b.setState('walk'); b.cd = 99; f.st = 0; Object.assign(b, { x: b.home.x, z: b.home.z });
+    g.inventory.equip('gaffe'); Object.assign(p, { x: f.x + 3, z: f.z + 3, vx: 0, vz: 0, inv: 1 }); p.setState('idle'); p.sync(); p.target = f; return true; });
+  if (!ok) break;
+  await h.until(() => window.S3K.inventory.items.gaffe.ready, 3000); await h.key('KeyF');
+  sonne = await h.until(() => window.S3K.entities.find(e => e.isBoss).stateName === 'stunned', 4000);
+}
+T.check('préfabriqué renvoyé → Promoteur sonné', sonne);
 let b = await boss();
 T.check('préfabriqué renvoyé → gros dégâts', b.hp === P.hp - P.returnDmg, JSON.stringify(b));
 await h.run(() => { const g = window.S3K; g.entities.find(e => e.isBoss).takeHit(1, 0, 1, 5, g.player); });

@@ -61,6 +61,8 @@ import { Neigeur } from '../entities/enemies/Neigeur.js';
 import { MarcoCeKlair } from '../entities/bosses/MarcoCeKlair.js';
 import { NeigePayante } from '../entities/props/NeigePayante.js';
 import { TamponOfficiel } from '../entities/props/TamponOfficiel.js';
+import { Monument } from '../entities/props/Monument.js';
+import { BoulesSapin } from '../entities/props/BoulesSapin.js';
 import kleberLayout from './kleber/layout.js';
 import kleberScript from './kleber/script.js';
 import prhLayout from './port-rhin/layout.js';
@@ -186,7 +188,7 @@ export const LEVELS = {
       cadeau_billet, stork, dylagne, terminal, arc_drapeau, bretzel_boomerang, gaffe_grappin, decor_kleber },
     types: { peagiste: Peagiste, bouclier: AgentBouclier, neigeur: Neigeur, marco: MarcoCeKlair, neige: NeigePayante,
       tampon: TamponOfficiel, tractable: Tractable, projo: Projecteur, stork: StorkAllie, dylagne: DylagneAllie,
-      terminal: Terminal, figurant: Figurant, caisse: CaisseFleches }
+      terminal: Terminal, figurant: Figurant, caisse: CaisseFleches, monument: Monument, boules: BoulesSapin }
   },
   'bac-a-sable': {
     debugOnly: true, layout: bacLayout, script: bacScript, texts: TEXTS.bac, subtitle: TEXTS.bac.subtitle,

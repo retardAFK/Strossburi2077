@@ -1,6 +1,9 @@
 // Niveau 6 : la place Kléber, la nuit, 2026, fin de la partie 1 (fiche docs/designs/niveau-kleber.md, validée par
 // délégation : Maxime valide en jouant cette maquette grise). Ambiance très sombre, brouillard violacé, seuls les néons
-// BlingCo brillent. Décor (tools/blender/decor_kleber.py → decor_kleber.glb, sapin-écran au centre) autour du sapin.
+// BlingCo brillent. Décor (tools/blender/decor_kleber.py → decor_kleber.glb, sapin-écran) autour du sapin.
+// Repères réels de la place (recherche web, 23/11) : l'Aubette néoclassique au fond (côté nord), la statue du général
+// Kléber au centre (bronze, Philippe Grass, 1840 ; placeholder en attendant un design), parterres de fleurs (2007),
+// Grand Sapin à boules dorées et rouges.
 // Repère : x à droite, z négatif = vers le fond.
 // 1 les portiques-péages (z 8 → -16) · 2 le labyrinthe de chalets (→ -56) · 3 le sapin-écran (→ -86) · B l'estrade (→ -120).
 const PI = Math.PI;
@@ -36,9 +39,9 @@ export default {
     // le labyrinthe, le sapin, l'estrade
     [-17, -16, -16, -121, 'kl_facade'], [16, 17, -16, -121, 'kl_facade'],
     [-17, -2, -56, -57, 'kl_facade'], [2, 17, -56, -57, 'kl_facade'],
-    [-17, -3, -86, -87, 'kl_facade'], [3, 17, -86, -87, 'kl_facade'], [-17, 17, -120, -121, 'kl_facade']
+    [-17, -3, -86, -87, 'kl_aubette'], [3, 17, -86, -87, 'kl_aubette'], [-17, 17, -120, -121, 'kl_facade']
   ],
-  blockers: [[-12, 12, 8, 9], [-1.6, 1.6, -69.4, -72.6]], // le pied du sapin-écran (décor)
+  blockers: [[-12, 12, 8, 9], [-4.1, -0.9, -62.9, -66.1]], // le pied du sapin-écran (décor : pivot `sapin` en -2.5, -64.5)
   blocks: [
     // péages : barrières Vauban du peuple parqué (à droite), tapis de la file VIP (à gauche)
     { x: 8, z: -4, w: 0.3, d: 10, h: 1.1, tex: 'beton', solid: true },
@@ -47,7 +50,10 @@ export default {
     chalet(-16, 2, -34), chalet(6, 16, -34),
     chalet(-16, -9, -44), chalet(-5, 11, -44),
     // la niche de l'étal à roulettes (tampon 3)
-    { x: 14, z: -46.8, w: 4, d: 0.6, h: 2.8, tex: 'kl_chalet', solid: true }, { x: 14, z: -55.2, w: 4, d: 0.6, h: 2.8, tex: 'kl_chalet', solid: true }
+    { x: 14, z: -46.8, w: 4, d: 0.6, h: 2.8, tex: 'kl_chalet', solid: true }, { x: 14, z: -55.2, w: 4, d: 0.6, h: 2.8, tex: 'kl_chalet', solid: true },
+    // la place : parterres de fleurs autour de la statue (réaménagement de 2007)
+    { x: -5, z: -76.6, w: 4, d: 1, h: 0.35, tex: 'kl_parterre', solid: true }, { x: -5, z: -82.4, w: 4, d: 1, h: 0.35, tex: 'kl_parterre', solid: true },
+    { x: -7.9, z: -79.5, w: 1, d: 4, h: 0.35, tex: 'kl_parterre', solid: true }, { x: -2.1, z: -79.5, w: 1, d: 4, h: 0.35, tex: 'kl_parterre', solid: true }
   ],
   lasers: [{ id: 'peage', x0: -12, x1: 12, z: -12 }],
   doors: [
@@ -69,6 +75,10 @@ export default {
     { type: 'caisse', x: -3, z: -28.5, arrow: 'enflammee' },
     { type: 'neige', id: 'n1', x: -11, z: -39, w: 1, d: 7 },
     { type: 'tractable', id: 'etal', label: 'ÉTAL À ROULETTES', x: 11, z: -51, w: 2, d: 7.6, h: 2.2, axis: 'x', min: 5, max: 11, color: 0x6a4a3a },
+    // la place Kléber : la statue du général au milieu de ses parterres, l'Aubette au fond (murs kl_aubette), le Grand
+    // Sapin du décor paré de boules dorées et rouges
+    { type: 'monument', x: -5, z: -79.5, label: 'STATUE DE KLÉBER' },
+    { type: 'boules', x: -2.5, z: -64.5, h: 10.9, r: 3.2, y0: 1, n: 70 },
     // le sapin-écran : générateur, caisses près de l'énigme (on n'est jamais bloqué)
     { type: 'projo', id: 'generateur', x: 6, z: -78, label: 'GÉNÉRATEUR DU SAPIN', color: CYAN },
     { type: 'caisse', x: -12, z: -60, arrow: 'court_circuit' }, { type: 'caisse', x: 12, z: -60, arrow: 'enflammee' },

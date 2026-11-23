@@ -1,5 +1,5 @@
 // Captures « avant / après » de chaque map : une image par salle (points F2 du layout), même cadrage à chaque fois,
-// pour comparer les versions. Lecture seule : ne touche ni au code ni à la sauvegarde.
+// pour comparer les versions. L'Ultra est avancé de 7 m depuis le point F2 (vue de jeu, pas du seuil). Lecture seule : ne touche ni au code ni à la sauvegarde.
 //   node tools/captures.mjs <étiquette> [niveau ...]      (ex. node tools/captures.mjs avant)
 // Résultat : tools/_frames/captures/<étiquette>/<niveau>-<n>-<salle>.png (dossier non versionné).
 // Prérequis : npm run build (dist/ à jour) et Chrome installé (comme les tests).
@@ -26,6 +26,10 @@ for (const id of levels) {
   const warps = await page.evaluate(() => (window.S3K.level.layout.warps || []).map(w => w.id));
   for (let i = 0; i < warps.length; i++) {
     await key('F2'); await wait(300); await skip();
+    // le point F2 est sur le seuil (la caméra, bornée à la salle, y filme le sol de haut) : quelques pas dans la salle
+    await page.evaluate(() => { const g = window.S3K, p = g.player;
+      for (let i = 0; i < 14; i++) { const q = { x: p.x + p.fx * 0.5, z: p.z + p.fz * 0.5 }; if (g.collision.resolve({ ...q }, 0.5)) break; p.x = q.x; p.z = q.z; }
+      p.sync(); });
     await wait(1800); await skip(); // dialogues fermés, bannières passées
     const file = `${out}/${id}-${i + 1}-${warps[i]}.png`;
     await page.screenshot({ path: file });

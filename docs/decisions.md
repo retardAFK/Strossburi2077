@@ -48,22 +48,35 @@ rallier les foules. L'objet du niveau 2 (Meinau 2026) est l'**Arc-Drapeau**. Tab
 | Commandes | **Un bouton par compagnon** (actions `summonStork`, `summonDylagne`). Clavier : R = Stork, T = Dylagne. Manette : RT = Stork, B = Dylagne (B ne sert qu'aux menus en jeu). Tactile : deux icônes rondes avec recharge en camembert. |
 | Expression | Selon la fiche : cris + bulles d'icônes, aucun texte. |
 
-### Niveaux : 11, dans cet ordre
+### Niveaux : 12, dans cet ordre (la Meinau en deux niveaux depuis le 23/11)
 | # | Niveau | Époque | Objet / compagnon gagné | Boss |
 |---|---|---|---|---|
 | 1 | Petite France | 2067 | bretzel-boomerang | ASR-67 (fait) |
-| 2 | La Meinau | 2026 | Arc-Drapeau | Egboehly |
-| 3 | Port du Rhin | 2026 | gaffe-grappin | Le Promoteur |
-| 4 | Marché 2000 (nuit) | 2026 | Stork | Le Gérant de nuit BlingCo |
-| 5 | Le Kalt | 2026 | Dylagne | Le Magnat du Carré VIP |
-| 6 | Place Kléber | 2026 | — (faux final, tout l'arsenal) | Marco CeKlair |
-| 7 | Petite France v2 | 2067 | — | ASR-67 Premium+, puis Al2 Prout |
-| 8 | Port du Rhin | 2067 | tambour | La Tour |
-| 9 | La Cathédrale | 2067 | — | Le Coq de l'horloge BlingCo |
-| 10 | Place Kléber | 2067 | mégaphone | Le Conseil d'administration |
-| 11 | La Meinau (final) | 2067 | — | Le PDG de BlingCo |
+| 2 | La Meinau : abords du stade | 2026 | — (3 entrées vers le niveau 3) | — |
+| 3 | La Meinau : intérieur du stade | 2026 | Arc-Drapeau | Egboehly |
+| 4 | Port du Rhin | 2026 | gaffe-grappin | Le Promoteur |
+| 5 | Marché 2000 (nuit) | 2026 | Stork | Le Gérant de nuit BlingCo |
+| 6 | Le Kalt | 2026 | Dylagne | Le Magnat du Carré VIP |
+| 7 | Place Kléber | 2026 | — (faux final, tout l'arsenal) | Marco CeKlair |
+| 8 | Petite France v2 | 2067 | — | ASR-67 Premium+, puis Al2 Prout |
+| 9 | Port du Rhin | 2067 | tambour | La Tour |
+| 10 | La Cathédrale | 2067 | — | Le Coq de l'horloge BlingCo |
+| 11 | Place Kléber | 2067 | mégaphone | Le Conseil d'administration |
+| 12 | La Meinau (final) | 2067 | — | Le PDG de BlingCo |
 
-Partie 1 (2026) = niveaux 2 à 6 ; partie 2 (2067) = niveaux 7 à 11. Les deux compagnons sont acquis juste avant
+Partie 1 (2026) = niveaux 2 à 7 ; partie 2 (2067) = niveaux 8 à 12. Les autres lieux 2026 seront aussi découpés en abords
++ intérieur après le pilote de la Meinau (décision du 23/11 ci-dessous).
+
+### Décisions du 23/11/2026 (brief `docs/designs/brief-greybox-meinau.md`, validé par Maxime dans Cowork)
+- Chaque lieu 2026 se découpe en **abords + intérieur** ; la Meinau en pilote (maquette grise d'abord, validée en jouant).
+- **2026 = réaliste** : « Les niveaux 2026 montrent les lieux réels tels qu'ils sont : matières, repères et éclairage fidèles.
+  Le cyberpunk est réservé à 2067 et à BlingCo. »
+- Tribune de la Meinau : la **vraie tribune sud 2026** (façade en fuselages d'A340). Kop en tribune **ouest**.
+- Bords fermés selon le lieu (Meinau : voie ferrée, grillage, maisons, berge du Rhin tortu).
+- Vestiaires, loges, sous-sols : design standard de stade. **3 écharpes par niveau** (marqueurs en attendant le système).
+- Points ouverts du brief, tranchés par Maxime le 23/11 : le centre d'entraînement s'appelle « centre d'entraînement »
+  (pas de nom d'entreprise) ; la **passerelle** sur le Rhin tortu existe ; la grille B s'ouvre avec une **accréditation
+  BlingCo** ; le terrain vague est un **chantier BlingCo** (gardé, l'accréditation s'y trouve). Les deux compagnons sont acquis juste avant
 le faux final de Kléber 2026.
 
 ### Ancien niveau `meinau-ouest`

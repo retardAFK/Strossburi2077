@@ -5,6 +5,18 @@ import { TUNING } from '../data/tuning.js';
 
 const WALL_H = 6;
 
+// étiquette de maquette grise (zone, bloc à dessiner) : texte sur fond sombre, toujours face caméra, lisible de loin
+function greyLabel(text, x, y, z, size = 1) {
+  const c = document.createElement('canvas'); c.width = 512; c.height = 64;
+  const g = c.getContext('2d');
+  g.fillStyle = 'rgba(20,22,32,0.8)'; g.fillRect(0, 0, 512, 64);
+  g.fillStyle = '#f4f2ee'; g.font = 'bold 26px monospace'; g.textAlign = 'center'; g.textBaseline = 'middle';
+  g.fillText(text.slice(0, 36), 256, 33);
+  const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(c), fog: false }));
+  s.scale.set(4 * size, 0.5 * size, 1); s.position.set(x, y, z);
+  return s;
+}
+
 export class World {
   constructor(game, layout) {
     this.game = game; this.layout = layout; this.scene = game.renderer.scene;
@@ -71,6 +83,7 @@ export class World {
     }
     for (const t of L.tables || []) this.buildTable(t);
     for (const b of L.blocks || []) this.buildBlock(b);
+    for (const l of L.labels || []) S.add(greyLabel(l.text, l.x, l.y ?? 3, l.z, l.size || 1.4)); // noms de zones (maquette grise)
     for (const [x0, x1, z0, z1, tag] of L.glass || []) col.addBox(x0, x1, z0, z1, tag || 'vitre'); // vitres sans modèle
     for (const s of L.screens || []) this.buildScreen(s);
     for (const g of L.gates || []) this.buildGate(g);
@@ -133,6 +146,7 @@ export class World {
     const m = new THREE.Mesh(new THREE.BoxGeometry(b.w, b.h, b.d), new THREE.MeshLambertMaterial({ map: TEX[b.tex || 'gres'](Math.max(b.w, b.d) / 3, b.h / 3) }));
     m.position.set(b.x, (b.y || 0) + b.h / 2, b.z); this.scene.add(m);
     if (b.solid) this.game.collision.addBox(b.x - b.w / 2, b.x + b.w / 2, b.z - b.d / 2, b.z + b.d / 2, 'block');
+    if (b.label) this.scene.add(greyLabel(b.label, b.x, (b.y || 0) + b.h + 0.6, b.z, b.labelSize || 1)); // maquette grise
   }
   // table de food court + 2 tabourets (obstacle rond)
   buildTable(t) {

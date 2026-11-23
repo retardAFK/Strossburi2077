@@ -9,6 +9,11 @@ Jetons de touches : `{use}`, `{attack}`… (remplacés en jeu par la touche de l
 | mei.parvis.1 | L'ULTRA | 2026... La Meinau, avant tout ça. Enfin, pas tout à fait avant : ils sont déjà là. | ok | auto — à relire par Maxime |
 | mei.parvis.2 | ROBOT-STEWARD | Bienvenue à la BlingCo Arena. Merci de présenter votre billet, votre abonnement et votre score de crédit. | ok | auto — à relire par Maxime |
 | mei.parvis.3 | TUTO | {attack} pour l'écharpe, {lock} pour verrouiller. Les stewards scannent tout, même les pigeons : profite du scan pour frapper. | ok | auto — à relire par Maxime |
+| mei.coursive.0 | L'ULTRA | La coursive. Elle fait tout le tour du stade. Le local du kop doit être au nord-ouest, côté tribune ouest. | ok | auto — à relire par Maxime |
+| mei.buvette1 | BUVETIER | Le local du kop ? Au nord-ouest, la porte à côté de ma buvette. Les anciens y gardent quelque chose de précieux. | ok | auto — à relire par Maxime |
+| mei.buvette2 | BUVETIÈRE | Pour aller sur la pelouse, il faut le tunnel sud. Mais BlingCo l'a fermé : il faudrait le tifo du kop et leur terminal, côté est. | ok | auto — à relire par Maxime |
+| mei.buvette3 | BUVETIER | Les loges VIP et les sous-sols ont des verrous BlingCo : une cible à côté de la porte. Avec un arc, ça se règle. | ok | auto — à relire par Maxime |
+| mei.buvette4 | BUVETIÈRE | Dans les vestiaires, les gamins cachent toujours leurs affaires derrière les casiers. | ok | auto — à relire par Maxime |
 | mei.coursive.1 | L'ULTRA | Les anciens du kop, parqués derrière un portique « zone supporters premium »... Le terminal doit le couper. | ok | auto — à relire par Maxime |
 | mei.coursive.2 | UN ANCIEN DU KOP | Toi, avec l'écharpe ! Ils nous ont « relogés » ici pour libérer des places en loge. Viens au local, on a quelque chose pour toi. | ok | auto — à relire par Maxime |
 | mei.local.1 | UN ANCIEN DU KOP | La hampe du grand drapeau, et une écharpe pour corde. On l'appelle l'Arc-Drapeau. Il a vu plus de matchs que leurs actionnaires. | ok | auto — à relire par Maxime |

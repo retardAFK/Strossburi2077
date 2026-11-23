@@ -153,10 +153,13 @@ tools/blender/            un script Python par modèle + lib commune (s3k_lib.py
   Objet : `items/BretzelBoomerang.js` via `systems/Inventory.js` (clic droit si rien n'est verrouillé, sinon F).
   Le layout déclare ses objets génériques dans `objects: [{ type, ... }]` (barque, leviers, PNJ...).
   Modèles : `tools/blender/{sbires,decor_pf,salles_pf}.py`.
-- **Niveau 2 jouable** : `levels/meinau` (`?level=meinau`, enchaîné après le niveau 1), la Meinau en 2026 : parvis (stewards-robots),
-  coursive (terminal → portique des anciens du kop), local du kop (Arc-Drapeau + flèches-bannières, tuto sur 3 cibles), kop (énigme du
-  tifo : l'écran géant donne l'ordre des couleurs, « PAS À VENDRE »), pelouse (boss Egboehly, `bosses/Egboehly.js` + `HydraHead.js`).
-  Décor : `tools/blender/decor_kit.py` exporte les pièces de `decor_meinau.py` (`decor_meinau_ext`, `decor_meinau_bol`).
+- **Niveaux 2 et 3 : la Meinau en maquette grise** (brief `docs/designs/brief-greybox-meinau.md`, plans `meinau-*-plan.svg`, 23/11) :
+  `levels/meinau-abords` (`?level=meinau-abords`) = les abords, zones ouvertes (tram, parvis et stewards, parking, parc, berge du Rhin
+  tortu), 3 entrées vers le niveau 3 (A portique, B grille fermée, C issue de secours secrète), transmises par la sauvegarde
+  (`completeLevel(texte, { entry })`) ; `levels/meinau` (`?level=meinau`) = l'intérieur : coursive en anneau, local du kop
+  (Arc-Drapeau, tuto 3 cibles), kop en tribune ouest (tifo), terminal + tifo → tunnel de la pelouse, loges VIP et sous-sols (verrous
+  Arc-Drapeau), vestiaires, pelouse (boss Egboehly, `bosses/Egboehly.js` + `HydraHead.js`). Blocs gris étiquetés (`blocks[].label`,
+  `labels` du layout), écharpes-marqueurs (`props/EcharpeMarqueur.js`). Anciens décors `decor_meinau_*` (Blender) non utilisés.
   Personnages sans design (anciens du kop, pigeon, kop) : placeholders gris étiquetés (`systems/Placeholder.js`).
   Répliques auto-validées à relire : `docs/dialogues/AUTO.md`.
 - **Niveau 3 jouable (maquette grise)** : `levels/port-rhin` (`?level=port-rhin`) : quai et palissade (agents immobiliers-clones),
@@ -194,7 +197,7 @@ tools/blender/            un script Python par modèle + lib commune (s3k_lib.py
 - Tests (filet anti-régression) : `npm test` = build + `tests/run-all.mjs` (Chrome installé piloté par
   `playwright-core`, sans fenêtre). `niveau1` (parcours complet via F2), `boss-asr67` (graine `?seed=1`,
   instantané des réglages `tests/snapshots/asr67.json`, mise à jour volontaire : `npm run test:update-snapshots`),
-  `meinau` (parcours du niveau 2), `boss-egboehly` (instantané `tests/snapshots/egboehly.json`), `port-rhin`, `boss-promoteur`, `marche2000`, `boss-gerant` (instantané `tests/snapshots/gerant.json`), `kalt`, `boss-magnat` (instantané `tests/snapshots/magnat.json`), `kleber`, `boss-marco` (instantané `tests/snapshots/marco.json`), `fin-partie1`, `meinau-ouest` (fumée), `manette` (Xbox / PlayStation simulées), `arc-drapeau` (bac à sable : changement d'objet, tir,
+  `meinau-abords` (parcours du niveau 2), `meinau` (parcours du niveau 3), `boss-egboehly` (instantané `tests/snapshots/egboehly.json`), `port-rhin`, `boss-promoteur`, `marche2000`, `boss-gerant` (instantané `tests/snapshots/gerant.json`), `kalt`, `boss-magnat` (instantané `tests/snapshots/magnat.json`), `kleber`, `boss-marco` (instantané `tests/snapshots/marco.json`), `fin-partie1`, `meinau-ouest` (fumée), `manette` (Xbox / PlayStation simulées), `arc-drapeau` (bac à sable : changement d'objet, tir,
   visée, munitions, tactile). Outils communs : `tests/helpers.mjs`. Sans Chrome installé (conteneur) :
   `CHROME_PATH=<binaire Chromium> npm test`.
   Toute PR garde `npm test` vert ; une PR qui touche `entities/bosses/` met à jour le test du boss.

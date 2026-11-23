@@ -35,9 +35,9 @@ export class Progress {
     if (s.companions?.length) this.game.events.emit('progress:companions', s.companions); // pour systems/Companions
   }
   // fin de niveau (hors debug) : sauvegarde du niveau suivant, écran de fin, puis {ok} : niveau suivant
-  complete(text) {
+  complete(text, extra = {}) {
     const g = this.game, next = this.next;
-    if (this.campaign.includes(this.id)) this.write({ level: next || this.id, done: !next, ...this.snapshot() });
+    if (this.campaign.includes(this.id)) this.write({ level: next || this.id, done: !next, ...this.snapshot(), ...extra });
     g.win(text);
     g.nextLevel = next;
     if (next) this.endLine('next', g.prompts.format(g.texts.nextLevel));

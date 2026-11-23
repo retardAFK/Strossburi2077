@@ -320,19 +320,35 @@ export const TEXTS = {
   // bac à sable de test (?level=bac-a-sable&debug=1) : pas un vrai niveau, textes de service
   // ------------------------------------------------ niveau 2 : la Meinau (2026). Répliques : data/dialogues/meinau.fr.js
   meinau: {
-    subtitle: 'NIVEAU 2 : LA MEINAU, 2026',
-    rooms: { parvis: 'LE PARVIS · « BLINGCO ARENA »', coursive: 'LA COURSIVE', local: 'LE LOCAL DU KOP', kop: 'LE KOP', pelouse: 'LA PELOUSE' },
+    subtitle: "NIVEAU 3 : LA MEINAU, L'INTÉRIEUR DU STADE (2026)",
+    rooms: { coursive: 'LA COURSIVE', local: 'LE LOCAL DU KOP', kop: 'LA TRIBUNE OUEST · LE KOP', loges: 'LES LOGES VIP BLINGCO',
+      vestiaires: 'LES VESTIAIRES', soussols: 'LES SOUS-SOLS TECHNIQUES', acces: 'LE TUNNEL DE LA PELOUSE', pelouse: 'LA PELOUSE' },
     ads: [['BLINGCO FOOTBALL', 'MULTI-CLUB · 5 CLUBS, 1 PROPRIÉTAIRE'], ['ABONNEMENT', 'PREMIUM+ : 89 BC / MATCH'],
       ['CLUB SATELLITE', 'VOTRE CLUB, NOTRE ACTIF'], ['BUVETTE', 'BIÈRE TOKENISÉE : 14 BC']],
     tifo: 'PAS À VENDRE',
     boss: 'EGBOEHLY · LE MULTIPROPRIÉTAIRE',
     headDown: 'TÊTE KO', planted: 'DRAPEAU PLANTÉ !', antiEcharpe: 'ANTI-ÉCHARPE !',
-    tutoDone: ['TUTO RÉUSSI', 'LE KOP VOUS ATTEND'], gateOpen: ['PORTIQUE COUPÉ', 'LES ANCIENS SONT LIBRES'], tifoDone: ['TIFO DÉPLOYÉ', 'LA PELOUSE EST OUVERTE'],
+    tutoDone: ['TUTO RÉUSSI', 'LE KOP VOUS ATTEND'], gateOpen: ['PORTIQUE COUPÉ', 'LES ANCIENS SONT LIBRES'], tifoDone: ['TIFO DÉPLOYÉ', 'LE KOP CHANTE'],
+    accesStep: ['ACCÈS PELOUSE : 1 / 2', 'LE TIFO ET LE TERMINAL OUVRENT LE TUNNEL'], accesOpen: ['ACCÈS PELOUSE OUVERT', 'LE TUNNEL SUD EST LIBRE'],
+    verrouLoges: ['VERROU TOUCHÉ', 'LES LOGES VIP SONT OUVERTES'], verrouSoussols: ['VERROU TOUCHÉ', 'LES SOUS-SOLS SONT OUVERTS'],
     opening: [`Strasbourg, 2026. La Meinau.`, "Le jour où BlingCo rachète le club. Le jour où tout commence.", "Cette fois, l'Ultra arrive avant eux."],
     end: ['MEINAU LIBÉRÉE', 'Les anciens du kop rejoignent la résistance. Suite : le Port du Rhin.']
   },
+  // niveau 2 : la Meinau, abords du stade (maquette grise, brief docs/designs/brief-greybox-meinau.md)
+  meinauAbords: {
+    subtitle: 'NIVEAU 2 : LA MEINAU, LES ABORDS DU STADE (2026)',
+    rooms: { tram: 'ARRIVÉE TRAM KRIMMERI', parking: 'LE PARKING OUEST', parvis: 'LE PARVIS SUD · FILE DES PORTIQUES',
+      berge: 'LA BERGE DU RHIN TORTU', parc: "LE PARC DE L'EXTENWOERTHFELD", terrain: 'LE TERRAIN VAGUE',
+      soprema: 'RACING SOPREMA PARC', nord: 'LES ABORDS DU STADE' },
+    ads: [['BLINGCO ARENA', 'PORTIQUES : PRÉSENTEZ VOTRE SCORE DE CRÉDIT'], ['ABONNEMENT', 'PREMIUM+ : 89 BC / MATCH']],
+    portiqueOpen: ['PORTIQUE A COUPÉ', "L'ENTRÉE DU PARVIS EST LIBRE"], raccourci: ['RACCOURCI OUVERT', 'ISSUE DE SECOURS C'],
+    grilleB: 'GRILLE FERMÉE : IL FAUT UN OBJET',
+    opening: ['Strasbourg, 2026. La Meinau.', "Le jour où BlingCo rachète le club. Le jour où tout commence.", "Cette fois, l'Ultra arrive avant eux."],
+    endA: ['ENTRÉE DANS LE STADE', "Par le portique A. Suite : l'intérieur du stade."],
+    endC: ['ENTRÉE DANS LE STADE', "Par l'issue de secours C. Suite : l'intérieur du stade."]
+  },
   portRhin: {
-    subtitle: 'NIVEAU 3 : LE PORT DU RHIN, 2026',
+    subtitle: 'NIVEAU 4 : LE PORT DU RHIN, 2026',
     rooms: { quai: 'LE QUAI · PALISSADE « BLINGCO LOFTS »', moulin: 'LE VIEUX MOULIN', conteneurs: 'CONTENEURS ET PÉNICHES',
       chantier: 'LE QUAI DU CHANTIER' },
     ads: [['BLINGCO LOFTS', 'VUE SUR RHIN · DÈS 9 999 BC / M²'], ['BIENTÔT ICI', 'VOTRE LOFT DE CARACTÈRE'],
@@ -346,7 +362,7 @@ export const TEXTS = {
     end: ['PORT DU RHIN LIBÉRÉ', 'Les dockers et les mariniers rejoignent la résistance. Suite : le Marché 2000.']
   },
   marche2000: {
-    subtitle: 'NIVEAU 4 : MARCHÉ 2000, 2026 (LA NUIT)',
+    subtitle: 'NIVEAU 5 : MARCHÉ 2000, 2026 (LA NUIT)',
     rooms: { arriere: "L'ARRIÈRE · RUE DE LA FARINE", marchenoir: 'LE MARCHÉ NOIR · PORTE VIOLETTE', rayons: 'LES RAYONS', reserve: 'LA RÉSERVE', toit: "LE TOIT · L'ENSEIGNE",
       magasin: 'LE MAGASIN · CÔTÉ TRAM' },
     ads: [['BLINGCO NUIT', 'OUVERT 24 H / 24 · PRIX x10 APRÈS 22 H'], ['TRADITION CERTIFIÉE', 'LE BRETZEL « AUTHENTIQUE® » : 12 BC'],
@@ -365,7 +381,7 @@ export const TEXTS = {
     end: ['MARCHÉ 2000 LIBÉRÉ', 'Les clients, les employés et Stork rejoignent la résistance. Suite : le Kalt.']
   },
   kalt: {
-    subtitle: 'NIVEAU 5 : LE KALT, 2026 (LA NUIT)',
+    subtitle: 'NIVEAU 6 : LE KALT, 2026 (LA NUIT)',
     rooms: { file: 'LA FILE · RUE LA FAYETTE', cour: "L'ALLÉE ET LA COUR", salle: 'LA SALLE · LE HANGAR ROUGE', cave: 'LA CAVE',
       piste: 'LA PISTE · LE CARRÉ VIP' },
     ads: [['BLINGCO NIGHT', 'CARRÉ VIP · LA BOUTEILLE À 900 BC'], ['DRESS CODE', 'BASKETS : 30 BC LE CENTIMÈTRE'],
@@ -382,7 +398,7 @@ export const TEXTS = {
     end: ['LE KALT LIBÉRÉ', 'Le peuple techno et Dylagne rejoignent la résistance. Suite : la place Kléber.']
   },
   kleber: {
-    subtitle: 'NIVEAU 6 : PLACE KLÉBER, 2026 (FIN DE LA PARTIE 1)',
+    subtitle: 'NIVEAU 7 : PLACE KLÉBER, 2026 (FIN DE LA PARTIE 1)',
     rooms: { peages: 'LES PORTIQUES-PÉAGES', chalets: 'LE LABYRINTHE DE CHALETS', sapin: 'LE SAPIN-ÉCRAN', estrade: "L'ESTRADE · LA SIGNATURE" },
     ads: [['MARCHÉ DE NOËL PERMANENT', '365 JOURS PAR AN · ENTRÉE 15 BC'], ['VIN CHAUD', '79 BC LE GOBELET MINUSCULE'],
       ['NEIGE PAYANTE', '5 BC LE FLOCON'], ['STRASBOURG', 'VENDUE CE SOIR · SIGNATURE SUR L\'ESTRADE']],

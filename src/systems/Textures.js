@@ -92,6 +92,16 @@ export const TEX = {
     for (const x of [6, 38]) { g.fillRect(x, 70, 20, 26); g.beginPath(); g.arc(x + 10, 70, 10, Math.PI, 0); g.fill(); }
     g.fillStyle = '#ffe9a8'; for (let x = 2; x < 64; x += 6) g.fillRect(x, 5, 2, 2);                   // guirlande
   }, rx, ry),
+  // maquette grise : volume blanc à dessiner (ex. façade en fuselages de la tribune sud de la Meinau), panneaux réguliers
+  ph_blanc: (rx, ry) => canvasTex(32, 32, g => {
+    g.fillStyle = '#e4e8ee'; g.fillRect(0, 0, 32, 32);
+    g.fillStyle = '#c4cad4'; g.fillRect(0, 15, 32, 2); g.fillRect(15, 0, 2, 32);
+  }, rx, ry),
+  // maquette grise : gris neutre uni (sols et volumes sans matière finale)
+  ph_gris: (rx, ry) => canvasTex(16, 16, g => {
+    g.fillStyle = '#8a8e96'; g.fillRect(0, 0, 16, 16);
+    g.fillStyle = '#7e828a'; g.fillRect(0, 15, 16, 1); g.fillRect(15, 0, 1, 16);
+  }, rx, ry),
   // parterre de fleurs (réaménagement de 2007) : vert sombre, fleurs claires
   kl_parterre: (rx, ry) => canvasTex(16, 16, g => {
     g.fillStyle = '#1f3a22'; g.fillRect(0, 0, 16, 16);

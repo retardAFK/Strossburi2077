@@ -2,13 +2,25 @@
 
 Générée par `node tools/dialogues-export.mjs` : les répliques dont la remarque commence par « auto ».
 Pour corriger : le fichier docs/dialogues/<niveau>.md, puis `node tools/dialogues-import.mjs`.
-Total : 55 réplique(s).
+Total : 67 réplique(s).
 
 | niveau | id | qui | réplique |
 |---|---|---|---|
+| meinau-abords | abords.arrivee.1 | L'ULTRA | Arrêt Krimmeri. La Meinau, en 2026. Le stade est là, et BlingCo aussi : une file de portiques sur le parvis. |
+| meinau-abords | abords.arrivee.2 | TUTO | Explore les abords : le parvis, le parking, le parc, la berge du Rhin tortu. Il y a plus d'une façon d'entrer dans le stade. |
+| meinau-abords | abords.grilleB | L'ULTRA | Une grille côté Rhin, cadenassée. Il me faudrait de quoi l'ouvrir... Plus tard. |
+| meinau-abords | abords.raccourci | L'ULTRA | La borne du parking commande l'issue de secours. Une entrée discrète. |
+| meinau-abords | abords.supporter | SUPPORTER | Ils filtrent l'entrée avec leurs portiques. Paraît que côté parking, il y a une issue de secours... |
+| meinau-abords | abords.habitante | HABITANTE | J'habite le quartier depuis quarante ans. Les soirs de match, tout le monde chante. Pas à leurs prix. |
+| meinau-abords | abords.jardinier | JARDINIER | Les jardins familiaux, c'est sacré. Des gamins ont perdu une écharpe par ici, du côté des cabanes. |
 | meinau | mei.parvis.1 | L'ULTRA | 2026... La Meinau, avant tout ça. Enfin, pas tout à fait avant : ils sont déjà là. |
 | meinau | mei.parvis.2 | ROBOT-STEWARD | Bienvenue à la BlingCo Arena. Merci de présenter votre billet, votre abonnement et votre score de crédit. |
 | meinau | mei.parvis.3 | TUTO | {attack} pour l'écharpe, {lock} pour verrouiller. Les stewards scannent tout, même les pigeons : profite du scan pour frapper. |
+| meinau | mei.coursive.0 | L'ULTRA | La coursive. Elle fait tout le tour du stade. Le local du kop doit être au nord-ouest, côté tribune ouest. |
+| meinau | mei.buvette1 | BUVETIER | Le local du kop ? Au nord-ouest, la porte à côté de ma buvette. Les anciens y gardent quelque chose de précieux. |
+| meinau | mei.buvette2 | BUVETIÈRE | Pour aller sur la pelouse, il faut le tunnel sud. Mais BlingCo l'a fermé : il faudrait le tifo du kop et leur terminal, côté est. |
+| meinau | mei.buvette3 | BUVETIER | Les loges VIP et les sous-sols ont des verrous BlingCo : une cible à côté de la porte. Avec un arc, ça se règle. |
+| meinau | mei.buvette4 | BUVETIÈRE | Dans les vestiaires, les gamins cachent toujours leurs affaires derrière les casiers. |
 | meinau | mei.coursive.1 | L'ULTRA | Les anciens du kop, parqués derrière un portique « zone supporters premium »... Le terminal doit le couper. |
 | meinau | mei.coursive.2 | UN ANCIEN DU KOP | Toi, avec l'écharpe ! Ils nous ont « relogés » ici pour libérer des places en loge. Viens au local, on a quelque chose pour toi. |
 | meinau | mei.local.1 | UN ANCIEN DU KOP | La hampe du grand drapeau, et une écharpe pour corde. On l'appelle l'Arc-Drapeau. Il a vu plus de matchs que leurs actionnaires. |

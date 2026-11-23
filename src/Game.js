@@ -199,7 +199,8 @@ export class Game {
   }
   // fin de niveau (ou de démo) : [titre, sous-titre]
   // fin de niveau : sauvegarde + niveau suivant (systems/Progress.js), sinon simple écran de fin
-  completeLevel(text) { if (this.progress) this.progress.complete(text); else this.win(text); }
+  // extra : ce que le niveau suivant doit savoir (ex. { entry: 'B' } : par où l'Ultra est entré dans le stade)
+  completeLevel(text, extra = {}) { if (this.progress) this.progress.complete(text, extra); else this.win(text); }
   win(text = this.texts.victory) {
     this.mode = 'end'; this.input.releasePointer(); this.audio.music(null); this.audio.play('win');
     const [t, sub] = text;

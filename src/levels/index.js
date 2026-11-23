@@ -69,6 +69,9 @@ import prhLayout from './port-rhin/layout.js';
 import prhScript from './port-rhin/script.js';
 import mei2Layout from './meinau/layout.js';
 import mei2Script from './meinau/script.js';
+import abordsLayout from './meinau-abords/layout.js';
+import abordsScript from './meinau-abords/script.js';
+import { EcharpeMarqueur } from '../entities/props/EcharpeMarqueur.js';
 
 // modèles exportés par tools/blender/*.py (embarqués dans le build par esbuild, chargés à la demande)
 import ultra from '../../assets/models/ultra.glb';
@@ -107,8 +110,6 @@ import pnj_celui_du_stade from '../../assets/models/pnj_celui_du_stade.glb';
 import arc_drapeau from '../../assets/models/arc_drapeau.glb';
 import steward_robot from '../../assets/models/steward_robot.glb';
 import egboehly from '../../assets/models/egboehly.glb';
-import decor_meinau_ext from '../../assets/models/decor_meinau_ext.glb';
-import decor_meinau_bol from '../../assets/models/decor_meinau_bol.glb';
 import decor_port_rhin from '../../assets/models/decor_port_rhin.glb';
 import agent_immo from '../../assets/models/agent_immo.glb';
 import pancarte_vendu from '../../assets/models/pancarte_vendu.glb';
@@ -139,7 +140,7 @@ import decor_kleber from '../../assets/models/decor_kleber.glb';
 export const DEFAULT_LEVEL = 'petite-france'; // l'ancien prototype reste accessible avec ?level=meinau-ouest
 // Partie 1, dans l'ordre (docs/decisions.md). Seuls les niveaux déjà inscrits dans LEVELS sont joués ;
 // la fin d'un niveau lance le suivant (systems/Progress.js). La partie 2 (2067) viendra plus tard.
-export const CAMPAIGN_ORDER = ['petite-france', 'meinau', 'port-rhin', 'marche2000', 'kalt', 'kleber'];
+export const CAMPAIGN_ORDER = ['petite-france', 'meinau-abords', 'meinau', 'port-rhin', 'marche2000', 'kalt', 'kleber'];
 
 export const LEVELS = {
   'meinau-ouest': {
@@ -156,12 +157,16 @@ export const LEVELS = {
     types: { serveur: Serveur, sommelier: Sommelier, terminal: Terminal, borne: Borne, plaque: Plaque,
       barque: Barque, lever: Lever, pnj: Pnj, coffre: Coffre, videur: VideurMaitreHotel, cible: Cible, asr: Asr67 }
   },
+  'meinau-abords': {
+    layout: abordsLayout, script: abordsScript, texts: TEXTS.meinauAbords, subtitle: TEXTS.meinauAbords.subtitle,
+    models: { ultra, steward_robot, bretzel_boomerang, terminal },
+    types: { steward: StewardRobot, figurant: Figurant, terminal: Terminal, echarpe: EcharpeMarqueur }
+  },
   meinau: {
     layout: mei2Layout, script: mei2Script, texts: TEXTS.meinau, subtitle: TEXTS.meinau.subtitle,
-    models: { ultra, steward_robot, egboehly, arc_drapeau, bretzel_boomerang, pf_cible_tpe, pf_herse_laser, terminal,
-      decor_meinau_ext, decor_meinau_bol },
+    models: { ultra, steward_robot, egboehly, arc_drapeau, bretzel_boomerang, pf_cible_tpe, pf_herse_laser, terminal },
     types: { steward: StewardRobot, egboehly: Egboehly, figurant: Figurant, crochet: Crochet, ecran: EcranGeant,
-      tifo: TifoGeant, caisse: CaisseFleches, cible: Cible, terminal: Terminal }
+      tifo: TifoGeant, caisse: CaisseFleches, cible: Cible, terminal: Terminal, echarpe: EcharpeMarqueur }
   },
   'port-rhin': {
     layout: prhLayout, script: prhScript, texts: TEXTS.portRhin, subtitle: TEXTS.portRhin.subtitle,

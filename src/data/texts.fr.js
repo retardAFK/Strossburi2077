@@ -383,17 +383,30 @@ export const TEXTS = {
       "Derrière la porte violette, un marché noir. Et quelque part, SCN se cache."],
     end: ['MARCHÉ 2000 LIBÉRÉ', 'Les clients, les employés et Stork rejoignent la résistance. Suite : le Kalt.']
   },
+  // niveau 6 : le Kalt, les abords (maquette grise, brief docs/designs/brief-greybox-kalt.md)
+  kaltAbords: {
+    subtitle: 'NIVEAU 6 : LE KALT, LES ABORDS (2026, LA NUIT)',
+    rooms: { tram: 'ARRÊT LYCÉE COUFFIGNAL', rue: 'RUE LA FAYETTE', avantcour: "L'AVANT-COUR", cour: 'LA COUR · LA FILE',
+      ruelle: 'LA RUELLE', arriere: "LES ARRIÈRE-COURS D'ENTREPÔTS" },
+    ads: [['BLINGCO NIGHT', 'PORTIQUE VIP · BADGE DORÉ OBLIGATOIRE']],
+    reveal: ['LE KALT', 'AU FOND DE LA COUR'], ruelle: ['LA RUELLE', 'VERS LES ARRIÈRE-COURS'],
+    toit: 'TOIT DU HANGAR : TROP HAUT (STORK ?)',
+    opening: ['Strasbourg, 2026. Rue La Fayette, la nuit.', 'Le Kalt, la boîte techno du quartier. BlingCo y a posé un portique, des cordons... et un carré VIP.',
+      'Ce soir, le peuple techno reste dehors. Pas pour longtemps.'],
+    endCour: ['ENTRÉE DANS LE KALT', "Par la cour et le portique. Suite : l'intérieur du club."],
+    endCave: ['ENTRÉE DANS LE KALT', "Par le soupirail de la cave (secret). Suite : l'intérieur du club."]
+  },
   kalt: {
-    subtitle: 'NIVEAU 6 : LE KALT, 2026 (LA NUIT)',
-    rooms: { file: 'LA FILE · RUE LA FAYETTE', cour: "L'ALLÉE ET LA COUR", salle: 'LA SALLE · LE HANGAR ROUGE', cave: 'LA CAVE',
-      piste: 'LA PISTE · LE CARRÉ VIP' },
+    subtitle: "NIVEAU 7 : LE KALT, L'INTÉRIEUR (2026, LA NUIT)",
+    rooms: { main: 'LE MAIN · LE GRAND HANGAR', mezza: 'LA MEZZA · ÉTAGE', artspace: "L'ARTSPACE · ÉTAGE", cave: 'LA CAVE',
+      piste: 'LE CARRÉ VIP BLINGCO' },
     ads: [['BLINGCO NIGHT', 'CARRÉ VIP · LA BOUTEILLE À 900 BC'], ['DRESS CODE', 'BASKETS : 30 BC LE CENTIMÈTRE'],
       ['LISTE VIP', "VOUS N'Y ÊTES PAS"], ['OPEN BAR', 'OUVERT AU BAR, PAS À VOUS']],
     boss: 'LE MAGNAT DU CARRÉ VIP · BLINGCO NIGHT',
     stamp: 'REFOULÉ !', vipOnly: 'VIP ONLY !', landed: 'RÉACTEURS COUPÉS !',
     fileOpen: ['LE CORDON EST TOMBÉ', "L'ALLÉE EST LIBRE"],
     courOpen: ['LA COUR EST LIBRE', 'LE HANGAR ROUGE EST OUVERT'],
-    vipOff: ['PORTIQUE VIP COUPÉ', 'LA CAVE EST OUVERTE'],
+    vipOff: ['PORTIQUE VIP COUPÉ', 'LA CAVE EST OUVERTE'], regieOff: ['RÉGIE COUPÉE', 'LA PORTE DE LA CAVE EST OUVERTE'],
     dylagne: ['DYLAGNE REJOINT LA RÉSISTANCE', 'SA GROSSE CAISSE TIENT LE RYTHME'],
     pisteOpen: ['BOUM !', 'LE RIDEAU DE LA PISTE TOMBE'],
     opening: ['Strasbourg, 2026. Rue la Fayette, la nuit.', 'Le Kalt, la boîte techno du quartier. BlingCo y a posé un tapis doré, un cordon rouge... et un carré VIP.',
@@ -401,7 +414,7 @@ export const TEXTS = {
     end: ['LE KALT LIBÉRÉ', 'Le peuple techno et Dylagne rejoignent la résistance. Suite : la place Kléber.']
   },
   kleber: {
-    subtitle: 'NIVEAU 7 : PLACE KLÉBER, 2026 (FIN DE LA PARTIE 1)',
+    subtitle: 'NIVEAU 8 : PLACE KLÉBER, 2026 (FIN DE LA PARTIE 1)',
     rooms: { peages: 'LES PORTIQUES-PÉAGES', chalets: 'LE LABYRINTHE DE CHALETS', sapin: 'LE SAPIN-ÉCRAN', estrade: "L'ESTRADE · LA SIGNATURE" },
     ads: [['MARCHÉ DE NOËL PERMANENT', '365 JOURS PAR AN · ENTRÉE 15 BC'], ['VIN CHAUD', '79 BC LE GOBELET MINUSCULE'],
       ['NEIGE PAYANTE', '5 BC LE FLOCON'], ['STRASBOURG', 'VENDUE CE SOIR · SIGNATURE SUR L\'ESTRADE']],

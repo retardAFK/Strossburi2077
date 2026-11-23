@@ -42,19 +42,19 @@ await h.run(() => { const g = window.S3K; g.entities.find(e => e.isBoss).takeHit
 T.check('en vol : VIP ONLY, ça rebondit', (await boss()).hp === hp);
 
 // bouteilles à étincelles : rafale de P.sparks[0]
-await place(0, -96);
+await place(18, -38);
 await force('sparks');
 await h.until(() => window.S3K.entities.find(e => e.isBoss).stateName === 'hover', 4000);
 T.check('rafale d\'étincelles', await h.run(() => window.__n) === P.sparks[0], `${await h.run(() => window.__n)} étincelles`);
 // pluie de bouchons : P.rain[0] zones, dont une sur l'Ultra
-await place(0, -96);
+await place(18, -38);
 await force('rain');
 T.check('pluie de bouchons : zones au sol', await h.run(() => window.__z) === P.rain[0]);
-T.check('une zone sur l\'Ultra', await h.run(() => window.S3K.entities.some(e => e.isHazard && !e.removed && Math.hypot(e.x, e.z + 96) < 0.1)));
+T.check('une zone sur l\'Ultra', await h.run(() => window.S3K.entities.some(e => e.isHazard && !e.removed && Math.hypot(e.x - 18, e.z + 38) < 0.1)));
 await h.until(() => window.S3K.entities.find(e => e.isBoss).stateName === 'hover', 4000);
 
 // flèche court-circuit (vraie touche F) → chute → au sol
-await place(0, -96);
+await place(18, -38);
 await force('hover');
 await h.run(() => { const g = window.S3K, a = g.inventory.items.arc; a.give('court_circuit', 2); a.arrow = 'court_circuit'; g.inventory.equip('arc'); g.player.target = g.entities.find(e => e.isBoss); });
 await h.until(() => window.S3K.inventory.items.arc.ready, 3000); await h.key('KeyF');
@@ -62,7 +62,7 @@ T.check('court-circuit : réacteurs coupés, il tombe', await h.until(() => ['fa
 T.check('au sol : point faible', await h.until(() => window.S3K.entities.find(e => e.isBoss).stateName === 'landed', 3000) && (await boss()).y < 1);
 // au sol : une vraie flèche fait 1
 hp = (await boss()).hp;
-await h.run(() => { const g = window.S3K; g.inventory.items.arc.arrow = 'simple'; Object.assign(g.player, { x: 0, z: -99 }); g.player.target = g.entities.find(e => e.isBoss); });
+await h.run(() => { const g = window.S3K; g.inventory.items.arc.arrow = 'simple'; Object.assign(g.player, { x: 20, z: -33 }); g.player.target = g.entities.find(e => e.isBoss); });
 await h.until(() => window.S3K.inventory.items.arc.ready, 3000); await h.key('KeyF');
 await h.wait(800);
 T.check('au sol : la flèche le touche', await h.run(hp => window.S3K.entities.find(e => e.isBoss).hp === hp - 1, hp));
@@ -81,7 +81,7 @@ await h.skipDialogs(); await h.wait(300); await h.skipDialogs();
 T.check('phase : événement + physios en renfort', (await h.run(() => window.__ev)).some(e => e.startsWith('phase')) &&
   await h.run(() => window.S3K.entities.filter(e => e.constructor.name === 'Physio' && e.alive && /^renforts/.test(e.group)).length) >= 2);
 const ph = (await boss()).phase;
-await place(0, -96);
+await place(18, -38);
 await h.run(() => { window.__n = 0; });
 await force('sparks');
 await h.until(() => window.S3K.entities.find(e => e.isBoss).stateName === 'hover', 4000);

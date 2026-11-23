@@ -8,7 +8,7 @@ import { TEXTS } from '../src/data/texts.fr.js';
 const T = checker('fin-partie1');
 // (levels/index.js importe des .glb : on lit l'ordre de la campagne dans le texte)
 const CAMPAIGN_ORDER = JSON.parse(readFileSync('src/levels/index.js', 'utf8').match(/CAMPAIGN_ORDER = (\[.*?\])/)[1].replace(/'/g, '"'));
-T.check('campagne de la partie 1 : 7 niveaux (Meinau en abords + intérieur), Kléber en dernier', CAMPAIGN_ORDER.length === 7 && CAMPAIGN_ORDER.at(-1) === 'kleber', CAMPAIGN_ORDER.join(' → '));
+T.check('campagne de la partie 1 : 8 niveaux (Meinau et Kalt en abords + intérieur), Kléber en dernier', CAMPAIGN_ORDER.length === 8 && CAMPAIGN_ORDER.at(-1) === 'kleber', CAMPAIGN_ORDER.join(' → '));
 
 const { browser, page, h } = await launch(T, { query: 'debug=1&seed=1' });
 const goTitle = () => page.waitForFunction(() => window.S3K?.world && (window.S3K.mode === 'title' || window.S3K.mode === 'cutscene'), null, { timeout: 30000 });

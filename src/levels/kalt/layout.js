@@ -1,99 +1,109 @@
-// Niveau 5 : le Kalt, rue la Fayette, la nuit, 2026 (fiches docs/designs/niveau-kalt.md, kalt.md, plan kalt-plan.png).
-// DONNÉES UNIQUEMENT. Maquette grise à valider en jouant. Repère : x à droite, z négatif = vers le fond.
-// Décors (tools/blender/decors_nuit.py) : l'entrée (decor_kalt_ext) en toile de fond à l'ouest de la file ; la scène DJ
-// du hangar (decor_kalt, avec le carré VIP doré posé sur la piste) au fond de la piste.
-// 1 la file dehors (z 8 → -22) · 2 l'allée et la cour (→ -52) · 3 la salle, hangar rouge all black (→ -90) ·
-// 4 la cave, à l'ouest de la salle · B la piste et le carré VIP (→ -124).
+// Niveau 7 : le Kalt, l'intérieur, la nuit, 2026. MAQUETTE GRISE (docs/designs/brief-greybox-kalt.md, plan
+// docs/designs/kalt-plan.svg v2) : blocs gris étiquetés, design standard de club industriel (le vrai club interdit les
+// photos). DONNÉES UNIQUEMENT. Les étages sont posés côte à côte dans le monde, reliés par des escaliers (script).
+// Rez-de-chaussée : le MAIN (grand hangar, rythme + lumières, props/Sono.js) et le CARRÉ VIP BlingCo (boss, à l'est).
+// Étage (z -68 → -96) : la MEZZA (petite salle, régie lumière) et l'ARTSPACE (expo, indices).
+// Cave (à l'ouest du Main) : Dylagne ; accès par le Main (porte coupée depuis la régie) ou par le soupirail (niveau 6).
+// Parcours : cour → Main → Mezza → cave → Carré VIP → boss.
 const PI = Math.PI;
-const PINK = 0xff4fa3, RED = 0xff1a3c, CYAN = 0x38f2ff, GOLD = 0xffc040, VIO = 0x6a5acd;
+const PINK = 0xff4fa3, RED = 0xff1a3c, CYAN = 0x38f2ff, GOLD = 0xffc040, VIO = 0x8a5cff;
+const grey = (x, z, w, d, h, label, solid = true) => ({ x, z, w, d, h, tex: 'ph_gris', solid, label });
 
 export default {
   id: 'kalt',
-  bg: 0x07070b, fog: [14, 52],
-  playerStart: { x: 0, z: 5, face: PI / 2 },
+  bg: 0x07070b, fog: [16, 60],
+  playerStart: { x: 0, z: -12, face: PI / 2 }, // entrée « cour » (le niveau 6 peut choisir la cave : script)
   opening: {
     shots: [
-      { from: [7, 4, 10], to: [5, 3.5, 6], look: [-14, 3, -8], lookTo: [-12, 3, -14], dur: 6 },
-      { from: [0, 3, -25], to: [0, 2.6, -34], look: [0, 1.5, -52], lookTo: [0, 1.8, -52], dur: 6 },
-      { from: [6, 6, -94], to: [3, 5, -97], look: [5.8, 1.5, -113.4], lookTo: [5.8, 2.2, -113.4], dur: 6 }
+      { from: [0, 4, -11], to: [0, 4, -16], look: [0, 2, -40], lookTo: [0, 2, -44], dur: 6 },
+      { from: [-10, 3, -72], to: [-2, 3, -74], look: [0, 1.5, -90], lookTo: [0, 1.5, -90], dur: 6 },
+      { from: [17, 5, -14], to: [17, 5, -20], look: [24, 2, -30], lookTo: [24, 3, -30], dur: 6 }
     ],
     captionAt: [0.4, 6, 12]
   },
   zones: [
-    { id: 'file', rect: [-9, 9, 8, -22] },
-    { id: 'cour', rect: [-9, 9, -22, -52] },
-    { id: 'salle', rect: [-14, 14, -52, -90] },
-    { id: 'cave', rect: [-30, -14, -72, -92] },
-    { id: 'piste', rect: [-14, 14, -90, -124], boss: true }
+    { id: 'main', rect: [-16, 16, -10, -50] },
+    { id: 'piste', rect: [16, 32, -12, -48], boss: true },
+    { id: 'cave', rect: [-40, -16, -20, -44] },
+    { id: 'mezza', rect: [-16, 7, -68, -96] },
+    { id: 'artspace', rect: [7, 30, -68, -96] }
   ],
   floors: [
-    { rect: [-9, 9, 8, -22], tex: 'paves', sky: true },
-    { rect: [-3, 3, -22, -36], tex: 'beton', sky: true }, { rect: [-9, 9, -36, -52], tex: 'beton', sky: true },
-    { rect: [-14, 14, -52, -90], tex: 'beton' }, { rect: [-30, -14, -72, -92], tex: 'beton' },
-    { rect: [-14, 14, -90, -124], tex: 'beton' }
+    { rect: [-16, 16, -10, -50], tex: 'ph_gris' }, { rect: [16, 32, -12, -48], tex: 'ph_gris' },
+    { rect: [-40, -16, -20, -44], tex: 'ph_gris' }, { rect: [-16, 30, -68, -96], tex: 'ph_gris' }
   ],
   walls: [
-    // la file : trottoir rue la Fayette, l'allée s'ouvre au fond (x -2.5 → 2.5)
-    [-10, -9, 8, -23, 'mur'], [9, 10, 8, -23, 'mur'], [-10, -2.5, -22, -23, 'mur'], [2.5, 10, -22, -23, 'mur'],
-    // l'allée entre le bâtiment blanc et le hangar, puis la cour
-    [-3.5, -2.5, -23, -36, 'mur'], [2.5, 3.5, -23, -36, 'mur'],
-    [-10, -9, -36, -53, 'mur'], [9, 10, -36, -53, 'mur'], [-10, -2.5, -35, -36, 'mur'], [2.5, 10, -35, -36, 'mur'],
-    // le hangar : façade (porte au milieu), salle, passage vers la cave (ouest, z -80 → -84), rideau de la piste
-    [-15, -2, -52, -53, 'beton'], [2, 15, -52, -53, 'beton'],
-    [-15, -14, -53, -80, 'beton'], [-15, -14, -84, -125, 'beton'], [14, 15, -53, -125, 'beton'],
-    [-15, -4, -90, -91, 'beton'], [4, 15, -90, -91, 'beton'], [-15, 15, -124, -125, 'beton'],
+    // le Main : porte de la cave (ouest), rideau du Carré VIP (est)
+    [-17, 17, -9, -10, 'ph_gris'], [-17, 17, -50, -51, 'ph_gris'],
+    [-17, -16, -10, -28, 'ph_gris'], [-17, -16, -32, -50, 'ph_gris'], [16, 17, -10, -28, 'ph_gris'], [16, 17, -32, -50, 'ph_gris'],
+    // le Carré VIP
+    [17, 33, -11, -12, 'ph_gris'], [17, 33, -48, -49, 'ph_gris'], [32, 33, -12, -48, 'ph_gris'],
     // la cave
-    [-31, -30, -71, -93, 'beton'], [-31, -15, -71, -72, 'beton'], [-31, -15, -92, -93, 'beton']
+    [-41, -40, -19, -45, 'ph_gris'], [-41, -16, -19, -20, 'ph_gris'], [-41, -16, -44, -45, 'ph_gris'],
+    // l'étage : la Mezza et l'artspace, une porte entre les deux
+    [-17, 31, -67, -68, 'ph_gris'], [-17, 31, -96, -97, 'ph_gris'], [-17, -16, -68, -96, 'ph_gris'], [30, 31, -68, -96, 'ph_gris'],
+    [6, 8, -68, -80, 'ph_gris'], [6, 8, -84, -96, 'ph_gris']
   ],
-  blockers: [[-10, 10, 8, 9], [3, 11, -117.5, -124]], // la scène DJ (décor) au fond de la piste, côté est
+  labels: [
+    { x: 0, z: -11, y: 5, text: 'MAIN · REZ-DE-CHAUSSÉE' }, { x: 24, z: -13, y: 5, text: 'CARRÉ VIP BLINGCO' },
+    { x: -28, z: -21, y: 4.5, text: 'CAVE · SOUS-SOL' }, { x: -5, z: -69, y: 4.5, text: 'ÉTAGE · LA MEZZA' },
+    { x: 19, z: -69, y: 4.5, text: "ÉTAGE · L'ARTSPACE" }, { x: 0, z: -9.6, y: 2.6, text: 'PORTE DE LA COUR' }
+  ],
   blocks: [
-    // la cour : poubelle jaune, vélos
-    { x: 7.5, z: -39, w: 1, d: 1, h: 1.1, tex: 'sol', solid: true }, { x: -7.5, z: -46, w: 1, d: 3, h: 0.9, tex: 'mur', solid: true },
-    // la salle : piliers IPN (on s'y cache des physios)
-    { x: -7, z: -70, w: 0.6, d: 0.6, h: 6, tex: 'beton', solid: true }, { x: 7, z: -70, w: 0.6, d: 0.6, h: 6, tex: 'beton', solid: true },
-    { x: -7, z: -82, w: 0.6, d: 0.6, h: 6, tex: 'beton', solid: true }, { x: 7, z: -82, w: 0.6, d: 0.6, h: 6, tex: 'beton', solid: true },
-    // la cave : fûts
-    { x: -28.5, z: -74, w: 1, d: 1, h: 1.2, tex: 'mur', solid: true }, { x: -28.5, z: -90, w: 1, d: 1, h: 1.2, tex: 'mur', solid: true }
+    // le Main : piliers IPN, scène DJ, bar, escalier vers l'étage
+    grey(-7, -26, 0.6, 0.6, 6, 'PILIER IPN'), grey(7, -26, 0.6, 0.6, 6), grey(-7, -40, 0.6, 0.6, 6), grey(7, -40, 0.6, 0.6, 6),
+    grey(0, -48.6, 10, 2, 1.2, 'SCÈNE DJ'), grey(-13.5, -14, 3, 1.2, 1.1, 'BAR'),
+    { ...grey(-14, -48, 3, 3, 0.5, 'ESCALIER → ÉTAGE', false), tex: 'ph_blanc' },
+    // le Carré VIP : estrade du Magnat (posée, elle décolle au combat)
+    grey(27, -45, 6, 2, 0.6, 'CANAPÉS VIP'),
+    // la cave : fûts, et l'écharpe derrière des fûts qu'on tire au grappin
+    grey(-38.5, -24, 1, 1, 1.2, 'FÛTS'), grey(-30, -43, 6, 1, 1.2, 'FÛTS'), grey(-38.7, -41.2, 2.6, 0.6, 1.2), // la niche de l'écharpe
+    grey(-38.5, -22, 1.5, 1, 0.5, 'SOUPIRAIL (VERS LES ARRIÈRE-COURS)', false),
+    // l'étage : escalier, cabine DJ de la Mezza (l'écharpe derrière), cimaises de l'artspace
+    { ...grey(-14, -70, 3, 3, 0.5, 'ESCALIER → REZ-DE-CHAUSSÉE', false), tex: 'ph_blanc' },
+    grey(-4, -90, 8, 1.4, 1.2, 'CABINE DJ DE LA MEZZA'), grey(-8.6, -92.5, 0.4, 4, 1.2), grey(0.6, -92.2, 0.4, 2.4, 1.2), // on passe derrière par la droite
+    grey(12, -88, 0.4, 6, 2.6, 'ŒUVRE'), grey(20, -76, 6, 0.4, 2.6, 'ŒUVRE'), grey(26, -90, 0.4, 6, 2.6, 'ŒUVRE')
   ],
-  // les basses ouvrent les portiques (props/Sono.js)
-  lasers: [{ id: 'basse1', x0: -14, x1: 14, z: -64 }, { id: 'basse2', x0: -14, x1: 14, z: -76 }],
   doors: [
-    { id: 'hangar', rect: [-2, 2, -52.2, -52.8], open: false },
-    { id: 'vip', rect: [-15, -14, -80, -84], open: false },
-    { id: 'piste', rect: [-4, 4, -90.2, -90.8], open: false }
+    { id: 'cave', rect: [-17, -16, -28, -32], open: false },
+    { id: 'piste', rect: [16, 17, -28, -32], open: false }
   ],
-  props: [
-    { model: 'decor_kalt_ext', x: -25, y: 0, z: -8, scale: 1.3 },
-    { id: 'dj', model: 'decor_kalt', x: 7, y: -0.02, z: -114, scale: 1.2, rotY: -PI / 2 } // carré VIP du décor en (5.8, -113.4)
-  ],
+  // les basses ouvrent les portiques du Main (props/Sono.js)
+  lasers: [{ id: 'basse1', x0: -16, x1: 16, z: -22 }, { id: 'basse2', x0: -16, x1: 16, z: -34 }],
   objects: [
-    // le peuple techno refoulé (placeholders : designs attendus de Cowork)
-    ...[2, -1.5, -5, -8.5, -12].map((z, i) => ({ type: 'figurant', id: i ? null : 'public', label: 'PUBLIC TECHNO', x: 7, z,
-      rotY: PI, talk: !i })),
-    { type: 'sono', rect: [-14, 14, -52, -90], gates: ['basse1', 'basse2'], light: { x: 0, y: 7, z: -72 } },
-    { type: 'caisse', x: 12.5, z: -56, arrow: 'court_circuit' },
-    { type: 'projo', id: 'vip', x: -12.6, z: -87.5, label: 'PROJECTEUR VIP' },
-    { type: 'dylagne', x: -26.5, z: -86, rotY: 0 },
-    { type: 'caisse', x: 12.5, z: -93, arrow: 'court_circuit' }, { type: 'caisse', x: -12.5, z: -93, arrow: 'court_circuit' }
+    { type: 'sono', rect: [-16, 16, -10, -50], gates: ['basse1', 'basse2'], light: { x: 0, y: 6, z: -30 } },
+    { type: 'caisse', x: 13.5, z: -13, arrow: 'court_circuit' },
+    // la régie lumière de la Mezza commande la porte de la cave (flèche court-circuit, proposition Cowork)
+    { type: 'projo', id: 'regie', x: 3, z: -94, label: 'RÉGIE LUMIÈRE (MEZZA)' },
+    { type: 'caisse', x: -13, z: -93, arrow: 'court_circuit' },
+    // la cave : Dylagne, l'écharpe derrière les fûts (les tirer au gaffe-grappin)
+    { type: 'dylagne', x: -33, z: -26, rotY: 0 },
+    { type: 'tractable', id: 'futs', label: 'FÛTS ROULANTS', x: -36.6, z: -42.6, w: 1.6, d: 1.4, h: 1.2, axis: 'x', min: -36.6, max: -31, color: 0x8a8d98 },
+    // l'artspace : une artiste (placeholder) donne des indices
+    { type: 'figurant', id: 'artiste', label: 'ARTISTE', x: 18, z: -86, rotY: PI / 2, talk: true },
+    { type: 'figurant', label: 'PUBLIC TECHNO', x: 22, z: -80, rotY: 0 },
+    // écharpes : Mezza (secrète, derrière la cabine DJ), cave (objet, derrière les fûts)
+    { type: 'echarpe', id: 'kalt-mezza', x: -4, z: -93.5, label: 'ÉCHARPE (SECRÈTE)' },
+    { type: 'echarpe', id: 'kalt-cave', x: -38.6, z: -42.6, label: 'ÉCHARPE (OBJET)' },
+    { type: 'caisse', x: 30, z: -14, arrow: 'court_circuit' }, { type: 'caisse', x: 30, z: -46, arrow: 'court_circuit' }
   ],
-  ads: [
-    { x: 9.9, z: -6, rotY: -PI / 2, w: 3, y: 3, idx: 0 }, { x: -9.9, z: -44, rotY: PI / 2, w: 3, y: 3, idx: 1 },
-    { x: 13.9, z: -58, rotY: -PI / 2, w: 3, y: 3.4, idx: 2 }, { x: -13.9, z: -100, rotY: PI / 2, w: 3.4, y: 3.6, idx: 3 }
-  ],
+  ads: [{ x: 15.9, z: -40, rotY: -PI / 2, w: 3, y: 3.4, idx: 0 }, { x: 31.9, z: -30, rotY: -PI / 2, w: 3.4, y: 3.6, idx: 2 }],
   neons: [
-    { x: 0, y: 3.4, z: -21.8, len: 5, axis: 'x', color: PINK }, { x: 0, y: 3.6, z: -52.9, len: 4, axis: 'x', color: CYAN },
-    { x: -13.9, y: 4.5, z: -71, len: 34, axis: 'z', color: RED }, { x: 13.9, y: 4.5, z: -71, len: 34, axis: 'z', color: RED },
-    { x: -29.9, y: 3, z: -82, len: 18, axis: 'z', color: VIO }, { x: 0, y: 5.5, z: -123.8, len: 22, axis: 'x', color: PINK }
+    { x: -15.9, y: 4.5, z: -30, len: 36, axis: 'z', color: RED }, { x: 15.9, y: 4.5, z: -20, len: 14, axis: 'z', color: RED },
+    { x: -39.9, y: 3, z: -32, len: 22, axis: 'z', color: VIO }, { x: 24, y: 5.5, z: -47.9, len: 14, axis: 'x', color: PINK },
+    { x: -5, y: 4, z: -95.9, len: 20, axis: 'x', color: CYAN }
   ],
   lights: [
-    { x: 0, z: -2, y: 7, color: VIO, i: 8, d: 24 }, { x: 0, z: -18, y: 5, color: PINK, i: 6, d: 14 },
-    { x: 0, z: -44, y: 7, color: VIO, i: 8, d: 22 }, { x: 0, z: -72, y: 6, color: 0x3a1020, i: 4, d: 30 },
-    { x: -22, z: -82, y: 4, color: 0x9a4dff, i: 9, d: 18 },
-    { x: 0, z: -100, y: 7, color: GOLD, i: 10, d: 28 }, { x: 0, z: -112, y: 6, color: PINK, i: 10, d: 24 }
+    { x: 0, z: -30, y: 6, color: 0x3a1020, i: 4, d: 30 }, { x: 24, z: -30, y: 6, color: GOLD, i: 12, d: 26 },
+    { x: -28, z: -32, y: 4, color: 0x9a4dff, i: 9, d: 22 }, { x: -5, z: -82, y: 5, color: 0x9a4dff, i: 8, d: 24 },
+    { x: 19, z: -82, y: 5, color: 0xffffff, i: 8, d: 24 }
   ],
   warps: [
-    { id: 'file', x: 0, z: 5, face: PI / 2 }, { id: 'cour', x: 0, z: -37, face: PI / 2 },
-    { id: 'salle', x: 0, z: -55, face: PI / 2 }, { id: 'cave', x: -17, z: -82, face: PI },
-    { id: 'piste', x: 0, z: -93, face: PI / 2 }
-  ]
+    { id: 'cour', x: 0, z: -12, face: PI / 2 }, { id: 'mezza', x: -10, z: -76, face: PI / 2 },
+    { id: 'artspace', x: 20, z: -72, face: PI / 2 }, { id: 'cave', x: -24, z: -30, face: PI }, { id: 'piste', x: 18.5, z: -30, face: 0 }
+  ],
+  // arrivées depuis le niveau 6 (sauvegarde : entry) et escaliers entre le rez-de-chaussée et l'étage
+  entries: { cour: { x: 0, z: -12, face: PI / 2 }, cave: { x: -37, z: -24, face: 0 } },
+  stairs: { up: { rect: [-15.5, -12.5, -46.5, -49.5], to: { x: -11, z: -72, face: PI / 2 } },
+    down: { rect: [-15.5, -12.5, -68.5, -71.5], to: { x: -11, z: -45, face: -PI / 2 } } }
 };

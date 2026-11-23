@@ -72,6 +72,7 @@ import mei2Script from './meinau/script.js';
 import abordsLayout from './meinau-abords/layout.js';
 import abordsScript from './meinau-abords/script.js';
 import { EcharpeMarqueur } from '../entities/props/EcharpeMarqueur.js';
+import { ObjetQuete } from '../entities/props/ObjetQuete.js';
 
 // modèles exportés par tools/blender/*.py (embarqués dans le build par esbuild, chargés à la demande)
 import ultra from '../../assets/models/ultra.glb';
@@ -160,7 +161,7 @@ export const LEVELS = {
   'meinau-abords': {
     layout: abordsLayout, script: abordsScript, texts: TEXTS.meinauAbords, subtitle: TEXTS.meinauAbords.subtitle,
     models: { ultra, steward_robot, bretzel_boomerang, terminal },
-    types: { steward: StewardRobot, figurant: Figurant, terminal: Terminal, echarpe: EcharpeMarqueur }
+    types: { steward: StewardRobot, figurant: Figurant, terminal: Terminal, echarpe: EcharpeMarqueur, objet: ObjetQuete }
   },
   meinau: {
     layout: mei2Layout, script: mei2Script, texts: TEXTS.meinau, subtitle: TEXTS.meinau.subtitle,

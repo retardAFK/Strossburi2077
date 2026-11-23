@@ -73,7 +73,10 @@ Partie 1 (2026) = niveaux 2 à 7 ; partie 2 (2067) = niveaux 8 à 12. Les autres
   Le cyberpunk est réservé à 2067 et à BlingCo. »
 - Tribune de la Meinau : la **vraie tribune sud 2026** (façade en fuselages d'A340). Kop en tribune **ouest**.
 - Bords fermés selon le lieu (Meinau : voie ferrée, grillage, maisons, berge du Rhin tortu).
-- Vestiaires, loges, sous-sols : design standard de stade. **3 écharpes par niveau** (marqueurs en attendant le système). Les deux compagnons sont acquis juste avant
+- Vestiaires, loges, sous-sols : design standard de stade. **3 écharpes par niveau** (marqueurs en attendant le système).
+- Points ouverts du brief, tranchés par Maxime le 23/11 : le centre d'entraînement s'appelle « centre d'entraînement »
+  (pas de nom d'entreprise) ; la **passerelle** sur le Rhin tortu existe ; la grille B s'ouvre avec une **accréditation
+  BlingCo** ; le terrain vague est un **chantier BlingCo** (gardé, l'accréditation s'y trouve). Les deux compagnons sont acquis juste avant
 le faux final de Kléber 2026.
 
 ### Ancien niveau `meinau-ouest`

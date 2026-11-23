@@ -2,8 +2,10 @@
 // docs/designs/meinau-abords-plan.svg, validés le 23/11) : blocs gris étiquetés, aucune matière finale.
 // DONNÉES UNIQUEMENT. Plan calé sur la vue satellite, nord en haut : x = (x_plan − 344) × 0,2 ; z = (y_plan − 344) × 0,2
 // (z négatif = nord). Zones ouvertes reliées : 1 arrivée tram (ouest) · 2 parvis sud · 3 tribune sud (repère) ·
-// 4 parking ouest · 5 parc et jardins (sud) · 6 terrain vague · 7 Racing Soprema Parc (est, au-delà du Rhin tortu).
-// Entrées du stade (→ niveau 3) : A portique (parvis) · B grille côté Rhin (objet requis) · C issue de secours (secret).
+// 4 parking ouest · 5 parc et jardins (sud) · 6 terrain vague, chantier BlingCo (par la passerelle) · 7 centre d'entraînement
+// (est, au-delà du Rhin tortu, grillagé).
+// Entrées du stade (→ niveau 3) : A portique (parvis) · B grille côté Rhin (accréditation BlingCo, trouvée sur le chantier)
+// · C issue de secours (secret). Décisions de Maxime du 23/11 : passerelle, accréditation, terrain vague = BlingCo.
 const PI = Math.PI;
 const grey = (x, z, w, d, h, label, solid = true) => ({ x, z, w, d, h, tex: 'ph_gris', solid, label });
 const car = (x, z) => ({ x, z, w: 2, d: 4.4, h: 1.5, tex: 'ph_gris', solid: true });
@@ -28,26 +30,26 @@ export default {
     { id: 'berge', rect: [17, 26, 12, -52.4] },
     { id: 'parc', rect: [-50, 20, 52.4, 12] },
     { id: 'terrain', rect: [26, 62, 0, -52.4] },
-    { id: 'soprema', rect: [26, 62, 52.4, 0] },
+    { id: 'centre', rect: [26, 62, 52.4, 0] },
     { id: 'nord', rect: [-50, 26, -6.8, -52.4] }
   ],
   floors: [
     { rect: [-62, 62, 52.4, -52.4], tex: 'ph_gris', sky: true },
     { rect: [-48.8, -26.8, -6.8, -36.8], tex: 'sol', sky: true } // marquages du parking
   ],
-  // bords réels, fermés (aucun vide visible) : voie ferrée (N-NE), grillage Soprema (E), maisons (S), av. de Colmar (O)
+  // bords réels, fermés (aucun vide visible) : voie ferrée (N-NE), grillage du centre d'entraînement (E), maisons (S), av. de Colmar (O)
   walls: [
     [-63, 63, -52.4, -53.4, 'ph_gris'], [-63, 63, 53.4, 52.4, 'ph_gris'],
     [-63, -62, 53.4, -53.4, 'ph_gris'], [62, 63, 53.4, -53.4, 'ph_gris']
   ],
   blockers: [[-62, -50, 52.4, -52.4]], // le tram et l'avenue : on ne quitte pas le quartier par là
   labels: [
-    { x: 0, z: -53, y: 7.5, text: 'VOIE FERRÉE (BORD)' }, { x: 62.5, z: 10, y: 7.5, text: 'GRILLAGE SOPREMA (BORD)' },
+    { x: 0, z: -53, y: 7.5, text: 'VOIE FERRÉE (BORD)' }, { x: 62.5, z: 10, y: 7.5, text: 'GRILLAGE (BORD)' },
     { x: -10, z: 53, y: 7.5, text: 'MAISONS RUE DES CIRIERS / STOEDEL' }, { x: -56, z: 0, y: 5, text: 'AV. DE COLMAR · TRAM A/E' },
     { x: -38, z: -48, text: '1 · ARRIVÉE TRAM KRIMMERI' }, { x: -38, z: -34, text: '4 · PARKING OUEST' },
     { x: -4, z: 9, text: '2 · PARVIS SUD' }, { x: -20, z: 30, text: '5 · PARC DE L\'EXTENWOERTHFELD' },
-    { x: 2, z: 27, text: 'JARDINS FAMILIAUX' }, { x: 45, z: -26, text: '6 · TERRAIN VAGUE' },
-    { x: 45, z: 4, text: '7 · RACING SOPREMA PARC' }, { x: 24, z: 30, y: 1.5, text: 'RHIN TORTU' }
+    { x: 2, z: 27, text: 'JARDINS FAMILIAUX' }, { x: 45, z: -26, text: '6 · TERRAIN VAGUE · CHANTIER BLINGCO' },
+    { x: 45, z: 4, text: "7 · CENTRE D'ENTRAÎNEMENT" }, { x: 24, z: 30, y: 1.5, text: 'RHIN TORTU' }
   ],
   blocks: [
     // le stade (niveau 3) et sa tribune sud, gros volume blanc visible de partout (façade en fuselages d'A340, à dessiner)
@@ -63,13 +65,18 @@ export default {
     car(-45, -12), car(-42, -12), car(-33, -12),
     grey(-25.3, -25.6, 3, 0.4, 2.2, 'ISSUE DE SECOURS C'), grey(-25.3, -32, 3, 0.4, 2.2),
     // la berge du Rhin tortu (l'eau arrête l'Ultra) et la passerelle supposée, fermée
-    { x: 26, z: -41, w: 2, d: 23, h: 0.1, tex: 'eau', solid: true }, { x: 25.5, z: -17, w: 2, d: 25, h: 0.1, tex: 'eau', solid: true },
+    { x: 26, z: -41, w: 2, d: 23, h: 0.1, tex: 'eau', solid: true },
+    { x: 25.5, z: -26.05, w: 2, d: 6.9, h: 0.1, tex: 'eau', solid: true }, { x: 25.5, z: -12.35, w: 2, d: 15.7, h: 0.1, tex: 'eau', solid: true },
     { x: 22.5, z: 8, w: 2, d: 25, h: 0.1, tex: 'eau', solid: true }, { x: 19.5, z: 36, w: 2, d: 33, h: 0.1, tex: 'eau', solid: true },
-    // (la berge longe la façade est du stade jusqu'à la grille B ; la passerelle n'est pas franchissable)
-    { x: 30, z: -21.4, w: 8, d: 2, h: 0.35, tex: 'ph_gris', label: 'PASSERELLE ? (À VALIDER)' },
-    // le terrain vague (chantier, palissades) et le Racing Soprema Parc (terrains grillagés)
-    grey(40, -40, 10, 0.3, 2.4, 'PALISSADE'), grey(52, -20, 0.3, 14, 2.4, 'PALISSADE'), grey(36, -8, 6, 4, 3, 'ENGINS DE CHANTIER'),
-    grey(29.2, 15, 0.3, 30, 3, 'GRILLAGE'), { x: 46, z: 16, w: 26, d: 24, h: 0.15, tex: 'ph_gris', label: 'TERRAINS D\'ENTRAÎNEMENT' },
+    // la berge longe la façade est du stade jusqu'à la grille B ; la passerelle enjambe le Rhin tortu vers le terrain vague
+    { x: 26.8, z: -21.4, w: 5.2, d: 2.4, h: 0.3, tex: 'ph_gris', label: 'PASSERELLE' },
+    grey(26.9, -22.7, 4.6, 0.2, 1.1), grey(26.9, -20.1, 4.6, 0.2, 1.1), // garde-corps
+    // le terrain vague, chantier BlingCo (palissades, engins, bungalow où traîne l'accréditation) ; grillage du centre
+    grey(40, -40, 10, 0.3, 2.4, 'PALISSADE « BLINGCO PARKING VIP »'), grey(56, -20, 0.3, 14, 2.4, 'PALISSADE'),
+    grey(36, -8, 6, 4, 3, 'ENGINS DE CHANTIER'), grey(48, -36, 6, 4, 3, 'BUNGALOW DE CHANTIER BLINGCO'),
+    grey(45.6, 0.2, 32.8, 0.3, 3, 'GRILLAGE DU CENTRE'),
+    // le centre d'entraînement (terrains grillagés, inaccessible)
+    grey(29.2, 15, 0.3, 30, 3, 'GRILLAGE'), { x: 46, z: 16, w: 26, d: 24, h: 0.15, tex: 'ph_gris', label: "TERRAINS D'ENTRAÎNEMENT" },
     // le parc (chemins sous les arbres) et les jardins familiaux (clôtures, cabanes)
     tree(-44, 18), tree(-38, 24), tree(-30, 18), tree(-24, 26), tree(-44, 34), tree(-34, 40), tree(-26, 46), tree(-16, 18),
     tree(-14, 38), tree(-40, 48), tree(14, 18), tree(-4, 18),
@@ -78,7 +85,7 @@ export default {
   ],
   doors: [
     { id: 'raccourci', rect: [-26.8, -26, -25.4, -32.2], open: false }, // côté parking de l'alcôve C
-    { id: 'grilleB', rect: [22.2, 24.6, -32.6, -33.4], open: false } // grille côté Rhin (fermée : objet requis)
+    { id: 'grilleB', rect: [22.2, 24.6, -32.6, -33.4], open: false } // grille côté Rhin : l'accréditation BlingCo l'ouvre
   ],
   lasers: [{ id: 'portique', x0: -5.1, x1: -0.7, z: -8.5 }],
   objects: [
@@ -90,12 +97,14 @@ export default {
     { type: 'figurant', id: 'habitante', label: 'HABITANTE', x: -30, z: 30, rotY: 0, talk: true },
     { type: 'figurant', id: 'jardinier', label: 'JARDINIER', x: 0, z: 36, rotY: PI, talk: true },
     { type: 'figurant', label: 'SUPPORTER', x: -40, z: -44, rotY: 0 },
+    // l'accréditation BlingCo, devant le bungalow du chantier : elle ouvre la grille B
+    { type: 'objet', id: 'accreditation', x: 48, z: -33, label: 'ACCRÉDITATION BLINGCO' },
     // écharpes (3) : marqueurs seulement (le système d'écharpes viendra plus tard)
     { type: 'echarpe', id: 'abords-parking', x: -38.4, z: -18.2, label: 'ÉCHARPE (PRINCIPALE)' },
     { type: 'echarpe', id: 'abords-jardins', x: 7.6, z: 39.8, label: 'ÉCHARPE (SECRÈTE)' },
     { type: 'echarpe', id: 'abords-terrain', x: 45.6, z: -12.2, label: 'ÉCHARPE (OBJET)' }
   ],
-  ads: [{ x: -3, z: -10.3, w: 6, y: 4.5, idx: 0 }, { x: -24, z: 5, rotY: PI / 2, w: 3, y: 3, idx: 1 }],
+  ads: [{ x: -3, z: -10.3, w: 6, y: 4.5, idx: 0 }, { x: -24, z: 5, rotY: PI / 2, w: 3, y: 3, idx: 1 }, { x: 40, z: -39.7, w: 5, y: 3.6, idx: 2 }],
   neons: [],
   lights: [
     { x: -38, z: -40, y: 10, color: 0xffffff, i: 10, d: 40 }, { x: -2, z: 0, y: 10, color: 0xffffff, i: 12, d: 40 },
@@ -103,6 +112,7 @@ export default {
   ],
   warps: [
     { id: 'tram', x: -38, z: -45, face: 0 }, { id: 'parking', x: -30, z: -28, face: 0 },
-    { id: 'parvis', x: -4, z: 5, face: PI / 2 }, { id: 'berge', x: 20, z: -6, face: PI / 2 }, { id: 'parc', x: -20, z: 20, face: -PI / 2 }
+    { id: 'parvis', x: -4, z: 5, face: PI / 2 }, { id: 'berge', x: 20, z: -6, face: PI / 2 }, { id: 'parc', x: -20, z: 20, face: -PI / 2 },
+    { id: 'terrain', x: 32, z: -21.4, face: 0 }
   ]
 };

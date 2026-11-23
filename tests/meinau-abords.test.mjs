@@ -23,9 +23,14 @@ await h.run(() => { window.__ech = []; window.S3K.events.on('echarpe:trouvee', i
 await tp(-39.5, -18.2); await h.wait(300);
 T.check('écharpe du parking ramassée (marqueur)', await h.run(() => window.__ech.includes('abords-parking')));
 
-// grille B : fermée
+// grille B : fermée sans accréditation
 await tp(23.3, -28.5, Math.PI / 2); await h.wait(300); await h.skipDialogs();
-T.check('berge : la grille B reste fermée (objet requis)', await h.run(() => window.S3K.world.doors.grilleB.box.on) && (await h.state()).mode === 'play');
+T.check('berge : la grille B reste fermée sans accréditation', await h.run(() => window.S3K.world.doors.grilleB.box.on) && (await h.state()).mode === 'play');
+// la passerelle enjambe le Rhin tortu ; à côté, l'eau arrête l'Ultra
+T.check('passerelle : on traverse le Rhin tortu', await blocked(25.5, -21.4) === false && await blocked(25.5, -24) && await blocked(25.5, -18.5));
+await tp(30, -21.4); await h.wait(300);
+T.check('terrain vague : le chantier BlingCo, gardé', (await h.state()).room.includes('CHANTIER BLINGCO') &&
+  await h.run(() => window.S3K.entities.filter(e => e.group === 'chantier' && e.alive).length) === 2);
 
 // entrée C : la borne cachée du parking ouvre le raccourci
 T.check('issue de secours C : raccourci fermé', await blocked(-26.4, -28.8));
@@ -48,6 +53,24 @@ await tp(-27.5, -28.8); await h.wait(200); await tp(-25, -28.8);
 T.check('issue de secours C → fin du niveau 2', await h.until(() => window.S3K.mode === 'end', 3000));
 T.check('sauvegarde : entrée C', (await save())?.entry === 'C');
 
+// entrée B : l'accréditation du chantier (E) ouvre la grille côté Rhin
+await page.reload(); await page.waitForFunction(() => window.S3K?.player, null, { timeout: 30000 });
+await h.start(); await h.god(); await h.skipDialogs();
+await tp(48, -31.8, -Math.PI / 2); await h.wait(200); await h.key('KeyE'); await h.wait(300); await h.skipDialogs();
+T.check('accréditation BlingCo prise (E)', await h.run(() => !window.S3K.entities.some(e => e.isQuestItem && e.alive)));
+await tp(23.3, -27, Math.PI / 2); await h.wait(200); await tp(23.3, -30, Math.PI / 2); await h.wait(300); await h.skipDialogs();
+T.check('accréditation : la grille B s\'ouvre', await h.run(() => !window.S3K.world.doors.grilleB.box.on));
+await tp(23.3, -34.2, Math.PI / 2);
+T.check('grille B → fin du niveau 2, entrée B', await h.until(() => window.S3K.mode === 'end', 3000) && (await save())?.entry === 'B');
+
+// le niveau 3 reprend la sauvegarde : l'Ultra entre par la grille B (coursive est)
+await page.goto(page.url().split('?')[0] + '?debug=1&seed=1');
+await page.waitForFunction(() => window.S3K?.player, null, { timeout: 30000 });
+await h.start(); await h.skipDialogs();
+const pb = await h.state();
+T.check('niveau 3 : arrivée par la grille B (coursive est)', Math.hypot(pb.x - 32.4, pb.z + 16.8) < 1, `${pb.x.toFixed(1)}, ${pb.z.toFixed(1)}`);
+await h.run(() => localStorage.setItem('s3k.save', JSON.stringify({ level: 'meinau', items: ['boomerang'], ammo: {}, companions: [], entry: 'C' })));
+
 // le niveau 3 reprend la sauvegarde : l'Ultra entre par l'issue de secours C (coursive ouest)
 await page.goto(page.url().split('?')[0] + '?debug=1&seed=1');
 await page.waitForFunction(() => window.S3K?.player, null, { timeout: 30000 });
@@ -61,6 +84,6 @@ await page.goto(page.url().split('?')[0] + '?debug=1&seed=1&level=meinau-abords'
 await page.waitForFunction(() => window.S3K?.player, null, { timeout: 30000 });
 await h.start();
 const rooms = [];
-for (let i = 0; i < 5; i++) { await h.warp(); await h.wait(300); rooms.push((await h.state()).room); }
-T.check('F2 : tram, parking, parvis, berge, parc', ['TRAM', 'PARKING', 'PARVIS', 'BERGE', 'PARC'].every(r => rooms.some(x => x.includes(r))), rooms.join(' | '));
+for (let i = 0; i < 6; i++) { await h.warp(); await h.wait(300); rooms.push((await h.state()).room); }
+T.check('F2 : tram, parking, parvis, berge, parc, terrain vague', ['TRAM', 'PARKING', 'PARVIS', 'BERGE', 'PARC', 'TERRAIN'].every(r => rooms.some(x => x.includes(r))), rooms.join(' | '));
 await T.finish(browser);

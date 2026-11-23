@@ -2,13 +2,14 @@
 
 Générée par `node tools/dialogues-export.mjs` : les répliques dont la remarque commence par « auto ».
 Pour corriger : le fichier docs/dialogues/<niveau>.md, puis `node tools/dialogues-import.mjs`.
-Total : 67 réplique(s).
+Total : 68 réplique(s).
 
 | niveau | id | qui | réplique |
 |---|---|---|---|
 | meinau-abords | abords.arrivee.1 | L'ULTRA | Arrêt Krimmeri. La Meinau, en 2026. Le stade est là, et BlingCo aussi : une file de portiques sur le parvis. |
 | meinau-abords | abords.arrivee.2 | TUTO | Explore les abords : le parvis, le parking, le parc, la berge du Rhin tortu. Il y a plus d'une façon d'entrer dans le stade. |
-| meinau-abords | abords.grilleB | L'ULTRA | Une grille côté Rhin, cadenassée. Il me faudrait de quoi l'ouvrir... Plus tard. |
+| meinau-abords | abords.grilleB | L'ULTRA | Une grille côté Rhin, réservée aux accrédités BlingCo. Leur chantier, de l'autre côté de la passerelle, doit en avoir une. |
+| meinau-abords | abords.accreditation | L'ULTRA | Une accréditation BlingCo « accès chantier et coursives ». Avec ça, la grille côté Rhin devrait s'ouvrir. |
 | meinau-abords | abords.raccourci | L'ULTRA | La borne du parking commande l'issue de secours. Une entrée discrète. |
 | meinau-abords | abords.supporter | SUPPORTER | Ils filtrent l'entrée avec leurs portiques. Paraît que côté parking, il y a une issue de secours... |
 | meinau-abords | abords.habitante | HABITANTE | J'habite le quartier depuis quarante ans. Les soirs de match, tout le monde chante. Pas à leurs prix. |

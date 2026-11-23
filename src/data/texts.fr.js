@@ -35,7 +35,7 @@ export const TEXTS = {
     hack: '{use} : pirater', activate: '{use} : activer', restore: '{use} : restaurer la plaque', talk: '{use} : parler', crate: '{use} : prendre des flèches', open: '{use} : ouvrir',
     lever: '{use} : actionner le levier', valve: '{use} : tourner la vanne', board: '{use} : monter dans la barque', sail: '{use} : larguer les amarres',
     storkDive: '{use} : STORK, PIQUÉ !', dylagneDrum: '{use} : DYLAGNE, GROSSE CAISSE !',
-    tampon: '{use} : prendre le tampon'
+    tampon: '{use} : prendre le tampon', take: '{use} : prendre'
   },
   // ------------------------------------------------ indications de commandes (systems/Prompts.js)
   // Les textes écrivent des ACTIONS entre accolades ({use}, {attack}...), jamais des touches : l'icône affichée
@@ -338,11 +338,14 @@ export const TEXTS = {
   meinauAbords: {
     subtitle: 'NIVEAU 2 : LA MEINAU, LES ABORDS DU STADE (2026)',
     rooms: { tram: 'ARRIVÉE TRAM KRIMMERI', parking: 'LE PARKING OUEST', parvis: 'LE PARVIS SUD · FILE DES PORTIQUES',
-      berge: 'LA BERGE DU RHIN TORTU', parc: "LE PARC DE L'EXTENWOERTHFELD", terrain: 'LE TERRAIN VAGUE',
-      soprema: 'RACING SOPREMA PARC', nord: 'LES ABORDS DU STADE' },
-    ads: [['BLINGCO ARENA', 'PORTIQUES : PRÉSENTEZ VOTRE SCORE DE CRÉDIT'], ['ABONNEMENT', 'PREMIUM+ : 89 BC / MATCH']],
+      berge: 'LA BERGE DU RHIN TORTU', parc: "LE PARC DE L'EXTENWOERTHFELD", terrain: 'LE TERRAIN VAGUE · CHANTIER BLINGCO',
+      centre: "LE CENTRE D'ENTRAÎNEMENT", nord: 'LES ABORDS DU STADE' },
+    ads: [['BLINGCO ARENA', 'PORTIQUES : PRÉSENTEZ VOTRE SCORE DE CRÉDIT'], ['ABONNEMENT', 'PREMIUM+ : 89 BC / MATCH'],
+      ['PROJET BLINGCO', 'ICI, VOTRE FUTUR PARKING VIP']],
     portiqueOpen: ['PORTIQUE A COUPÉ', "L'ENTRÉE DU PARVIS EST LIBRE"], raccourci: ['RACCOURCI OUVERT', 'ISSUE DE SECOURS C'],
-    grilleB: 'GRILLE FERMÉE : IL FAUT UN OBJET',
+    grilleB: 'GRILLE FERMÉE : IL FAUT UNE ACCRÉDITATION', accreditation: ['ACCRÉDITATION BLINGCO', 'ELLE OUVRE LA GRILLE CÔTÉ RHIN'],
+    grilleOpen: ['GRILLE B OUVERTE', 'ACCRÉDITATION ACCEPTÉE'],
+    endB: ['ENTRÉE DANS LE STADE', "Par la grille côté Rhin (B). Suite : l'intérieur du stade."],
     opening: ['Strasbourg, 2026. La Meinau.', "Le jour où BlingCo rachète le club. Le jour où tout commence.", "Cette fois, l'Ultra arrive avant eux."],
     endA: ['ENTRÉE DANS LE STADE', "Par le portique A. Suite : l'intérieur du stade."],
     endC: ['ENTRÉE DANS LE STADE', "Par l'issue de secours C. Suite : l'intérieur du stade."]

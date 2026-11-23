@@ -155,7 +155,7 @@ tools/blender/            un script Python par modèle + lib commune (s3k_lib.py
   Modèles : `tools/blender/{sbires,decor_pf,salles_pf}.py`.
 - **Niveaux 2 et 3 : la Meinau en maquette grise** (brief `docs/designs/brief-greybox-meinau.md`, plans `meinau-*-plan.svg`, 23/11) :
   `levels/meinau-abords` (`?level=meinau-abords`) = les abords, zones ouvertes (tram, parvis et stewards, parking, parc, berge du Rhin
-  tortu), 3 entrées vers le niveau 3 (A portique, B grille fermée, C issue de secours secrète), transmises par la sauvegarde
+  tortu), 3 entrées vers le niveau 3 (A portique, B grille ouverte par l'accréditation BlingCo du chantier du terrain vague, par la passerelle, C issue de secours secrète), transmises par la sauvegarde
   (`completeLevel(texte, { entry })`) ; `levels/meinau` (`?level=meinau`) = l'intérieur : coursive en anneau, local du kop
   (Arc-Drapeau, tuto 3 cibles), kop en tribune ouest (tifo), terminal + tifo → tunnel de la pelouse, loges VIP et sous-sols (verrous
   Arc-Drapeau), vestiaires, pelouse (boss Egboehly, `bosses/Egboehly.js` + `HydraHead.js`). Blocs gris étiquetés (`blocks[].label`,

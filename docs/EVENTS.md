@@ -53,6 +53,7 @@ Certains noms viennent des **données** et n'apparaissent pas comme émis ici : 
 | `marco:recover` | `entities/bosses/MarcoCeKlair.js` | `levels/kleber/estrade.js` | `this` |
 | `neige:fondue` | `entities/props/NeigePayante.js` | — | `this.id, this` |
 | `neon:off` | `entities/props/NeonCour.js` | `levels/marche2000/arriere.js` | `this` |
+| `objet:pris` | `entities/props/ObjetQuete.js` | `levels/meinau-abords/script.js` | `this.id, this` |
 | `peage:hack` | — | `levels/kleber/peages.js` | — |
 | `pf:boss` | `levels/petite-france/salle4.js` | `levels/petite-france/salle5.js` | — |
 | `plaque:restored` | `entities/props/Plaque.js` | `levels/petite-france/script.js` | `this.id` |

@@ -2,7 +2,7 @@
 
 Générée par `node tools/dialogues-export.mjs` : les répliques dont la remarque commence par « auto ».
 Pour corriger : le fichier docs/dialogues/<niveau>.md, puis `node tools/dialogues-import.mjs`.
-Total : 68 réplique(s).
+Total : 75 réplique(s).
 
 | niveau | id | qui | réplique |
 |---|---|---|---|
@@ -74,3 +74,10 @@ Total : 68 réplique(s).
 | marche2000 | m2k.boss.phase2 | LE GÉRANT DE NUIT | Fermeture exceptionnelle ! Les clients restent, les prix montent ! |
 | marche2000 | m2k.boss.end | LE GÉRANT DE NUIT | Erreur de caisse... Rendu monnaie... impossible... |
 | marche2000 | m2k.end.1 | EMPLOYÉ DE NUIT | Le Marché 2000 rouvre aux prix du quartier. Merci, l'Ultra. Et toi aussi, la cigogne. Au Kalt, on dit que la cave résiste encore. |
+| kalt-abords | kaltab.arrivee.1 | L'ULTRA | Lycée Couffignal, la nuit. Le Kalt est par là, rue La Fayette. De la rue, on ne voit qu'une grille entre deux entrepôts. |
+| kalt-abords | kaltab.arrivee.2 | TUTO | La grille mène à la cour. Il y a peut-être d'autres chemins : regarde derrière les entrepôts. |
+| kalt-abords | kaltab.cour | L'ULTRA | Le Kalt, au fond de la cour. Et devant la porte : un portique BlingCo, des robots-cordons, des videurs. |
+| kalt-abords | kaltab.public | PUBLIC TECHNO | Une heure de file. Les robots-cordons ne laissent passer que les badges dorés. Paraît qu'il y a une ruelle, derrière les palettes... |
+| kalt-abords | kaltab.toit | L'ULTRA | Une échelle vers le toit du hangar. Trop haut pour moi seul. |
+| kalt | kalt.mezza | L'ULTRA | La Mezza, la petite salle de l'étage. Au fond, la régie lumière : c'est elle qui tient la porte de la cave. |
+| kalt | kalt.artiste | ARTISTE | BlingCo veut transformer l'artspace en salon VIP. La régie de la Mezza ? Un court-circuit et leurs portes s'ouvrent toutes seules. |

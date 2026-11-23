@@ -1,18 +1,16 @@
-// Le Kalt, salle B : la piste. Le carré VIP doré posé au milieu décolle : boss le Magnat du Carré VIP. En vol, rien ne
-// le touche ; flèche court-circuit (caisses à l'entrée de la piste) → chute → au sol : {use}, grosse caisse de Dylagne
-// (gros dégâts) ; flèche, bretzel ou écharpe y font 1 (sans Dylagne, on n'est jamais bloqué). Phases : physios en renfort.
-const PI = Math.PI, HOME = { x: 0, z: -105 };
+// Le Kalt intérieur : le Carré VIP BlingCo (à l'est du Main). Le carré VIP doré décolle : boss le Magnat du Carré
+// VIP. En vol, rien ne le touche ; flèche court-circuit (caisses du Carré) → chute → au sol : {use}, grosse caisse de
+// Dylagne (gros dégâts) ; flèche, bretzel ou écharpe y font 1 (sans Dylagne, on n'est jamais bloqué). Phases : physios.
+const PI = Math.PI, HOME = { x: 24, z: -30 };
 
 export function piste(game, { T, W, E, say, dylagne, sono }) {
-  const boss = game.spawn('magnat', 5.8, -113.4, null, { face: -PI / 2 }); // posé sur le carré VIP du décor
+  const boss = game.spawn('magnat', HOME.x, HOME.z, null, { face: PI });
   boss.home = { ...HOME };
   let started = false;
-  const start = game.trigger([-14, 14, -91.5, -94], () => {
+  const start = game.trigger([17.2, 19.5, -26, -34], () => {
     started = true;
-    game.setCheckpoint(0, -93, PI / 2); W.setDoor('piste', false);
+    game.setCheckpoint(18.5, -30, 0); W.setDoor('piste', false);
     dylagne()?.cancelOffer(); sono()?.stop();
-    // le carré VIP du décor, c'est le sien : il décolle
-    W.props.dj?.traverse(o => { if (/^carre_vip_decor/.test(o.name)) o.visible = false; });
     game.audio.music('boss');
     game.hud.showBoss(T.boss); game.hud.setBoss(1);
     say(['kalt.boss.1', 'kalt.boss.2'], () => boss.start());
@@ -21,8 +19,8 @@ export function piste(game, { T, W, E, say, dylagne, sono }) {
   E.on('magnat:rise', () => dylagne()?.cancelOffer());
   E.on('boss:phase', n => {
     say([n === 1 ? 'kalt.boss.phase1' : 'kalt.boss.phase2']);
-    game.spawn('physio', -10, -97, 'renforts' + n, { face: 0 });
-    game.spawn('physio', 10, -97, 'renforts' + n, { face: PI });
+    game.spawn('physio', 20, -14, 'renforts' + n, { face: -PI / 2 });
+    game.spawn('physio', 20, -46, 'renforts' + n, { face: PI / 2 });
   });
   // mort de l'Ultra : le Magnat reprend sa ronde
   E.on('player:respawn', () => { if (started && boss.alive && boss.stateName !== 'intro') boss.reset(); });

@@ -55,6 +55,8 @@ import { Projecteur } from '../entities/props/Projecteur.js';
 import { DylagneAllie } from '../entities/props/DylagneAllie.js';
 import kaltLayout from './kalt/layout.js';
 import kaltScript from './kalt/script.js';
+import kaltAbordsLayout from './kalt-abords/layout.js';
+import kaltAbordsScript from './kalt-abords/script.js';
 import { Peagiste } from '../entities/enemies/Peagiste.js';
 import { AgentBouclier } from '../entities/enemies/AgentBouclier.js';
 import { Neigeur } from '../entities/enemies/Neigeur.js';
@@ -128,8 +130,6 @@ import physio_kalt from '../../assets/models/physio_kalt.glb';
 import robot_cordon from '../../assets/models/robot_cordon.glb';
 import magnat_vip from '../../assets/models/magnat_vip.glb';
 import dylagne from '../../assets/models/dylagne.glb';
-import decor_kalt from '../../assets/models/decor_kalt.glb';
-import decor_kalt_ext from '../../assets/models/decor_kalt_ext.glb';
 import agent_kleber_peagiste from '../../assets/models/agent_kleber_peagiste.glb';
 import agent_kleber_bouclier from '../../assets/models/agent_kleber_bouclier.glb';
 import agent_kleber_neigeur from '../../assets/models/agent_kleber_neigeur.glb';
@@ -141,7 +141,7 @@ import decor_kleber from '../../assets/models/decor_kleber.glb';
 export const DEFAULT_LEVEL = 'petite-france'; // l'ancien prototype reste accessible avec ?level=meinau-ouest
 // Partie 1, dans l'ordre (docs/decisions.md). Seuls les niveaux déjà inscrits dans LEVELS sont joués ;
 // la fin d'un niveau lance le suivant (systems/Progress.js). La partie 2 (2067) viendra plus tard.
-export const CAMPAIGN_ORDER = ['petite-france', 'meinau-abords', 'meinau', 'port-rhin', 'marche2000', 'kalt', 'kleber'];
+export const CAMPAIGN_ORDER = ['petite-france', 'meinau-abords', 'meinau', 'port-rhin', 'marche2000', 'kalt-abords', 'kalt', 'kleber'];
 
 export const LEVELS = {
   'meinau-ouest': {
@@ -181,12 +181,16 @@ export const LEVELS = {
     types: { vigile: VigileNuit, chariot: ChariotRobot, gerant: GerantNuit, neon: NeonCour, camera: CameraScanner,
       lettre: LettreNeon, stork: StorkAllie, figurant: Figurant, caisse: CaisseFleches }
   },
+  'kalt-abords': {
+    layout: kaltAbordsLayout, script: kaltAbordsScript, texts: TEXTS.kaltAbords, subtitle: TEXTS.kaltAbords.subtitle,
+    models: { ultra, physio_kalt, robot_cordon, arc_drapeau, bretzel_boomerang, gaffe_grappin },
+    types: { physio: Physio, cordon: RobotCordon, figurant: Figurant, tractable: Tractable, echarpe: EcharpeMarqueur }
+  },
   kalt: {
     layout: kaltLayout, script: kaltScript, texts: TEXTS.kalt, subtitle: TEXTS.kalt.subtitle,
-    models: { ultra, physio_kalt, robot_cordon, magnat_vip, dylagne, arc_drapeau, bretzel_boomerang, gaffe_grappin,
-      decor_kalt, decor_kalt_ext },
+    models: { ultra, physio_kalt, robot_cordon, magnat_vip, dylagne, arc_drapeau, bretzel_boomerang, gaffe_grappin },
     types: { physio: Physio, cordon: RobotCordon, magnat: MagnatVip, sono: Sono, projo: Projecteur, dylagne: DylagneAllie,
-      figurant: Figurant, caisse: CaisseFleches }
+      figurant: Figurant, caisse: CaisseFleches, tractable: Tractable, echarpe: EcharpeMarqueur }
   },
   kleber: {
     layout: kleberLayout, script: kleberScript, texts: TEXTS.kleber, subtitle: TEXTS.kleber.subtitle,

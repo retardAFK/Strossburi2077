@@ -144,9 +144,12 @@ export class World {
   // bloc de décor simple (pile de pont, socle...) : { x, z, w, d, h, y?, tex?, solid? }
   buildBlock(b) {
     const m = new THREE.Mesh(new THREE.BoxGeometry(b.w, b.h, b.d), new THREE.MeshLambertMaterial({ map: TEX[b.tex || 'gres'](Math.max(b.w, b.d) / 3, b.h / 3) }));
-    m.position.set(b.x, (b.y || 0) + b.h / 2, b.z); this.scene.add(m);
+    m.position.set(b.x, (b.y || 0) + b.h / 2, b.z);
     if (b.solid) this.game.collision.addBox(b.x - b.w / 2, b.x + b.w / 2, b.z - b.d / 2, b.z + b.d / 2, 'block');
-    if (b.label) this.scene.add(greyLabel(b.label, b.x, (b.y || 0) + b.h + 0.6, b.z, b.labelSize || 1)); // maquette grise
+    const g = new THREE.Group(); g.add(m); this.scene.add(g);
+    if (b.label) g.add(greyLabel(b.label, b.x, (b.y || 0) + b.h + 0.6, b.z, b.labelSize || 1)); // maquette grise
+    // bloc nommé : le script peut le montrer / cacher (setPropVisible), ex. un bâtiment révélé en entrant dans une cour
+    if (b.id) { this.props[b.id] = g; if (b.hidden) g.visible = false; }
   }
   // table de food court + 2 tabourets (obstacle rond)
   buildTable(t) {

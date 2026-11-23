@@ -169,10 +169,12 @@ tools/blender/            un script Python par modèle + lib commune (s3k_lib.py
   (`systems/Stealth.js` : faisceaux des `Guetteur` vigiles / chariots, caméras-scanners, néons, palettes, fumigènes ; « repéré ! » → retour au
   début de la salle), passage optionnel du marché noir (porte violette → rayons), la réserve (vagues), le toit (enseigne « MARCHÉ 2000 » → Stork, `props/StorkAllie.js`, version événement en attendant
   l'étape F), boss le Gérant de nuit (`bosses/GerantNuit.js` : tiroir-caisse ouvert = piqué de Stork). Décor : `decor_marche2000` (decor_kit).
-- **Niveau 5 jouable (maquette grise)** : `levels/kalt` (`?level=kalt`), la nuit : la file (robots-cordons `enemies/RobotCordon.js` à tirer au grappin,
-  physios `enemies/Physio.js`), la cour, la salle « rythme + lumières » (`props/Sono.js` : portiques laser ouverts sur les basses, physios `dark`
-  visibles aux flashs du strobo ; projecteur VIP `props/Projecteur.js` à la flèche court-circuit), la cave (Dylagne, `props/DylagneAllie.js`,
-  version événement en attendant l'étape F), boss le Magnat du Carré VIP (`bosses/MagnatVip.js`). Décors : `decor_kalt`, `decor_kalt_ext`.
+- **Niveaux 6 et 7 : le Kalt en maquette grise** (brief `docs/designs/brief-greybox-kalt.md`, plan `kalt-plan.svg` v2, 23/11) :
+  `levels/kalt-abords` = tram Lycée Couffignal, rue La Fayette, grille → cour (le Kalt révélé en entrant), videurs (`enemies/Physio.js`) et
+  robots-cordons du portique (`enemies/RobotCordon.js`, gaffe-grappin) ; secret : palettes de la ruelle → arrière-cours → soupirail ; toit
+  (Stork ?) fermé. `levels/kalt` = le Main (rythme + lumières, `props/Sono.js`), l'étage par l'escalier (Mezza : régie lumière
+  `props/Projecteur.js` à la flèche court-circuit → porte de la cave ; artspace), la cave (Dylagne, `props/DylagneAllie.js`, version
+  événement en attendant l'étape F), le Carré VIP (boss le Magnat, `bosses/MagnatVip.js`). Décors Blender du Kalt non utilisés en maquette.
 - **Niveau 6 jouable (maquette grise), fin de la partie 1** : `levels/kleber` (`?level=kleber`) : péages (borne à pirater), labyrinthe de chalets
   (3 tampons officiels, flèche enflammée → `props/NeigePayante.js`, étal au grappin, horloge de la signature `props/Horloge.js`), sapin-écran
   (Stork + Dylagne + court-circuit), boss Marco CeKlair (`bosses/MarcoCeKlair.js`, attelage au sol), faux final → glitch → PARADOXE → « À suivre ».

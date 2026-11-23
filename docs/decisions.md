@@ -48,7 +48,7 @@ rallier les foules. L'objet du niveau 2 (Meinau 2026) est l'**Arc-Drapeau**. Tab
 | Commandes | **Un bouton par compagnon** (actions `summonStork`, `summonDylagne`). Clavier : R = Stork, T = Dylagne. Manette : RT = Stork, B = Dylagne (B ne sert qu'aux menus en jeu). Tactile : deux icônes rondes avec recharge en camembert. |
 | Expression | Selon la fiche : cris + bulles d'icônes, aucun texte. |
 
-### Niveaux : 12, dans cet ordre (la Meinau en deux niveaux depuis le 23/11)
+### Niveaux : 13, dans cet ordre (la Meinau et le Kalt en deux niveaux depuis le 23/11)
 | # | Niveau | Époque | Objet / compagnon gagné | Boss |
 |---|---|---|---|---|
 | 1 | Petite France | 2067 | bretzel-boomerang | ASR-67 (fait) |
@@ -56,16 +56,18 @@ rallier les foules. L'objet du niveau 2 (Meinau 2026) est l'**Arc-Drapeau**. Tab
 | 3 | La Meinau : intérieur du stade | 2026 | Arc-Drapeau | Egboehly |
 | 4 | Port du Rhin | 2026 | gaffe-grappin | Le Promoteur |
 | 5 | Marché 2000 (nuit) | 2026 | Stork | Le Gérant de nuit BlingCo |
-| 6 | Le Kalt | 2026 | Dylagne | Le Magnat du Carré VIP |
-| 7 | Place Kléber | 2026 | — (faux final, tout l'arsenal) | Marco CeKlair |
-| 8 | Petite France v2 | 2067 | — | ASR-67 Premium+, puis Al2 Prout |
-| 9 | Port du Rhin | 2067 | tambour | La Tour |
-| 10 | La Cathédrale | 2067 | — | Le Coq de l'horloge BlingCo |
-| 11 | Place Kléber | 2067 | mégaphone | Le Conseil d'administration |
-| 12 | La Meinau (final) | 2067 | — | Le PDG de BlingCo |
+| 6 | Le Kalt : abords (rue La Fayette, cour) | 2026 | — (entrées cour, cave, toit) | — |
+| 7 | Le Kalt : intérieur (Main, Mezza, cave, Carré VIP) | 2026 | Dylagne | Le Magnat du Carré VIP |
+| 8 | Place Kléber | 2026 | — (faux final, tout l'arsenal) | Marco CeKlair |
+| 9 | Petite France v2 | 2067 | — | ASR-67 Premium+, puis Al2 Prout |
+| 10 | Port du Rhin | 2067 | tambour | La Tour |
+| 11 | La Cathédrale | 2067 | — | Le Coq de l'horloge BlingCo |
+| 12 | Place Kléber | 2067 | mégaphone | Le Conseil d'administration |
+| 13 | La Meinau (final) | 2067 | — | Le PDG de BlingCo |
 
-Partie 1 (2026) = niveaux 2 à 7 ; partie 2 (2067) = niveaux 8 à 12. Les autres lieux 2026 seront aussi découpés en abords
-+ intérieur après le pilote de la Meinau (décision du 23/11 ci-dessous).
+Partie 1 (2026) = niveaux 2 à 8 ; partie 2 (2067) = niveaux 9 à 13. Les autres lieux 2026 seront aussi découpés en abords
++ intérieur (décision du 23/11 ci-dessous). À venir (`docs/designs/decisions-chapitre1.md`, décisions 11 à 13) : le
+Marché 2000 devient le Baggersee, placé avant le Kalt ; ce tableau sera refait à ce moment-là.
 
 ### Décisions du 23/11/2026 (brief `docs/designs/brief-greybox-meinau.md`, validé par Maxime dans Cowork)
 - Chaque lieu 2026 se découpe en **abords + intérieur** ; la Meinau en pilote (maquette grise d'abord, validée en jouant).

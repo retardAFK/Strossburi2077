@@ -57,6 +57,31 @@ export const TEX = {
   moquette: (rx, ry) => canvasTex(16, 16, g => {
     g.fillStyle = '#5a1840'; g.fillRect(0, 0, 16, 16);
     g.fillStyle = '#d8a830'; for (let i = 0; i < 16; i += 4) { g.fillRect(i, i, 2, 2); g.fillRect(15 - i, i, 2, 2); }
+  }, rx, ry),
+  // Place Kléber (couleurs de la planche validée decors-kleber / decor_kleber.py) : façades alsaciennes encrassées et
+  // quasi noires, colombages, fenêtres presque toutes éteintes (motif 4 m × 6 m = un mur)
+  kl_facade: (rx, ry) => canvasTex(64, 96, g => {
+    g.fillStyle = '#2b2622'; g.fillRect(0, 0, 64, 96);
+    for (let i = 0; i < 90; i++) { g.fillStyle = Math.random() < 0.5 ? '#25201d' : '#322c27'; g.fillRect(Math.random() * 64 | 0, Math.random() * 96 | 0, 2, 2); }
+    for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) {
+      g.fillStyle = (r + c) % 3 ? '#0c1020' : '#7a5a2a'; g.fillRect(4 + c * 16, 10 + r * 20, 8, 11);   // fenêtres (une sur trois allumée)
+    }
+    g.fillStyle = '#1e120a';                                                                              // colombages
+    for (let c = 0; c <= 4; c++) g.fillRect(c * 16 - 1, 0, 2, 82);
+    for (let r = 0; r < 4; r++) g.fillRect(0, 6 + r * 20, 64, 2);
+    g.fillStyle = '#1a1414'; g.fillRect(0, 82, 64, 14);                                                  // soubassement
+  }, rx, ry),
+  // chalet du marché de Noël permanent : planches prune, liseré néon rose en haut
+  kl_chalet: (rx, ry) => canvasTex(32, 32, g => {
+    g.fillStyle = '#2a1e30'; g.fillRect(0, 0, 32, 32);
+    g.fillStyle = '#22182a'; for (let x = 0; x < 32; x += 4) g.fillRect(x, 0, 1, 32);
+    g.fillStyle = '#ff2e88'; g.fillRect(0, 0, 32, 2);
+  }, rx, ry),
+  // dalle mouillée qui reflète (motif dalle_mouillee de la planche)
+  kl_dalle: (rx, ry) => canvasTex(16, 16, g => {
+    for (let y = 0; y < 16; y++) for (let x = 0; x < 16; x++) {
+      g.fillStyle = x % 8 === 0 || y % 8 === 0 ? '#141020' : (x + y) % 11 === 0 ? '#1e1a30' : '#0c0a16'; g.fillRect(x, y, 1, 1);
+    }
   }, rx, ry)
 };
 

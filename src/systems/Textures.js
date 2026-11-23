@@ -77,6 +77,23 @@ export const TEX = {
     g.fillStyle = '#22182a'; for (let x = 0; x < 32; x += 4) g.fillRect(x, 0, 1, 32);
     g.fillStyle = '#ff2e88'; g.fillRect(0, 0, 32, 2);
   }, rx, ry),
+  // l'Aubette (côté nord de la place, néoclassique, Blondel 1765-1772), illuminée pour le Grand Sapin : pierre claire,
+  // arcades au rez-de-chaussée, hautes fenêtres éclairées, pilastres, corniche et guirlande lumineuse (motif 4 m × 6 m)
+  kl_aubette: (rx, ry) => canvasTex(64, 96, g => {
+    g.fillStyle = '#b9a687'; g.fillRect(0, 0, 64, 96);
+    for (let i = 0; i < 70; i++) { g.fillStyle = Math.random() < 0.5 ? '#ad9a7c' : '#c4b193'; g.fillRect(Math.random() * 64 | 0, Math.random() * 96 | 0, 2, 1); }
+    g.fillStyle = '#d6c6a6'; g.fillRect(0, 0, 3, 96); g.fillRect(31, 0, 3, 60);                        // pilastres
+    g.fillStyle = '#9c8a6c'; g.fillRect(0, 8, 64, 4); g.fillRect(0, 58, 64, 3);                         // corniche, bandeau
+    for (const x of [8, 40]) { g.fillStyle = '#ffd890'; g.fillRect(x, 20, 14, 28); g.fillStyle = '#9c8a6c'; g.fillRect(x + 6, 20, 2, 28); } // fenêtres
+    g.fillStyle = '#2a2430';                                                                            // arcades
+    for (const x of [6, 38]) { g.fillRect(x, 70, 20, 26); g.beginPath(); g.arc(x + 10, 70, 10, Math.PI, 0); g.fill(); }
+    g.fillStyle = '#ffe9a8'; for (let x = 2; x < 64; x += 6) g.fillRect(x, 5, 2, 2);                   // guirlande
+  }, rx, ry),
+  // parterre de fleurs (réaménagement de 2007) : vert sombre, fleurs claires
+  kl_parterre: (rx, ry) => canvasTex(16, 16, g => {
+    g.fillStyle = '#1f3a22'; g.fillRect(0, 0, 16, 16);
+    for (let i = 0; i < 14; i++) { g.fillStyle = ['#2c5230', '#e8e0d0', '#d81e2c'][i % 3]; g.fillRect((i * 7) % 16, (i * 5) % 16, 2, 2); }
+  }, rx, ry),
   // dalle mouillée qui reflète (motif dalle_mouillee de la planche)
   kl_dalle: (rx, ry) => canvasTex(16, 16, g => {
     for (let y = 0; y < 16; y++) for (let x = 0; x < 16; x++) {

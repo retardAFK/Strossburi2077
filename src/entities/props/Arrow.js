@@ -7,8 +7,11 @@ import { TUNING } from '../../data/tuning.js';
 import { arrowEffect } from './arrowEffects.js';
 
 const A = TUNING.arc;
-const PASS = new Set(['water', 'vitre', 'gate', 'switch', 'terminal', 'plaque', 'target']);
+export const PASS = new Set(['water', 'vitre', 'gate', 'switch', 'terminal', 'plaque', 'target']); // ce que la flèche survole
 const STEPS = 4; // sous-pas par tick : pas de flèche qui traverse une cible fine
+
+// ce qu'une flèche peut toucher (aussi utilisé par la visée de l'Arc-Drapeau)
+export const arrowCanHit = e => !!(e.isEnemy || e.isSwitch || e.isTerminal || e.isTarget || e.hookable || e.arrowTarget);
 
 function placeholder() {
   const g = new THREE.Group(), grey = new THREE.MeshLambertMaterial({ color: 0x9a9aa6 });
@@ -55,7 +58,7 @@ export class Arrow extends Entity {
   touch() {
     for (const e of this.game.entities) {
       if (e === this || !e.alive || e.isArrow) continue;
-      if (!(e.isEnemy || e.isSwitch || e.isTerminal || e.isTarget || e.hookable || e.arrowTarget)) continue;
+      if (!arrowCanHit(e)) continue;
       const dx = e.x - this.x, dz = e.z - this.z, d = Math.hypot(dx, dz) || 0.01;
       if (d > e.r + this.r || this.y > (e.hitH || 2.6)) continue;
       e.takeHit(A.dmg, this.dir.x, this.dir.z, A.knock, this);

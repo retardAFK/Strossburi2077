@@ -1,13 +1,15 @@
 // Arc-Drapeau (objet du niveau 2, Meinau 2026). Règles tranchées par Maxime le 21/11/2026 (docs/decisions.md) :
 //  - tir simple (une flèche par appui, cadence TUNING.arc.cooldown) ;
 //  - cible verrouillée → la flèche part vers elle ; sinon, viser (clic droit maintenu / LB maintenu / bouton VISER
-//    à bascule au tactile) = vue par-dessus l'épaule, la flèche part au centre de l'écran ; sinon, droit devant ;
+//    à bascule au tactile) = vue par-dessus l'épaule, la flèche part vers ce qui est AU CENTRE DE L'ÉCRAN (rayon tiré
+//    depuis la caméra : premier mur, sol ou cible rencontré ; la caméra est décalée, viser un point fixe au loin faisait
+//    passer la flèche à côté du réticule) ; sinon, droit devant ;
 //  - en visée : marche lente, la roulade annule ; le clic gauche tire au lieu de fouetter ;
 //  - flèches simples illimitées, flèches spéciales comptées (data/arrows.js, désactivées tant que non codées).
 // Modèle : arc sur le dos (pivot torso) quand on ne vise pas, en main pendant la visée ; drapeau roulé / déployé.
 import * as THREE from 'three';
 import { Weapon } from './Weapon.js';
-import { Arrow } from '../entities/props/Arrow.js';
+import { Arrow, PASS, arrowCanHit } from '../entities/props/Arrow.js';
 import { ARROWS } from '../data/arrows.js';
 import { TUNING } from '../data/tuning.js';
 
@@ -65,7 +67,7 @@ export class ArcDrapeau extends Weapon {
     const from = { x: p.x + p.fx * 0.4, y: p.y + A.height, z: p.z + p.fz * 0.4 };
     let to;
     if (t) to = { x: t.x, y: (t.hitY ?? 1.2) + (t.y || 0), z: t.z };
-    else if (p.aiming) to = g.camera.aimPoint(A.range);
+    else if (p.aiming) to = this.aimTarget();
     else to = { x: from.x + p.fx * A.range, y: from.y, z: from.z + p.fz * A.range };
     const v = new THREE.Vector3(to.x - from.x, to.y - from.y, to.z - from.z).normalize();
     if (!p.aiming) p.faceTo(from.x + v.x, from.z + v.z);
@@ -74,6 +76,23 @@ export class ArcDrapeau extends Weapon {
     this.cd = A.cooldown; this.ready = false; this.shot = A.shotPose;
     if (!type.infinite && --this.ammo[type.id] <= 0) this.arrow = 'simple';
     if (!type.infinite) g.inventory.refresh();
+  }
+  // point visé : on avance le long du rayon caméra → réticule (à partir de la hauteur de l'Ultra, la caméra pouvant
+  // frôler un mur derrière lui) jusqu'au premier sol, mur ou cible ; rien → au bout de la portée
+  aimTarget() {
+    const g = this.game, c = g.camera, o = c.cam.position, d = c.aimDir(), p = g.player;
+    const t0 = Math.max(0, (p.x - o.x) * d.x + (p.y + A.height - o.y) * d.y + (p.z - o.z) * d.z);
+    const at = t => ({ x: o.x + d.x * t, y: o.y + d.y * t, z: o.z + d.z * t });
+    for (let t = t0 + 0.5; t < t0 + A.range; t += 0.15) {
+      const q = at(t);
+      if (q.y <= 0.05) return q;
+      for (const b of g.collision.boxes) if (b.on && !PASS.has(b.tag) && q.x > b.x0 && q.x < b.x1 && q.z > b.z0 && q.z < b.z1) return q;
+      for (const e of g.entities) {
+        if (e === p || !e.alive || e.isArrow || !arrowCanHit(e)) continue;
+        if (Math.hypot(e.x - q.x, e.z - q.z) < e.r && q.y < (e.hitH || 2.6)) return q;
+      }
+    }
+    return at(t0 + A.range);
   }
   hudLine() {
     const T = this.game.texts, t = this.type;

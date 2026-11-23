@@ -5,8 +5,8 @@
 // 1 les portiques-péages (z 8 → -16) · 2 le labyrinthe de chalets (→ -56) · 3 le sapin-écran (→ -86) · B l'estrade (→ -120).
 const PI = Math.PI;
 const PINK = 0xff4fa3, GOLD = 0xffc040, CYAN = 0x38f2ff, FLUO = 0xd8ff2a, VIO = 0x5a2a9a;
-// chalet du labyrinthe : bloc plein (placeholder gris-bois)
-const chalet = (x0, x1, z) => ({ x: (x0 + x1) / 2, z, w: x1 - x0, d: 3, h: 2.8, tex: 'mur', solid: true });
+// chalet du labyrinthe : bloc plein aux couleurs des chalets de la planche (planches prune, liseré néon rose)
+const chalet = (x0, x1, z) => ({ x: (x0 + x1) / 2, z, w: x1 - x0, d: 3, h: 2.8, tex: 'kl_chalet', solid: true });
 
 export default {
   id: 'kleber',
@@ -27,16 +27,16 @@ export default {
     { id: 'estrade', rect: [-16, 16, -86, -120], boss: true }
   ],
   floors: [
-    { rect: [-12, 12, 8, -16], tex: 'paves', sky: true }, { rect: [-16, 16, -16, -56], tex: 'paves', sky: true },
-    { rect: [-16, 16, -56, -86], tex: 'paves', sky: true }, { rect: [-16, 16, -86, -120], tex: 'beton', sky: true }
+    { rect: [-12, 12, 8, -16], tex: 'kl_dalle', sky: true }, { rect: [-16, 16, -16, -56], tex: 'kl_dalle', sky: true },
+    { rect: [-16, 16, -56, -86], tex: 'kl_dalle', sky: true }, { rect: [-16, 16, -86, -120], tex: 'kl_dalle', sky: true }
   ],
   walls: [
     // les péages : la place s'ouvre au fond (x -2 → 2)
-    [-13, -12, 8, -17, 'mur'], [12, 13, 8, -17, 'mur'], [-16, -2, -16, -17, 'mur'], [2, 16, -16, -17, 'mur'],
+    [-13, -12, 8, -17, 'kl_facade'], [12, 13, 8, -17, 'kl_facade'], [-16, -2, -16, -17, 'kl_facade'], [2, 16, -16, -17, 'kl_facade'],
     // le labyrinthe, le sapin, l'estrade
-    [-17, -16, -16, -121, 'mur'], [16, 17, -16, -121, 'mur'],
-    [-17, -2, -56, -57, 'mur'], [2, 17, -56, -57, 'mur'],
-    [-17, -3, -86, -87, 'beton'], [3, 17, -86, -87, 'beton'], [-17, 17, -120, -121, 'beton']
+    [-17, -16, -16, -121, 'kl_facade'], [16, 17, -16, -121, 'kl_facade'],
+    [-17, -2, -56, -57, 'kl_facade'], [2, 17, -56, -57, 'kl_facade'],
+    [-17, -3, -86, -87, 'kl_facade'], [3, 17, -86, -87, 'kl_facade'], [-17, 17, -120, -121, 'kl_facade']
   ],
   blockers: [[-12, 12, 8, 9], [-1.6, 1.6, -69.4, -72.6]], // le pied du sapin-écran (décor)
   blocks: [
@@ -47,7 +47,7 @@ export default {
     chalet(-16, 2, -34), chalet(6, 16, -34),
     chalet(-16, -9, -44), chalet(-5, 11, -44),
     // la niche de l'étal à roulettes (tampon 3)
-    { x: 14, z: -46.8, w: 4, d: 0.6, h: 2.8, tex: 'mur', solid: true }, { x: 14, z: -55.2, w: 4, d: 0.6, h: 2.8, tex: 'mur', solid: true }
+    { x: 14, z: -46.8, w: 4, d: 0.6, h: 2.8, tex: 'kl_chalet', solid: true }, { x: 14, z: -55.2, w: 4, d: 0.6, h: 2.8, tex: 'kl_chalet', solid: true }
   ],
   lasers: [{ id: 'peage', x0: -12, x1: 12, z: -12 }],
   doors: [

@@ -69,6 +69,20 @@ for (let i = 0; i < 3; i++) {
 }
 await h.btn(5, 60);
 T.check('RB en visée : touche le mannequin à 24 m', await h.until(() => window.S3K.entities.find(e => e.id === 'loin').hits > 0, 3000), `avant ${before}`);
+// visée à courte distance : la flèche part vers ce qui est sous le réticule, malgré le décalage de la caméra d'épaule
+// (avant, elle visait un point fixe à 25 m dans l'axe de la caméra et passait à côté des cibles proches)
+const nearBefore = await hits('proche'); await h.run(n => { window.__nb = n; }, nearBefore);
+await h.run(() => { const p = window.S3K.player; Object.assign(p, { x: -6, z: -2, face: Math.PI / 2 }); p.sync(); });
+await h.wait(400);
+for (let i = 0; i < 3; i++) {
+  await h.run(() => { const c = window.S3K.camera, m = window.S3K.entities.find(e => e.id === 'proche');
+    const dx = m.x - c.pos.x, dy = 1.2 - c.pos.y, dz = m.z - c.pos.z;
+    c.yaw = Math.atan2(-dx, -dz); c.aimPitch = Math.atan2(dy, Math.hypot(dx, dz)); });
+  await h.wait(250);
+}
+await h.until(() => window.S3K.inventory.items.arc.ready, 3000);
+await h.btn(5, 60);
+T.check('RB en visée : touche le mannequin proche (8 m) visé au réticule', await h.until(() => window.S3K.entities.find(e => e.id === 'proche').hits > window.__nb, 3000), `avant ${nearBefore}`);
 // marche lente en visée
 const z0 = (await h.state()).z;
 await h.run(() => { window.__pad.axes[1] = -1; }); await h.wait(500); await h.run(() => { window.__pad.axes[1] = 0; });

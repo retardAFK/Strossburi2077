@@ -13,7 +13,7 @@ const chalet = (x0, x1, z) => ({ x: (x0 + x1) / 2, z, w: x1 - x0, d: 3, h: 2.8, 
 
 export default {
   id: 'kleber',
-  bg: 0x0a0714, fog: [10, 44],
+  bg: 0x1e1838, fog: [20, 72], // ciel de nuit urbain, pas de noir
   playerStart: { x: 0, z: 5, face: PI / 2 },
   opening: {
     shots: [
@@ -98,6 +98,10 @@ export default {
   lights: [
     { x: 0, z: -2, y: 7, color: PINK, i: 6, d: 20 }, { x: 0, z: -30, y: 8, color: VIO, i: 7, d: 26 },
     { x: 0, z: -48, y: 8, color: VIO, i: 7, d: 24 }, { x: 0, z: -71, y: 12, color: CYAN, i: 12, d: 30 },
+    // éclairage public chaud (lampadaires) : la pierre se lit la nuit
+    { x: -8, z: 0, y: 6, color: 0xffd8a0, i: 10, d: 24 }, { x: 8, z: -40, y: 6, color: 0xffd8a0, i: 10, d: 24 },
+    { x: -8, z: -40, y: 6, color: 0xffd8a0, i: 10, d: 24 }, { x: 8, z: -66, y: 7, color: 0xffd8a0, i: 14, d: 28 },
+    { x: -6, z: -80, y: 7, color: 0xffd8a0, i: 14, d: 28 }, { x: 0, z: -100, y: 7, color: 0xffd8a0, i: 12, d: 28 },
     { x: 0, z: -100, y: 8, color: GOLD, i: 10, d: 28 }, { x: 0, z: -114, y: 7, color: FLUO, i: 8, d: 22 }
   ],
   warps: [

@@ -4,7 +4,7 @@
 //  - le socle payant, au pied du sapin : grosse caisse de Dylagne ({use}, à moins de 6 m) ;
 //  - le générateur : flèche court-circuit (caisses près de l'énigme).
 // Agents à bouclier et neigeur en garde. 3 verrous → l'estrade s'ouvre.
-const PI = Math.PI, SAPIN = { x: 0, z: -71 };
+const PI = Math.PI, SAPIN = { x: -2.5, z: -64.5 }; // pied du sapin du décor (pivot `sapin`)
 
 export function sapin(game, { T, W, E, say, stork, dylagne }) {
   let started = false, locks = 0;
